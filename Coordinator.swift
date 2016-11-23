@@ -57,7 +57,7 @@ If you embed controllers into other VC (thus using them as simple UI components)
 then keep that flow inside the given container controller.
 Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
 */
-public class Coordinator<T>: CoordinatorType {
+open class Coordinator<T>: CoordinatorType {
 	///	This
 	public typealias RootController = T
 
@@ -98,9 +98,9 @@ public class Coordinator<T>: CoordinatorType {
 	}
 
 	/// Parent Coordinator
-	var parent: Coordinator?
+	open var parent: Coordinator?
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
-	private(set) var childCoordinators: [Identifier: Coordinator] = [:]
+	private(set) public var childCoordinators: [Identifier: Coordinator] = [:]
 
 
 
@@ -115,14 +115,14 @@ public class Coordinator<T>: CoordinatorType {
 	///	etc.
 	///
 	///	- Parameter completion: An optional `Callback` executed at the end.
-	func start(with completion: @escaping Callback = {_ in}) {}
+	open func start(with completion: @escaping Callback = {_ in}) {}
 
 	/// Tells the coordinator that it is done and that it should 
 	///	rewind the view controller state to where it was before `start` was called.
 	///	That means either dismiss presented controller or pop pushed ones.
 	///
 	///	- Parameter completion: An optional `Callback` executed at the end.
-	func stop(with completion: @escaping Callback = {_ in}) {}
+	open func stop(with completion: @escaping Callback = {_ in}) {}
 
 
 
@@ -134,7 +134,7 @@ public class Coordinator<T>: CoordinatorType {
 
 	- Returns: The started coordinator.
 	*/
-	func startChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
+	public func startChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
 		childCoordinators[coordinator.identifier] = coordinator
 		coordinator.start(with: completion)
 	}
@@ -146,7 +146,7 @@ public class Coordinator<T>: CoordinatorType {
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
-	func stopChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
+	public func stopChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
 		coordinator.stop { [unowned self] coordinator in
 			guard let c = self.childCoordinators.removeValue(forKey: coordinator.identifier) else { return }
 			completion(c)
