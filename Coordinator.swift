@@ -71,8 +71,9 @@ open class Coordinator<T>: CoordinatorType {
 
 	
 
-	/// The root view controller for a coordinator. Each coordinator creates its VC hierarchy internally, so this is read-only property
-	public let rootViewController: T
+	/// The root view controller for a coordinator. 
+	///	Each coordinator creates its VC hierarchy internally, so there should be no need to alter this once set
+	open var rootViewController: T
 
 	/// You need to supply at least one UIViewController (or any of its subclasses) that will be loaded as root.
 	///	Usually one of container controllers (UINavigationController, UITabBarController etc)
@@ -100,7 +101,7 @@ open class Coordinator<T>: CoordinatorType {
 	/// Parent Coordinator
 	open var parent: Coordinator?
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
-	private(set) public var childCoordinators: [Identifier: Coordinator] = [:]
+	open var childCoordinators: [Identifier: Coordinator] = [:]
 
 
 
