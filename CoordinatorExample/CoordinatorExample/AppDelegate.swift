@@ -12,19 +12,24 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var applicationCoordinator: Coordinator!
+	var applicationCoordinator: Coordinator<UINavigationController>!
 
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
 
 		self.window = UIWindow(frame: UIScreen.main.bounds)
 
-		self.window?.rootViewController = nc
+
+		let nc = UINavigationController(rootViewController: ViewController())
+		applicationCoordinator = Coordinator(rootViewController: nc)
+
+		self.window?.rootViewController = applicationCoordinator.rootViewController
 
 		return true
 	}
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+		applicationCoordinator.start()
 		self.window?.makeKeyAndVisible()
 		return true
 	}
