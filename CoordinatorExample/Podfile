@@ -1,0 +1,8 @@
+use_frameworks!
+
+target ‘CoordinatorExample’ do
+	platform :ios, ‘8.2’
+
+	pod 'Coordinator', :path => ‘../'
+end
+

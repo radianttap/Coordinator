@@ -1,0 +1,22 @@
+{
+  "name": "Coordinator",
+  "version": "1.0",
+  "summary": "Implementation of (Application) Coordinator software design pattern in Swift 3.",
+  "homepage": "https://github.com/radianttap/Coordinator",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Aleksandar Vacić": "radianttap.com"
+  },
+  "social_media_url": "https://twitter.com/radiantav",
+  "platforms": {
+    "ios": "8.2"
+  },
+  "source": {
+    "git": "https://github.com/radianttap/Coordinator.git"
+  },
+  "source_files": "Coordinator.swift",
+  "frameworks": "UIKit"
+}
