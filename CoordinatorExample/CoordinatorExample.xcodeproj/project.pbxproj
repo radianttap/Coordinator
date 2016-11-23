@@ -12,7 +12,6 @@
 		D04B76621DE5B6D2009F1B9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B76611DE5B6D2009F1B9A /* ViewController.swift */; };
 		D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D04B76661DE5B6D2009F1B9A /* Assets.xcassets */; };
 		D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */; };
-		D04B76721DE5B6EA009F1B9A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B76711DE5B6EA009F1B9A /* Coordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +23,6 @@
 		D04B76661DE5B6D2009F1B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D04B76691DE5B6D2009F1B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D04B766B1DE5B6D2009F1B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D04B76711DE5B6EA009F1B9A /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -51,7 +49,6 @@
 		D04B76531DE5B6D2009F1B9A = {
 			isa = PBXGroup;
 			children = (
-				D04B76711DE5B6EA009F1B9A /* Coordinator.swift */,
 				D04B765E1DE5B6D2009F1B9A /* CoordinatorExample */,
 				D04B765D1DE5B6D2009F1B9A /* Products */,
 				EA799296365A87C4A6350688 /* Pods */,
@@ -212,7 +209,6 @@
 			files = (
 				D04B76621DE5B6D2009F1B9A /* ViewController.swift in Sources */,
 				D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */,
-				D04B76721DE5B6EA009F1B9A /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
