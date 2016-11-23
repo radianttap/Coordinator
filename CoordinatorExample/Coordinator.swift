@@ -9,8 +9,12 @@
 
 import UIKit
 
+//	Must do 2-step dance due to the way Swift works with generic protocols
+//	`associatedtype RootController` is needed to allow any kind of UIVC subclass to
+//	become Coordinator's root VC
 public protocol CoordinatorType: class {
 	associatedtype RootController
+	associatedtype Identifier
 
 	/// You need to supply at least one UIViewController (or any of its subclasses) that will be loaded as root.
 	///	Usually one of container controllers (UINavigationController, UITabBarController etc)
@@ -20,34 +24,38 @@ public protocol CoordinatorType: class {
 	/// - returns: Coordinator instance, prepared to start
 	init(rootViewController: RootController?)
 
-	/// The root view controller for a coordinator. Each coordinator creates its VC hierarchy internally, so this is read-only property
+	/// The root view controller for a coordinator. 
+	///	Each coordinator creates its VC hierarchy internally, so this is read-only property (post init)
 	var rootViewController: RootController { get }
+
+	///	Unique identifier for the Coordinator
+	var identifier: Identifier { get }
 }
 
 
 /**
 Coordinators are a design pattern that encourages decoupling view controllers
 such that they know as little as possible about how they are presented.
-As such, view controllers should never directly push/pop or present other VCs
+
+As such, view controllers should never directly push/pop or present other VCs.
+They should either use:
+1. Delegate pattern to indicate such action is needed and owning Coordinator will assign itself delegate
+2. Specific closures that owning Coordinator will populate and thus respond to
+3. Custom actions implemented using `targetViewController(for:sender:)` API
 
 Coordinators can be “nested” such that child coordinators encapsulate different flows
 and prevent any one of them from becoming too large.
 
 Each coordinator has an identifier to simplify logging and debugging.
-Identifier can also be used as subscript for the childCoordinators "array"
+Identifier is also used as key for the childCoordinators dictionary
 
-## Usage
+You can either use Coordinator instances directly or – far more likely – 
+subclass them to add specific behavior for the given particular usage.
 
-1. Create a simple class named anything you want and adopt this protocol.
-
-2. Each coordinator you create should know all possible exit points from all view controllers it should handle.
-
-3. Exit points are closure properties of type Callback:
-- declared by view controller
-- defined by coordinator when VC is instantiated
-
-Note: Don't overthink this. If you embed controllers into other VC, then keep their flow their own business.
-Expose only those behaviors that cause push/pop/present to bubble up to the Coordinator
+Note: Don't overthink this. Idea is to have fairly small number of coordinators in the app.
+If you embed controllers into other VC (thus using them as simple UI components), 
+then keep that flow inside the given container controller.
+Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
 */
 public class Coordinator<T>: CoordinatorType {
 	///	This
@@ -85,14 +93,13 @@ public class Coordinator<T>: CoordinatorType {
 
 
 	/// Default identifier is the class name of the Coordinator
-	var identifier: Identifier {
+	public var identifier: Identifier {
 		return String(describing: self)
 	}
 
 	/// Parent Coordinator
 	var parent: Coordinator?
-
-	///	essentially an array of child coordinators
+	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
 	private(set) var childCoordinators: [Identifier: Coordinator] = [:]
 
 
@@ -100,9 +107,21 @@ public class Coordinator<T>: CoordinatorType {
 
 
 	/// Tells the coordinator to create its initial view controller and take over the user flow.
+	///	Use this method to configure your `rootViewController` (if it isn't already).
+	///	Some examples:
+	///	* instantiate and assign `viewControllers` for UINavigationController or UITabBarController
+	///	* assign itself (Coordinator) as delegate for the shown UIViewController(s)
+	///	* setup closure entry/exit points
+	///	etc.
+	///
+	///	- Parameter completion: An optional `Callback` executed at the end.
 	func start(with completion: @escaping Callback = {_ in}) {}
 
-	/// Tells the coordinator that it is done and that it should rewind the view controller state to where it was before `start` was called.
+	/// Tells the coordinator that it is done and that it should 
+	///	rewind the view controller state to where it was before `start` was called.
+	///	That means either dismiss presented controller or pop pushed ones.
+	///
+	///	- Parameter completion: An optional `Callback` executed at the end.
 	func stop(with completion: @escaping Callback = {_ in}) {}
 
 
@@ -111,7 +130,7 @@ public class Coordinator<T>: CoordinatorType {
 	Adds new child coordinator and starts it.
 
 	- Parameter coordinator: The coordinator implementation to start.
-	- Parameter callback: An optional `CoordinatorCallback` passed to the coordinator's `start()` method.
+	- Parameter completion: An optional `Callback` passed to the coordinator's `start()` method.
 
 	- Returns: The started coordinator.
 	*/
@@ -125,7 +144,7 @@ public class Coordinator<T>: CoordinatorType {
 	Stops the given child coordinator and removes it from the
 
 	- Parameter coordinator: The coordinator implementation to start.
-	- Parameter callback: An optional `CoordinatorCallback` passed to the coordinator's `start()` method.
+	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
 	func stopChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
 		coordinator.stop { [unowned self] coordinator in
