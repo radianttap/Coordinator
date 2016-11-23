@@ -16,21 +16,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
 
-		self.window = UIWindow(frame: UIScreen.main.bounds)
+		window = UIWindow(frame: UIScreen.main.bounds)
 
 
 		let nc = UINavigationController(rootViewController: ViewController())
 		applicationCoordinator = Coordinator(rootViewController: nc)
 
-		self.window?.rootViewController = applicationCoordinator.rootViewController
 
+		window?.rootViewController = applicationCoordinator.rootViewController
 		return true
 	}
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
 		applicationCoordinator.start()
-		self.window?.makeKeyAndVisible()
+		window?.makeKeyAndVisible()
 		return true
 	}
 
