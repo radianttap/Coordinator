@@ -99,7 +99,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	}
 
 	/// Parent Coordinator
-	open var parent: Coordinator?
+	open var parent: Any?
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
 	open var childCoordinators: [Identifier: Coordinator] = [:]
 
@@ -128,7 +128,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 
 	 */
 	override open var next: UIResponder? {
-		guard let parent = self.parent else { return nil }
+		guard let parent = self.parent as? UIResponder else { return nil }
 		return parent
 	}
 
