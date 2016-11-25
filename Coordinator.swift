@@ -57,7 +57,7 @@ If you embed controllers into other VC (thus using them as simple UI components)
 then keep that flow inside the given container controller.
 Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
 */
-open class Coordinator<T>: CoordinatorType {
+open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	///	This
 	public typealias RootController = T
 
@@ -104,6 +104,33 @@ open class Coordinator<T>: CoordinatorType {
 	open var childCoordinators: [Identifier: Coordinator] = [:]
 
 
+
+	/**	(from UIKit `next:` docs)
+	
+	---
+	The UIResponder class does not store or set the next responder automatically,
+	instead returning nil by default. 
+	
+	Subclasses must override this method to set the next responder. 
+	UIView implements this method by returning the UIViewController object 
+	that manages it (if it has one) or its superview (if it doesn’t); 
+	UIViewController implements the method by returning its view’s superview; 
+	UIWindow returns the application object, and UIApplication returns nil.
+	
+	---
+	
+	For coordinators, we need to return either the parent coordinator if there is one _or_
+	nil. Coordinator can be nested only inside other coordinators.
+
+	For this to work properly though, each UIViewController presented by coordinator 
+	must adopt `Coordinable` protocol and have parentCoordinator property populated by its
+	owning Coordinator
+
+	 */
+	override open var next: UIResponder? {
+		guard let parent = self.parent else { return nil }
+		return parent
+	}
 
 
 
@@ -155,3 +182,54 @@ open class Coordinator<T>: CoordinatorType {
 	}
 }
 
+
+/**
+Must be adopted by UIViewController subclasses that are presented by Coordinators,
+so that responder chain works properly.
+
+Coordinators must set this property for their rootViewController.
+*/
+public protocol Coordinable: class {
+	var parentCoordinator: Any? { get set }
+}
+
+extension UIViewController: Coordinable {
+	private struct AssociatedKeys {
+		static var ParentCoordinator = "ParentCoordinator"
+	}
+	///	*Must* bet set for View Controller acting as Coordinator.rootViewController
+	open var parentCoordinator: Any? {
+		get {
+			guard let obj = objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) else { return nil }
+			return obj
+		}
+		set {
+			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+		}
+	}
+
+	/**	(from UIKit `next:` docs)
+
+	---
+	The UIResponder class does not store or set the next responder automatically,
+	instead returning nil by default.
+
+	Subclasses must override this method to set the next responder.
+	UIView implements this method by returning the UIViewController object
+	that manages it (if it has one) or its superview (if it doesn’t);
+	UIViewController implements the method by returning its view’s superview;
+	UIWindow returns the application object, and UIApplication returns nil.
+
+	---
+
+	Thus, to avoid messing up the Responder chain, here return either 
+	- the `parentCoordinator` if it exists or
+	- the `view.superview`
+	*/
+	override open var next: UIResponder? {
+		guard let parentCoordinator = self.parentCoordinator as? UIResponder else {
+			return view.superview
+		}
+		return parentCoordinator
+	}
+}
