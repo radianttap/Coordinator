@@ -164,6 +164,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	*/
 	public func startChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
 		childCoordinators[coordinator.identifier] = coordinator
+		coordinator.parent = self
 		coordinator.start(with: completion)
 	}
 
@@ -175,6 +176,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
 	public func stopChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
+		coordinator.parent = nil
 		coordinator.stop { [unowned self] coordinator in
 			guard let c = self.childCoordinators.removeValue(forKey: coordinator.identifier) else { return }
 			completion(c)
