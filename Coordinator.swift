@@ -65,7 +65,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	public typealias Identifier = String
 
 	/// A callback function used by coordinators to signal events.
-	public typealias Callback = (Coordinator) -> Void
+	public typealias Callback = (Any) -> Void
 
 
 
@@ -101,7 +101,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	/// Parent Coordinator
 	open var parent: Any?
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
-	open var childCoordinators: [Identifier: Coordinator] = [:]
+	open var childCoordinators: [Identifier: Any] = [:]
 
 
 
@@ -162,7 +162,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 
 	- Returns: The started coordinator.
 	*/
-	public func startChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
+	public func startChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
 		childCoordinators[coordinator.identifier] = coordinator
 		coordinator.parent = self
 		coordinator.start(with: completion)
@@ -175,10 +175,10 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
-	public func stopChild(coordinator: Coordinator, completion: @escaping Callback = {_ in}) {
+	public func stopChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
 		coordinator.parent = nil
 		coordinator.stop { [unowned self] coordinator in
-			guard let c = self.childCoordinators.removeValue(forKey: coordinator.identifier) else { return }
+			guard let c = self.childCoordinators.removeValue(forKey: (coordinator as! Coordinator<U>).identifier) else { return }
 			completion(c)
 		}
 	}
