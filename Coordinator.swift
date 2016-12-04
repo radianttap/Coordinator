@@ -29,7 +29,7 @@ public protocol CoordinatorType: class {
 	var rootViewController: RootController { get }
 
 	///	Unique identifier for the Coordinator
-	var identifier: Identifier { get }
+	static var identifier: Identifier { get }
 }
 
 
@@ -94,8 +94,12 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 
 
 	/// Default identifier is the class name of the Coordinator
-	public var identifier: Identifier {
+	public static var identifier: Identifier {
 		return String(describing: self)
+	}
+
+	open var identifier: Identifier {
+		return type(of: self).identifier
 	}
 
 	/// Parent Coordinator
@@ -170,7 +174,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 
 
 	/**
-	Stops the given child coordinator and removes it from the
+	Stops the given child coordinator and removes it from the `childCoordinators` array
 
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
@@ -179,6 +183,21 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 		coordinator.parent = nil
 		coordinator.stop { [unowned self] coordinator in
 			guard let c = self.childCoordinators.removeValue(forKey: (coordinator as! Coordinator<U>).identifier) else { return }
+			completion(c)
+		}
+	}
+
+	/**
+	Stops the child coordinator with given identifier and removes it from the `childCoordinators` array
+
+	- Parameter coordinator: The coordinator implementation to start.
+	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
+	*/
+	public func stopChild(with identifier: Identifier, completion: @escaping Callback = {_ in}) {
+		guard let coordinator = childCoordinators[identifier] as? Coordinator<UIResponder> else { return }
+		coordinator.parent = nil
+		coordinator.stop { [unowned self] _ in
+			guard let c = self.childCoordinators.removeValue(forKey: identifier) else { return }
 			completion(c)
 		}
 	}
