@@ -172,12 +172,8 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
 	public func stopChild<U>(with identifier: Identifier, type: U.Type, completion: @escaping Callback = {_ in}) where U: UIResponder {
-		guard let coordinator = childCoordinators[identifier] as? Coordinator<U> else { return }
-		coordinator.parent = nil
-		coordinator.stop { [unowned self] _ in
-			guard let c = self.childCoordinators.removeValue(forKey: identifier) else { return }
-			completion(c)
-		}
+		guard let c = childCoordinators[identifier] as? Coordinator<U> else { return }
+		stopChild(coordinator: c, completion: completion)
 	}
 }
 
@@ -230,7 +226,7 @@ extension UIViewController: Coordinable {
 			return obj
 		}
 		set {
-			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_ASSIGN)
 		}
 	}
 
