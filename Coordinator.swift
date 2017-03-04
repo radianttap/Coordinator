@@ -57,10 +57,9 @@ If you embed controllers into other VC (thus using them as simple UI components)
 then keep that flow inside the given container controller.
 Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
 */
-open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
+open class Coordinator<T>: CoordinatorType {
 	///	This
 	public typealias RootController = T
-
 	///	Identifier is used to ease-up debug, logging etc.
 	public typealias Identifier = String
 
@@ -93,7 +92,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 
 
 
-	/// Default identifier is the class name of the Coordinator
+	/// Default identifier is the class name of the Coordinator subclass
 	public static var identifier: Identifier {
 		return String(describing: self)
 	}
@@ -103,17 +102,10 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	}
 
 	/// Parent Coordinator
-	open var parent: Any?
+	open var parentCoordinator: Coordinator<Any>?
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
 	open var childCoordinators: [Identifier: Any] = [:]
 
-
-
-	///	Returns either `parent` coordinator or nil if there isn‘t one
-	override open var coordinatingResponder: UIResponder? {
-		guard let parent = self.parent as? UIResponder else { return nil }
-		return parent
-	}
 
 
 	/// Tells the coordinator to create its initial view controller and take over the user flow.
@@ -146,7 +138,7 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	*/
 	public func startChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
 		childCoordinators[coordinator.identifier] = coordinator
-		coordinator.parent = self
+		coordinator.parentCoordinator = self as? Coordinator<Any>
 		coordinator.start(with: completion)
 	}
 
@@ -158,8 +150,9 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
 	public func stopChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
-		coordinator.parent = nil
-		coordinator.stop { [unowned self] coordinator in
+		coordinator.parentCoordinator = nil
+		coordinator.stop {
+			[unowned self] coordinator in
 			guard let c = self.childCoordinators.removeValue(forKey: (coordinator as! Coordinator<U>).identifier) else { return }
 			completion(c)
 		}
@@ -181,50 +174,55 @@ open class Coordinator<T>: UIResponder, CoordinatorType where T: UIResponder {
 
 
 /**
-Driving engine of the message passing through the app, with no need for Delegate pattern nor Singletons.
-
-It piggy-backs on the UIResponder.next? in order to pass the message through UIView/UIVC hierarchy of any depth and complexity.
-However, it does not interfere with the regular UIResponder functionality.
-
-At the UIViewController level (see below), it‘s intercepted to switch up to the coordinator, if the UIVC has one. 
-Once that happens, it stays in the Coordinator hierarchy, since coordinator can be nested only inside other coordinators.
-*/
-public extension UIResponder {
-	open var coordinatingResponder: UIResponder? {
-		return next
-	}
-/*	// sort-of implementation of the custom message/command to put into your UIResponder extension
-	func messageTemplate(args: Whatever, sender: Any?) {
-		coordinatingResponder?.messageTemplate(args: args, sender: sender)
-	}
- */
-}
-
-
-
-
-
-/**
 Must be adopted by UIViewController subclasses that are presented by Coordinators,
 so that responder chain works properly.
 
 Coordinators must set this property for their rootViewController.
 */
 public protocol Coordinable: class {
-	var parentCoordinator: Any? { get set }
+	var coordinatingResponder: Coordinable?		{ get }
+}
+
+
+extension Coordinator: Coordinable {
+	///	Returns either `parent` coordinator or nil if there isn‘t one
+	open var coordinatingResponder: Coordinable? {
+		return parentCoordinator
+	}
+}
+
+
+/**
+Driving engine of the message passing through the app, with no need for Delegate pattern nor Singletons.
+
+Coordinable will piggy-back on the UIResponder.next? in order to pass the message through UIView/UIVC hierarchy of any depth and complexity.
+However, it does not interfere with the regular UIResponder functionality.
+
+At the UIViewController level (see below), it‘s intercepted to switch up to the coordinator, if the UIVC has one.
+Once that happens, it stays in the Coordinator hierarchy, since coordinator can be nested only inside other coordinators.
+*/
+public extension UIView {
+	open var coordinatingResponder: Coordinable? {
+		return next as? Coordinable
+	}
+	/*	// sort-of implementation of the custom message/command to put into your UIResponder extension
+	func messageTemplate(args: Whatever, sender: Any?) {
+	coordinatingResponder?.messageTemplate(args: args, sender: sender)
+	}
+ */
 }
 
 //	Make sure every UIViewController adopts this protocol
-extension UIViewController: Coordinable {
+public extension UIViewController: Coordinable {
 	private struct AssociatedKeys {
 		static var ParentCoordinator = "ParentCoordinator"
 	}
 	///	*Must* be set for View Controller acting as Coordinator.rootViewController
-	open var parentCoordinator: Any? {
+	open var parentCoordinator: Coordinator<Any>? {
 		get {
 			//	DANGER: this returns Any! so if you call this and 
 			//	object is not really there, your app will crash
-			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator)
+			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Coordinator<Any>
 		}
 		set {
 			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
@@ -248,9 +246,10 @@ extension UIViewController: Coordinable {
 	Thus this returns `parentCoordinator` if the current UIViewController has one,
 	or its view's `superview` if it doesn‘t.
 	*/
-	override open var coordinatingResponder: UIResponder? {
-		guard let parentCoordinator = self.parentCoordinator as? UIResponder else {
-			return view.superview
+	///	Returns either `parent` coordinator or nil if there isn‘t one
+	open var coordinatingResponder: Coordinable? {
+		guard let parentCoordinator = self.parentCoordinator else {
+			return view.superview as? Coordinable
 		}
 		return parentCoordinator
 	}
