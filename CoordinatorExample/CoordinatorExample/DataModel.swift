@@ -32,3 +32,10 @@ class PersonObjc: NSObject {
 	}
 }
 
+class PersonBox: NSObject {
+	let unbox: Person
+	init(_ value: Person) {
+		self.unbox = value
+	}
+}
+

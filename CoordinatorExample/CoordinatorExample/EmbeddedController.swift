@@ -11,8 +11,10 @@ import UIKit
 class EmbeddedController: UIViewController {
 
 	@IBAction func tapped(_ sender: UIButton) {
+//		let p = Person(name: "Bella")
+//		coordinatingResponder?.greet(p)
 		let p = Person(name: "Bella")
-		coordinatingResponder?.greet(p)
+		coordinatingResponder?.greet3(PersonBox(p))
 	}
 
 	@IBAction func tapped2(_ sender: UIButton) {

@@ -36,5 +36,11 @@ extension UIResponder {
 		coordinatingResponder?.greet2(p)
 	}
 	
+	func greet3(_ p: PersonBox) {
+		print("\n\( String(describing: self) )")
+
+		coordinatingResponder?.greet3(p)
+	}
+	
 }
 

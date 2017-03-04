@@ -35,4 +35,13 @@ final class ApplicationCoordinator: Coordinator<UINavigationController> {
 		ac.addAction(UIAlertAction(title: "OK", style: .default))
 		rootViewController.present(ac, animated: true)
 	}
+
+
+	override func greet3(_ p: PersonBox) {
+		let realPerson = p.unbox
+
+		let ac = UIAlertController(title: nil, message: realPerson.name, preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "OK", style: .default))
+		rootViewController.present(ac, animated: true)
+	}
 }
