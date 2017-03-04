@@ -34,7 +34,7 @@ then keep that flow inside the given container controller.
 Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
 */
 
-open class Coordinator<T> {
+open class Coordinator<T>: NSObject {
 	/// A callback function used by coordinators to signal events.
 	public typealias Callback = (Any) -> Void
 
@@ -70,7 +70,7 @@ open class Coordinator<T> {
 
 
 	/// Parent Coordinator
-	open var parentCoordinator: Any?	//	this annoys me, but will fix as time allows
+	open var parent: Any?	//	this annoys me, but will fix as time allows
 
 
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
@@ -108,7 +108,7 @@ open class Coordinator<T> {
 	*/
 	public func startChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
 		childCoordinators[coordinator.identifier] = coordinator
-		coordinator.parentCoordinator = self
+		coordinator.parent = self
 		coordinator.start(with: completion)
 	}
 
@@ -120,7 +120,7 @@ open class Coordinator<T> {
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
 	public func stopChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
-		coordinator.parentCoordinator = nil
+		coordinator.parent = nil
 		coordinator.stop {
 			[unowned self] obj in
 			guard
@@ -178,7 +178,7 @@ public protocol Coordinable: class {
 extension Coordinator: Coordinable {
 	///	Returns either `parent` coordinator or nil if there isn‘t one
 	open var coordinatingResponder: Coordinable? {
-		return parentCoordinator as? Coordinable
+		return parent as? Coordinable
 	}
 }
 
@@ -192,7 +192,7 @@ However, it does not interfere with the regular UIResponder functionality.
 At the UIViewController level (see below), it‘s intercepted to switch up to the coordinator, if the UIVC has one.
 Once that happens, it stays in the Coordinator hierarchy, since coordinator can be nested only inside other coordinators.
 */
-public extension UIView {
+extension UIView: Coordinable {
 	open var coordinatingResponder: Coordinable? {
 		return next as? Coordinable
 	}
@@ -204,7 +204,7 @@ public extension UIView {
 }
 
 
-public extension UIViewController {
+extension UIViewController: Coordinable {
 	/**	(from UIKit `next:` docs)
 
 	---
