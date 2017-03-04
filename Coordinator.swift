@@ -195,7 +195,7 @@ public extension UIView {
 	}
 	/*	// sort-of implementation of the custom message/command to put into your Coordinable extension
 	func messageTemplate(args: Whatever, sender: Any?) {
-	coordinatingResponder?.messageTemplate(args: args, sender: sender)
+		coordinatingResponder?.messageTemplate(args: args, sender: sender)
 	}
  */
 }
@@ -227,3 +227,4 @@ public extension UIViewController {
 		return parentCoordinator
 	}
 }
+
