@@ -96,10 +96,7 @@
 				D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */,
 				D0F32E0F1E6B61C20087C700 /* Messages.swift */,
 				D0F32E111E6B62B40087C700 /* DataModel.swift */,
-				D04B76611DE5B6D2009F1B9A /* ViewController.swift */,
-				D0F32E191E6B6DF20087C700 /* ViewController.xib */,
-				D0F32E151E6B67A60087C700 /* EmbeddedController.swift */,
-				D0F32E161E6B67A60087C700 /* EmbeddedController.xib */,
+				D0F32E2A1E6B73680087C700 /* UI */,
 				D0F32E131E6B674C0087C700 /* Helpers.swift */,
 				D04B76661DE5B6D2009F1B9A /* Assets.xcassets */,
 				D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */,
@@ -134,6 +131,17 @@
 				D0F32E241E6B71130087C700 /* TinyConstraints.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		D0F32E2A1E6B73680087C700 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D04B76611DE5B6D2009F1B9A /* ViewController.swift */,
+				D0F32E191E6B6DF20087C700 /* ViewController.xib */,
+				D0F32E151E6B67A60087C700 /* EmbeddedController.swift */,
+				D0F32E161E6B67A60087C700 /* EmbeddedController.xib */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		EA799296365A87C4A6350688 /* Pods */ = {
