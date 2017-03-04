@@ -15,6 +15,15 @@
 		D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */; };
 		D0F32E101E6B61C20087C700 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E0F1E6B61C20087C700 /* Messages.swift */; };
 		D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E111E6B62B40087C700 /* DataModel.swift */; };
+		D0F32E141E6B674C0087C700 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E131E6B674C0087C700 /* Helpers.swift */; };
+		D0F32E171E6B67A60087C700 /* EmbeddedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E151E6B67A60087C700 /* EmbeddedController.swift */; };
+		D0F32E181E6B67A60087C700 /* EmbeddedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F32E161E6B67A60087C700 /* EmbeddedController.xib */; };
+		D0F32E1A1E6B6DF20087C700 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F32E191E6B6DF20087C700 /* ViewController.xib */; };
+		D0F32E251E6B71130087C700 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D0F32E1E1E6B71130087C700 /* LICENSE */; };
+		D0F32E261E6B71130087C700 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E1F1E6B71130087C700 /* README.md */; };
+		D0F32E271E6B71130087C700 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E221E6B71130087C700 /* Constraints.swift */; };
+		D0F32E281E6B71130087C700 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E231E6B71130087C700 /* Stack.swift */; };
+		D0F32E291E6B71130087C700 /* TinyConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E241E6B71130087C700 /* TinyConstraints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +38,15 @@
 		D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		D0F32E0F1E6B61C20087C700 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		D0F32E111E6B62B40087C700 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		D0F32E131E6B674C0087C700 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		D0F32E151E6B67A60087C700 /* EmbeddedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedController.swift; sourceTree = "<group>"; };
+		D0F32E161E6B67A60087C700 /* EmbeddedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmbeddedController.xib; sourceTree = "<group>"; };
+		D0F32E191E6B6DF20087C700 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		D0F32E1E1E6B71130087C700 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		D0F32E1F1E6B71130087C700 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D0F32E221E6B71130087C700 /* Constraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		D0F32E231E6B71130087C700 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		D0F32E241E6B71130087C700 /* TinyConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TinyConstraints.swift; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -55,6 +73,7 @@
 		D04B76531DE5B6D2009F1B9A = {
 			isa = PBXGroup;
 			children = (
+				D0F32E1D1E6B71130087C700 /* TinyConstraints */,
 				D04B765E1DE5B6D2009F1B9A /* CoordinatorExample */,
 				D04B765D1DE5B6D2009F1B9A /* Products */,
 				EA799296365A87C4A6350688 /* Pods */,
@@ -78,11 +97,43 @@
 				D0F32E0F1E6B61C20087C700 /* Messages.swift */,
 				D0F32E111E6B62B40087C700 /* DataModel.swift */,
 				D04B76611DE5B6D2009F1B9A /* ViewController.swift */,
+				D0F32E191E6B6DF20087C700 /* ViewController.xib */,
+				D0F32E151E6B67A60087C700 /* EmbeddedController.swift */,
+				D0F32E161E6B67A60087C700 /* EmbeddedController.xib */,
+				D0F32E131E6B674C0087C700 /* Helpers.swift */,
 				D04B76661DE5B6D2009F1B9A /* Assets.xcassets */,
 				D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */,
 				D04B766B1DE5B6D2009F1B9A /* Info.plist */,
 			);
 			path = CoordinatorExample;
+			sourceTree = "<group>";
+		};
+		D0F32E1D1E6B71130087C700 /* TinyConstraints */ = {
+			isa = PBXGroup;
+			children = (
+				D0F32E1E1E6B71130087C700 /* LICENSE */,
+				D0F32E1F1E6B71130087C700 /* README.md */,
+				D0F32E201E6B71130087C700 /* TinyConstraints */,
+			);
+			path = TinyConstraints;
+			sourceTree = "<group>";
+		};
+		D0F32E201E6B71130087C700 /* TinyConstraints */ = {
+			isa = PBXGroup;
+			children = (
+				D0F32E211E6B71130087C700 /* Classes */,
+			);
+			path = TinyConstraints;
+			sourceTree = "<group>";
+		};
+		D0F32E211E6B71130087C700 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D0F32E221E6B71130087C700 /* Constraints.swift */,
+				D0F32E231E6B71130087C700 /* Stack.swift */,
+				D0F32E241E6B71130087C700 /* TinyConstraints.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		EA799296365A87C4A6350688 /* Pods */ = {
@@ -158,6 +209,9 @@
 			files = (
 				D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */,
 				D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */,
+				D0F32E1A1E6B6DF20087C700 /* ViewController.xib in Resources */,
+				D0F32E181E6B67A60087C700 /* EmbeddedController.xib in Resources */,
+				D0F32E251E6B71130087C700 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,9 +271,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */,
+				D0F32E171E6B67A60087C700 /* EmbeddedController.swift in Sources */,
+				D0F32E141E6B674C0087C700 /* Helpers.swift in Sources */,
 				D04B76621DE5B6D2009F1B9A /* ViewController.swift in Sources */,
+				D0F32E291E6B71130087C700 /* TinyConstraints.swift in Sources */,
+				D0F32E271E6B71130087C700 /* Constraints.swift in Sources */,
 				D0F32E101E6B61C20087C700 /* Messages.swift in Sources */,
+				D0F32E281E6B71130087C700 /* Stack.swift in Sources */,
 				D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */,
+				D0F32E261E6B71130087C700 /* README.md in Sources */,
 				D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

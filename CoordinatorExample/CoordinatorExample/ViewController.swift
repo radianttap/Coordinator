@@ -10,11 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
+	@IBOutlet fileprivate weak var container: UIView!
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		view.backgroundColor = .orange
+		let vc = EmbeddedController(nibName: nil, bundle: nil)
+		embed(controller: vc, into: container)
 	}
-
 }
 

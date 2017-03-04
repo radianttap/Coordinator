@@ -9,16 +9,19 @@
 import Foundation
 
 
-class ClassObject {
-	let name: String = "CLASS"
+class Person {
+	let name: String
+	init(name: String) {
+		self.name = name
+	}
 }
 
-struct StructObject {
+struct Place {
 	let name: String
 }
 
-enum SomeEnum {
-	case one
-	case two
+enum Direction {
+	case south
+	case north
 }
 

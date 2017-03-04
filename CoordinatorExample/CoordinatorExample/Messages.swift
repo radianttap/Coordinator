@@ -11,16 +11,22 @@ import Coordinator
 
 extension Coordinable {
 
-	func bubbleC(_ c: ClassObject) {
-		coordinatingResponder?.bubbleC(c)
+	func greet(_ p: Person) {
+		print(String(describing: self))
+
+		coordinatingResponder?.greet(p)
 	}
 
-	func bubbleS(_ s: StructObject) {
-		coordinatingResponder?.bubbleS(s)
+	func find(_ p: Place) {
+		print(String(describing: self))
+
+		coordinatingResponder?.find(p)
 	}
 
-	func bubbleE(_ e: SomeEnum) {
-		coordinatingResponder?.bubbleE(e)
+	func go(_ d: Direction) {
+		print(String(describing: self))
+
+		coordinatingResponder?.go(d)
 	}
 }
 

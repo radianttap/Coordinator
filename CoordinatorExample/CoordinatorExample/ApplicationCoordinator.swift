@@ -6,7 +6,7 @@
 //  Copyright © 2017. Radiant Tap. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Coordinator
 
 final class ApplicationCoordinator: Coordinator<UINavigationController> {
@@ -16,5 +16,12 @@ final class ApplicationCoordinator: Coordinator<UINavigationController> {
 
 		super.init(rootViewController: nc)
 		nc.parentCoordinator = self
+	}
+
+
+	func greet(_ p: Person) {
+		let ac = UIAlertController(title: nil, message: p.name, preferredStyle: .alert)
+		ac.addAction(UIAlertAction(title: "OK", style: .default))
+		rootViewController.present(ac, animated: true)
 	}
 }

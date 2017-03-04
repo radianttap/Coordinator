@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11762"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="CoordinatorExample" customModuleProvider="target">
+            <connections>
+                <outlet property="container" destination="0cn-OD-xXy" id="5bU-5z-RtZ"/>
+                <outlet property="view" destination="iN0-l3-epB" id="wFf-tc-VmB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0cn-OD-xXy">
+                    <rect key="frame" x="8" y="36" width="359" height="359"/>
+                    <color key="backgroundColor" white="1" alpha="0.24850566275167785" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="0cn-OD-xXy" secondAttribute="height" multiplier="1:1" id="TlW-WR-BRu"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.65366699500000003" green="0.72600655970000005" blue="0.83330078119999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="leadingMargin" secondItem="0cn-OD-xXy" secondAttribute="leading" id="acr-q2-QaH"/>
+                <constraint firstItem="0cn-OD-xXy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="28" id="bkV-AB-tcF"/>
+                <constraint firstAttribute="trailingMargin" secondItem="0cn-OD-xXy" secondAttribute="trailing" id="kIM-dw-au8"/>
+            </constraints>
+            <point key="canvasLocation" x="34.5" y="54.5"/>
+        </view>
+    </objects>
+</document>
