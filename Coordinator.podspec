@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = 'Coordinator'
-  s.version      = '2.0.1'
-  s.summary      = 'Advanced implementation of (Application) Coordinator software design pattern in Swift 3. It subclasses UIResponder to allow implementation of custom UIResponder actions and thus side-step the need for delegates all over your code.'
+  s.version      = '3.0'
+  s.summary      = 'Advanced implementation of (Application) Coordinator software design pattern in Swift 3. It implements a mechanism to allow implementation of custom messaging between any UIView, UIViewController and Coordinator, regardless of where in the hierarchy they are. It thus side-steps the need for delegates all over your code. It simplifies testing and allows creation of self-contained visual boxes that do one thing and don't care where are they embedded or presented.'
   s.homepage     = 'https://github.com/radianttap/Coordinator'
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { 'Aleksandar Vacić' => 'radianttap.com' }
