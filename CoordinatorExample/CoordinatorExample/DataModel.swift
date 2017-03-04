@@ -25,3 +25,10 @@ enum Direction {
 	case north
 }
 
+class PersonObjc: NSObject {
+	let name: String
+	init(name: String) {
+		self.name = name
+	}
+}
+

@@ -9,7 +9,7 @@
 import Foundation
 import Coordinator
 
-extension Coordinable {
+extension UIResponder {
 
 	func greet(_ p: Person) {
 		print("\n\( String(describing: self) )")
@@ -28,5 +28,13 @@ extension Coordinable {
 
 		coordinatingResponder?.go(d)
 	}
+
+
+	func greet2(_ p: PersonObjc) {
+		print("\n\( String(describing: self) )")
+
+		coordinatingResponder?.greet2(p)
+	}
+	
 }
 

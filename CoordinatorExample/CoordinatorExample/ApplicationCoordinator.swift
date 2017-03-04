@@ -19,7 +19,18 @@ final class ApplicationCoordinator: Coordinator<UINavigationController> {
 	}
 
 
-	func greet(_ p: Person) {
+
+
+	//	this does not work, since it's pure Swift class
+//	override func greet(_ p: Person) {
+//		let ac = UIAlertController(title: nil, message: p.name, preferredStyle: .alert)
+//		ac.addAction(UIAlertAction(title: "OK", style: .default))
+//		rootViewController.present(ac, animated: true)
+//	}
+
+	
+	//	this works, because it subclasses NSObject
+	override func greet2(_ p: PersonObjc) {
 		let ac = UIAlertController(title: nil, message: p.name, preferredStyle: .alert)
 		ac.addAction(UIAlertAction(title: "OK", style: .default))
 		rootViewController.present(ac, animated: true)

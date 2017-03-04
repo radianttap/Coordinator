@@ -34,7 +34,7 @@ then keep that flow inside the given container controller.
 Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
 */
 
-open class Coordinator<T>: NSObject {
+open class Coordinator<T>: UIResponder {
 	/// A callback function used by coordinators to signal events.
 	public typealias Callback = (Any) -> Void
 
@@ -141,7 +141,14 @@ open class Coordinator<T>: NSObject {
 		guard let c = childCoordinators[identifier] as? Coordinator<U> else { return }
 		stopChild(coordinator: c, completion: completion)
 	}
+
+	///	Returns either `parent` coordinator or nil if there isn‘t one
+	override open var coordinatingResponder: UIResponder? {
+		return parent as? UIResponder
+	}
 }
+
+
 
 //	Inject parentCoordinator property into all UIViewControllers
 extension UIViewController {
@@ -163,25 +170,6 @@ extension UIViewController {
 
 
 /**
-Must be adopted by UIViewController subclasses that are presented by Coordinators,
-so that responder chain works properly.
-
-Coordinators must set this property for their rootViewController.
-*/
-public protocol Coordinable: class {
-	var coordinatingResponder: Coordinable?		{ get }
-}
-
-
-extension Coordinator: Coordinable {
-	///	Returns either `parent` coordinator or nil if there isn‘t one
-	open var coordinatingResponder: Coordinable? {
-		return parent as? Coordinable
-	}
-}
-
-
-/**
 Driving engine of the message passing through the app, with no need for Delegate pattern nor Singletons.
 
 Coordinable will piggy-back on the UIResponder.next? in order to pass the message through UIView/UIVC hierarchy of any depth and complexity.
@@ -190,9 +178,9 @@ However, it does not interfere with the regular UIResponder functionality.
 At the UIViewController level (see below), it‘s intercepted to switch up to the coordinator, if the UIVC has one.
 Once that happens, it stays in the Coordinator hierarchy, since coordinator can be nested only inside other coordinators.
 */
-extension UIView: Coordinable {
-	open var coordinatingResponder: Coordinable? {
-		return next as? Coordinable
+public extension UIResponder {
+	open var coordinatingResponder: UIResponder? {
+		return next
 	}
 	/*	// sort-of implementation of the custom message/command to put into your Coordinable extension
 	func messageTemplate(args: Whatever, sender: Any?) {
@@ -202,7 +190,13 @@ extension UIView: Coordinable {
 }
 
 
-extension UIViewController: Coordinable {
+//extension UIView: Coordinable {
+//	open var coordinatingResponder: Coordinable? {
+//		return next as? Coordinable
+//	}
+//}
+
+extension UIViewController {
 	/**	(from UIKit `next:` docs)
 
 	---
@@ -221,9 +215,9 @@ extension UIViewController: Coordinable {
 	or its view's `superview` if it doesn‘t.
 	*/
 	///	Returns either `parent` coordinator or nil if there isn‘t one
-	open var coordinatingResponder: Coordinable? {
-		guard let parentCoordinator = self.parentCoordinator as? Coordinable else {
-			return view.superview as? Coordinable
+	override open var coordinatingResponder: UIResponder? {
+		guard let parentCoordinator = self.parentCoordinator as? UIResponder else {
+			return view.superview
 		}
 		return parentCoordinator
 	}

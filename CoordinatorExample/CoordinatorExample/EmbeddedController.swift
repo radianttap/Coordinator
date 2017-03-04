@@ -14,4 +14,9 @@ class EmbeddedController: UIViewController {
 		let p = Person(name: "Bella")
 		coordinatingResponder?.greet(p)
 	}
+
+	@IBAction func tapped2(_ sender: UIButton) {
+		let p = PersonObjc(name: "Oldie")
+		coordinatingResponder?.greet2(p)
+	}
 }

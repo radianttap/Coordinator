@@ -35,14 +35,34 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="tapped:" destination="-1" eventType="touchUpInside" id="dDx-fa-gQk"/>
+                        <action selector="tapped:" destination="-1" eventType="touchUpInside" id="BSe-pm-9to"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JlX-Xx-VF7" userLabel="Ciao oldie">
+                    <rect key="frame" x="126" y="260.5" width="123" height="38"/>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <inset key="contentEdgeInsets" minX="16" minY="8" maxX="16" maxY="8"/>
+                    <state key="normal" title="Ciao oldie">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="4"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="tapped2:" destination="-1" eventType="touchUpInside" id="x6Z-Al-jHF"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Sed-ki-CKK" firstAttribute="top" secondItem="JlX-Xx-VF7" secondAttribute="bottom" constant="16" id="AwZ-Pk-zbT"/>
+                <constraint firstItem="JlX-Xx-VF7" firstAttribute="width" secondItem="Sed-ki-CKK" secondAttribute="width" id="CK5-RK-MS1"/>
                 <constraint firstItem="Sed-ki-CKK" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerYWithinMargins" id="bsA-SO-J0k"/>
                 <constraint firstItem="Sed-ki-CKK" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerXWithinMargins" id="o6d-KA-raC"/>
+                <constraint firstItem="JlX-Xx-VF7" firstAttribute="centerX" secondItem="Sed-ki-CKK" secondAttribute="centerX" id="s8y-CF-45k"/>
             </constraints>
         </view>
     </objects>
