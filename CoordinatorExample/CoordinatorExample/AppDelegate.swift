@@ -13,16 +13,14 @@ import Coordinator
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var applicationCoordinator: Coordinator<UINavigationController>!
+	var applicationCoordinator: ApplicationCoordinator!
 
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
 
 		window = UIWindow(frame: UIScreen.main.bounds)
 
-
 		let nc = UINavigationController(rootViewController: ViewController())
-		applicationCoordinator = Coordinator(rootViewController: nc)
-
+		applicationCoordinator = ApplicationCoordinator(rootViewController: nc)
 
 		window?.rootViewController = applicationCoordinator.rootViewController
 		return true
