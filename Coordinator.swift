@@ -9,30 +9,6 @@
 
 import UIKit
 
-//	Must do 2-step dance due to the way Swift works with generic protocols
-//	`associatedtype RootController` is needed to allow any kind of UIVC subclass to
-//	become Coordinator's root VC
-public protocol CoordinatorType: class {
-	associatedtype RootController
-	associatedtype Identifier
-
-	/// You need to supply at least one UIViewController (or any of its subclasses) that will be loaded as root.
-	///	Usually one of container controllers (UINavigationController, UITabBarController etc)
-	///
-	/// - parameter rootViewController: UIViewController at the top of the hierarchy.
-	///
-	/// - returns: Coordinator instance, prepared to start
-	init(rootViewController: RootController?)
-
-	/// The root view controller for a coordinator. 
-	///	Each coordinator creates its VC hierarchy internally, so this is read-only property (post init)
-	var rootViewController: RootController { get }
-
-	///	Unique identifier for the Coordinator
-	static var identifier: Identifier { get }
-}
-
-
 /**
 Coordinators are a design pattern that encourages decoupling view controllers
 such that they know as little as possible about how they are presented.
@@ -57,22 +33,16 @@ If you embed controllers into other VC (thus using them as simple UI components)
 then keep that flow inside the given container controller.
 Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
 */
-open class Coordinator<T>: CoordinatorType {
-	///	This
-	public typealias RootController = T
-	///	Identifier is used to ease-up debug, logging etc.
-	public typealias Identifier = String
 
+open class Coordinator<T> {
 	/// A callback function used by coordinators to signal events.
-	public typealias Callback = (Any) -> Void
+	public typealias Callback = (Coordinator<Any>) -> Void
 
 
-
-	
-
-	/// The root view controller for a coordinator. 
+	/// The root view controller for a coordinator.
 	///	Each coordinator creates its VC hierarchy internally, so there should be no need to alter this once set
 	open var rootViewController: T
+
 
 	/// You need to supply at least one UIViewController (or any of its subclasses) that will be loaded as root.
 	///	Usually one of container controllers (UINavigationController, UITabBarController etc)
@@ -89,22 +59,22 @@ open class Coordinator<T>: CoordinatorType {
 	}
 
 
-
-
-
 	/// Default identifier is the class name of the Coordinator subclass
-	public static var identifier: Identifier {
+	public static var identifier: String {
 		return String(describing: self)
 	}
 
-	open var identifier: Identifier {
+	open var identifier: String {
 		return type(of: self).identifier
 	}
 
+
 	/// Parent Coordinator
 	open var parentCoordinator: Coordinator<Any>?
+
+
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
-	open var childCoordinators: [Identifier: Any] = [:]
+	open var childCoordinators: [String: Coordinator<Any>] = [:]
 
 
 
@@ -137,8 +107,8 @@ open class Coordinator<T>: CoordinatorType {
 	- Returns: The started coordinator.
 	*/
 	public func startChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
-		childCoordinators[coordinator.identifier] = coordinator
-		coordinator.parentCoordinator = self as? Coordinator<Any>
+		childCoordinators[coordinator.identifier] = coordinator as! Coordinator<Any>
+		coordinator.parentCoordinator = self as! Coordinator<Any>
 		coordinator.start(with: completion)
 	}
 
@@ -153,7 +123,7 @@ open class Coordinator<T>: CoordinatorType {
 		coordinator.parentCoordinator = nil
 		coordinator.stop {
 			[unowned self] coordinator in
-			guard let c = self.childCoordinators.removeValue(forKey: (coordinator as! Coordinator<U>).identifier) else { return }
+			guard let c = self.childCoordinators.removeValue(forKey: coordinator.identifier) else { return }
 			completion(c)
 		}
 	}
@@ -164,9 +134,27 @@ open class Coordinator<T>: CoordinatorType {
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
-	public func stopChild<U>(with identifier: Identifier, type: U.Type, completion: @escaping Callback = {_ in}) where U: UIResponder {
+	public func stopChild<U>(with identifier: String, type: U.Type, completion: @escaping Callback = {_ in}) {
 		guard let c = childCoordinators[identifier] as? Coordinator<U> else { return }
 		stopChild(coordinator: c, completion: completion)
+	}
+}
+
+//	Inject parentCoordinator property into all UIViewControllers
+extension UIViewController {
+	private struct AssociatedKeys {
+		static var ParentCoordinator = "ParentCoordinator"
+	}
+	///	*Must* be set for View Controller acting as Coordinator.rootViewController
+	open var parentCoordinator: Coordinator<Any>? {
+		get {
+			//	DANGER: this returns Any! so if you call this and
+			//	object is not really there, your app will crash
+			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Coordinator<Any>
+		}
+		set {
+			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
+		}
 	}
 }
 
@@ -205,30 +193,15 @@ public extension UIView {
 	open var coordinatingResponder: Coordinable? {
 		return next as? Coordinable
 	}
-	/*	// sort-of implementation of the custom message/command to put into your UIResponder extension
+	/*	// sort-of implementation of the custom message/command to put into your Coordinable extension
 	func messageTemplate(args: Whatever, sender: Any?) {
 	coordinatingResponder?.messageTemplate(args: args, sender: sender)
 	}
  */
 }
 
-//	Make sure every UIViewController adopts this protocol
-public extension UIViewController: Coordinable {
-	private struct AssociatedKeys {
-		static var ParentCoordinator = "ParentCoordinator"
-	}
-	///	*Must* be set for View Controller acting as Coordinator.rootViewController
-	open var parentCoordinator: Coordinator<Any>? {
-		get {
-			//	DANGER: this returns Any! so if you call this and 
-			//	object is not really there, your app will crash
-			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Coordinator<Any>
-		}
-		set {
-			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
-		}
-	}
 
+public extension UIViewController {
 	/**	(from UIKit `next:` docs)
 
 	---
