@@ -222,11 +222,12 @@ extension UIViewController: Coordinable {
 	///	*Must* be set for View Controller acting as Coordinator.rootViewController
 	open var parentCoordinator: Any? {
 		get {
-			guard let obj = objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) else { return nil }
-			return obj
+			//	DANGER: this returns Any! so if you call this and 
+			//	object is not really there, your app will crash
+			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator)
 		}
 		set {
-			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_ASSIGN)
+			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
 		}
 	}
 
