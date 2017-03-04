@@ -36,7 +36,7 @@ Expose to Coordinator only those behaviors that cause push/pop/present to bubble
 
 open class Coordinator<T> {
 	/// A callback function used by coordinators to signal events.
-	public typealias Callback = (Coordinator<Any>) -> Void
+	public typealias Callback = (Any) -> Void
 
 
 	/// The root view controller for a coordinator.
@@ -70,11 +70,11 @@ open class Coordinator<T> {
 
 
 	/// Parent Coordinator
-	open var parentCoordinator: Coordinator<Any>?
+	open var parentCoordinator: Any?	//	this annoys me, but will fix as time allows
 
 
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
-	open var childCoordinators: [String: Coordinator<Any>] = [:]
+	open var childCoordinators: [String: Any] = [:]
 
 
 
@@ -107,8 +107,8 @@ open class Coordinator<T> {
 	- Returns: The started coordinator.
 	*/
 	public func startChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
-		childCoordinators[coordinator.identifier] = coordinator as! Coordinator<Any>
-		coordinator.parentCoordinator = self as! Coordinator<Any>
+		childCoordinators[coordinator.identifier] = coordinator
+		coordinator.parentCoordinator = self
 		coordinator.start(with: completion)
 	}
 
@@ -122,8 +122,11 @@ open class Coordinator<T> {
 	public func stopChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
 		coordinator.parentCoordinator = nil
 		coordinator.stop {
-			[unowned self] coordinator in
-			guard let c = self.childCoordinators.removeValue(forKey: coordinator.identifier) else { return }
+			[unowned self] obj in
+			guard
+				let coord = obj as? Coordinator<Any>,
+				let c = self.childCoordinators.removeValue(forKey: coord.identifier)
+			else { return }
 			completion(c)
 		}
 	}
@@ -146,11 +149,11 @@ extension UIViewController {
 		static var ParentCoordinator = "ParentCoordinator"
 	}
 	///	*Must* be set for View Controller acting as Coordinator.rootViewController
-	open var parentCoordinator: Coordinator<Any>? {
+	open var parentCoordinator: Any? {
 		get {
 			//	DANGER: this returns Any! so if you call this and
 			//	object is not really there, your app will crash
-			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Coordinator<Any>
+			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Any
 		}
 		set {
 			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
@@ -175,7 +178,7 @@ public protocol Coordinable: class {
 extension Coordinator: Coordinable {
 	///	Returns either `parent` coordinator or nil if there isn‘t one
 	open var coordinatingResponder: Coordinable? {
-		return parentCoordinator
+		return parentCoordinator as? Coordinable
 	}
 }
 
@@ -221,7 +224,7 @@ public extension UIViewController {
 	*/
 	///	Returns either `parent` coordinator or nil if there isn‘t one
 	open var coordinatingResponder: Coordinable? {
-		guard let parentCoordinator = self.parentCoordinator else {
+		guard let parentCoordinator = self.parentCoordinator as? Coordinable else {
 			return view.superview as? Coordinable
 		}
 		return parentCoordinator
