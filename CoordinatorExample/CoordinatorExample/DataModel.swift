@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+//	pure Swift class
 class Person {
 	let name: String
 	init(name: String) {
@@ -25,6 +25,7 @@ enum Direction {
 	case north
 }
 
+//	Objective-C subclass
 class PersonObjc: NSObject {
 	let name: String
 	init(name: String) {
@@ -32,10 +33,18 @@ class PersonObjc: NSObject {
 	}
 }
 
+
+//	SOLUTION:
+//	Boxing pure Swift type into Objective-C friendly form
+
 class PersonBox: NSObject {
 	let unbox: Person
 	init(_ value: Person) {
 		self.unbox = value
 	}
+}
+
+extension Person {
+	var boxed: PersonBox { return PersonBox(self) }
 }
 

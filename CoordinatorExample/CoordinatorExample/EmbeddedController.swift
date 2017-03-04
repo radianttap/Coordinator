@@ -14,7 +14,7 @@ class EmbeddedController: UIViewController {
 //		let p = Person(name: "Bella")
 //		coordinatingResponder?.greet(p)
 		let p = Person(name: "Bella")
-		coordinatingResponder?.greet3(PersonBox(p))
+		coordinatingResponder?.greet3(p.boxed)
 	}
 
 	@IBAction func tapped2(_ sender: UIButton) {
