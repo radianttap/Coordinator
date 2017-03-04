@@ -149,14 +149,12 @@ extension UIViewController {
 		static var ParentCoordinator = "ParentCoordinator"
 	}
 	///	*Must* be set for View Controller acting as Coordinator.rootViewController
-	open var parentCoordinator: Any? {
+	public var parentCoordinator: Any? {
 		get {
-			//	DANGER: this returns Any! so if you call this and
-			//	object is not really there, your app will crash
-			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Any
+			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator)
 		}
 		set {
-			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
+			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_ASSIGN)
 		}
 	}
 }
