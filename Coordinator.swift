@@ -190,12 +190,6 @@ public extension UIResponder {
 }
 
 
-//extension UIView: Coordinable {
-//	open var coordinatingResponder: Coordinable? {
-//		return next as? Coordinable
-//	}
-//}
-
 extension UIViewController {
 	/**	(from UIKit `next:` docs)
 
