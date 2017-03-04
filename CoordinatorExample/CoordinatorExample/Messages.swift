@@ -12,19 +12,19 @@ import Coordinator
 extension Coordinable {
 
 	func greet(_ p: Person) {
-		print(String(describing: self))
+		print("\n\( String(describing: self) )")
 
 		coordinatingResponder?.greet(p)
 	}
 
 	func find(_ p: Place) {
-		print(String(describing: self))
+		print("\n\( String(describing: self) )")
 
 		coordinatingResponder?.find(p)
 	}
 
 	func go(_ d: Direction) {
-		print(String(describing: self))
+		print("\n\( String(describing: self) )")
 
 		coordinatingResponder?.go(d)
 	}
