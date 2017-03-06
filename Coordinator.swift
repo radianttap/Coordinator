@@ -119,16 +119,10 @@ open class Coordinator<T>: UIResponder {
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
-	public func stopChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
+	public func stopChild<U>(coordinator: Coordinator<U>, completion: @escaping () -> Void = {}) {
 		coordinator.parent = nil
-		coordinator.stop {
-			[unowned self] obj in
-			guard
-				let coord = obj as? Coordinator<Any>,
-				let c = self.childCoordinators.removeValue(forKey: coord.identifier)
-			else { return }
-			completion(c)
-		}
+		self.childCoordinators.removeValue(forKey: coordinator.identifier)
+		completion()
 	}
 
 	/**
@@ -137,7 +131,7 @@ open class Coordinator<T>: UIResponder {
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
-	public func stopChild<U>(with identifier: String, type: U.Type, completion: @escaping Callback = {_ in}) {
+	public func stopChild<U>(with identifier: String, type: U.Type, completion: @escaping () -> Void = {}) {
 		guard let c = childCoordinators[identifier] as? Coordinator<U> else { return }
 		stopChild(coordinator: c, completion: completion)
 	}
