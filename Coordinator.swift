@@ -155,7 +155,7 @@ extension UIViewController {
 			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator)
 		}
 		set {
-			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_ASSIGN)
+			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
 		}
 	}
 }
@@ -173,7 +173,7 @@ At the UIViewController level (see below), it‘s intercepted to switch up to th
 Once that happens, it stays in the Coordinator hierarchy, since coordinator can be nested only inside other coordinators.
 */
 public extension UIResponder {
-	open var coordinatingResponder: UIResponder? {
+	public var coordinatingResponder: UIResponder? {
 		return next
 	}
 	/*	// sort-of implementation of the custom message/command to put into your Coordinable extension
