@@ -1,8 +1,10 @@
 use_frameworks!
 
-target ‘CoordinatorExample’ do
-	platform :ios, ‘8.2’
+target 'CoordinatorExample' do
+	platform :ios, '9.0'
 
-	pod 'Coordinator', :path => ‘../'
+	pod 'Coordinator', :path => '../'
+
+	pod 'TinyConstraints'
 end
 

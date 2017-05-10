@@ -20,34 +20,27 @@
 //    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //    THE SOFTWARE.
-//
 
-import UIKit
+#if os(OSX)
+    import AppKit
+#else
+    import UIKit
+#endif
 
-public typealias Constraint = NSLayoutConstraint
-public typealias Constraints = [Constraint]
+extension View: Constrainable {}
+extension LayoutGuide: Constrainable {}
 
-public extension Collection where Iterator.Element == Constraint {
+public protocol Constrainable {
+    var topAnchor: NSLayoutYAxisAnchor { get }
+    var bottomAnchor: NSLayoutYAxisAnchor { get }
+    var leftAnchor: NSLayoutXAxisAnchor { get }
+    var rightAnchor: NSLayoutXAxisAnchor { get }
+    var leadingAnchor: NSLayoutXAxisAnchor { get }
+    var trailingAnchor: NSLayoutXAxisAnchor { get }
     
-    func activate() {
-        
-        if let constraints = self as? Constraints {
-            Constraint.activate(constraints)
-        }
-    }
+    var centerXAnchor: NSLayoutXAxisAnchor { get }
+    var centerYAnchor: NSLayoutYAxisAnchor { get }
     
-    func deActivate() {
-        
-        if let constraints = self as? Constraints {
-            Constraint.deactivate(constraints)
-        }
-    }
-}
-
-public extension Constraint {
-    
-    func with(_ p: UILayoutPriority) -> Self {
-        priority = p
-        return self
-    }
+    var widthAnchor: NSLayoutDimension { get }
+    var heightAnchor: NSLayoutDimension { get }
 }

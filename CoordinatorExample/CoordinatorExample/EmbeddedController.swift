@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmbeddedController: UIViewController {
+final class EmbeddedController: UIViewController {
 
 	@IBAction func tapped(_ sender: UIButton) {
 //		let p = Person(name: "Bella")

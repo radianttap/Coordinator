@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_CoordinatorExampleVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_CoordinatorExampleVersionString[];
+FOUNDATION_EXPORT double TinyConstraintsVersionNumber;
+FOUNDATION_EXPORT const unsigned char TinyConstraintsVersionString[];
 

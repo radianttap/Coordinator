@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
 	@IBOutlet fileprivate weak var container: UIView!
 

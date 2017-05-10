@@ -1,10 +1,10 @@
 <p align="center">
-    <img src="Art/logo.png" width="890" alt="Tiny Constraints"/>
+    <img src="Art/logo.png" width="890" alt="TinyConstraints"/>
 </p>
 
 **tl;dr** *Nothing but sugar.*
 
-**Tiny Constraints** is the syntactic sugar that makes Auto Layout sweeter for human use.
+**TinyConstraints** is the syntactic sugar that makes Auto Layout sweeter for human use.
 
 ![](Art/gifs/tc_03.gif)![](Art/gifs/tc_01.gif)![](Art/gifs/tc_02.gif)
 
@@ -29,7 +29,7 @@ NSLayoutConstraint.activate([
 ])
 ```
 
-with `Tiny Constraints`:
+with `TinyConstraints`:
 ```swift
 view.edges(to: superview)
 ```
@@ -47,7 +47,7 @@ NSLayoutConstraint.activate([
 ])
 ```
 
-with `Tiny Constraints`:
+with `TinyConstraints`:
 ```swift
 view.center(in: superview)
 ```
@@ -58,12 +58,13 @@ view.center(in: superview, offset: CGPoint(x: 10, y: 10))
 ```
 
 ## Basic Use
+
 ### Typealiases
 
-`Tiny Constraints` gives you convenient and tiny typealiases for handling constraints.
+`TinyConstraints` gives you convenient and tiny typealiases for handling constraints.
 
-- Constraint = NSLayoutConstraint
-- Constraints = [NSLayoutConstraint]
+- `Constraint` = `NSLayoutConstraint`
+- `Constraints` = `[NSLayoutConstraint]`
 
 ### Equal and Unequal Anchors
 This constraints the `top-anchor` of the view to the `top-anchor` of the superview.
@@ -71,9 +72,15 @@ This constraints the `top-anchor` of the view to the `top-anchor` of the supervi
 view.top(to: superview)
 ```
 
-This constraints the `top-anchor` of the view to the `bottom-anchor` of the superview.
+This constraints the `top-anchor` of `firstView` to the `bottom-anchor` of `secondView`.
 ```swift
-view.top(to: superview, superview.bottomAnchor)
+firstView.topToBottom(of: secondView)
+```
+
+### Relation and Priority
+For almost all constraints you can set the `relation` and `priority` properties. The default relation is `.equal` and the default priority is `.required`.
+```swift
+container.width(150, relation: .equalOrLess, priority: .high)
 ```
 
 ### Storing Constraints
@@ -83,7 +90,7 @@ let constraints = view.size(CGSize(width: 100, height: 100), isActive: false)
 ```
 
 ### Activation and Deactivation
-Besides the default `NSLayoutConstraint` activation, `Tiny Constraints` also provides a way to activate *a set* of constraints.
+Besides the default `NSLayoutConstraint` activation, `TinyConstraints` also provides a way to activate *a set* of constraints.
 ```swift
 constraints.activate()
 ```
@@ -95,7 +102,7 @@ oldConstraints.deActivate()
 constraints.activate()
 UIViewPropertyAnimator(duration: 1, dampingRatio: 0.4) {
     self.layoutIfNeeded()
-    }.startAnimation()
+}.startAnimation()
 ```
 
 ### Animating Constraint Constants
@@ -106,7 +113,7 @@ let height = view.height(100)
 height.constant = 200
 UIViewPropertyAnimator(duration: 1, dampingRatio: 0.4) {
     self.layoutIfNeeded()
-    }.startAnimation()
+}.startAnimation()
 ```
 
 ### Stack
@@ -116,7 +123,7 @@ let views = [logo, title, description]
 superview.stack(views, axis: .vertical, spacing: 10)
 ```
 
-#####Find these examples and more in the *Example Project*.
+##### Find these examples and more in the *Example Project*.
 
 ## Installation
 

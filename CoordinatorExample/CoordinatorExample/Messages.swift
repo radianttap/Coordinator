@@ -6,7 +6,7 @@
 //  Copyright © 2017. Radiant Tap. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Coordinator
 
 extension UIResponder {

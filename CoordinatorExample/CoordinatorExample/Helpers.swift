@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import TinyConstraints
 
 extension UIViewController {
 	func embed<T>(controller vc: T, into parentView: UIView?)

@@ -1,16 +1,19 @@
 PODS:
-  - Coordinator (1.0)
+  - Coordinator (3.1.2)
+  - TinyConstraints (2.0.0)
 
 DEPENDENCIES:
   - Coordinator (from `../`)
+  - TinyConstraints
 
 EXTERNAL SOURCES:
   Coordinator:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Coordinator: 8449f362fb1a613da10fbcf962c049ccac2d72c9
+  Coordinator: b1fb8f9299f927af8c06be7091b328d8ed69c4f4
+  TinyConstraints: c8f3c34a90aa2a5b6960dcff5cc6a69e8938cf1b
 
-PODFILE CHECKSUM: 5e84536e9e29526f115588790e945b1598b69f0f
+PODFILE CHECKSUM: 83b4afef447e3ca01b6315221c13f9b913cd7573
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1
