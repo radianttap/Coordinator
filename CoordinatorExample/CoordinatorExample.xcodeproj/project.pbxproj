@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5844AA38478FFECFE509CA4E /* Pods_CoordinatorExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */; };
 		D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5A1EC2FE230008A087 /* AppDependency.swift */; };
+		D010CB5D1EC316AF0008A087 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5C1EC316AF0008A087 /* Manager.swift */; };
 		D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */; };
 		D04B76621DE5B6D2009F1B9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B76611DE5B6D2009F1B9A /* ViewController.swift */; };
 		D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D04B76661DE5B6D2009F1B9A /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		4AA320E87E13AC9A9EDB7E0C /* Pods-CoordinatorExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoordinatorExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CoordinatorExample/Pods-CoordinatorExample.release.xcconfig"; sourceTree = "<group>"; };
 		682B196ABF2D7650612256D2 /* Pods-CoordinatorExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoordinatorExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoordinatorExample/Pods-CoordinatorExample.debug.xcconfig"; sourceTree = "<group>"; };
 		D010CB5A1EC2FE230008A087 /* AppDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
+		D010CB5C1EC316AF0008A087 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		D04B765C1DE5B6D2009F1B9A /* CoordinatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoordinatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D04B76611DE5B6D2009F1B9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				D0F32E2A1E6B73680087C700 /* UI */,
 				D0F32E131E6B674C0087C700 /* Helpers.swift */,
 				D010CB5A1EC2FE230008A087 /* AppDependency.swift */,
+				D010CB5C1EC316AF0008A087 /* Manager.swift */,
 				D04B76661DE5B6D2009F1B9A /* Assets.xcassets */,
 				D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */,
 				D04B766B1DE5B6D2009F1B9A /* Info.plist */,
@@ -248,6 +251,7 @@
 				D0F32E101E6B61C20087C700 /* Messages.swift in Sources */,
 				D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */,
 				D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */,
+				D010CB5D1EC316AF0008A087 /* Manager.swift in Sources */,
 				D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
