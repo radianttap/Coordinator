@@ -10,15 +10,4 @@ import UIKit
 
 final class EmbeddedController: UIViewController {
 
-	@IBAction func tapped(_ sender: UIButton) {
-//		let p = Person(name: "Bella")
-//		coordinatingResponder?.greet(p)
-		let p = Person(name: "Bella")
-		coordinatingResponder?.greet3(p.boxed)
-	}
-
-	@IBAction func tapped2(_ sender: UIButton) {
-		let p = PersonObjc(name: "Oldie")
-		coordinatingResponder?.greet2(p)
-	}
 }
