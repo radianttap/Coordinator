@@ -10,6 +10,7 @@ import Foundation
 
 class Product {
 	var imagePath: String?
+	var price: Price?
 
 	var materials: [String] = []
 

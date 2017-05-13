@@ -8,15 +8,12 @@
 
 import Foundation
 
-class Price {
-	let product: Product
-
+struct Price {
 	let currencyCode: String
 	var wholesalePrice: Decimal?
 	var retailPrice: Decimal?
 
-	init(product: Product, currencyCode: String = "EUR", wholesalePrice: Decimal? = nil, retailPrice: Decimal? = nil) {
-		self.product = product
+	init(currencyCode: String = "EUR", wholesalePrice: Decimal? = nil, retailPrice: Decimal? = nil) {
 		self.currencyCode = currencyCode
 		self.wholesalePrice = wholesalePrice
 		self.retailPrice = retailPrice
