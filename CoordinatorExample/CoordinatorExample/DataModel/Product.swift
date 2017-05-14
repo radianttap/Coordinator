@@ -11,13 +11,15 @@ import Foundation
 class Product {
 	var name: String
 	var desc: String?
-	var imagePath: String?
 	var price: Price?
 
 	var materials: [String] = []
 
+	var gridImagePath: String?
+	var promoImagePath: String?
+
 	weak var category: Category?
-	weak var collection: Collection?
+	weak var theme: Theme?
 
 	init(name: String) {
 		self.name = name

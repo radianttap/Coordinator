@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Collection {
+class Theme {
 	var name: String
 
 	var product: [Product] = []

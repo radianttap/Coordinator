@@ -11,7 +11,7 @@ import Foundation
 class Season {
 	var name: String
 
-	var collections: [Collection] = []
+	var themes: [Theme] = []
 	var categories: [Category] = []
 
 	init(name: String) {

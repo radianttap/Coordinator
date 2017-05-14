@@ -17,7 +17,7 @@
 		D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E111E6B62B40087C700 /* DataModel.swift */; };
 		D0FF0C2E1EC6D6C60023F8B8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */; };
 		D0FF0C311EC6D73D0023F8B8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C301EC6D73D0023F8B8 /* Category.swift */; };
-		D0FF0C331EC6D7980023F8B8 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C321EC6D7980023F8B8 /* Collection.swift */; };
+		D0FF0C331EC6D7980023F8B8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C321EC6D7980023F8B8 /* Theme.swift */; };
 		D0FF0C351EC6D7FF0023F8B8 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C341EC6D7FF0023F8B8 /* Season.swift */; };
 		D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C361EC6D9180023F8B8 /* Price.swift */; };
 		D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C381EC83C070023F8B8 /* DataManager.swift */; };
@@ -50,7 +50,7 @@
 		D0F32E111E6B62B40087C700 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = DataModel/Product.swift; sourceTree = "<group>"; };
 		D0FF0C301EC6D73D0023F8B8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = DataModel/Category.swift; sourceTree = "<group>"; };
-		D0FF0C321EC6D7980023F8B8 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = DataModel/Collection.swift; sourceTree = "<group>"; };
+		D0FF0C321EC6D7980023F8B8 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = DataModel/Theme.swift; sourceTree = "<group>"; };
 		D0FF0C341EC6D7FF0023F8B8 /* Season.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Season.swift; path = DataModel/Season.swift; sourceTree = "<group>"; };
 		D0FF0C361EC6D9180023F8B8 /* Price.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Price.swift; path = DataModel/Price.swift; sourceTree = "<group>"; };
 		D0FF0C381EC83C070023F8B8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 				D0FF0C361EC6D9180023F8B8 /* Price.swift */,
 				D0FF0C301EC6D73D0023F8B8 /* Category.swift */,
 				D0FF0C341EC6D7FF0023F8B8 /* Season.swift */,
-				D0FF0C321EC6D7980023F8B8 /* Collection.swift */,
+				D0FF0C321EC6D7980023F8B8 /* Theme.swift */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -306,7 +306,7 @@
 				D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */,
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
 				D0FF0C4A1EC856830023F8B8 /* StoryboardLoadable.swift in Sources */,
-				D0FF0C331EC6D7980023F8B8 /* Collection.swift in Sources */,
+				D0FF0C331EC6D7980023F8B8 /* Theme.swift in Sources */,
 				D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */,
 				D0FF0C3D1EC855A80023F8B8 /* HomeController.swift in Sources */,
 				D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */,
