@@ -23,8 +23,3 @@ extension ReusableView where Self: UIView {
 
 //	using this to prevent compiler crash during SIL emitting 
 protocol NibReusableView : ReusableView, NibLoadableView {}
-
-//	conformance enforcement
-extension UITableViewCell: ReusableView {}
-extension UITableViewHeaderFooterView: ReusableView {}
-extension UICollectionReusableView: ReusableView {}

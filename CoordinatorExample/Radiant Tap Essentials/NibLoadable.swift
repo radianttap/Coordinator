@@ -30,9 +30,3 @@ extension NibLoadableView where Self: UIView {
 		return nibObject
 	}
 }
-
-//	conformance enforcement
-extension UITableViewCell: NibLoadableView {}
-extension UITableViewHeaderFooterView: NibLoadableView {}
-extension UICollectionReusableView: NibLoadableView {}
-
