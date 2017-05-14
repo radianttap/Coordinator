@@ -14,11 +14,13 @@ import Foundation
 
 struct AppDependency: UsesNetwork, UsesKeychain, UsesPersistance, UsesWebService, UsesDataManager, UsesAccountManager, UsesCartManager {
 	let networkProvider: Network
-	let keychainProvider: Keychain
-	let persistanceProvider: RTCoreDataStack
 	let apiProvider: WebService
 
-	let dataManager: DataManager
+	let keychainProvider: Keychain
+
+	var persistanceProvider: RTCoreDataStack?
+	var dataManager: DataManager
+
 	let accountManager: AccountManager
 	let cartManager: CartManager
 }
