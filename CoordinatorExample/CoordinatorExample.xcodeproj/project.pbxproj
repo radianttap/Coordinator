@@ -29,6 +29,10 @@
 		D0FF0C491EC856830023F8B8 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C451EC856830023F8B8 /* ReusableView.swift */; };
 		D0FF0C4A1EC856830023F8B8 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C461EC856830023F8B8 /* StoryboardLoadable.swift */; };
 		D0FF0C4C1EC857240023F8B8 /* Embeddable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C4B1EC857240023F8B8 /* Embeddable.swift */; };
+		D0FF0C4F1EC85C610023F8B8 /* PromoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C4D1EC85C610023F8B8 /* PromoCell.swift */; };
+		D0FF0C501EC85C610023F8B8 /* PromoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */; };
+		D0FF0C521EC85CB30023F8B8 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */; };
+		D0FF0C541EC860D50023F8B8 /* Photos.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0FF0C531EC860D50023F8B8 /* Photos.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +61,10 @@
 		D0FF0C451EC856830023F8B8 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D0FF0C461EC856830023F8B8 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
 		D0FF0C4B1EC857240023F8B8 /* Embeddable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Embeddable.swift; sourceTree = "<group>"; };
+		D0FF0C4D1EC85C610023F8B8 /* PromoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCell.swift; sourceTree = "<group>"; };
+		D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromoCell.xib; sourceTree = "<group>"; };
+		D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		D0FF0C531EC860D50023F8B8 /* Photos.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photos.xcassets; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -121,7 +129,11 @@
 			children = (
 				D0FF0C3A1EC855450023F8B8 /* App.storyboard */,
 				D0FF0C3C1EC855A80023F8B8 /* HomeController.swift */,
+				D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */,
 				D0FF0C3E1EC855CE0023F8B8 /* PromoController.swift */,
+				D0FF0C4D1EC85C610023F8B8 /* PromoCell.swift */,
+				D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */,
+				D0FF0C531EC860D50023F8B8 /* Photos.xcassets */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -225,6 +237,8 @@
 				D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */,
 				D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */,
 				D0FF0C3B1EC855450023F8B8 /* App.storyboard in Resources */,
+				D0FF0C541EC860D50023F8B8 /* Photos.xcassets in Resources */,
+				D0FF0C501EC85C610023F8B8 /* PromoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +307,7 @@
 				D0FF0C3D1EC855A80023F8B8 /* HomeController.swift in Sources */,
 				D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */,
 				D0FF0C351EC6D7FF0023F8B8 /* Season.swift in Sources */,
+				D0FF0C4F1EC85C610023F8B8 /* PromoCell.swift in Sources */,
 				D0FF0C481EC856830023F8B8 /* NibLoadable.swift in Sources */,
 				D0FF0C3F1EC855CE0023F8B8 /* PromoController.swift in Sources */,
 				D0FF0C471EC856830023F8B8 /* DequeableView.swift in Sources */,
@@ -301,6 +316,7 @@
 				D010CB5D1EC316AF0008A087 /* Manager.swift in Sources */,
 				D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */,
 				D0FF0C311EC6D73D0023F8B8 /* Category.swift in Sources */,
+				D0FF0C521EC85CB30023F8B8 /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

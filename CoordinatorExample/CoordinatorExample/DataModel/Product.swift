@@ -9,6 +9,8 @@
 import Foundation
 
 class Product {
+	var name: String
+	var desc: String?
 	var imagePath: String?
 	var price: Price?
 
@@ -17,7 +19,7 @@ class Product {
 	weak var category: Category?
 	weak var collection: Collection?
 
-	init() {
-
+	init(name: String) {
+		self.name = name
 	}
 }
