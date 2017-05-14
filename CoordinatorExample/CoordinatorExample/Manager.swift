@@ -41,7 +41,7 @@ final class RTCoreDataStack {
 }
 
 protocol UsesPersistance {
-	var persistanceProvider: RTCoreDataStack? { get }
+	var persistanceProvider: RTCoreDataStack { get }
 }
 
 //	General Data handler

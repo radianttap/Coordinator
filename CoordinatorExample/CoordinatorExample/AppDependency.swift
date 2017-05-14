@@ -18,9 +18,20 @@ struct AppDependency: UsesNetwork, UsesKeychain, UsesPersistance, UsesWebService
 
 	let keychainProvider: Keychain
 
-	var persistanceProvider: RTCoreDataStack?
+	var persistanceProvider: RTCoreDataStack
 	var dataManager: DataManager
 
-	let accountManager: AccountManager
-	let cartManager: CartManager
+	var accountManager: AccountManager
+	var cartManager: CartManager
+
+	//	dummy init, for simpler demo
+	init() {
+		self.networkProvider = Network()
+		self.apiProvider = WebService()
+		self.keychainProvider = Keychain()
+		self.persistanceProvider = RTCoreDataStack()
+		self.dataManager = DataManager()
+		self.accountManager = AccountManager()
+		self.cartManager = CartManager()
+	}
 }
