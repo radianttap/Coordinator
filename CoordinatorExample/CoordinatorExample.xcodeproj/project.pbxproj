@@ -33,6 +33,7 @@
 		D0FF0C501EC85C610023F8B8 /* PromoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */; };
 		D0FF0C521EC85CB30023F8B8 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */; };
 		D0FF0C541EC860D50023F8B8 /* Photos.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0FF0C531EC860D50023F8B8 /* Photos.xcassets */; };
+		D0FF0C561EC8B2B10023F8B8 /* ContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C551EC8B2B10023F8B8 /* ContainerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromoCell.xib; sourceTree = "<group>"; };
 		D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		D0FF0C531EC860D50023F8B8 /* Photos.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photos.xcassets; sourceTree = "<group>"; };
+		D0FF0C551EC8B2B10023F8B8 /* ContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerCell.swift; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 				D0FF0C3A1EC855450023F8B8 /* App.storyboard */,
 				D0FF0C3C1EC855A80023F8B8 /* HomeController.swift */,
 				D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */,
+				D0FF0C551EC8B2B10023F8B8 /* ContainerCell.swift */,
 				D0FF0C3E1EC855CE0023F8B8 /* PromoController.swift */,
 				D0FF0C4D1EC85C610023F8B8 /* PromoCell.swift */,
 				D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */,
@@ -299,6 +302,7 @@
 			files = (
 				D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */,
 				D0FF0C491EC856830023F8B8 /* ReusableView.swift in Sources */,
+				D0FF0C561EC8B2B10023F8B8 /* ContainerCell.swift in Sources */,
 				D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */,
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
 				D0FF0C4A1EC856830023F8B8 /* StoryboardLoadable.swift in Sources */,

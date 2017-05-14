@@ -38,7 +38,7 @@ extension PromoCell {
 	}
 
 	func configure(with product: Product) {
-		if let path = product.imagePath {
+		if let path = product.promoImagePath {
 			photoView.image = UIImage(named: path)
 		}
 

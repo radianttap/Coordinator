@@ -10,4 +10,35 @@ import UIKit
 
 final class CategoryCell: UICollectionViewCell, ReusableView {
     
+	@IBOutlet fileprivate weak var photoView: UIImageView!
+	@IBOutlet fileprivate weak var nameLabel: UILabel!
+}
+
+
+extension CategoryCell {
+
+	override func awakeFromNib() {
+		super.awakeFromNib()
+
+		cleanup()
+	}
+
+	override func prepareForReuse() {
+		super.prepareForReuse()
+
+		cleanup()
+	}
+
+	private func cleanup() {
+		photoView.image = nil
+		nameLabel.text = nil
+	}
+
+	func configure(with product: Product) {
+		if let path = product.gridImagePath {
+			photoView.image = UIImage(named: path)
+		}
+
+		nameLabel.text = product.name
+	}
 }
