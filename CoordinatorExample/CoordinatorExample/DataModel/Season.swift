@@ -12,6 +12,7 @@ class Season {
 	var name: String
 
 	var collections: [Collection] = []
+	var categories: [Category] = []
 
 	init(name: String) {
 		self.name = name

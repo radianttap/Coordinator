@@ -44,13 +44,6 @@ protocol UsesPersistance {
 	var persistanceProvider: RTCoreDataStack { get }
 }
 
-//	General Data handler
-final class DataManager {}
-
-protocol UsesDataManager {
-	var dataManager: DataManager { get }
-}
-
 //	Keeper of UserAccount related stuff
 final class AccountManager {}
 

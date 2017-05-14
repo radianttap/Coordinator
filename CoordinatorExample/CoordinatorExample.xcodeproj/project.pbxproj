@@ -21,6 +21,7 @@
 		D0FF0C331EC6D7980023F8B8 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C321EC6D7980023F8B8 /* Collection.swift */; };
 		D0FF0C351EC6D7FF0023F8B8 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C341EC6D7FF0023F8B8 /* Season.swift */; };
 		D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C361EC6D9180023F8B8 /* Price.swift */; };
+		D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C381EC83C070023F8B8 /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		D0FF0C321EC6D7980023F8B8 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = DataModel/Collection.swift; sourceTree = "<group>"; };
 		D0FF0C341EC6D7FF0023F8B8 /* Season.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Season.swift; path = DataModel/Season.swift; sourceTree = "<group>"; };
 		D0FF0C361EC6D9180023F8B8 /* Price.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Price.swift; path = DataModel/Price.swift; sourceTree = "<group>"; };
+		D0FF0C381EC83C070023F8B8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 		D0FF0C2F1EC6D6CC0023F8B8 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				D0FF0C381EC83C070023F8B8 /* DataManager.swift */,
 				D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */,
 				D0FF0C361EC6D9180023F8B8 /* Price.swift */,
 				D0FF0C301EC6D73D0023F8B8 /* Category.swift */,
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */,
+				D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */,
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
 				D0F32E141E6B674C0087C700 /* Helpers.swift in Sources */,
 				D0FF0C331EC6D7980023F8B8 /* Collection.swift in Sources */,
