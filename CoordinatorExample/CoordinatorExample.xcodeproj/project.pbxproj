@@ -11,16 +11,11 @@
 		D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5A1EC2FE230008A087 /* AppDependency.swift */; };
 		D010CB5D1EC316AF0008A087 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5C1EC316AF0008A087 /* Manager.swift */; };
 		D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */; };
-		D04B76621DE5B6D2009F1B9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B76611DE5B6D2009F1B9A /* ViewController.swift */; };
 		D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D04B76661DE5B6D2009F1B9A /* Assets.xcassets */; };
 		D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */; };
 		D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */; };
-		D0F32E101E6B61C20087C700 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E0F1E6B61C20087C700 /* Messages.swift */; };
 		D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E111E6B62B40087C700 /* DataModel.swift */; };
 		D0F32E141E6B674C0087C700 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E131E6B674C0087C700 /* Helpers.swift */; };
-		D0F32E171E6B67A60087C700 /* EmbeddedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E151E6B67A60087C700 /* EmbeddedController.swift */; };
-		D0F32E181E6B67A60087C700 /* EmbeddedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F32E161E6B67A60087C700 /* EmbeddedController.xib */; };
-		D0F32E1A1E6B6DF20087C700 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0F32E191E6B6DF20087C700 /* ViewController.xib */; };
 		D0FF0C2E1EC6D6C60023F8B8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */; };
 		D0FF0C311EC6D73D0023F8B8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C301EC6D73D0023F8B8 /* Category.swift */; };
 		D0FF0C331EC6D7980023F8B8 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C321EC6D7980023F8B8 /* Collection.swift */; };
@@ -35,17 +30,12 @@
 		D010CB5C1EC316AF0008A087 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		D04B765C1DE5B6D2009F1B9A /* CoordinatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoordinatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D04B76611DE5B6D2009F1B9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D04B76661DE5B6D2009F1B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D04B76691DE5B6D2009F1B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D04B766B1DE5B6D2009F1B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
-		D0F32E0F1E6B61C20087C700 /* Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		D0F32E111E6B62B40087C700 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		D0F32E131E6B674C0087C700 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		D0F32E151E6B67A60087C700 /* EmbeddedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedController.swift; sourceTree = "<group>"; };
-		D0F32E161E6B67A60087C700 /* EmbeddedController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmbeddedController.xib; sourceTree = "<group>"; };
-		D0F32E191E6B6DF20087C700 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = DataModel/Product.swift; sourceTree = "<group>"; };
 		D0FF0C301EC6D73D0023F8B8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = DataModel/Category.swift; sourceTree = "<group>"; };
 		D0FF0C321EC6D7980023F8B8 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = DataModel/Collection.swift; sourceTree = "<group>"; };
@@ -97,7 +87,6 @@
 			children = (
 				D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */,
 				D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */,
-				D0F32E0F1E6B61C20087C700 /* Messages.swift */,
 				D0F32E111E6B62B40087C700 /* DataModel.swift */,
 				D0FF0C2F1EC6D6CC0023F8B8 /* DataModel */,
 				D0F32E2A1E6B73680087C700 /* UI */,
@@ -114,10 +103,6 @@
 		D0F32E2A1E6B73680087C700 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D04B76611DE5B6D2009F1B9A /* ViewController.swift */,
-				D0F32E191E6B6DF20087C700 /* ViewController.xib */,
-				D0F32E151E6B67A60087C700 /* EmbeddedController.swift */,
-				D0F32E161E6B67A60087C700 /* EmbeddedController.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -173,7 +158,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Radiant Tap";
 				TargetAttributes = {
 					D04B765B1DE5B6D2009F1B9A = {
@@ -207,8 +192,6 @@
 			files = (
 				D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */,
 				D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */,
-				D0F32E1A1E6B6DF20087C700 /* ViewController.xib in Resources */,
-				D0F32E181E6B67A60087C700 /* EmbeddedController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,11 +252,8 @@
 			files = (
 				D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */,
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
-				D0F32E171E6B67A60087C700 /* EmbeddedController.swift in Sources */,
 				D0F32E141E6B674C0087C700 /* Helpers.swift in Sources */,
 				D0FF0C331EC6D7980023F8B8 /* Collection.swift in Sources */,
-				D04B76621DE5B6D2009F1B9A /* ViewController.swift in Sources */,
-				D0F32E101E6B61C20087C700 /* Messages.swift in Sources */,
 				D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */,
 				D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */,
 				D0FF0C351EC6D7FF0023F8B8 /* Season.swift in Sources */,
@@ -316,6 +296,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -366,6 +347,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
