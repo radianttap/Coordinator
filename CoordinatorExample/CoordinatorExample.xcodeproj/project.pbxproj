@@ -15,13 +15,20 @@
 		D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */; };
 		D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */; };
 		D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E111E6B62B40087C700 /* DataModel.swift */; };
-		D0F32E141E6B674C0087C700 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E131E6B674C0087C700 /* Helpers.swift */; };
 		D0FF0C2E1EC6D6C60023F8B8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */; };
 		D0FF0C311EC6D73D0023F8B8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C301EC6D73D0023F8B8 /* Category.swift */; };
 		D0FF0C331EC6D7980023F8B8 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C321EC6D7980023F8B8 /* Collection.swift */; };
 		D0FF0C351EC6D7FF0023F8B8 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C341EC6D7FF0023F8B8 /* Season.swift */; };
 		D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C361EC6D9180023F8B8 /* Price.swift */; };
 		D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C381EC83C070023F8B8 /* DataManager.swift */; };
+		D0FF0C3B1EC855450023F8B8 /* App.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0FF0C3A1EC855450023F8B8 /* App.storyboard */; };
+		D0FF0C3D1EC855A80023F8B8 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C3C1EC855A80023F8B8 /* HomeController.swift */; };
+		D0FF0C3F1EC855CE0023F8B8 /* PromoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C3E1EC855CE0023F8B8 /* PromoController.swift */; };
+		D0FF0C471EC856830023F8B8 /* DequeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C431EC856830023F8B8 /* DequeableView.swift */; };
+		D0FF0C481EC856830023F8B8 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C441EC856830023F8B8 /* NibLoadable.swift */; };
+		D0FF0C491EC856830023F8B8 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C451EC856830023F8B8 /* ReusableView.swift */; };
+		D0FF0C4A1EC856830023F8B8 /* StoryboardLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C461EC856830023F8B8 /* StoryboardLoadable.swift */; };
+		D0FF0C4C1EC857240023F8B8 /* Embeddable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C4B1EC857240023F8B8 /* Embeddable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,13 +43,20 @@
 		D04B766B1DE5B6D2009F1B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		D0F32E111E6B62B40087C700 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		D0F32E131E6B674C0087C700 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = DataModel/Product.swift; sourceTree = "<group>"; };
 		D0FF0C301EC6D73D0023F8B8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = DataModel/Category.swift; sourceTree = "<group>"; };
 		D0FF0C321EC6D7980023F8B8 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collection.swift; path = DataModel/Collection.swift; sourceTree = "<group>"; };
 		D0FF0C341EC6D7FF0023F8B8 /* Season.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Season.swift; path = DataModel/Season.swift; sourceTree = "<group>"; };
 		D0FF0C361EC6D9180023F8B8 /* Price.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Price.swift; path = DataModel/Price.swift; sourceTree = "<group>"; };
 		D0FF0C381EC83C070023F8B8 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		D0FF0C3A1EC855450023F8B8 /* App.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = App.storyboard; sourceTree = "<group>"; };
+		D0FF0C3C1EC855A80023F8B8 /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		D0FF0C3E1EC855CE0023F8B8 /* PromoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoController.swift; sourceTree = "<group>"; };
+		D0FF0C431EC856830023F8B8 /* DequeableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DequeableView.swift; sourceTree = "<group>"; };
+		D0FF0C441EC856830023F8B8 /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		D0FF0C451EC856830023F8B8 /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		D0FF0C461EC856830023F8B8 /* StoryboardLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryboardLoadable.swift; sourceTree = "<group>"; };
+		D0FF0C4B1EC857240023F8B8 /* Embeddable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Embeddable.swift; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -69,6 +83,7 @@
 		D04B76531DE5B6D2009F1B9A = {
 			isa = PBXGroup;
 			children = (
+				D0FF0C421EC856830023F8B8 /* Radiant Tap Essentials */,
 				D04B765E1DE5B6D2009F1B9A /* CoordinatorExample */,
 				D04B765D1DE5B6D2009F1B9A /* Products */,
 				EA799296365A87C4A6350688 /* Pods */,
@@ -92,7 +107,6 @@
 				D0F32E111E6B62B40087C700 /* DataModel.swift */,
 				D0FF0C2F1EC6D6CC0023F8B8 /* DataModel */,
 				D0F32E2A1E6B73680087C700 /* UI */,
-				D0F32E131E6B674C0087C700 /* Helpers.swift */,
 				D010CB5A1EC2FE230008A087 /* AppDependency.swift */,
 				D010CB5C1EC316AF0008A087 /* Manager.swift */,
 				D04B76661DE5B6D2009F1B9A /* Assets.xcassets */,
@@ -105,6 +119,9 @@
 		D0F32E2A1E6B73680087C700 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D0FF0C3A1EC855450023F8B8 /* App.storyboard */,
+				D0FF0C3C1EC855A80023F8B8 /* HomeController.swift */,
+				D0FF0C3E1EC855CE0023F8B8 /* PromoController.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -120,6 +137,18 @@
 				D0FF0C321EC6D7980023F8B8 /* Collection.swift */,
 			);
 			name = DataModel;
+			sourceTree = "<group>";
+		};
+		D0FF0C421EC856830023F8B8 /* Radiant Tap Essentials */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF0C451EC856830023F8B8 /* ReusableView.swift */,
+				D0FF0C441EC856830023F8B8 /* NibLoadable.swift */,
+				D0FF0C431EC856830023F8B8 /* DequeableView.swift */,
+				D0FF0C461EC856830023F8B8 /* StoryboardLoadable.swift */,
+				D0FF0C4B1EC857240023F8B8 /* Embeddable.swift */,
+			);
+			path = "Radiant Tap Essentials";
 			sourceTree = "<group>";
 		};
 		EA799296365A87C4A6350688 /* Pods */ = {
@@ -195,6 +224,7 @@
 			files = (
 				D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */,
 				D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */,
+				D0FF0C3B1EC855450023F8B8 /* App.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,13 +284,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */,
+				D0FF0C491EC856830023F8B8 /* ReusableView.swift in Sources */,
 				D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */,
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
-				D0F32E141E6B674C0087C700 /* Helpers.swift in Sources */,
+				D0FF0C4A1EC856830023F8B8 /* StoryboardLoadable.swift in Sources */,
 				D0FF0C331EC6D7980023F8B8 /* Collection.swift in Sources */,
 				D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */,
+				D0FF0C3D1EC855A80023F8B8 /* HomeController.swift in Sources */,
 				D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */,
 				D0FF0C351EC6D7FF0023F8B8 /* Season.swift in Sources */,
+				D0FF0C481EC856830023F8B8 /* NibLoadable.swift in Sources */,
+				D0FF0C3F1EC855CE0023F8B8 /* PromoController.swift in Sources */,
+				D0FF0C471EC856830023F8B8 /* DequeableView.swift in Sources */,
+				D0FF0C4C1EC857240023F8B8 /* Embeddable.swift in Sources */,
 				D0FF0C2E1EC6D6C60023F8B8 /* Product.swift in Sources */,
 				D010CB5D1EC316AF0008A087 /* Manager.swift in Sources */,
 				D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */,
