@@ -16,5 +16,5 @@ protocol UsesDataManager {
 //	General Data handler
 final class DataManager {
 
-	var seasons: [Season] = []
+	fileprivate(set) var seasons: [Season] = []
 }
