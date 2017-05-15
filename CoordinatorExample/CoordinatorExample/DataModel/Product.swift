@@ -10,10 +10,12 @@ import Foundation
 
 class Product {
 	var name: String
+	var styleCode: String
 	var desc: String?
 	var price: Price?
 
 	var materials: [String] = []
+	var colors: [Color] = []
 
 	var gridImagePath: String?
 	var promoImagePath: String?
@@ -21,7 +23,8 @@ class Product {
 	weak var category: Category?
 	weak var theme: Theme?
 
-	init(name: String) {
+	init(name: String, styleCode: String) {
 		self.name = name
+		self.styleCode = styleCode
 	}
 }

@@ -34,6 +34,7 @@
 		D0FF0C521EC85CB30023F8B8 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */; };
 		D0FF0C541EC860D50023F8B8 /* Photos.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0FF0C531EC860D50023F8B8 /* Photos.xcassets */; };
 		D0FF0C561EC8B2B10023F8B8 /* ContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C551EC8B2B10023F8B8 /* ContainerCell.swift */; };
+		D0FF0C581EC987EE0023F8B8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C571EC987EE0023F8B8 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		D0FF0C531EC860D50023F8B8 /* Photos.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photos.xcassets; sourceTree = "<group>"; };
 		D0FF0C551EC8B2B10023F8B8 /* ContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerCell.swift; sourceTree = "<group>"; };
+		D0FF0C571EC987EE0023F8B8 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = DataModel/Color.swift; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -146,6 +148,7 @@
 			children = (
 				D0FF0C381EC83C070023F8B8 /* DataManager.swift */,
 				D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */,
+				D0FF0C571EC987EE0023F8B8 /* Color.swift */,
 				D0FF0C361EC6D9180023F8B8 /* Price.swift */,
 				D0FF0C301EC6D73D0023F8B8 /* Category.swift */,
 				D0FF0C341EC6D7FF0023F8B8 /* Season.swift */,
@@ -313,6 +316,7 @@
 				D0FF0C351EC6D7FF0023F8B8 /* Season.swift in Sources */,
 				D0FF0C4F1EC85C610023F8B8 /* PromoCell.swift in Sources */,
 				D0FF0C481EC856830023F8B8 /* NibLoadable.swift in Sources */,
+				D0FF0C581EC987EE0023F8B8 /* Color.swift in Sources */,
 				D0FF0C3F1EC855CE0023F8B8 /* PromoController.swift in Sources */,
 				D0FF0C471EC856830023F8B8 /* DequeableView.swift in Sources */,
 				D0FF0C4C1EC857240023F8B8 /* Embeddable.swift in Sources */,
