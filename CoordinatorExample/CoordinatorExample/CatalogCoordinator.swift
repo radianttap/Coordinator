@@ -9,7 +9,7 @@
 import Foundation
 import Coordinator
 
-final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable {
+final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable, UINavigationControllerDelegate {
 	var dependencies: AppDependency? {
 		didSet {
 			self.childCoordinators.forEach { (_, coordinator) in
@@ -36,12 +36,15 @@ final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable 
 
 		completion(self)
 	}
+
+	//	UINavigationControllerDelegate
+	//	must be here, due to current Swift/ObjC limitations
+
+	func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+		//	check if customer has pop-ed back
+		//	so update your internal state, if needed
+	}
 }
-
-extension CatalogCoordinator: UINavigationControllerDelegate {
-
-}
-
 
 fileprivate extension CatalogCoordinator {
 	func loadHome() {
