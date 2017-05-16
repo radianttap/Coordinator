@@ -14,7 +14,6 @@
 		D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D04B76661DE5B6D2009F1B9A /* Assets.xcassets */; };
 		D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */; };
 		D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */; };
-		D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E111E6B62B40087C700 /* DataModel.swift */; };
 		D0FF0C2E1EC6D6C60023F8B8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */; };
 		D0FF0C311EC6D73D0023F8B8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C301EC6D73D0023F8B8 /* Category.swift */; };
 		D0FF0C331EC6D7980023F8B8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C321EC6D7980023F8B8 /* Theme.swift */; };
@@ -36,6 +35,7 @@
 		D0FF0C581EC987EE0023F8B8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C571EC987EE0023F8B8 /* Color.swift */; };
 		D0FF0C5A1ECB91CD0023F8B8 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */; };
 		D0FF0C5C1ECB97D80023F8B8 /* CatalogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C5B1ECB97D80023F8B8 /* CatalogCoordinator.swift */; };
+		D0FF0C5F1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C5E1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +49,6 @@
 		D04B76691DE5B6D2009F1B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D04B766B1DE5B6D2009F1B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
-		D0F32E111E6B62B40087C700 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		D0FF0C2D1EC6D6C60023F8B8 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Product.swift; path = DataModel/Product.swift; sourceTree = "<group>"; };
 		D0FF0C301EC6D73D0023F8B8 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = DataModel/Category.swift; sourceTree = "<group>"; };
 		D0FF0C321EC6D7980023F8B8 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = DataModel/Theme.swift; sourceTree = "<group>"; };
@@ -71,6 +70,7 @@
 		D0FF0C571EC987EE0023F8B8 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = DataModel/Color.swift; sourceTree = "<group>"; };
 		D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		D0FF0C5B1ECB97D80023F8B8 /* CatalogCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogCoordinator.swift; sourceTree = "<group>"; };
+		D0FF0C5E1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cart-CoordinatingResponder.swift"; path = "CoordinatorExample/Cart-CoordinatingResponder.swift"; sourceTree = SOURCE_ROOT; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,10 +118,10 @@
 			children = (
 				D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */,
 				D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */,
-				D0F32E111E6B62B40087C700 /* DataModel.swift */,
 				D010CB5A1EC2FE230008A087 /* AppDependency.swift */,
 				D0FF0C5B1ECB97D80023F8B8 /* CatalogCoordinator.swift */,
 				D0FF0C2F1EC6D6CC0023F8B8 /* DataModel */,
+				D0FF0C5D1ECBB3260023F8B8 /* Cart */,
 				D0F32E2A1E6B73680087C700 /* UI */,
 				D010CB5C1EC316AF0008A087 /* Manager.swift */,
 				D04B76661DE5B6D2009F1B9A /* Assets.xcassets */,
@@ -170,6 +170,14 @@
 				D0FF0C4B1EC857240023F8B8 /* Embeddable.swift */,
 			);
 			path = "Radiant Tap Essentials";
+			sourceTree = "<group>";
+		};
+		D0FF0C5D1ECBB3260023F8B8 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				D0FF0C5E1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift */,
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 		EA799296365A87C4A6350688 /* Pods */ = {
@@ -306,7 +314,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0F32E121E6B62B40087C700 /* DataModel.swift in Sources */,
 				D0FF0C491EC856830023F8B8 /* ReusableView.swift in Sources */,
 				D0FF0C5A1ECB91CD0023F8B8 /* Storyboards.swift in Sources */,
 				D0FF0C561EC8B2B10023F8B8 /* PromoContainerCell.swift in Sources */,
@@ -324,6 +331,7 @@
 				D0FF0C581EC987EE0023F8B8 /* Color.swift in Sources */,
 				D0FF0C471EC856830023F8B8 /* DequeableView.swift in Sources */,
 				D0FF0C4C1EC857240023F8B8 /* Embeddable.swift in Sources */,
+				D0FF0C5F1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift in Sources */,
 				D0FF0C2E1EC6D6C60023F8B8 /* Product.swift in Sources */,
 				D010CB5D1EC316AF0008A087 /* Manager.swift in Sources */,
 				D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */,

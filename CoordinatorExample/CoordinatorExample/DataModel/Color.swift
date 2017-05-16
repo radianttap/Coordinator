@@ -45,3 +45,24 @@ extension Color {
 		return Color(name: "Pink", code: 72)
 	}()
 }
+
+
+
+
+
+
+/*
+//	SOLUTION:
+//	Boxing pure Swift type into Objective-C friendly form
+
+class ColorBox: NSObject {
+	let unbox: Color
+	init(_ value: Color) {
+		self.unbox = value
+	}
+}
+
+extension Color {
+	var boxed: ColorBox { return ColorBox(self) }
+}
+*/

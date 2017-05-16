@@ -14,6 +14,8 @@ final class PromoCell: UICollectionViewCell, NibReusableView {
 	@IBOutlet fileprivate weak var nameLabel: UILabel!
 	@IBOutlet fileprivate weak var categoryLabel: UILabel!
 	@IBOutlet fileprivate weak var descLabel: UILabel!
+
+	fileprivate var product: Product?
 }
 
 extension PromoCell {
@@ -38,6 +40,8 @@ extension PromoCell {
 	}
 
 	func configure(with product: Product) {
+		self.product = product
+
 		if let path = product.promoImagePath {
 			photoView.image = UIImage(named: path)
 		}
@@ -45,5 +49,12 @@ extension PromoCell {
 		nameLabel.text = product.name
 		categoryLabel.text = product.category?.name.localizedUppercase
 		descLabel.text = product.desc
+	}
+}
+
+fileprivate extension PromoCell {
+	@IBAction func didTapBuyNow(_ sender: UIButton) {
+//		guard let product = product else { return }
+		coordinatingResponder?.cartToggle(sender: self)
 	}
 }

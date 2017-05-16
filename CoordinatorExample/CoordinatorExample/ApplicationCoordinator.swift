@@ -40,6 +40,21 @@ final class ApplicationCoordinator: Coordinator<UINavigationController>, Dependa
 
 		completion(self)
 	}
+/*
+	//	UIResponder coordinating messages
+
+//	override func cartBuyNow(_ product: Product, sender: Any?) {
+//		//	re-route to CartManager and/or CartCoordinator
+//	}
+
+//	override func cartAdd(product: Product, color: Color, sender: Any?, completion: (Bool) -> Void) {
+//		//	re-route to CartManager and/or CartCoordinator
+//	}
+
+	override func cartToggle(sender: Any?) {
+		
+	}
+*/
 }
 
 

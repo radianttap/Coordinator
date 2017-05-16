@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Product {
+class Product: NSObject {
 	var name: String
 	var styleCode: String
 	var desc: String?
