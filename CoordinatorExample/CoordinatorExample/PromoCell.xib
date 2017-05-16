@@ -43,7 +43,7 @@
                                 <rect key="frame" x="220" y="89" width="228" height="65"/>
                                 <string key="text">Luxurious dress richly ornamented with jacquard pattern. A piece that will make you shine with graceful elegance whenever you wear it.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="0.75277894295302017" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
