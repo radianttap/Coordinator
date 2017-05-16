@@ -34,14 +34,9 @@ struct AppDependency: UsesNetwork, UsesKeychain, UsesPersistance, UsesWebService
 		self.accountManager = AccountManager()
 		self.cartManager = CartManager()
 	}
+}
 
-	init(dataManager: DataManager) {
-		self.networkProvider = Network()
-		self.apiProvider = WebService()
-		self.keychainProvider = Keychain()
-		self.persistanceProvider = RTCoreDataStack()
-		self.dataManager = dataManager
-		self.accountManager = AccountManager()
-		self.cartManager = CartManager()
-	}
+
+protocol Dependable: class {
+	var dependencies: AppDependency? { get set }
 }

@@ -9,15 +9,44 @@
 import UIKit
 import Coordinator
 
-final class ApplicationCoordinator: Coordinator<UINavigationController> {
+final class ApplicationCoordinator: Coordinator<UINavigationController>, Dependable {
+	var dependencies: AppDependency? {
+		didSet {
+			self.childCoordinators.forEach { (_, coordinator) in
+				if let c = coordinator as? Dependable {
+					c.dependencies = dependencies
+				}
+			}
+		}
+	}
 
-	required init(rootViewController: UINavigationController?) {
-		guard let nc = rootViewController else { fatalError("Must supply root VC") }
-
+	required init(rootViewController: UINavigationController? = nil) {
+		let nc: UINavigationController = rootViewController ?? UINavigationController()
 		super.init(rootViewController: nc)
+
 		nc.parentCoordinator = self
 	}
 
+	override func start(with completion: @escaping Coordinator<Any>.Callback = {_ in}) {
+		//	this is top-level, it should 
+		//	keep references to shared objects (Managers)
+
+		dependencies = AppDependency()
+
+		//	now, here comes the logic what 
+		//	content Coordinator to load
+
+		loadCatalog()
+
+		completion(self)
+	}
+}
 
 
+fileprivate extension ApplicationCoordinator {
+	func loadCatalog() {
+		let cc = CatalogCoordinator(rootViewController: rootViewController)
+		cc.dependencies = dependencies
+		startChild(coordinator: cc)
+	}
 }

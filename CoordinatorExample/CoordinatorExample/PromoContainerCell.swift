@@ -11,7 +11,11 @@ import TinyConstraints
 
 final class PromoContainerCell: UICollectionViewCell, ReusableView {
 	typealias Dependencies = UsesDataManager
-	var dependencies: Dependencies?
+	var dependencies: Dependencies? {
+		didSet {
+			collectionView.reloadData()
+		}
+	}
 
 	fileprivate lazy var collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
@@ -34,6 +38,12 @@ final class PromoContainerCell: UICollectionViewCell, ReusableView {
 		guard let dataManager = dependencies?.dataManager else { return [] }
 
 		return dataManager.promotedProducts
+	}
+
+	override func awakeFromNib() {
+		super.awakeFromNib()
+
+		collectionView.reloadData()
 	}
 }
 

@@ -25,17 +25,21 @@ extension StoryboardLoadable where Self:UIViewController {
 		return String(describing: self)
 	}
 
-	static func instantiate(fromStoryboard storyboardName: String? = nil) -> Self {
-		let sb = storyboardName ?? self.storyboardName
+	static func instantiate(fromStoryboardNamed name: String? = nil) -> Self {
+		let sb = name ?? self.storyboardName
 		let storyboard = UIStoryboard(name: sb, bundle: nil)
+		return instantiate(fromStoryboard: storyboard)
+	}
+
+	static func instantiate(fromStoryboard storyboard: UIStoryboard) -> Self {
 		let identifier = self.storyboardIdentifier
 		guard let vc = storyboard.instantiateViewController(withIdentifier: identifier) as? Self else {
-			fatalError("Failed to instantiate view controller with identifier=\(identifier) from storyboard named \(sb)")
+			fatalError("Failed to instantiate view controller with identifier=\(identifier) from storyboard \( storyboard )")
 		}
 		return vc
 
 	}
-
+	
 	static func initial(fromStoryboard storyboardName: String? = nil) -> Self {
 		let sb = storyboardName ?? self.storyboardName
 		let storyboard = UIStoryboard(name: sb, bundle: nil)

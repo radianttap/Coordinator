@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIStoryboard {
-	static var app: UIStoryboard = {
-		return UIStoryboard(name: "App", bundle: nil)
-	}()
+	struct Name {
+		static let app = "App"
+	}
 }

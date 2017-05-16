@@ -118,6 +118,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MmZ-eu-0Bg"/>
+                    <connections>
+                        <outlet property="collectionView" destination="1PH-AN-5Ht" id="GG3-eF-zFv"/>
+                        <outlet property="notificationContainer" destination="FD0-oj-Zz7" id="CWE-gz-ksy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W0a-vs-5yr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
