@@ -9,5 +9,7 @@
 import UIKit
 
 final class PromoController: UIViewController {
+	typealias Dependencies = UsesDataManager
+	var dependencies: Dependencies?
 
 }

@@ -9,5 +9,7 @@
 import UIKit
 
 final class ContainerCell: UICollectionViewCell, ReusableView {
-    
+	typealias Dependencies = UsesDataManager
+	var dependencies: Dependencies?
+
 }

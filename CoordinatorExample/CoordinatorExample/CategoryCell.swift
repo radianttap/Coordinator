@@ -34,11 +34,13 @@ extension CategoryCell {
 		nameLabel.text = nil
 	}
 
-	func configure(with product: Product) {
+	func configure(with category: Category) {
+		nameLabel.text = category.name
+
+		guard let product = category.products.first else { return }
+
 		if let path = product.gridImagePath {
 			photoView.image = UIImage(named: path)
 		}
-
-		nameLabel.text = product.name
 	}
 }
