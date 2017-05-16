@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -60,8 +61,43 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WWi-SL-9yU" userLabel="contentView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LLI-9b-ZuT">
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2D8-HR-Fk8">
+                                                            <rect key="frame" x="104.5" y="174" width="37.5" height="18"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <color key="textColor" red="0.28235294119999998" green="0.52941176469999995" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="2D8-HR-Fk8" secondAttribute="bottom" id="5Mf-Jw-bIJ"/>
+                                                        <constraint firstItem="LLI-9b-ZuT" firstAttribute="leading" secondItem="WWi-SL-9yU" secondAttribute="leading" id="HLj-av-9Mu"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="2D8-HR-Fk8" secondAttribute="trailing" id="M2H-m1-BuC"/>
+                                                        <constraint firstAttribute="bottom" secondItem="LLI-9b-ZuT" secondAttribute="bottom" id="YYH-TS-aGJ"/>
+                                                        <constraint firstItem="LLI-9b-ZuT" firstAttribute="top" secondItem="WWi-SL-9yU" secondAttribute="top" id="eHd-9m-wzU"/>
+                                                        <constraint firstAttribute="trailing" secondItem="LLI-9b-ZuT" secondAttribute="trailing" id="i1d-kU-nFb"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="WWi-SL-9yU" firstAttribute="leading" secondItem="8pj-D5-JRh" secondAttribute="leading" id="Ioy-SX-f3J"/>
+                                            <constraint firstAttribute="trailing" secondItem="WWi-SL-9yU" secondAttribute="trailing" priority="999" id="Wmy-lR-jM7"/>
+                                            <constraint firstItem="WWi-SL-9yU" firstAttribute="top" secondItem="8pj-D5-JRh" secondAttribute="top" id="g2q-bK-Cdu"/>
+                                            <constraint firstAttribute="bottom" secondItem="WWi-SL-9yU" secondAttribute="bottom" priority="999" id="yfT-cq-5eO"/>
+                                        </constraints>
                                         <size key="customSize" width="150" height="200"/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="2D8-HR-Fk8" id="K9x-T9-MKG"/>
+                                            <outlet property="photoView" destination="LLI-9b-ZuT" id="bpA-5j-Ngz"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
