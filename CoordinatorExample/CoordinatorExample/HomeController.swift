@@ -114,7 +114,7 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
 		case .categories:
 			if categories.count == 0 { return .zero }
 			let w2h = size.width / size.height
-			size.width = collectionView.bounds.size.width / 3
+			size.width = max( (collectionView.bounds.size.width - 2) / 3, 0 )
 			size.height = size.width / w2h
 		}
 
