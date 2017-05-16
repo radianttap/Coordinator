@@ -19,6 +19,7 @@ class Product {
 
 	var gridImagePath: String?
 	var promoImagePath: String?
+	var imagePaths : [String] = []
 
 	weak var category: Category?
 	weak var theme: Theme?
