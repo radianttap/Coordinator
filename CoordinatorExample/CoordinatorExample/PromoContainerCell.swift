@@ -20,9 +20,13 @@ final class PromoContainerCell: UICollectionViewCell, ReusableView {
 	fileprivate lazy var collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
+		layout.minimumLineSpacing = 0
+		layout.minimumInteritemSpacing = 0
 
 		let cv = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
 		cv.translatesAutoresizingMaskIntoConstraints = false
+		cv.isPagingEnabled = true
+		cv.backgroundColor = self.backgroundColor
 
 		cv.dataSource = self
 		cv.delegate = self

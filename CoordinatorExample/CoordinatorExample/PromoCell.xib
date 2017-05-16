@@ -27,16 +27,25 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slide1" translatesAutoresizingMaskIntoConstraints="NO" id="H4J-1s-qXt">
                                 <rect key="frame" x="0.0" y="0.0" width="456" height="162"/>
                             </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3nA-VV-HeO">
+                                <rect key="frame" x="212" y="29.5" width="252" height="59.5"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.30264261744966442" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jacquard Dress" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNN-Z9-qEm">
-                                <rect key="frame" x="220" y="36.5" width="228" height="26.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="220" y="37.5" width="228" height="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <color key="textColor" red="0.4941301367" green="0.78878966149999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dress" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxp-f9-xBg">
-                                <rect key="frame" x="220" y="63" width="228" height="18"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRESS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxp-f9-xBg">
+                                <rect key="frame" x="220" y="66.5" width="228" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                <color key="textColor" red="0.63118006081257061" green="0.68981162471014945" blue="0.78327164173126218" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eum-c8-RlQ">
@@ -46,6 +55,20 @@
                                 <color key="textColor" white="1" alpha="0.75277894295302017" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aiN-b9-z5t">
+                                <rect key="frame" x="8" y="123" width="85" height="31"/>
+                                <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
+                                <state key="normal" title="BUY NOW">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -57,12 +80,18 @@
                             <constraint firstItem="Eum-c8-RlQ" firstAttribute="trailing" secondItem="rxp-f9-xBg" secondAttribute="trailing" id="A4W-el-pUd"/>
                             <constraint firstItem="H4J-1s-qXt" firstAttribute="leading" secondItem="XcG-kh-xof" secondAttribute="leading" id="Ajy-5w-XMC"/>
                             <constraint firstItem="FNN-Z9-qEm" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XcG-kh-xof" secondAttribute="topMargin" id="C3B-0z-QRl"/>
+                            <constraint firstItem="3nA-VV-HeO" firstAttribute="leading" secondItem="FNN-Z9-qEm" secondAttribute="leading" constant="-8" id="ClA-VK-vcD"/>
+                            <constraint firstItem="aiN-b9-z5t" firstAttribute="leading" secondItem="XcG-kh-xof" secondAttribute="leadingMargin" id="KEH-Bm-zEo"/>
                             <constraint firstItem="FNN-Z9-qEm" firstAttribute="trailing" secondItem="rxp-f9-xBg" secondAttribute="trailing" id="MCB-kE-DS5"/>
                             <constraint firstAttribute="trailing" secondItem="H4J-1s-qXt" secondAttribute="trailing" id="MMJ-Zu-e4g"/>
+                            <constraint firstItem="3nA-VV-HeO" firstAttribute="bottom" secondItem="rxp-f9-xBg" secondAttribute="bottom" constant="8" id="Wgh-eb-o3v"/>
                             <constraint firstItem="Eum-c8-RlQ" firstAttribute="top" secondItem="rxp-f9-xBg" secondAttribute="bottom" constant="8" id="abQ-My-cIu"/>
+                            <constraint firstItem="3nA-VV-HeO" firstAttribute="top" secondItem="FNN-Z9-qEm" secondAttribute="top" constant="-8" id="fOV-Q9-LEc"/>
                             <constraint firstItem="rxp-f9-xBg" firstAttribute="bottom" secondItem="XcG-kh-xof" secondAttribute="centerY" id="iBY-zp-VBn"/>
                             <constraint firstAttribute="bottom" secondItem="H4J-1s-qXt" secondAttribute="bottom" id="meh-TQ-kqg"/>
+                            <constraint firstAttribute="trailing" secondItem="3nA-VV-HeO" secondAttribute="trailing" constant="-8" id="nSt-jm-Okp"/>
                             <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="Eum-c8-RlQ" secondAttribute="bottom" id="oUd-Qs-yII"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="aiN-b9-z5t" secondAttribute="bottom" id="s6c-O5-xw2"/>
                             <constraint firstItem="rxp-f9-xBg" firstAttribute="top" secondItem="FNN-Z9-qEm" secondAttribute="bottom" id="vOP-cj-8gV"/>
                         </constraints>
                     </view>
@@ -81,7 +110,7 @@
                 <outlet property="nameLabel" destination="FNN-Z9-qEm" id="7cn-Ot-57c"/>
                 <outlet property="photoView" destination="H4J-1s-qXt" id="Aur-BL-jR6"/>
             </connections>
-            <point key="canvasLocation" x="-56" y="-82"/>
+            <point key="canvasLocation" x="-177" y="-102"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -43,7 +43,7 @@ extension PromoCell {
 		}
 
 		nameLabel.text = product.name
-		categoryLabel.text = product.category?.name
+		categoryLabel.text = product.category?.name.localizedUppercase
 		descLabel.text = product.desc
 	}
 }
