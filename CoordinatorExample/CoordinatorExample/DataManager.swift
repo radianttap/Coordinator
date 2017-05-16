@@ -57,7 +57,7 @@ fileprivate extension DataManager {
 			p.careInstructions = "Hand wash. Dry flat."
 			p.colors = [Color.c18, Color.c40]
 			p.imagePaths = ["71546-11a", "71546-11ab", "71546-11b", "71546-11c", "71546-18a", "71546-18b", "71546-18c"]
-			p.gridImagePath = "71546-11b"
+			p.gridImagePath = "71546-11ab"
 			return p
 		}()
 		promotedProducts.append(p1)

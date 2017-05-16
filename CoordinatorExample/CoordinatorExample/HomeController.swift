@@ -47,6 +47,11 @@ extension HomeController {
 		super.viewDidLoad()
 
 		self.collectionView.register(PromoContainerCell.self)
+
+		self.navigationItem.titleView = {
+			return UIImageView(image: UIImage(named: "ivko_woman"))
+		}()
+		self.navigationItem.titleView?.sizeToFit()
 	}
 
 	override func viewDidLayoutSubviews() {
