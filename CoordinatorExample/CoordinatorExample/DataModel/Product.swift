@@ -13,6 +13,7 @@ class Product {
 	var styleCode: String
 	var desc: String?
 	var price: Price?
+	var careInstructions: String?
 
 	var materials: [String] = []
 	var colors: [Color] = []
