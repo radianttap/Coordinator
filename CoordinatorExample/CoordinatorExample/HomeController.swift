@@ -10,6 +10,7 @@ import UIKit
 
 final class HomeController: UIViewController, StoryboardLoadable {
 	//	Dependencies
+
 	typealias Dependencies = UsesDataManager
 	var dependencies: Dependencies? {
 		didSet {
@@ -19,10 +20,12 @@ final class HomeController: UIViewController, StoryboardLoadable {
 	}
 
 	//	UI Outlets
+
 	@IBOutlet fileprivate weak var collectionView: UICollectionView!
 	@IBOutlet fileprivate weak var notificationContainer: UIView!
 
 	//	Local data model
+
 	fileprivate var promotedProducts: [Product] {
 		guard let dataManager = dependencies?.dataManager else { return [] }
 
@@ -43,7 +46,7 @@ extension HomeController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.collectionView.register(ContainerCell.self)
+		self.collectionView.register(PromoContainerCell.self)
 	}
 }
 
@@ -72,7 +75,7 @@ extension HomeController: UICollectionViewDataSource {
 		let ls = LayoutSection(rawValue: indexPath.section)!
 		switch ls {
 		case .promotions:
-			let cell: ContainerCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+			let cell: PromoContainerCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
 			cell.dependencies = dependencies
 			return cell
 
