@@ -48,6 +48,14 @@ extension HomeController {
 
 		self.collectionView.register(PromoContainerCell.self)
 	}
+
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+
+		if self.automaticallyAdjustsScrollViewInsets {
+			collectionView.contentInset.top = self.topLayoutGuide.length
+		}
+	}
 }
 
 //	MARK: UICollectionViewDataSource

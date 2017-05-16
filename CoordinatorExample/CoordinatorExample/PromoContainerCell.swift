@@ -39,12 +39,6 @@ final class PromoContainerCell: UICollectionViewCell, ReusableView {
 
 		return dataManager.promotedProducts
 	}
-
-	override func awakeFromNib() {
-		super.awakeFromNib()
-
-		collectionView.reloadData()
-	}
 }
 
 //	MARK: UICollectionViewDataSource
