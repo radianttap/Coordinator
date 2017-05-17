@@ -9,12 +9,7 @@
 import UIKit
 import TinyConstraints
 
-protocol PromoContainerCellDelegate: class {
-	func promoContainerCell(_ cell: PromoContainerCell, didSelect product: Product)
-}
-
 final class PromoContainerCell: UICollectionViewCell, ReusableView {
-	weak var delegate: PromoContainerCellDelegate?
 
 	//	Dependecies (configuration)
 	typealias Dependencies = UsesDataManager
@@ -76,6 +71,6 @@ extension PromoContainerCell: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let promo = promotedProducts[indexPath.item]
-		delegate?.promoContainerCell(self, didSelect: promo)
+		showProduct(promo, sender: self)
 	}
 }

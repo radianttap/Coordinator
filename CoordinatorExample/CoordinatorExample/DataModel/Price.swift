@@ -19,3 +19,8 @@ struct Price {
 		self.retailPrice = retailPrice
 	}
 }
+
+
+//	Boxing pure Swift type into Objective-C friendly form
+//	but only if you actually use the structs in UIResponder methods you create
+

@@ -51,8 +51,6 @@ extension Color {
 
 
 
-/*
-//	SOLUTION:
 //	Boxing pure Swift type into Objective-C friendly form
 
 class ColorBox: NSObject {
@@ -65,4 +63,3 @@ class ColorBox: NSObject {
 extension Color {
 	var boxed: ColorBox { return ColorBox(self) }
 }
-*/
