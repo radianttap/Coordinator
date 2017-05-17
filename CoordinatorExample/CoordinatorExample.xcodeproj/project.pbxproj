@@ -10,6 +10,7 @@
 		5844AA38478FFECFE509CA4E /* Pods_CoordinatorExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */; };
 		D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5A1EC2FE230008A087 /* AppDependency.swift */; };
 		D010CB5D1EC316AF0008A087 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5C1EC316AF0008A087 /* Manager.swift */; };
+		D0255A7C1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */; };
 		D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */; };
 		D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D04B76661DE5B6D2009F1B9A /* Assets.xcassets */; };
 		D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */; };
@@ -44,6 +45,7 @@
 		682B196ABF2D7650612256D2 /* Pods-CoordinatorExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoordinatorExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CoordinatorExample/Pods-CoordinatorExample.debug.xcconfig"; sourceTree = "<group>"; };
 		D010CB5A1EC2FE230008A087 /* AppDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		D010CB5C1EC316AF0008A087 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Catalog-CoordinatingResponder.swift"; sourceTree = "<group>"; };
 		D04B765C1DE5B6D2009F1B9A /* CoordinatorExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoordinatorExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D04B76661DE5B6D2009F1B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */,
 				D0FF0C601ECC2B790023F8B8 /* ProductViewController.swift */,
 				D0FF0C531EC860D50023F8B8 /* Photos.xcassets */,
+				D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
 				D0FF0C4A1EC856830023F8B8 /* StoryboardLoadable.swift in Sources */,
 				D0FF0C611ECC2B790023F8B8 /* ProductViewController.swift in Sources */,
+				D0255A7C1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift in Sources */,
 				D0FF0C331EC6D7980023F8B8 /* Theme.swift in Sources */,
 				D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */,
 				D0FF0C3D1EC855A80023F8B8 /* HomeController.swift in Sources */,

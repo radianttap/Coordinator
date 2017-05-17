@@ -36,7 +36,14 @@ final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable,
 
 		completion(self)
 	}
+/*
+	//	UIResponder actions
+	override func showProduct(_ product: Product, sender: Any?) {
+		loadProduct(product)
+	}
+*/
 
+/*
 	//	UINavigationControllerDelegate
 	//	must be here, due to current Swift/ObjC limitations
 
@@ -44,12 +51,19 @@ final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable,
 		//	check if customer has pop-ed back
 		//	so update your internal state, if needed
 	}
+*/
 }
 
 fileprivate extension CatalogCoordinator {
 	func loadHome() {
 		let vc = HomeController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
 		vc.dependencies = dependencies
+		rootViewController.show(vc, sender: self)
+	}
+
+	func loadProduct(_ product: Product) {
+		let vc = ProductViewController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
+		vc.product = product
 		rootViewController.show(vc, sender: self)
 	}
 }
