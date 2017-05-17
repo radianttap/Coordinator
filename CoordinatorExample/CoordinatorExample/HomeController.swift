@@ -78,6 +78,20 @@ extension HomeController {
 	}
 }
 
+
+
+extension HomeController: PromoContainerCellDelegate {
+	func promoContainerCell(_ cell: PromoContainerCell, didSelect product: Product) {
+
+		let vc = ProductViewController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
+		vc.product = product
+		show(vc, sender: self)
+	}
+}
+
+
+
+
 //	MARK: UICollectionViewDataSource
 extension HomeController: UICollectionViewDataSource {
 	fileprivate enum LayoutSection: Int {
@@ -104,6 +118,7 @@ extension HomeController: UICollectionViewDataSource {
 		switch ls {
 		case .promotions:
 			let cell: PromoContainerCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+			cell.delegate = self
 			cell.dependencies = dependencies
 			return cell
 

@@ -36,6 +36,7 @@
 		D0FF0C5A1ECB91CD0023F8B8 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */; };
 		D0FF0C5C1ECB97D80023F8B8 /* CatalogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C5B1ECB97D80023F8B8 /* CatalogCoordinator.swift */; };
 		D0FF0C5F1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C5E1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift */; };
+		D0FF0C611ECC2B790023F8B8 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C601ECC2B790023F8B8 /* ProductViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		D0FF0C5B1ECB97D80023F8B8 /* CatalogCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogCoordinator.swift; sourceTree = "<group>"; };
 		D0FF0C5E1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cart-CoordinatingResponder.swift"; path = "CoordinatorExample/Cart-CoordinatingResponder.swift"; sourceTree = SOURCE_ROOT; };
+		D0FF0C601ECC2B790023F8B8 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -141,6 +143,7 @@
 				D0FF0C551EC8B2B10023F8B8 /* PromoContainerCell.swift */,
 				D0FF0C4D1EC85C610023F8B8 /* PromoCell.swift */,
 				D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */,
+				D0FF0C601ECC2B790023F8B8 /* ProductViewController.swift */,
 				D0FF0C531EC860D50023F8B8 /* Photos.xcassets */,
 			);
 			name = UI;
@@ -320,6 +323,7 @@
 				D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */,
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
 				D0FF0C4A1EC856830023F8B8 /* StoryboardLoadable.swift in Sources */,
+				D0FF0C611ECC2B790023F8B8 /* ProductViewController.swift in Sources */,
 				D0FF0C331EC6D7980023F8B8 /* Theme.swift in Sources */,
 				D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */,
 				D0FF0C3D1EC855A80023F8B8 /* HomeController.swift in Sources */,

@@ -140,5 +140,49 @@
             </objects>
             <point key="canvasLocation" x="-172" y="179.46026986506749"/>
         </scene>
+        <!--Product View Controller-->
+        <scene sceneID="0cJ-bi-bCN">
+            <objects>
+                <viewController storyboardIdentifier="ProductViewController" id="moF-r1-ZcN" customClass="ProductViewController" customModule="CoordinatorExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MHc-IE-xG8"/>
+                        <viewControllerLayoutGuide type="bottom" id="wN3-YZ-yRo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rfI-s5-zEG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="71502-25a" translatesAutoresizingMaskIntoConstraints="NO" id="psR-Bz-LS9">
+                                <rect key="frame" x="24" y="77.5" width="335" height="720"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieD-QM-IQY">
+                                <rect key="frame" x="24" y="36" width="335" height="33.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ieD-QM-IQY" firstAttribute="leading" secondItem="rfI-s5-zEG" secondAttribute="leadingMargin" constant="8" id="6t6-56-kAD"/>
+                            <constraint firstItem="psR-Bz-LS9" firstAttribute="top" secondItem="ieD-QM-IQY" secondAttribute="bottom" constant="8" id="DUX-GA-wge"/>
+                            <constraint firstItem="psR-Bz-LS9" firstAttribute="leading" secondItem="ieD-QM-IQY" secondAttribute="leading" id="Y5d-0e-MgD"/>
+                            <constraint firstItem="ieD-QM-IQY" firstAttribute="top" secondItem="MHc-IE-xG8" secondAttribute="bottom" constant="16" id="dbZ-E7-pgp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ieD-QM-IQY" secondAttribute="trailing" id="eFM-yv-YME"/>
+                            <constraint firstItem="psR-Bz-LS9" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ieD-QM-IQY" secondAttribute="trailing" id="t6s-VP-A6A"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainPhotoView" destination="psR-Bz-LS9" id="81g-Pg-nlA"/>
+                        <outlet property="titleLabel" destination="ieD-QM-IQY" id="710-OJ-4d6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aoT-mW-6bm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760.79999999999995" y="173.16341829085459"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="71502-25a" width="490" height="720"/>
+    </resources>
 </document>
