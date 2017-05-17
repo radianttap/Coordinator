@@ -55,6 +55,7 @@ extension PromoCell {
 fileprivate extension PromoCell {
 	@IBAction func didTapBuyNow(_ sender: UIButton) {
 //		guard let product = product else { return }
-		coordinatingResponder?.cartToggle(sender: self)
+
+		
 	}
 }

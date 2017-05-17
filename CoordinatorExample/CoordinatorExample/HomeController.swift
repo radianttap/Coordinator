@@ -15,7 +15,8 @@ final class HomeController: UIViewController, StoryboardLoadable {
 	var dependencies: Dependencies? {
 		didSet {
 			if !self.isViewLoaded { return }
-			self.collectionView.reloadData()
+
+			self.updateData()
 		}
 	}
 
@@ -26,19 +27,8 @@ final class HomeController: UIViewController, StoryboardLoadable {
 
 	//	Local data model
 
-	fileprivate var promotedProducts: [Product] {
-		guard let dataManager = dependencies?.dataManager else { return [] }
-
-		return dataManager.promotedProducts
-	}
-	fileprivate var categories: [Category] {
-		guard
-			let dataManager = dependencies?.dataManager,
-			let season = dataManager.seasons.first
-		else { return [] }
-
-		return season.categories
-	}
+	fileprivate var promotedProducts: [Product] = []
+	fileprivate var categories: [Category] = []
 }
 
 //	MARK: View lifecycle
@@ -46,20 +36,45 @@ extension HomeController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.collectionView.register(PromoContainerCell.self)
+		setupTitleView()
+		collectionView.register(PromoContainerCell.self)
 
-		self.navigationItem.titleView = {
-			return UIImageView(image: UIImage(named: "ivko_woman"))
-		}()
-		self.navigationItem.titleView?.sizeToFit()
+		updateData()
 	}
 
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 
-		if self.automaticallyAdjustsScrollViewInsets {
-			collectionView.contentInset.top = self.topLayoutGuide.length
+		if automaticallyAdjustsScrollViewInsets {
+			collectionView.contentInset.top = topLayoutGuide.length
 		}
+	}
+
+/*
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+
+		updateData()
+	}
+*/
+	//*
+	fileprivate func updateData() {
+		guard let dataManager = dependencies?.dataManager else { return }
+
+		promotedProducts = dataManager.promotedProducts
+
+		guard let season = dataManager.seasons.first else { return }
+		categories = season.categories
+
+		collectionView.reloadData()
+	}
+//*/
+
+	fileprivate func setupTitleView() {
+		self.navigationItem.titleView = {
+			return UIImageView(image: UIImage(named: "ivko_woman"))
+		}()
+		self.navigationItem.titleView?.sizeToFit()
 	}
 }
 
