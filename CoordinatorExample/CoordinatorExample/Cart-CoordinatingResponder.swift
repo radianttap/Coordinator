@@ -25,11 +25,3 @@ extension UIResponder {
 		coordinatingResponder?.cartToggle(sender: sender)
 	}
 }
-
-//	Improvement for future
-//protocol CartAdding {}
-//extension CartAdding where Self: UIResponder {
-//	func cartAdd(product: Product, color: Color, sender: Any?, completion: (Bool) -> Void) {
-//		coordinatingResponder?.cartAdd(product: product, color: color, sender: sender, completion: completion)
-//	}
-//}
