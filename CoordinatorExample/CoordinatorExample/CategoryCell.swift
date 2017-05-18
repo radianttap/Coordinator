@@ -12,6 +12,8 @@ final class CategoryCell: UICollectionViewCell, ReusableView {
     
 	@IBOutlet fileprivate weak var photoView: UIImageView!
 	@IBOutlet fileprivate weak var nameLabel: UILabel!
+
+	fileprivate var category: Category?
 }
 
 
@@ -35,10 +37,10 @@ extension CategoryCell {
 	}
 
 	func configure(with category: Category) {
+		self.category = category
 		nameLabel.text = category.name
 
 		guard let product = category.products.first else { return }
-
 		if let path = product.gridImagePath {
 			photoView.image = UIImage(named: path)
 		}

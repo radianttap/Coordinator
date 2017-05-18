@@ -11,13 +11,7 @@ import TinyConstraints
 
 final class PromoContainerCell: UICollectionViewCell, ReusableView {
 
-	//	Dependecies (configuration)
-	typealias Dependencies = UsesDataManager
-	var dependencies: Dependencies? {
-		didSet {
-			collectionView.reloadData()
-		}
-	}
+	//	UI outlets
 
 	fileprivate lazy var collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
@@ -40,10 +34,12 @@ final class PromoContainerCell: UICollectionViewCell, ReusableView {
 		return cv
 	}()
 
-	fileprivate var promotedProducts: [Product] {
-		guard let dataManager = dependencies?.dataManager else { return [] }
+	//	Local data model
 
-		return dataManager.promotedProducts
+	var promotedProducts: [Product] = [] {
+		didSet {
+			collectionView.reloadData()
+		}
 	}
 }
 
@@ -71,6 +67,7 @@ extension PromoContainerCell: UICollectionViewDelegateFlowLayout {
 
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let promo = promotedProducts[indexPath.item]
+
 		showProduct(promo, sender: self)
 	}
 }

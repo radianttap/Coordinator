@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Category {
+final class Category: NSObject {
 	var name: String
 
 	var products: [Product] = []

@@ -10,8 +10,41 @@ import UIKit
 
 extension UIResponder {
 
+	//	** Data requests by various VCs should bubble up to some of the Coordinators
+	//	** which will then contact DataManager, get the data and pass it back
+
+
+	/// Returns the list of all currently promoted products
+	///
+	/// - Parameters:
+	///   - sender: reference to object who requested data
+	///   - completion: Closure to call when data is ready or error occurs
+	func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void ) {
+		coordinatingResponder?.fetchPromotedProducts(sender: sender, completion: completion)
+	}
+
+	/// Returns the list of categories in given season. If `season` is `nil`,
+	///	it will return categories for the latest season.
+	///
+	/// - Parameters:
+	///   - season: (optional) season
+	///   - sender: reference to object who requested data
+	///   - completion: Closure to call when data is ready or error occurs
+	func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void ) {
+		coordinatingResponder?.fetchProductCategories(season: season, sender: sender, completion: completion)
+	}
+
+
+
+	//	** Switching to different VCs
+
+
+	/// Use this method to request display of single product details view
+	///
+	/// - Parameters:
+	///   - product: Product to show
+	///   - sender: reference to object who requested the display
 	func showProduct(_ product: Product, sender: Any?) {
 		coordinatingResponder?.showProduct(product, sender: sender)
 	}
-
 }

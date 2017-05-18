@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Season {
+final class Season: NSObject {
 	var name: String
 
 	var themes: [Theme] = []

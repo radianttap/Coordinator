@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Theme {
+final class Theme: NSObject {
 	var name: String
 
 	var product: [Product] = []

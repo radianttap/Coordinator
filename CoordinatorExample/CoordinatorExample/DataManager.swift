@@ -18,9 +18,20 @@ final class DataManager {
 
 	fileprivate(set) var seasons: [Season] = []
 	fileprivate(set) var promotedProducts: [Product] = []
+	fileprivate(set) var activeSeason: Season?
 
 	init() {
 		loadProducts()
+	}
+}
+
+
+extension DataManager {
+	func productCategories(season: Season? = nil) -> [Category] {
+		guard let s = season ?? activeSeason ?? seasons.first else {
+			return []
+		}
+		return s.categories
 	}
 }
 
@@ -30,6 +41,7 @@ fileprivate extension DataManager {
 		//	populate data source, so there's something for the rest of the app to use
 
 		let season = Season(name: "Spring/Summer 2017")
+		activeSeason = season
 
 		let categoryNames = ["Coat", "Dress", "Long Jacket", "Blouse/Top", "Pants", "Cardigan", "Skirt", "Pullover", "Jacket", "Top", "Pullwarmer", "Scarf", "Tunic"]
 		let categories: [Category] = categoryNames.map({ Category(name: $0) })

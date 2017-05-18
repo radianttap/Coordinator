@@ -23,7 +23,11 @@ final class ProductViewController: UIViewController, StoryboardLoadable {
 			self.populate()
 		}
 	}
+}
 
+
+//	MARK: View lifecycle
+extension ProductViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 

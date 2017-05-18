@@ -9,16 +9,6 @@
 import UIKit
 
 final class HomeController: UIViewController, StoryboardLoadable {
-	//	Dependencies
-
-	typealias Dependencies = UsesDataManager
-	var dependencies: Dependencies? {
-		didSet {
-			if !self.isViewLoaded { return }
-
-			self.updateData()
-		}
-	}
 
 	//	UI Outlets
 
@@ -27,8 +17,27 @@ final class HomeController: UIViewController, StoryboardLoadable {
 
 	//	Local data model
 
-	fileprivate var promotedProducts: [Product] = []
-	fileprivate var categories: [Category] = []
+	var season: Season? {
+		didSet {
+			if !self.isViewLoaded { return }
+			updateData()
+		}
+	}
+
+	var promotedProducts: [Product] = [] {
+		didSet {
+			if !self.isViewLoaded { return }
+//			collectionView.reloadSections( IndexSet(integer: LayoutSection.promotions.rawValue) )
+			collectionView.reloadData()
+		}
+	}
+	var categories: [Category] = [] {
+		didSet {
+			if !self.isViewLoaded { return }
+//			collectionView.reloadSections( IndexSet(integer: LayoutSection.promotions.rawValue) )
+			collectionView.reloadData()
+		}
+	}
 }
 
 //	MARK: View lifecycle
@@ -38,8 +47,6 @@ extension HomeController {
 
 		setupTitleView()
 		collectionView.register(PromoContainerCell.self)
-
-		updateData()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -50,25 +57,11 @@ extension HomeController {
 		}
 	}
 
-/*
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 
 		updateData()
 	}
-*/
-	//*
-	fileprivate func updateData() {
-		guard let dataManager = dependencies?.dataManager else { return }
-
-		promotedProducts = dataManager.promotedProducts
-
-		guard let season = dataManager.seasons.first else { return }
-		categories = season.categories
-
-		collectionView.reloadData()
-	}
-//*/
 
 	fileprivate func setupTitleView() {
 		self.navigationItem.titleView = {
@@ -76,6 +69,46 @@ extension HomeController {
 		}()
 		self.navigationItem.titleView?.sizeToFit()
 	}
+}
+
+
+fileprivate extension HomeController {
+	///	This is the heart of the approach that isolates VCs from the rest of the app.
+	///
+	///	Each VC will always use only its local data model and care about nothing else.
+	///	Local model is populated either direclty from outside (DI) or
+	///	by using `coordinatingResponder` messages with completion handler.
+	///
+	///	Note the use of `[weak self]`. 
+	///	VCs should not care where data come from, thus
+	///	they will potentially be fetched from the (slow?) network, meaning
+	///	customer can decide to move away from this VC which could then be deallocated.
+	///	Hence you need to use `weak self` to avoid crashing your app
+	func updateData() {
+
+		fetchPromotedProducts(sender: self) {
+			[weak self] arr, _ in
+			guard let `self` = self else { return }
+
+			DispatchQueue.main.async {
+				self.promotedProducts = arr
+			}
+		}
+
+		guard let season = season else {
+			self.categories = []
+			return
+		}
+		fetchProductCategories(season: season, sender: self) {
+			[weak self] arr, _ in
+			guard let `self` = self else { return }
+
+			DispatchQueue.main.async {
+				self.categories = arr
+			}
+		}
+	}
+
 }
 
 
@@ -106,7 +139,7 @@ extension HomeController: UICollectionViewDataSource {
 		switch ls {
 		case .promotions:
 			let cell: PromoContainerCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-			cell.dependencies = dependencies
+			cell.promotedProducts = promotedProducts
 			return cell
 
 		case .categories:

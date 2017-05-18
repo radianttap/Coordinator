@@ -38,10 +38,23 @@ final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable,
 	}
 
 	//	UIResponder actions
+	//	must be placed here, due to current Swift/ObjC limitations
+
 	override func showProduct(_ product: Product, sender: Any?) {
 		loadProduct(product)
 	}
 
+	override func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
+		guard let dataManager = dependencies?.dataManager else { fatalError("Missing DataManager instance") }
+
+		completion( dataManager.promotedProducts, nil )
+	}
+
+	override func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {
+		guard let dataManager = dependencies?.dataManager else { fatalError("Missing DataManager instance") }
+
+		completion( dataManager.productCategories(season: season), nil )
+	}
 
 	//	UINavigationControllerDelegate
 	//	must be here, due to current Swift/ObjC limitations
@@ -56,8 +69,10 @@ final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable,
 fileprivate extension CatalogCoordinator {
 	///	Shows Home VC
 	func loadHome() {
+		guard let dataManager = dependencies?.dataManager else { fatalError("Missing DataManager instance") }
+
 		let vc = HomeController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
-		vc.dependencies = dependencies
+		vc.season = dataManager.activeSeason
 		rootViewController.show(vc, sender: self)
 	}
 
