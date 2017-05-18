@@ -40,11 +40,15 @@ extension StoryboardLoadable where Self:UIViewController {
 
 	}
 	
-	static func initial(fromStoryboard storyboardName: String? = nil) -> Self {
-		let sb = storyboardName ?? self.storyboardName
+	static func initial(fromStoryboardNamed name: String? = nil) -> Self {
+		let sb = name ?? self.storyboardName
 		let storyboard = UIStoryboard(name: sb, bundle: nil)
+		return initial(fromStoryboard: storyboard)
+	}
+
+	static func initial(fromStoryboard storyboard: UIStoryboard) -> Self {
 		guard let vc = storyboard.instantiateInitialViewController() as? Self else {
-			fatalError("Failed to instantiate initial view controller from storyboard named \(sb)")
+			fatalError("Failed to instantiate initial view controller from storyboard named \( storyboard )")
 		}
 		return vc
 	}
