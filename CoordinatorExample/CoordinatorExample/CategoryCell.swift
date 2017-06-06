@@ -41,8 +41,8 @@ extension CategoryCell {
 		nameLabel.text = category.name
 
 		guard let product = category.products.first else { return }
-		if let path = product.gridImagePath {
-			photoView.image = UIImage(named: path)
+		if let path = product.gridImagePath, let img = UIImage(named: path) {
+			photoView.image = img
 		}
 	}
 }

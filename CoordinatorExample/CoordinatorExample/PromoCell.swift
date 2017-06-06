@@ -42,8 +42,8 @@ extension PromoCell {
 	func configure(with product: Product) {
 		self.product = product
 
-		if let path = product.promoImagePath {
-			photoView.image = UIImage(named: path)
+		if let path = product.promoImagePath, let img = UIImage(named: path) {
+			photoView.image = img
 		}
 
 		nameLabel.text = product.name
