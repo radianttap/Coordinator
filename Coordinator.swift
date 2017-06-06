@@ -9,7 +9,7 @@
 
 import UIKit
 
-/**
+/*
 Coordinators are a design pattern that encourages decoupling view controllers
 such that they know as little as possible about how they are presented.
 
@@ -25,60 +25,74 @@ and prevent any one of them from becoming too large.
 Each coordinator has an identifier to simplify logging and debugging.
 Identifier is also used as key for the childCoordinators dictionary
 
-You can either use Coordinator instances directly or – far more likely – 
+You can either use Coordinator instances directly or – far more likely –
 subclass them to add specific behavior for the given particular usage.
 
 Note: Don't overthink this. Idea is to have fairly small number of coordinators in the app.
-If you embed controllers into other VC (thus using them as simple UI components), 
+If you embed controllers into other VC (thus using them as simple UI components),
 then keep that flow inside the given container controller.
 Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
 */
 
-open class Coordinator<T>: UIResponder {
-	/// A callback function used by coordinators to signal events.
-	public typealias Callback = (Any) -> Void
+
+///	Helper protocol to simplify coordinator‘s hierarchy walk-up.
+///
+///	Note: This protocol should not be subclassed.
+public protocol Coordinating: class {
+	///	Unique string to identify specific Coordinator instance
+	///
+	///	By default it will be String representation of the Coordinator's subclass.
+	///	If you directly instantiate `Coordinator<T>`, then you need to set it manually
+	var identifier: String { get }
+
+	///	Returns either `parent` coordinator or `nil` if there isn‘t one
+	var coordinatingResponder: UIResponder? { get }
+}
 
 
-	/// The root view controller for a coordinator.
-	///	Each coordinator creates its VC hierarchy internally, so there should be no need to alter this once set
-	open var rootViewController: T
+///	Main Coordinator instance, where T is UIViewController or any of its subclasses.
+open class Coordinator<T>: UIResponder, Coordinating {
+	open let rootViewController: T
 
 
-	/// You need to supply at least one UIViewController (or any of its subclasses) that will be loaded as root.
-	///	Usually one of container controllers (UINavigationController, UITabBarController etc)
+	/// You need to supply UIViewController (or any of its subclasses) that will be loaded as root of the UI hierarchy.
+	///	Usually one of container controllers (UINavigationController, UITabBarController etc).
 	///
 	/// - parameter rootViewController: UIViewController at the top of the hierarchy.
 	///
 	/// - returns: Coordinator instance, prepared to start
-	public required init(rootViewController: T?) {
-		guard let rootViewController = rootViewController else {
+	public init(rootViewController: T?) {
+		guard let rootViewController = rootViewController, let rvc = rootViewController as? UIViewController else {
 			fatalError("Must supply UIViewController (or any of its subclasses) or override this init and instantiate VC in there.")
 		}
-		//	set as initial controller. Can't be changed later on
 		self.rootViewController = rootViewController
+		super.init()
+
+		rvc.parentCoordinator = self
 	}
 
 
-	/// Default identifier is the class name of the Coordinator subclass
-	public static var identifier: String {
-		return String(describing: self)
-	}
-
-	open var identifier: String {
-		return type(of: self).identifier
-	}
+	open lazy var identifier: String = {
+		return String(describing: type(of: self))
+	}()
 
 
-	/// Parent Coordinator
-	open var parent: Any?	//	this annoys me, but will fix as time allows
-
+	/// Parent Coordinator can be any other Coordinator
+	open weak var parent: Coordinating?
 
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
-	open var childCoordinators: [String: Any] = [:]
+	///	The only way to add/remove something is through startChild/stopChild methods
+	fileprivate(set) public var childCoordinators: [String: Coordinating] = [:]
 
 
 
-	/// Tells the coordinator to create its initial view controller and take over the user flow.
+	open override var coordinatingResponder: UIResponder? {
+		return parent as? UIResponder
+	}
+
+
+
+	/// Tells the coordinator to create/display its initial view controller and take over the user flow.
 	///	Use this method to configure your `rootViewController` (if it isn't already).
 	///	Some examples:
 	///	* instantiate and assign `viewControllers` for UINavigationController or UITabBarController
@@ -87,14 +101,18 @@ open class Coordinator<T>: UIResponder {
 	///	etc.
 	///
 	///	- Parameter completion: An optional `Callback` executed at the end.
-	open func start(with completion: @escaping Callback = {_ in}) {}
+	open func start(with completion: @escaping (Coordinator<T>) -> Void = {_ in}) {
+		completion(self)
+	}
 
-	/// Tells the coordinator that it is done and that it should 
+	/// Tells the coordinator that it is done and that it should
 	///	rewind the view controller state to where it was before `start` was called.
 	///	That means either dismiss presented controller or pop pushed ones.
 	///
 	///	- Parameter completion: An optional `Callback` executed at the end.
-	open func stop(with completion: @escaping Callback = {_ in}) {}
+	open func stop(with completion: @escaping () -> Void = {}) {
+		completion()
+	}
 
 
 
@@ -106,7 +124,7 @@ open class Coordinator<T>: UIResponder {
 
 	- Returns: The started coordinator.
 	*/
-	public func startChild<U>(coordinator: Coordinator<U>, completion: @escaping Callback = {_ in}) {
+	public func startChild<U>(coordinator: Coordinator<U>, completion: @escaping (Coordinator<U>) -> Void = {_ in}) {
 		childCoordinators[coordinator.identifier] = coordinator
 		coordinator.parent = self
 		coordinator.start(with: completion)
@@ -116,29 +134,16 @@ open class Coordinator<T>: UIResponder {
 	/**
 	Stops the given child coordinator and removes it from the `childCoordinators` array
 
-	- Parameter coordinator: The coordinator implementation to start.
+	- Parameter coordinator: The coordinator implementation to stop.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
 	public func stopChild<U>(coordinator: Coordinator<U>, completion: @escaping () -> Void = {}) {
-		coordinator.parent = nil
-		self.childCoordinators.removeValue(forKey: coordinator.identifier)
-		completion()
-	}
+		coordinator.stop {
+			[unowned self] in
 
-	/**
-	Stops the child coordinator with given identifier and removes it from the `childCoordinators` array
-
-	- Parameter coordinator: The coordinator implementation to start.
-	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
-	*/
-	public func stopChild<U>(with identifier: String, type: U.Type, completion: @escaping () -> Void = {}) {
-		guard let c = childCoordinators[identifier] as? Coordinator<U> else { return }
-		stopChild(coordinator: c, completion: completion)
-	}
-
-	///	Returns either `parent` coordinator or nil if there isn‘t one
-	override open var coordinatingResponder: UIResponder? {
-		return parent as? UIResponder
+			self.childCoordinators.removeValue(forKey: coordinator.identifier)
+			completion()
+		}
 	}
 }
 
@@ -149,10 +154,10 @@ extension UIViewController {
 	private struct AssociatedKeys {
 		static var ParentCoordinator = "ParentCoordinator"
 	}
-	///	*Must* be set for View Controller acting as Coordinator.rootViewController
-	public var parentCoordinator: Any? {
+
+	public var parentCoordinator: Coordinating? {
 		get {
-			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator)
+			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Coordinating
 		}
 		set {
 			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
@@ -166,7 +171,7 @@ extension UIViewController {
 /**
 Driving engine of the message passing through the app, with no need for Delegate pattern nor Singletons.
 
-Coordinable will piggy-back on the UIResponder.next? in order to pass the message through UIView/UIVC hierarchy of any depth and complexity.
+It piggy-backs on the UIResponder.next? in order to pass the message through UIView/UIVC hierarchy of any depth and complexity.
 However, it does not interfere with the regular UIResponder functionality.
 
 At the UIViewController level (see below), it‘s intercepted to switch up to the coordinator, if the UIVC has one.
@@ -176,7 +181,10 @@ public extension UIResponder {
 	public var coordinatingResponder: UIResponder? {
 		return next
 	}
-	/*	// sort-of implementation of the custom message/command to put into your Coordinable extension
+
+	/*
+	// sort-of implementation of the custom message/command to put into your Coordinable extension
+
 	func messageTemplate(args: Whatever, sender: Any?) {
 		coordinatingResponder?.messageTemplate(args: args, sender: sender)
 	}
@@ -185,9 +193,13 @@ public extension UIResponder {
 
 
 extension UIViewController {
-	/**	(from UIKit `next:` docs)
+	/**
+	Returns `parentCoordinator` if the current UIViewController has one,
+	or its view's `superview` if it doesn‘t.
 
 	---
+	(Attention: from UIResponder.next documentation)
+
 	The UIResponder class does not store or set the next responder automatically,
 	instead returning nil by default.
 
@@ -196,18 +208,12 @@ extension UIViewController {
 	that manages it (if it has one) or its superview (if it doesn’t);
 	UIViewController implements the method by returning its view’s superview;
 	UIWindow returns the application object, and UIApplication returns nil.
-
-	---
-
-	Thus this returns `parentCoordinator` if the current UIViewController has one,
-	or its view's `superview` if it doesn‘t.
 	*/
-	///	Returns either `parent` coordinator or nil if there isn‘t one
 	override open var coordinatingResponder: UIResponder? {
-		guard let parentCoordinator = self.parentCoordinator as? UIResponder else {
+		guard let parentCoordinator = self.parentCoordinator else {
 			return view.superview
 		}
-		return parentCoordinator
+		return parentCoordinator as? UIResponder
 	}
 }
 
