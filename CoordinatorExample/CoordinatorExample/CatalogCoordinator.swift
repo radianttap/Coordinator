@@ -20,7 +20,7 @@ final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable,
 		}
 	}
 
-	required init(rootViewController: UINavigationController?) {
+	override init(rootViewController: UINavigationController?) {
 		guard let nc = rootViewController else { fatalError("Must supply root VC") }
 		super.init(rootViewController: nc)
 
@@ -28,13 +28,13 @@ final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable,
 		nc.delegate = self
 	}
 
-	override func start(with completion: @escaping Coordinator<Any>.Callback = {_ in}) {
+	override func start(with completion: @escaping (Coordinator<UINavigationController>) -> Void = {_ in}) {
 		//	here comes the logic what's the
 		//	initial VC to display for the Catalog
 
 		loadHome()
 
-		completion(self)
+		super.start(with: completion)
 	}
 
 	//	UIResponder actions

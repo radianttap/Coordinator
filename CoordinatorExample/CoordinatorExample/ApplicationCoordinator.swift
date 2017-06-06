@@ -20,14 +20,14 @@ final class ApplicationCoordinator: Coordinator<UINavigationController>, Dependa
 		}
 	}
 
-	required init(rootViewController: UINavigationController? = nil) {
+	override init(rootViewController: UINavigationController? = nil) {
 		let nc: UINavigationController = rootViewController ?? UINavigationController()
 		super.init(rootViewController: nc)
 
 		nc.parentCoordinator = self
 	}
 
-	override func start(with completion: @escaping Coordinator<Any>.Callback = {_ in}) {
+	override func start(with completion: @escaping (Coordinator<UINavigationController>) -> Void = {_ in}) {
 		//	this is top-level, it should 
 		//	keep references to shared objects (Managers)
 
@@ -38,7 +38,7 @@ final class ApplicationCoordinator: Coordinator<UINavigationController>, Dependa
 
 		loadCatalog()
 
-		completion(self)
+		super.start(with: completion)
 	}
 
 	//	UIResponder coordinating messages
