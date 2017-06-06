@@ -33,7 +33,7 @@ final class ApplicationCoordinator: Coordinator<UINavigationController>, Dependa
 
 		dependencies = AppDependency()
 
-		//	now, here comes the logic what 
+		//	now, here comes the logic which 
 		//	content Coordinator to load
 
 		loadCatalog()
