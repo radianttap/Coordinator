@@ -45,14 +45,25 @@ final class ApplicationCoordinator: Coordinator<UINavigationController>, Dependa
 
 	override func cartBuyNow(_ product: Product, sender: Any?) {
 		//	re-route to CartManager and/or CartCoordinator
+
+		let ac = UIAlertController(title: nil, message: "cart-BuyNow", preferredStyle: .alert)
+		ac.addAction( UIAlertAction(title: "OK", style: .default) )
+		rootViewController.present(ac, animated: true)
 	}
 
 	override func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: (Bool) -> Void) {
 		//	re-route to CartManager and/or CartCoordinator
+
+		let ac = UIAlertController(title: nil, message: "cart-Add", preferredStyle: .alert)
+		ac.addAction( UIAlertAction(title: "OK", style: .default) )
+		rootViewController.present(ac, animated: true)
 	}
 
 	override func cartToggle(sender: Any?) {
-		
+
+		let ac = UIAlertController(title: nil, message: "cart-Toggle", preferredStyle: .alert)
+		ac.addAction( UIAlertAction(title: "OK", style: .default) )
+		rootViewController.present(ac, animated: true)
 	}
 }
 
