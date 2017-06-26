@@ -2,7 +2,6 @@
 //  Coordinator.swift
 //  Radiant Tap Essentials
 //
-//  Created by Aleksandar Vacić on 21.10.16..
 //  Copyright © 2016 Radiant Tap
 //  MIT License · http://choosealicense.com/licenses/mit/
 //
@@ -47,6 +46,13 @@ public protocol Coordinating: class {
 
 	///	Returns either `parent` coordinator or `nil` if there isn‘t one
 	var coordinatingResponder: UIResponder? { get }
+
+	///	Call this method if the Coordinator is using UINavigationController
+	///	as rootViewController and customer has just pop-ed out of `coordinator` domain
+	///
+	///	This allows you to inform `coordinator.parent` it should activate something else
+	///	(like previous childCoordinator, if there is one)
+	func coordinatorDidFinish<T>(_ coordinator: Coordinator<T>)
 }
 
 
@@ -115,6 +121,9 @@ open class Coordinator<T>: UIResponder, Coordinating {
 	}
 
 
+	public func coordinatorDidFinish<U>(_ coordinator: Coordinator<U>) {
+		stopChild(coordinator: coordinator)
+	}
 
 	/**
 	Adds new child coordinator and starts it.
