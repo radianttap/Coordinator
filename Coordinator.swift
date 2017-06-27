@@ -121,7 +121,7 @@ open class Coordinator<T>: UIResponder, Coordinating {
 	}
 
 
-	public func coordinatorDidFinish<U>(_ coordinator: Coordinator<U>) {
+	open func coordinatorDidFinish<U>(_ coordinator: Coordinator<U>) {
 		stopChild(coordinator: coordinator)
 	}
 
