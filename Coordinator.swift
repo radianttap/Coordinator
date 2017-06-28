@@ -44,6 +44,12 @@ public protocol Coordinating: class {
 	///	If you directly instantiate `Coordinator<T>`, then you need to set it manually
 	var identifier: String { get }
 
+	/// Parent Coordinator can be any other Coordinator
+	weak var parent: Coordinating? { get }
+
+	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
+	var childCoordinators: [String: Coordinating] { get }
+
 	///	Returns either `parent` coordinator or `nil` if there isn‘t one
 	var coordinatingResponder: UIResponder? { get }
 
