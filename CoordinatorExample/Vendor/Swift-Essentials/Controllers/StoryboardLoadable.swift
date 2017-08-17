@@ -2,8 +2,8 @@
 //  StoryboardLoadable.swift
 //  Radiant Tap Essentials
 //
-//  Created by Aleksandar Vacić on 14.8.16.
-//  Copyright © 2016. Radiant Tap. All rights reserved.
+//  Copyright © 2016 Radiant Tap
+//  MIT License · http://choosealicense.com/licenses/mit/
 //
 
 import UIKit
@@ -15,7 +15,7 @@ protocol StoryboardLoadable {
 }
 
 
-extension StoryboardLoadable where Self:UIViewController {
+extension StoryboardLoadable where Self: UIViewController {
 
 	static var storyboardName: String {
 		return String(describing: self)
