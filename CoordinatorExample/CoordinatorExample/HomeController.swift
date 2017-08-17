@@ -76,7 +76,7 @@ fileprivate extension HomeController {
 	///	This is the heart of the approach that isolates VCs from the rest of the app.
 	///
 	///	Each VC will always use only its local data model and care about nothing else.
-	///	Local model is populated either direclty from outside (DI) or
+	///	Local model is populated either directly from outside (DI) or
 	///	by using `coordinatingResponder` messages with completion handler.
 	///
 	///	Note the use of `[weak self]`. 
