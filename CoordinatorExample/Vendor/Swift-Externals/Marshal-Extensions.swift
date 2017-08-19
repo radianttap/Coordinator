@@ -1,12 +1,12 @@
 //
 //  Marshal-Extensions.swift
-//  RS
+//  CoordinatorExample
 //
-//  Created by Aleksandar Vacić on 28.6.17..
-//  Copyright © 2017. Meridian Gaming. All rights reserved.
+//  Created by Aleksandar Vacić on 20.8.17..
+//  Copyright © 2017. Radiant Tap. All rights reserved.
 //
 //	Note:
-//	These are general extensions, tailored for MB environment
+//	These are general extensions, tailored for this app
 
 import Foundation
 import Marshal
@@ -18,8 +18,6 @@ extension Date : ValueType {
 		}
 		if let date = DateFormatter.iso8601Formatter.date(from: dateString) {
 			return date
-			//		} else if let date = DateFormatter.noTimeZoneFormatter.date(from: dateString) {
-			//			return date
 		} else if let date = DateFormatter.iso8601FractionalSecondsFormatter.date(from: dateString) {
 			return date
 		}
