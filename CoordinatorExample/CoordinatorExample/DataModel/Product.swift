@@ -9,8 +9,9 @@
 import Foundation
 
 final class Product: NSObject {
-	var name: String
-	var styleCode: String
+	let name: String
+	let styleCode: String
+
 	var desc: String?
 	var price: Price?
 	var careInstructions: String?

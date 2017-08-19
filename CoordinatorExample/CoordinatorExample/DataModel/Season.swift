@@ -9,12 +9,14 @@
 import Foundation
 
 final class Season: NSObject {
-	var name: String
+	let id: String
+	let name: String
 
 	var themes: [Theme] = []
 	var categories: [Category] = []
 
-	init(name: String) {
+	init(name: String, id: String) {
 		self.name = name
+		self.id = id
 	}
 }

@@ -9,11 +9,13 @@
 import Foundation
 
 final class Theme: NSObject {
-	var name: String
+	let id: String
+	let name: String
 
 	var product: [Product] = []
 
-	init(name: String) {
+	init(name: String, id: String) {
 		self.name = name
+		self.id = id
 	}
 }
