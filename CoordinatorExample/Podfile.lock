@@ -1,19 +1,50 @@
 PODS:
-  - Coordinator (4.0.3)
-  - TinyConstraints (2.0.0)
+  - Coordinator (4.1)
+  - Kingfisher (3.10.2)
+  - Marshal (1.2.4)
+  - SwiftyTimer (2.0.0)
+  - TinyConstraints (2.1.1)
 
 DEPENDENCIES:
   - Coordinator (from `../`)
-  - TinyConstraints
+  - Kingfisher (from `https://github.com/radianttap/Kingfisher.git`)
+  - Marshal (from `https://github.com/radianttap/Marshal.git`)
+  - SwiftyTimer (from `https://github.com/radianttap/SwiftyTimer.git`)
+  - TinyConstraints (from `https://github.com/radianttap/TinyConstraints.git`)
 
 EXTERNAL SOURCES:
   Coordinator:
     :path: "../"
+  Kingfisher:
+    :git: https://github.com/radianttap/Kingfisher.git
+  Marshal:
+    :git: https://github.com/radianttap/Marshal.git
+  SwiftyTimer:
+    :git: https://github.com/radianttap/SwiftyTimer.git
+  TinyConstraints:
+    :git: https://github.com/radianttap/TinyConstraints.git
+
+CHECKOUT OPTIONS:
+  Kingfisher:
+    :commit: 96d0f0134d36263991df3f183b501e434d8ba54c
+    :git: https://github.com/radianttap/Kingfisher.git
+  Marshal:
+    :commit: 7a814e26312d5e7f1209168ca1a7860dcc12cf5f
+    :git: https://github.com/radianttap/Marshal.git
+  SwiftyTimer:
+    :commit: 77325e642504ccf1d1dde022da35c384764958e7
+    :git: https://github.com/radianttap/SwiftyTimer.git
+  TinyConstraints:
+    :commit: 42513def02c9958d32b7fe315a19f4e5f3aee202
+    :git: https://github.com/radianttap/TinyConstraints.git
 
 SPEC CHECKSUMS:
-  Coordinator: 149ef881b347cbd227850fc9c61e1a6ac6b8b12f
-  TinyConstraints: c8f3c34a90aa2a5b6960dcff5cc6a69e8938cf1b
+  Coordinator: be562cc10ecedc094ee218fe96ab36d905433fe4
+  Kingfisher: d65c8e3db9bf83eb4354cc2c9444d4b1cfd38d14
+  Marshal: b635c8e4eab427d46cd953617fb6594d3a30f0f1
+  SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
+  TinyConstraints: 1cd016f1984410e11fda693e8d8d2977a71556ad
 
-PODFILE CHECKSUM: 83b4afef447e3ca01b6315221c13f9b913cd7573
+PODFILE CHECKSUM: aa9c9818bb7facbccccce702d354093118ae1c27
 
 COCOAPODS: 1.2.1

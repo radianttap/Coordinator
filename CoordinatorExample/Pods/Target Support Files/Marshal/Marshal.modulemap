@@ -1,0 +1,6 @@
+framework module Marshal {
+  umbrella header "Marshal-umbrella.h"
+
+  export *
+  module * { export * }
+}

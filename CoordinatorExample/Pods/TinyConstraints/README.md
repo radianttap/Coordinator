@@ -16,6 +16,7 @@
 - [X] Optionally store your constraints.
 - [X] Set constraint priorities upon creation.
 - [X] Stack views together with one line of code.
+- [X] No need to set `translatesAutoresizingMaskIntoConstraints` because `TinyConstraints` does it for you.
 
 ## Examples
 ### Edges
@@ -42,8 +43,8 @@ view.edges(to: superview, insets: UIEdgeInsets(top: 10, left: 10, bottom: 0, rig
 Constraining the center of a view to its superview with `NSLayoutConstraint`:
 ```swift
 NSLayoutConstraint.activate([
-	view.centerXAnchor.constraint(equalTo: superview.centerXAnchor, constant: 0)
-	view.centerYAnchor.constraint(equalTo: superview.centerYAnchor, constant: 0)
+    view.centerXAnchor.constraint(equalTo: superview.centerXAnchor, constant: 0)
+    view.centerYAnchor.constraint(equalTo: superview.centerYAnchor, constant: 0)
 ])
 ```
 
