@@ -9,7 +9,7 @@
 import UIKit
 import Coordinator
 
-final class AppCoordinator: NavigationCoordinator {
+final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	var dependencies: AppDependency? {
 		didSet { updateChildCoordinatorDependencies() }
 	}
@@ -36,7 +36,9 @@ final class AppCoordinator: NavigationCoordinator {
 		super.start(with: completion)
 	}
 
-	//	UIResponder coordinating messages
+
+
+	//	MARK:- CoordinatingResponder
 
 	override func cartBuyNow(_ product: Product, sender: Any?) {
 		//	re-route to CartManager and/or CartCoordinator
@@ -64,6 +66,8 @@ final class AppCoordinator: NavigationCoordinator {
 
 
 fileprivate extension AppCoordinator {
+	//	MARK:- Internal
+
 	func loadCatalog() {
 		let cc = CatalogCoordinator(rootViewController: rootViewController)
 		cc.dependencies = dependencies
