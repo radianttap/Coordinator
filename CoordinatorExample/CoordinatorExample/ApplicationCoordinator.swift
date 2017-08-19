@@ -20,7 +20,7 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 
 	enum Section {
 		case catalog(CatalogCoordinator.Page?)
-		case cart
+		case cart(CartCoordinator.Page?)
 		case account(AccountCoordinator.Page?)
 	}
 	var section: Section = .catalog(.home)
@@ -81,8 +81,8 @@ fileprivate extension AppCoordinator {
 		switch section {
 		case .catalog(let page):
 			showCatalog(page)
-		case .cart:
-			showCart()
+		case .cart(let page):
+			showCart(page)
 		case .account(let page):
 			showAccount(page)
 		}
@@ -109,7 +109,7 @@ fileprivate extension AppCoordinator {
 		startChild(coordinator: c)
 	}
 
-	func showCart() {
+	func showCart(_ page: CartCoordinator.Page?) {
 
 	}
 
