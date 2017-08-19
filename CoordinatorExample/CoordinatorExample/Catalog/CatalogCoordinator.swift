@@ -14,66 +14,68 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 		didSet { updateChildCoordinatorDependencies() }
 	}
 
-	override init(rootViewController: UINavigationController?) {
-		guard let nc = rootViewController else { fatalError("Must supply root VC") }
-		super.init(rootViewController: nc)
+	//	Declaration of all local pages (ViewControllers)
 
-		nc.parentCoordinator = self
-		nc.delegate = self
+	enum Page {
+		case home
+//		case categories
+		case product(Product)
 	}
+	var page: Page = .home
+
+	func display(page: Page) {
+		rootViewController.parentCoordinator = self
+		rootViewController.delegate = self
+
+		setupActivePage(page)
+	}
+
+	//	Coordinator lifecycle
 
 	override func start(with completion: @escaping (Coordinator<UINavigationController>) -> Void = {_ in}) {
-		//	here comes the logic what's the
-		//	initial VC to display for the Catalog
-
-		loadHome()
-
+		rootViewController.delegate = self
 		super.start(with: completion)
+
+		setupActivePage()
 	}
 
-	//	UIResponder actions
+
+
+
+	//	MARK:- Coordinating Messages
 	//	must be placed here, due to current Swift/ObjC limitations
 
 	override func showProduct(_ product: Product, sender: Any?) {
-		loadProduct(product)
+		setupActivePage( .product(product) )
 	}
 
 	override func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
 		guard let dataManager = dependencies?.dataManager else { fatalError("Missing DataManager instance") }
 
-		completion( dataManager.promotedProducts, nil )
+//		completion( dataManager.promotedProducts, nil )
 	}
 
 	override func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {
 		guard let dataManager = dependencies?.dataManager else { fatalError("Missing DataManager instance") }
 
-		completion( dataManager.productCategories(season: season), nil )
-	}
-
-	//	UINavigationControllerDelegate
-	//	must be here, due to current Swift/ObjC limitations
-
-	func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-		//	check if customer has pop-ed back
-		//	so update your internal state, if needed
-		//	like an array of controllers this Coordinator keeps
+//		completion( dataManager.productCategories(season: season), nil )
 	}
 }
 
 fileprivate extension CatalogCoordinator {
-	///	Shows Home VC
-	func loadHome() {
-		guard let dataManager = dependencies?.dataManager else { fatalError("Missing DataManager instance") }
+	func setupActivePage(_ enforcedPage: Page? = nil) {
+		let p = enforcedPage ?? page
 
-		let vc = HomeController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
-		vc.season = dataManager.activeSeason
-		rootViewController.show(vc, sender: self)
-	}
+		switch p {
+		case .home:
+			let vc = HomeController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
+//			vc.season = dataManager.activeSeason
+			root(vc)
 
-	///	Shows Detail Product VC, for provided product
-	func loadProduct(_ product: Product) {
-		let vc = ProductViewController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
-		vc.product = product
-		rootViewController.show(vc, sender: self)
+		case .product(let product):
+			let vc = ProductViewController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
+			vc.product = product
+			show(vc)
+		}
 	}
 }

@@ -12,13 +12,17 @@ import Coordinator
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
-	var applicationCoordinator: AppCoordinator!
+
+	var appCoordinator: AppCoordinator = {
+		let vc = UINavigationController.initial(fromStoryboardNamed: UIStoryboard.Name.app)
+		let c = AppCoordinator(rootViewController: vc)
+		return c
+	}()
 
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
 		window = UIWindow(frame: UIScreen.main.bounds)
 
-		applicationCoordinator = AppCoordinator()
-		window?.rootViewController = applicationCoordinator.rootViewController
+		window?.rootViewController = appCoordinator.rootViewController
 
 		return true
 	}
@@ -26,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
 		window?.makeKeyAndVisible()
-		applicationCoordinator.start()
+		appCoordinator.start()
 
 		return true
 	}

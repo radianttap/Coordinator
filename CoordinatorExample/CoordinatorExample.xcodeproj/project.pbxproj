@@ -20,6 +20,8 @@
 		D00541891F46349500CFF7AE /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D005417F1F46349500CFF7AE /* ReusableView.swift */; };
 		D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5A1EC2FE230008A087 /* AppDependency.swift */; };
 		D0255A7C1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */; };
+		D02921D11F48FB540010B2B6 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D01F48FB540010B2B6 /* ProductViewController.swift */; };
+		D02921D31F48FED40010B2B6 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D21F48FED40010B2B6 /* AccountCoordinator.swift */; };
 		D036A9541F48EE12001E671B /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036A9521F48EE12001E671B /* AssetManager.swift */; };
 		D036A9551F48EE12001E671B /* IvkoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036A9531F48EE12001E671B /* IvkoService.swift */; };
 		D036A9571F48EE28001E671B /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036A9561F48EE28001E671B /* CartManager.swift */; };
@@ -55,7 +57,6 @@
 		D0FF0C5A1ECB91CD0023F8B8 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */; };
 		D0FF0C5C1ECB97D80023F8B8 /* CatalogCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C5B1ECB97D80023F8B8 /* CatalogCoordinator.swift */; };
 		D0FF0C5F1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C5E1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift */; };
-		D0FF0C611ECC2B790023F8B8 /* PromoContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C601ECC2B790023F8B8 /* PromoContainerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,8 @@
 		D005417F1F46349500CFF7AE /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D010CB5A1EC2FE230008A087 /* AppDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Catalog-CoordinatingResponder.swift"; path = "Catalog/Catalog-CoordinatingResponder.swift"; sourceTree = "<group>"; };
+		D02921D01F48FB540010B2B6 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductViewController.swift; path = Catalog/ProductViewController.swift; sourceTree = "<group>"; };
+		D02921D21F48FED40010B2B6 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
 		D036A9521F48EE12001E671B /* AssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssetManager.swift; path = CoordinatorExample/IvkoService/AssetManager.swift; sourceTree = SOURCE_ROOT; };
 		D036A9531F48EE12001E671B /* IvkoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IvkoService.swift; path = CoordinatorExample/IvkoService/IvkoService.swift; sourceTree = SOURCE_ROOT; };
 		D036A9561F48EE28001E671B /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
@@ -110,7 +113,6 @@
 		D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		D0FF0C5B1ECB97D80023F8B8 /* CatalogCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatalogCoordinator.swift; path = Catalog/CatalogCoordinator.swift; sourceTree = "<group>"; };
 		D0FF0C5E1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Cart-CoordinatingResponder.swift"; path = "CoordinatorExample/Cart/Cart-CoordinatingResponder.swift"; sourceTree = SOURCE_ROOT; };
-		D0FF0C601ECC2B790023F8B8 /* PromoContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PromoContainerCell.swift; path = Catalog/PromoContainerCell.swift; sourceTree = "<group>"; };
 		D14A32D34BA5EEF29B3D05FE /* Pods_CoordinatorExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoordinatorExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				D036A9591F48EFF4001E671B /* AccountManager.swift */,
+				D02921D21F48FED40010B2B6 /* AccountCoordinator.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -286,9 +289,9 @@
 				D0FF0C3C1EC855A80023F8B8 /* HomeController.swift */,
 				D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */,
 				D0FF0C551EC8B2B10023F8B8 /* PromoContainerCell.swift */,
+				D02921D01F48FB540010B2B6 /* ProductViewController.swift */,
 				D0FF0C4D1EC85C610023F8B8 /* PromoCell.swift */,
 				D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */,
-				D0FF0C601ECC2B790023F8B8 /* PromoContainerCell.swift */,
 			);
 			name = Catalog;
 			sourceTree = "<group>";
@@ -470,12 +473,12 @@
 				D00541881F46349500CFF7AE /* NibLoadable.swift in Sources */,
 				D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */,
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
-				D0FF0C611ECC2B790023F8B8 /* PromoContainerCell.swift in Sources */,
 				D00541891F46349500CFF7AE /* ReusableView.swift in Sources */,
 				D00541861F46349500CFF7AE /* AsyncOperation.swift in Sources */,
 				D036A96A1F48F206001E671B /* ActionClosurable.swift in Sources */,
 				D00541851F46349500CFF7AE /* Notifying.swift in Sources */,
 				D00541841F46349500CFF7AE /* String-Extensions.swift in Sources */,
+				D02921D31F48FED40010B2B6 /* AccountCoordinator.swift in Sources */,
 				D036A9651F48F206001E671B /* Network-Extensions.swift in Sources */,
 				D0255A7C1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift in Sources */,
 				D0FF0C331EC6D7980023F8B8 /* Theme.swift in Sources */,
@@ -494,6 +497,7 @@
 				D036A9681F48F206001E671B /* NetworkPayload.swift in Sources */,
 				D00541831F46349500CFF7AE /* Date-Extensions.swift in Sources */,
 				D0FF0C581EC987EE0023F8B8 /* Color.swift in Sources */,
+				D02921D11F48FB540010B2B6 /* ProductViewController.swift in Sources */,
 				D036A9571F48EE28001E671B /* CartManager.swift in Sources */,
 				D00541811F46349500CFF7AE /* StoryboardLoadable.swift in Sources */,
 				D0FF0C5F1ECBB3430023F8B8 /* Cart-CoordinatingResponder.swift in Sources */,

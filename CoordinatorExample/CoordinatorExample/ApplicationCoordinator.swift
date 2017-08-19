@@ -15,25 +15,31 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	}
 
 
-	override init(rootViewController: UINavigationController? = nil) {
-		let nc: UINavigationController = rootViewController ?? UINavigationController()
-		super.init(rootViewController: nc)
+	//	Declaration of all possible Coordinators
+	//	== sections inside the app
 
-		nc.parentCoordinator = self
+	enum Section {
+		case catalog(CatalogCoordinator.Page?)
+		case cart
+		case account(AccountCoordinator.Page?)
 	}
+	var section: Section = .catalog(.home)
+
+
+
+	//	Coordinator lifecycle
 
 	override func start(with completion: @escaping (Coordinator<UINavigationController>) -> Void = {_ in}) {
 		//	this is top-level, it should 
 		//	keep references to shared objects (Managers)
 
 		dependencies = AppDependency()
+		super.start(with: completion)
 
 		//	now, here comes the logic which 
 		//	content Coordinator to load
 
-		loadCatalog()
-
-		super.start(with: completion)
+		setupActiveSection()
 	}
 
 
@@ -68,9 +74,45 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 fileprivate extension AppCoordinator {
 	//	MARK:- Internal
 
-	func loadCatalog() {
-		let cc = CatalogCoordinator(rootViewController: rootViewController)
-		cc.dependencies = dependencies
-		startChild(coordinator: cc)
+	func setupActiveSection(_ enforcedSection: Section? = nil) {
+		if let enforcedSection = enforcedSection {
+			section = enforcedSection
+		}
+		switch section {
+		case .catalog(let page):
+			showCatalog(page)
+		case .cart:
+			showCart()
+		case .account(let page):
+			showAccount(page)
+		}
+	}
+
+	func showCatalog(_ page: CatalogCoordinator.Page?) {
+		let identifier = String(describing: CatalogCoordinator.self)
+		//	if Coordinator is already created...
+		if let c = childCoordinators[identifier] as? CatalogCoordinator {
+			c.dependencies = dependencies
+			//	just display this page
+			if let page = page {
+				c.display(page: page)
+			}
+			return
+		}
+
+		//	otherwise, create the coordinator and start it
+		let c = CatalogCoordinator(rootViewController: rootViewController)
+		c.dependencies = dependencies
+		if let page = page {
+			c.page = page
+		}
+		startChild(coordinator: c)
+	}
+
+	func showCart() {
+
+	}
+
+	func showAccount(_ page: AccountCoordinator.Page?) {
 	}
 }
