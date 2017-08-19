@@ -37,7 +37,6 @@
 		D0FF0C4F1EC85C610023F8B8 /* PromoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C4D1EC85C610023F8B8 /* PromoCell.swift */; };
 		D0FF0C501EC85C610023F8B8 /* PromoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */; };
 		D0FF0C521EC85CB30023F8B8 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */; };
-		D0FF0C541EC860D50023F8B8 /* Photos.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0FF0C531EC860D50023F8B8 /* Photos.xcassets */; };
 		D0FF0C561EC8B2B10023F8B8 /* PromoContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C551EC8B2B10023F8B8 /* PromoContainerCell.swift */; };
 		D0FF0C581EC987EE0023F8B8 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C571EC987EE0023F8B8 /* Color.swift */; };
 		D0FF0C5A1ECB91CD0023F8B8 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */; };
@@ -80,7 +79,6 @@
 		D0FF0C4D1EC85C610023F8B8 /* PromoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoCell.swift; sourceTree = "<group>"; };
 		D0FF0C4E1EC85C610023F8B8 /* PromoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromoCell.xib; sourceTree = "<group>"; };
 		D0FF0C511EC85CB30023F8B8 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		D0FF0C531EC860D50023F8B8 /* Photos.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Photos.xcassets; sourceTree = "<group>"; };
 		D0FF0C551EC8B2B10023F8B8 /* PromoContainerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromoContainerCell.swift; sourceTree = "<group>"; };
 		D0FF0C571EC987EE0023F8B8 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Color.swift; path = DataModel/Color.swift; sourceTree = "<group>"; };
 		D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
@@ -232,7 +230,6 @@
 				D04B76661DE5B6D2009F1B9A /* Assets.xcassets */,
 				D0FF0C591ECB91CD0023F8B8 /* Storyboards.swift */,
 				D0FF0C3A1EC855450023F8B8 /* App.storyboard */,
-				D0FF0C531EC860D50023F8B8 /* Photos.xcassets */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -334,7 +331,6 @@
 				D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */,
 				D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */,
 				D0FF0C3B1EC855450023F8B8 /* App.storyboard in Resources */,
-				D0FF0C541EC860D50023F8B8 /* Photos.xcassets in Resources */,
 				D0FF0C501EC85C610023F8B8 /* PromoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
