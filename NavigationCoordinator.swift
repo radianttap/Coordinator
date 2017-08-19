@@ -12,6 +12,12 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 	//	this keeps the references to actual UIViewControllers managed by this Coordinator only
 	open var viewControllers: [UIViewController] = []
 
+	public override init(rootViewController: UINavigationController?) {
+		super.init(rootViewController: rootViewController)
+
+		rootViewController?.delegate = self
+	}
+
 	public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
 		//	get the FROM coordinator in the NC transition
 		guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else {
