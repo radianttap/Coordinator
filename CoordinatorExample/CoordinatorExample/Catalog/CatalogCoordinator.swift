@@ -50,15 +50,11 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 	}
 
 	override func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
-		guard let dataManager = dependencies?.dataManager else { fatalError("Missing DataManager instance") }
-
-//		completion( dataManager.promotedProducts, nil )
+		completion( [], nil )
 	}
 
 	override func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {
-		guard let dataManager = dependencies?.dataManager else { fatalError("Missing DataManager instance") }
-
-//		completion( dataManager.productCategories(season: season), nil )
+		completion( [], nil )
 	}
 }
 
