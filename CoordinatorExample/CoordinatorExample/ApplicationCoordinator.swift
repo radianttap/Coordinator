@@ -11,14 +11,9 @@ import Coordinator
 
 final class AppCoordinator: NavigationCoordinator {
 	var dependencies: AppDependency? {
-		didSet {
-			self.childCoordinators.forEach { (_, coordinator) in
-				if let c = coordinator as? Dependable {
-					c.dependencies = dependencies
-				}
-			}
-		}
+		didSet { updateChildCoordinatorDependencies() }
 	}
+
 
 	override init(rootViewController: UINavigationController? = nil) {
 		let nc: UINavigationController = rootViewController ?? UINavigationController()

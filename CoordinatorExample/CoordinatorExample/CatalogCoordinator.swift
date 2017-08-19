@@ -9,15 +9,9 @@
 import Foundation
 import Coordinator
 
-final class CatalogCoordinator: Coordinator<UINavigationController>, Dependable, UINavigationControllerDelegate {
+final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 	var dependencies: AppDependency? {
-		didSet {
-			self.childCoordinators.forEach { (_, coordinator) in
-				if let c = coordinator as? Dependable {
-					c.dependencies = dependencies
-				}
-			}
-		}
+		didSet { updateChildCoordinatorDependencies() }
 	}
 
 	override init(rootViewController: UINavigationController?) {

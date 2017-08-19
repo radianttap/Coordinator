@@ -7,36 +7,79 @@
 //
 
 import Foundation
+import Coordinator
+import CoreData
+
+
+//	Dummy objects, placeholders for real ones
+final class RTCoreDataStack {}
+final class Keychain {}
 
 //	Dependency carrier through the app,
-//	injected into every Coordinator and UIViewController
-//	Protocol composition approach: http://merowing.info/2017/04/using-protocol-compositon-for-dependency-injection/
+//	injected into every Coordinator
 
-struct AppDependency: UsesNetwork, UsesKeychain, UsesPersistance, UsesWebService, UsesDataManager, UsesAccountManager, UsesCartManager {
-	let networkProvider: Network
-	let apiProvider: WebService
+struct AppDependency {
+	var apiManager: IvkoService?
+	var dataManager: DataManager?
+	var assetManager: AssetManager?
+	var accountManager: AccountManager?
+	var cartManager: CartManager?
 
-	let keychainProvider: Keychain
+	var keychainProvider: Keychain?
+	var persistanceProvider: RTCoreDataStack?
+	var moc: NSManagedObjectContext?
 
-	var persistanceProvider: RTCoreDataStack
-	var dataManager: DataManager
+	init(apiManager: IvkoService? = nil,
+	     persistanceProvider: RTCoreDataStack? = nil,
+	     dataManager: DataManager? = nil,
+	     moc: NSManagedObjectContext? = nil,
+	     assetManager: AssetManager? = nil,
+	     accountManager: AccountManager? = nil,
+	     cartManager: CartManager? = nil,
+	     keychainProvider: Keychain? = nil)
+	{
+		self.accountManager = accountManager
+		self.assetManager = assetManager
+		self.cartManager = cartManager
+		self.apiManager = apiManager
 
-	var accountManager: AccountManager
-	var cartManager: CartManager
+		self.keychainProvider = keychainProvider
+		self.persistanceProvider = persistanceProvider
+		self.dataManager = dataManager
+		self.moc = moc
+	}
+}
 
-	//	dummy init, for simpler demo
-	init() {
-		self.networkProvider = Network()
-		self.apiProvider = WebService()
-		self.keychainProvider = Keychain()
-		self.persistanceProvider = RTCoreDataStack()
-		self.dataManager = DataManager()
-		self.accountManager = AccountManager()
-		self.cartManager = CartManager()
+final class AppDependencyBox: NSObject {
+	let unbox: AppDependency
+	init(_ value: AppDependency) {
+		self.unbox = value
+	}
+}
+
+extension AppDependency {
+	var boxed: AppDependencyBox { return AppDependencyBox(self) }
+}
+
+
+
+
+//	Protocol you need to apply to all the Coordinators,
+//	so the new `dependencies` value is propagated down
+
+protocol NeedsDependency: class {
+	var dependencies: AppDependency? { get set }
+}
+
+extension NeedsDependency where Self: Coordinating {
+	func updateChildCoordinatorDependencies() {
+		self.childCoordinators.forEach { (_, coordinator) in
+			if let c = coordinator as? NeedsDependency {
+				c.dependencies = dependencies
+			}
+		}
 	}
 }
 
 
-protocol Dependable: class {
-	var dependencies: AppDependency? { get set }
-}
+
