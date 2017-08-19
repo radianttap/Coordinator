@@ -9,7 +9,7 @@
 import UIKit
 import Coordinator
 
-final class ApplicationCoordinator: Coordinator<UINavigationController>, Dependable {
+final class AppCoordinator: NavigationCoordinator {
 	var dependencies: AppDependency? {
 		didSet {
 			self.childCoordinators.forEach { (_, coordinator) in
@@ -68,7 +68,7 @@ final class ApplicationCoordinator: Coordinator<UINavigationController>, Dependa
 }
 
 
-fileprivate extension ApplicationCoordinator {
+fileprivate extension AppCoordinator {
 	func loadCatalog() {
 		let cc = CatalogCoordinator(rootViewController: rootViewController)
 		cc.dependencies = dependencies

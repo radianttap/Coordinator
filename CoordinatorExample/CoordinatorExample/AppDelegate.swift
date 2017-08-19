@@ -12,12 +12,12 @@ import Coordinator
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
-	var applicationCoordinator: ApplicationCoordinator!
+	var applicationCoordinator: AppCoordinator!
 
 	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
 		window = UIWindow(frame: UIScreen.main.bounds)
 
-		applicationCoordinator = ApplicationCoordinator()
+		applicationCoordinator = AppCoordinator()
 		window?.rootViewController = applicationCoordinator.rootViewController
 
 		return true
