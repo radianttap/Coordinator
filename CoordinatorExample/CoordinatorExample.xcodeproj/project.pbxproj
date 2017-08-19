@@ -137,9 +137,9 @@
 		D005416F1F4633A200CFF7AE /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				D00541701F46349500CFF7AE /* Swift-Essentials */,
 				D036A9611F48F206001E671B /* Swift-Externals */,
 				D036A95B1F48F206001E671B /* Swift-Network */,
-				D00541701F46349500CFF7AE /* Swift-Essentials */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -196,9 +196,9 @@
 		D005417C1F46349500CFF7AE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D005417D1F46349500CFF7AE /* DequeableView.swift */,
-				D005417E1F46349500CFF7AE /* NibLoadable.swift */,
 				D005417F1F46349500CFF7AE /* ReusableView.swift */,
+				D005417E1F46349500CFF7AE /* NibLoadable.swift */,
+				D005417D1F46349500CFF7AE /* DequeableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
