@@ -9,11 +9,11 @@
 import UIKit
 import TinyConstraints
 
-extension UIViewController {
+public extension UIViewController {
 	///	(view, parentView) -> Void
-	typealias LayoutBlock = (UIView, UIView) -> Void
+	public typealias LayoutBlock = (UIView, UIView) -> Void
 
-	func embed<T>(controller vc: T, into parentView: UIView?, layout: LayoutBlock = {
+	public func embed<T>(controller vc: T, into parentView: UIView?, layout: LayoutBlock = {
 		v, pv in
 		let constraints = v.edges(to: pv, isActive: false)
 		constraints.forEach {
@@ -35,7 +35,7 @@ extension UIViewController {
 		//	somewhere in calling scope
 	}
 
-	func unembed(controller: UIViewController?) {
+	public func unembed(controller: UIViewController?) {
 		guard let controller = controller else { return }
 
 		controller.willMove(toParentViewController: nil)

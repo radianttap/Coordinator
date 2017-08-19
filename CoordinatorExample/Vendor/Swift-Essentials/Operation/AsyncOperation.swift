@@ -8,8 +8,8 @@
 
 import Foundation
 
-class AsyncOperation : Operation {
-	enum State {
+open class AsyncOperation : Operation {
+	public enum State {
 		case ready
 		case executing
 		case finished
@@ -26,7 +26,7 @@ class AsyncOperation : Operation {
 		}
 	}
 
-	fileprivate(set) var state = State.ready {
+	fileprivate(set) public var state = State.ready {
 		willSet {
 			willChangeValue(forKey: state.key)
 			willChangeValue(forKey: newValue.key)
@@ -37,19 +37,19 @@ class AsyncOperation : Operation {
 		}
 	}
 
-	final override var isAsynchronous: Bool {
+	final override public var isAsynchronous: Bool {
 		return true
 	}
 
-	final override var isExecuting: Bool {
+	final override public var isExecuting: Bool {
 		return state == .executing
 	}
 
-	final override var isFinished: Bool {
+	final override public var isFinished: Bool {
 		return state == .finished
 	}
 
-	final override var isReady: Bool {
+	final override public var isReady: Bool {
 		return state == .ready
 	}
 
@@ -64,16 +64,16 @@ class AsyncOperation : Operation {
 	/// You **should** override this method and start and/or do your async work here.
 	///	**Must** call `markFinished()` inside your override
 	///	when async work is done since operation needs to be mark `finished`.
-	func workItem() {
+	open func workItem() {
 		markFinished()
 	}
 
-	required override init() {
+	required override public init() {
 	}
 
 	//MARK: Control
 
-	final override func start() {
+	final override public func start() {
 		if isCancelled {
 			state = .finished
 			return
@@ -82,7 +82,7 @@ class AsyncOperation : Operation {
 		main()
 	}
 
-	final override func main() {
+	final override public func main() {
 		if isCancelled {
 			state = .finished
 			return

@@ -14,11 +14,11 @@
 
 import Foundation
 
-class NotificationToken {
-	let token: NSObjectProtocol
-	let center: NotificationCenter
+public class NotificationToken {
+	public let token: NSObjectProtocol
+	public let center: NotificationCenter
 
-	init(token: NSObjectProtocol, center: NotificationCenter? = nil) {
+	public init(token: NSObjectProtocol, center: NotificationCenter? = nil) {
 		self.token = token
 		self.center = center ?? NotificationCenter.default
 	}
@@ -28,12 +28,12 @@ class NotificationToken {
 	}
 }
 
-struct NotificationDescriptor<A> {
-	let name: Notification.Name
+public struct NotificationDescriptor<A> {
+	public let name: Notification.Name
 }
 
-extension NotificationCenter {
-	func addObserver<A>(for descriptor: NotificationDescriptor<A>,
+public extension NotificationCenter {
+	public func addObserver<A>(for descriptor: NotificationDescriptor<A>,
 	                 queue: OperationQueue? = nil,
 	                 using block: @escaping (A) -> ()) -> NotificationToken {
 
@@ -42,7 +42,7 @@ extension NotificationCenter {
 		}), center: self)
 	}
 
-	func post<A>(_ descriptor: NotificationDescriptor<A>,
+	public func post<A>(_ descriptor: NotificationDescriptor<A>,
 	          value: A) {
 
 		post(name: descriptor.name, object: value)

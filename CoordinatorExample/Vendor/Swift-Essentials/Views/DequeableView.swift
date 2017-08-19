@@ -9,23 +9,23 @@
 import UIKit
 
 
-extension UICollectionView {
+public extension UICollectionView {
 
 	//	register for the Class-based cell
-	func register<T: UICollectionViewCell>(_: T.Type)
+	public func register<T: UICollectionViewCell>(_: T.Type)
 		where T: ReusableView
 	{
 		register(T.self, forCellWithReuseIdentifier: T.reuseIdentifier)
 	}
 
 	//	register for the Nib-based cell
-	func register<T: UICollectionViewCell>(_: T.Type)
+	public func register<T: UICollectionViewCell>(_: T.Type)
 		where T:NibReusableView
 	{
 		register(T.nib, forCellWithReuseIdentifier: T.reuseIdentifier)
 	}
 
-	func dequeueReusableCell<T: UICollectionViewCell>(forIndexPath indexPath: IndexPath) -> T
+	public func dequeueReusableCell<T: UICollectionViewCell>(forIndexPath indexPath: IndexPath) -> T
 		where T:ReusableView
 	{
 		//	this deque and cast can fail if you forget to register the proper cell
@@ -37,20 +37,20 @@ extension UICollectionView {
 	}
 
 	//	register for the Class-based supplementary view
-	func register<T: UICollectionReusableView>(_: T.Type, kind: String)
+	public func register<T: UICollectionReusableView>(_: T.Type, kind: String)
 		where T:ReusableView
 	{
 		register(T.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: T.reuseIdentifier)
 	}
 
 	//	register for the Nib-based supplementary view
-	func register<T: UICollectionReusableView>(_: T.Type, kind: String)
+	public func register<T: UICollectionReusableView>(_: T.Type, kind: String)
 		where T:NibReusableView
 	{
 		register(T.nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: T.reuseIdentifier)
 	}
 
-	func dequeueReusableView<T: UICollectionReusableView>(kind: String, atIndexPath indexPath: IndexPath) -> T
+	public func dequeueReusableView<T: UICollectionReusableView>(kind: String, atIndexPath indexPath: IndexPath) -> T
 		where T:ReusableView
 	{
 		//	this deque and cast can fail if you forget to register the proper cell
@@ -63,23 +63,23 @@ extension UICollectionView {
 }
 
 
-extension UITableView {
+public extension UITableView {
 
 	//	register for the Class-based cell
-	func register<T: UITableViewCell>(_: T.Type)
+	public func register<T: UITableViewCell>(_: T.Type)
 		where T: ReusableView
 	{
 		register(T.self, forCellReuseIdentifier: T.reuseIdentifier)
 	}
 
 	//	register for the Nib-based cell
-	func register<T: UITableViewCell>(_: T.Type)
+	public func register<T: UITableViewCell>(_: T.Type)
 		where T:NibReusableView
 	{
 		register(T.nib, forCellReuseIdentifier: T.reuseIdentifier)
 	}
 
-	func dequeueReusableCell<T: UITableViewCell>(forIndexPath indexPath: IndexPath) -> T
+	public func dequeueReusableCell<T: UITableViewCell>(forIndexPath indexPath: IndexPath) -> T
 		where T:ReusableView
 	{
 		guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
@@ -89,20 +89,20 @@ extension UITableView {
 	}
 
 	//	register for the Class-based header/footer view
-	func register<T: UITableViewHeaderFooterView>(_: T.Type)
+	public func register<T: UITableViewHeaderFooterView>(_: T.Type)
 		where T:ReusableView
 	{
 		register(T.self, forHeaderFooterViewReuseIdentifier: T.reuseIdentifier)
 	}
 
 	//	register for the Nib-based header/footer view
-	func register<T: UITableViewHeaderFooterView>(_: T.Type)
+	public func register<T: UITableViewHeaderFooterView>(_: T.Type)
 		where T:NibReusableView
 	{
 		register(T.self, forHeaderFooterViewReuseIdentifier: T.reuseIdentifier)
 	}
 
-	func dequeueReusableView<T: UITableViewHeaderFooterView>() -> T?
+	public func dequeueReusableView<T: UITableViewHeaderFooterView>() -> T?
 		where T:ReusableView
 	{
 		let v = dequeueReusableHeaderFooterView(withIdentifier: T.reuseIdentifier) as? T

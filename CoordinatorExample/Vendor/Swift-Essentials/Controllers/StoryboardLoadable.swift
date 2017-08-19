@@ -9,29 +9,29 @@
 import UIKit
 
 
-protocol StoryboardLoadable {
+public protocol StoryboardLoadable {
 	static var storyboardName: String { get }
 	static var storyboardIdentifier: String { get }
 }
 
 
-extension StoryboardLoadable where Self: UIViewController {
+public extension StoryboardLoadable where Self: UIViewController {
 
-	static var storyboardName: String {
+	public static var storyboardName: String {
 		return String(describing: self)
 	}
 
-	static var storyboardIdentifier: String {
+	public static var storyboardIdentifier: String {
 		return String(describing: self)
 	}
 
-	static func instantiate(fromStoryboardNamed name: String? = nil) -> Self {
+	public static func instantiate(fromStoryboardNamed name: String? = nil) -> Self {
 		let sb = name ?? self.storyboardName
 		let storyboard = UIStoryboard(name: sb, bundle: nil)
 		return instantiate(fromStoryboard: storyboard)
 	}
 
-	static func instantiate(fromStoryboard storyboard: UIStoryboard) -> Self {
+	public static func instantiate(fromStoryboard storyboard: UIStoryboard) -> Self {
 		let identifier = self.storyboardIdentifier
 		guard let vc = storyboard.instantiateViewController(withIdentifier: identifier) as? Self else {
 			fatalError("Failed to instantiate view controller with identifier=\(identifier) from storyboard \( storyboard )")
@@ -40,13 +40,13 @@ extension StoryboardLoadable where Self: UIViewController {
 
 	}
 	
-	static func initial(fromStoryboardNamed name: String? = nil) -> Self {
+	public static func initial(fromStoryboardNamed name: String? = nil) -> Self {
 		let sb = name ?? self.storyboardName
 		let storyboard = UIStoryboard(name: sb, bundle: nil)
 		return initial(fromStoryboard: storyboard)
 	}
 
-	static func initial(fromStoryboard storyboard: UIStoryboard) -> Self {
+	public static func initial(fromStoryboard storyboard: UIStoryboard) -> Self {
 		guard let vc = storyboard.instantiateInitialViewController() as? Self else {
 			fatalError("Failed to instantiate initial view controller from storyboard named \( storyboard )")
 		}
