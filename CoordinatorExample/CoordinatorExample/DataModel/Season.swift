@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Marshal
 
 final class Season: NSObject {
 	let id: String
@@ -19,4 +20,14 @@ final class Season: NSObject {
 		self.name = name
 		self.id = id
 	}
+
+	init(object: MarshaledObject) throws {
+		id = try object.value(for: "id")
+		name = try object.value(for: "name")
+
+		categories = try object.value(for: "categories")
+		themes = try object.value(for: "themes")
+	}
 }
+
+extension Season: Unmarshaling {}

@@ -13,6 +13,8 @@ enum DataError: Error {
 	case internalError
 	case insufficientInput
 	case missingData
+
+	case unknownColorCode(Int)
 }
 
 
@@ -25,6 +27,8 @@ extension DataError: CustomStringConvertible {
 			return "Insufficient input parameters"
 		case .missingData:
 			return "No data available at the moment"
+		case .unknownColorCode(let code):
+			return "Unhandled product color code: \( code )"
 		}
 	}
 }

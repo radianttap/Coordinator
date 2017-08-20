@@ -14,6 +14,24 @@ struct Color {
 }
 
 extension Color {
+	init(colorCode: Int) throws {
+		switch colorCode {
+		case 11: self = Color.c11
+		case 18: self = Color.c18
+		case 19: self = Color.c19
+		case 25: self = Color.c25
+		case 29: self = Color.c29
+		case 35: self = Color.c35
+		case 39: self = Color.c39
+		case 40: self = Color.c40
+		case 69: self = Color.c69
+		case 72: self = Color.c72
+		default:
+			throw DataError.unknownColorCode(colorCode)
+		}
+	}
+
+
 	static let c11: Color = {
 		return Color(name: "Off-White", code: 11)
 	}()

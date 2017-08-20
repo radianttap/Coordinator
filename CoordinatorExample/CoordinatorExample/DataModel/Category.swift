@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Marshal
 
 final class Category: NSObject {
 	var name: String
@@ -16,4 +17,14 @@ final class Category: NSObject {
 	init(name: String) {
 		self.name = name
 	}
+
+	init(object: MarshaledObject) throws {
+		name = try object.value(for: "name")
+
+		if let arr: [Product] = try? object.value(for: "products") {
+			products = arr
+		}
+	}
 }
+
+extension Category: Unmarshaling {}
