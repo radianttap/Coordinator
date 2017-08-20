@@ -24,6 +24,7 @@ struct AppDependency {
 	var assetManager: AssetManager?
 	var accountManager: AccountManager?
 	var cartManager: CartManager?
+	var catalogManager: CatalogManager?
 
 	var keychainProvider: Keychain?
 	var persistanceProvider: RTCoreDataStack?
@@ -36,11 +37,13 @@ struct AppDependency {
 	     assetManager: AssetManager? = nil,
 	     accountManager: AccountManager? = nil,
 	     cartManager: CartManager? = nil,
+	     catalogManager: CatalogManager? = nil,
 	     keychainProvider: Keychain? = nil)
 	{
 		self.accountManager = accountManager
 		self.assetManager = assetManager
 		self.cartManager = cartManager
+		self.catalogManager = catalogManager
 		self.apiManager = apiManager
 
 		self.keychainProvider = keychainProvider
