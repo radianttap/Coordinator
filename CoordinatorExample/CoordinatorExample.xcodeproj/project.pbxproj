@@ -23,6 +23,7 @@
 		D02921D11F48FB540010B2B6 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D01F48FB540010B2B6 /* ProductViewController.swift */; };
 		D02921D31F48FED40010B2B6 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D21F48FED40010B2B6 /* AccountCoordinator.swift */; };
 		D02921D51F4901640010B2B6 /* CartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D41F4901640010B2B6 /* CartCoordinator.swift */; };
+		D02921D71F4906790010B2B6 /* IvkoServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D61F4906790010B2B6 /* IvkoServiceError.swift */; };
 		D036A9541F48EE12001E671B /* AssetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036A9521F48EE12001E671B /* AssetManager.swift */; };
 		D036A9551F48EE12001E671B /* IvkoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036A9531F48EE12001E671B /* IvkoService.swift */; };
 		D036A9571F48EE28001E671B /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D036A9561F48EE28001E671B /* CartManager.swift */; };
@@ -78,6 +79,7 @@
 		D02921D01F48FB540010B2B6 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductViewController.swift; path = Catalog/ProductViewController.swift; sourceTree = "<group>"; };
 		D02921D21F48FED40010B2B6 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
 		D02921D41F4901640010B2B6 /* CartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCoordinator.swift; sourceTree = "<group>"; };
+		D02921D61F4906790010B2B6 /* IvkoServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IvkoServiceError.swift; sourceTree = "<group>"; };
 		D036A9521F48EE12001E671B /* AssetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssetManager.swift; path = CoordinatorExample/IvkoService/AssetManager.swift; sourceTree = SOURCE_ROOT; };
 		D036A9531F48EE12001E671B /* IvkoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IvkoService.swift; path = CoordinatorExample/IvkoService/IvkoService.swift; sourceTree = SOURCE_ROOT; };
 		D036A9561F48EE28001E671B /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				D036A9521F48EE12001E671B /* AssetManager.swift */,
 				D036A9531F48EE12001E671B /* IvkoService.swift */,
+				D02921D61F4906790010B2B6 /* IvkoServiceError.swift */,
 			);
 			path = IvkoService;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */,
 				D0FF0C351EC6D7FF0023F8B8 /* Season.swift in Sources */,
 				D0FF0C4F1EC85C610023F8B8 /* PromoCell.swift in Sources */,
+				D02921D71F4906790010B2B6 /* IvkoServiceError.swift in Sources */,
 				D036A9551F48EE12001E671B /* IvkoService.swift in Sources */,
 				D036A96C1F48F206001E671B /* Marshal-Extensions.swift in Sources */,
 				D02921D51F4901640010B2B6 /* CartCoordinator.swift in Sources */,
