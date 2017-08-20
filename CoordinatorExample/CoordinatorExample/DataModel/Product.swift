@@ -26,6 +26,7 @@ final class Product: NSObject {
 
 	weak var category: Category?
 	weak var theme: Theme?
+	weak var season: Season?
 
 	init(name: String, styleCode: String) {
 		self.name = name
@@ -50,8 +51,6 @@ final class Product: NSObject {
 		promoImagePath = try? object.value(for: "promoImage")
 		gridImagePath = try? object.value(for: "gridImage")
 		imagePaths = (try? object.value(for: "images")) ?? []
-
-		category = try? object.value(for: "category")
 	}
 }
 
