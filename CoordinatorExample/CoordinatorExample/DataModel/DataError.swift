@@ -7,13 +7,15 @@
 //
 
 import Foundation
-
+import Marshal
 
 enum DataError: Error {
 	case internalError
 	case insufficientInput
 	case missingData
 
+	case ivkoServiceError(IvkoServiceError)
+	case marshalError(MarshalError)
 	case unknownColorCode(Int)
 }
 
@@ -29,6 +31,8 @@ extension DataError: CustomStringConvertible {
 			return "No data available at the moment"
 		case .unknownColorCode(let code):
 			return "Unhandled product color code: \( code )"
+		case .ivkoServiceError, .marshalError:
+			return "Internal error"
 		}
 	}
 }
