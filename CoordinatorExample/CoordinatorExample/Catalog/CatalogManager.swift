@@ -171,13 +171,15 @@ fileprivate extension CatalogManager {
 		lastUpdatedProducts = Date()
 
 		dataManager.fetchProducts {
-			[unowned self] set, dataError in
+			[unowned self] seasons, cats, dataError in
 			if let dataError = dataError {
 				callback(false, dataError)
 				return
 			}
 
-			self.seasons = set
+			self.categories = cats
+			self.seasons = seasons
+
 			callback(true, nil)
 		}
 	}

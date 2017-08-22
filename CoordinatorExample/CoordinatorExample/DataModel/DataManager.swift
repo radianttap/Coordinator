@@ -23,17 +23,17 @@ final class DataManager {
 
 
 extension DataManager {
-	func fetchProducts(callback: @escaping (Set<Season>, DataError?) -> Void) {
+	func fetchProducts(callback: @escaping (Set<Season>, Set<Category>, DataError?) -> Void) {
 		let path = IvkoService.Path.products
 		apiManager.call(path: path) {
 			json, serviceError in
 
 			if let serviceError = serviceError {
-				callback( [], DataError.ivkoServiceError(serviceError) )
+				callback( [], [], DataError.ivkoServiceError(serviceError) )
 				return
 			}
 			guard let result = json else {
-				callback( [], DataError.missingData )
+				callback( [], [], DataError.missingData )
 				return
 			}
 
@@ -84,9 +84,9 @@ extension DataManager {
 					s.themes.forEach({ $0.season = s })
 				})
 
-				callback( seasons, nil )
+				callback( seasons, categories, nil )
 			} catch let marshalErr {
-				callback( [], DataError.marshalError(marshalErr as! MarshalError) )
+				callback( [], [], DataError.marshalError(marshalErr as! MarshalError) )
 			}
 		}
 	}
