@@ -15,6 +15,7 @@ final class CatalogManager {
 		self.dataManager = dataManager
 	}
 
+	fileprivate(set) var activeSeason: Season?
 	fileprivate(set) var seasons: [Season] = []
 	fileprivate(set) var themes: [Theme] = []
 	fileprivate(set) var categories: [Category] = []
@@ -24,9 +25,25 @@ final class CatalogManager {
 extension CatalogManager {
 	//	MARK:- Public API
 	//	These methods should be custom tailored to read specific data subsets,
-	//	as required for specific views
+	//	as required for specific views. These will be called by Coordinators,
+	//	then routed into UIViewControllers
+
+	func seasons(callback: @escaping ([Season], DataError?) -> Void) {
+
+	}
+
+	func categories(for season: Season?, callback: @escaping ([Category], DataError?) -> Void) {
+		let s = season ?? activeSeason
+
+	}
+
+	func themes(for season: Season?, callback: @escaping ([Theme], DataError?) -> Void) {
+		let s = season ?? activeSeason
+
+	}
 
 	func products(for season: Season?, callback: @escaping ([Product], DataError?) -> Void) {
+		let s = season ?? activeSeason
 
 	}
 
