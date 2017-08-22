@@ -39,11 +39,13 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	override func start(with completion: @escaping (Coordinator<UINavigationController>) -> Void = {_ in}) {
 		//	prepare managers
 		let apiManager = IvkoService.shared
-		dataManager = DataManager(apiManager: apiManager)
+		let assetManager = AssetManager.shared
+		dataManager = DataManager(apiManager: apiManager, assetManager: assetManager)
 		catalogManager = CatalogManager(dataManager: dataManager)
 
 		dependencies = AppDependency(apiManager: apiManager,
 		                             dataManager: dataManager,
+		                             assetManager: assetManager,
 		                             catalogManager: catalogManager)
 		//	finally ready
 		super.start(with: completion)

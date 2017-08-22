@@ -11,9 +11,11 @@ import Marshal
 
 final class DataManager {
 	let apiManager: IvkoService
+	let assetManager: AssetManager
 
-	init(apiManager: IvkoService) {
+	init(apiManager: IvkoService, assetManager: AssetManager) {
 		self.apiManager = apiManager
+		self.assetManager = assetManager
 
 		//	apply configuration
 		//	setup in-memory data cache
@@ -26,7 +28,7 @@ extension DataManager {
 	func fetchProducts(callback: @escaping (Set<Season>, Set<Category>, DataError?) -> Void) {
 		let path = IvkoService.Path.products
 		apiManager.call(path: path) {
-			json, serviceError in
+			[unowned self] json, serviceError in
 
 			if let serviceError = serviceError {
 				callback( [], [], DataError.ivkoServiceError(serviceError) )
@@ -39,6 +41,9 @@ extension DataManager {
 
 			do {
 				let products: Set<Product> = try result.value(for: "products")
+				products.forEach({
+					$0.assetManager = self.assetManager	//	need to image URLs
+				})
 
 				let jsonObjects: [JSON] = try result.value(for: "products")
 

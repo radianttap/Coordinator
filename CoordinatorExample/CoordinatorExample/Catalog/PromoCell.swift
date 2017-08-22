@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class PromoCell: UICollectionViewCell, NibReusableView {
 
@@ -42,8 +43,8 @@ extension PromoCell {
 	func configure(with product: Product) {
 		self.product = product
 
-		if let path = product.promoImagePath, let img = UIImage(named: path) {
-			photoView.image = img
+		if let url = product.promoImageURL {
+			photoView.kf.setImage(with: url)
 		}
 
 		nameLabel.text = product.name

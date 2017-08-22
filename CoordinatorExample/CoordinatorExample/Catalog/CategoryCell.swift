@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class CategoryCell: UICollectionViewCell, ReusableView {
     
@@ -41,8 +42,8 @@ extension CategoryCell {
 		nameLabel.text = category.name
 
 		guard let product = category.products.first else { return }
-		if let path = product.gridImagePath, let img = UIImage(named: path) {
-			photoView.image = img
+		if let url = product.gridImageURL {
+			photoView.kf.setImage(with: url)
 		}
 	}
 }

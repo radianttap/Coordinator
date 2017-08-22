@@ -29,6 +29,7 @@ final class Product: NSObject {
 	weak var category: Category?
 	weak var theme: Theme?
 	weak var season: Season?
+	weak var assetManager: AssetManager?
 
 	init(name: String, styleCode: String, categoryName: String) {
 		self.name = name
@@ -66,6 +67,20 @@ extension Product {
 	}
 	var themeCode: String {
 		return styleCode.substring(to: Theme.styleCodeIndex)
+	}
+
+	var promoImageURL: URL? {
+		guard let path = promoImagePath else { return nil }
+		return assetManager?.url(forPromoPath: path)
+	}
+
+	var gridImageURL: URL? {
+		guard let path = gridImagePath else { return nil }
+		return assetManager?.url(forProductPath: path)
+	}
+
+	var imageURLs: [URL] {
+		return imagePaths.flatMap({ assetManager?.url(forProductPath: $0) })
 	}
 }
 
