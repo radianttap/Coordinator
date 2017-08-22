@@ -13,14 +13,25 @@ final class CatalogManager {
 
 	init(dataManager: DataManager) {
 		self.dataManager = dataManager
+
+		fetchProducts()
+		fetchPromotions()
 	}
 
 	fileprivate(set) var activeSeason: Season?
-	fileprivate(set) var seasons: Set<Season> = []
+
+	fileprivate(set) var seasons: Set<Season> = [] {
+		didSet {
+			if activeSeason == nil { activeSeason = orderedSeasons.first }
+		}
+	}
+
 	fileprivate(set) var categories: Set<Category> = []
+
 	fileprivate(set) var promotedProducts: [Product] = []
 
-	fileprivate var lastUpdated: Date?
+	fileprivate var lastUpdatedProducts: Date?
+	fileprivate var lastUpdatedPromotions: Date?
 }
 
 extension CatalogManager {
@@ -135,7 +146,7 @@ fileprivate extension CatalogManager {
 
 
 	var orderedSeasons: [Season] {
-		return seasons.sorted(by: { $0.id < $1.id })
+		return seasons.sorted(by: { $0.id > $1.id })
 	}
 
 
@@ -151,11 +162,13 @@ fileprivate extension CatalogManager {
 	///	Fetch an update on app start + at least once every day.
 	///
 	///	Callback first param is `true` if data set is successfully refreshed.
-	func fetchProducts(callback: @escaping (Bool, DataError?) -> Void) {
-		if let lastUpdated = lastUpdated, lastUpdated.isLaterThan(date: Date().subtract(days: 1)) {
+	func fetchProducts(callback: @escaping (Bool, DataError?) -> Void = {_, _ in}) {
+		if let lastUpdated = lastUpdatedProducts, lastUpdated.isLaterThan(date: Date().subtract(days: 1)) {
 			callback(false, nil)
 			return
 		}
+
+		lastUpdatedProducts = Date()
 
 		dataManager.fetchProducts {
 			[unowned self] set, dataError in
@@ -170,11 +183,13 @@ fileprivate extension CatalogManager {
 	}
 
 
-	func fetchPromotions(callback: @escaping (Bool, DataError?) -> Void) {
-		if let lastUpdated = lastUpdated, lastUpdated.isLaterThan(date: Date().subtract(hours: 2)) {
+	func fetchPromotions(callback: @escaping (Bool, DataError?) -> Void = {_, _ in}) {
+		if let lastUpdated = lastUpdatedPromotions, lastUpdated.isLaterThan(date: Date().subtract(hours: 2)) {
 			callback(false, nil)
 			return
 		}
+
+		lastUpdatedPromotions = Date()
 
 		dataManager.fetchPromotedProducts {
 			[unowned self] arr, dataError in

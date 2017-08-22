@@ -23,6 +23,11 @@ extension UIResponder {
 		coordinatingResponder?.fetchPromotedProducts(sender: sender, completion: completion)
 	}
 
+
+	func fetchActiveSeason(sender: Any?, completion: @escaping (Season?, Error?) -> Void ) {
+		coordinatingResponder?.fetchActiveSeason(sender: sender, completion: completion)
+	}
+
 	/// Returns the list of categories in given season. If `season` is `nil`,
 	///	it will return categories for the latest season.
 	///

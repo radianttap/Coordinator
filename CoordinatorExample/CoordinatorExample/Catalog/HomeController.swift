@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyTimer
 
 final class HomeController: UIViewController, StoryboardLoadable {
 
@@ -38,6 +39,11 @@ final class HomeController: UIViewController, StoryboardLoadable {
 			collectionView.reloadData()
 		}
 	}
+
+
+	//	Timers
+
+	var timer: Timer?
 }
 
 //	MARK: View lifecycle
@@ -95,10 +101,31 @@ fileprivate extension HomeController {
 			}
 		}
 
+		//	this below could be done better
+
 		guard let season = season else {
 			self.categories = []
+
+			fetchActiveSeason(sender: self, completion: {
+				[weak self] s, error in
+				guard let `self` = self else { return }
+				DispatchQueue.main.async {
+					if let s = s {
+						self.season = s
+						self.updateData()
+						return
+					}
+
+					//	try again in half a sec
+					self.timer = Timer.after(0.5, {
+						[weak self] in
+						self?.updateData()
+					})
+				}
+			})
 			return
 		}
+
 		fetchProductCategories(season: season, sender: self) {
 			[weak self] arr, _ in
 			guard let `self` = self else { return }

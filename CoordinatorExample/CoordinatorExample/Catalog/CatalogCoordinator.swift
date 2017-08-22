@@ -57,12 +57,20 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 		manager.promotedProducts(callback: completion)
 	}
 
-	override func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {
+	override func fetchProductCategories(season: Season?, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {
 		guard let manager = dependencies?.catalogManager else {
 			completion( [], nil )
 			return
 		}
 		manager.categories(for: season, callback: completion)
+	}
+
+	override func fetchActiveSeason(sender: Any?, completion: @escaping (Season?, Error?) -> Void) {
+		guard let manager = dependencies?.catalogManager else {
+			completion( nil, nil )
+			return
+		}
+		completion(manager.activeSeason, nil)
 	}
 }
 
@@ -73,7 +81,7 @@ fileprivate extension CatalogCoordinator {
 		switch p {
 		case .home:
 			let vc = HomeController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
-//			vc.season = dataManager.activeSeason
+			vc.season = dependencies?.catalogManager?.activeSeason
 			root(vc)
 
 		case .product(let product):
