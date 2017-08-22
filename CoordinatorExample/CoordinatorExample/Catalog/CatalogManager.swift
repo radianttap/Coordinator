@@ -9,7 +9,7 @@
 import Foundation
 
 final class CatalogManager {
-	private var dataManager: DataManager
+	fileprivate var dataManager: DataManager
 
 	init(dataManager: DataManager) {
 		self.dataManager = dataManager
@@ -22,11 +22,44 @@ final class CatalogManager {
 }
 
 extension CatalogManager {
-	func fetchProducts(for season: Season?, callback: @escaping ([Product], DataError?) -> Void) {
+	//	MARK:- Public API
+	//	These methods should be custom tailored to read specific data subsets,
+	//	as required for specific views
+
+	func products(for season: Season?, callback: @escaping ([Product], DataError?) -> Void) {
 
 	}
 
-	func fetchPromotedProducts(callback: @escaping ([Product], DataError?) -> Void) {
+	func promotedProducts(callback: @escaping ([Product], DataError?) -> Void) {
 
+	}
+}
+
+
+fileprivate extension CatalogManager {
+	//	MARK:- Private API
+	//	These are thin wrappers around DataManager‘s similarly named methods.
+	//	They are used to process received data and splice and dice them as needed,
+	//	into business logic that only CatalogManager knows about
+
+
+	///	`Product` set comes from API as dense structure with information about the product itself,
+	///	but also the season/theme/category it belongs to. Those are all parent relationships.
+	///
+	///	It‘s identifier is `styleCode`.
+	///
+	///	First two characters are code for season.
+	///	Third character is code for (marketing) theme (or first 3 combined).
+	///	The rest of the characters complete the product code.
+	func fetchProducts(callback: @escaping ([Product], DataError?) -> Void) {
+		dataManager.fetchProducts {
+			[unowned self] arr, dataError in
+			if let dataError = dataError {
+				callback( [], dataError )
+				return
+			}
+
+
+		}
 	}
 }
