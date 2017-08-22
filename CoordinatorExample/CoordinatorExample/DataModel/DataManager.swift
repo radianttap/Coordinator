@@ -23,7 +23,7 @@ final class DataManager {
 
 
 extension DataManager {
-	func fetchProducts(callback: @escaping ([Product], DataError?) -> Void) {
+	func fetchProducts(callback: @escaping (Set<Season>, DataError?) -> Void) {
 		let path = IvkoService.Path.products
 		apiManager.call(path: path) {
 			json, serviceError in
@@ -38,8 +38,27 @@ extension DataManager {
 			}
 
 			do {
-				let products: [Product] = try result.value(for: "products")
-				callback( products, nil )
+				let products: Set<Product> = try result.value(for: "products")
+				let seasons: Set<Season> = try result.value(for: "products")
+				let themes: Set<Theme> = try result.value(for: "products")
+				let categories: Set<Category> = try result.value(for: "products")
+
+				categories.forEach({ c in
+					c.products = Set(products.filter({ $0.categoryName == c.name }))
+					c.products.forEach({ $0.category = c })
+				})
+
+				themes.forEach({ t in
+					t.products = Set(products.filter({ $0.themeCode == t.id }))
+					t.products.forEach({ $0.theme = t })
+				})
+
+				seasons.forEach({ s in
+					s.themes = Set(themes.filter({ $0.seasonCode == s.id }))
+					s.themes.forEach({ $0.season = s })
+				})
+
+				callback( seasons, nil )
 			} catch let marshalErr {
 				callback( [], DataError.marshalError(marshalErr as! MarshalError) )
 			}

@@ -13,6 +13,8 @@ final class Product: NSObject {
 	let name: String
 	let styleCode: String
 
+	let categoryName: String
+
 	var desc: String?
 	var price: Price?
 	var careInstructions: String?
@@ -28,14 +30,16 @@ final class Product: NSObject {
 	weak var theme: Theme?
 	weak var season: Season?
 
-	init(name: String, styleCode: String) {
+	init(name: String, styleCode: String, categoryName: String) {
 		self.name = name
 		self.styleCode = styleCode
+		self.categoryName = categoryName
 	}
 
 	init(object: MarshaledObject) throws {
 		name = try object.value(for: "name")
 		styleCode = try object.value(for: "style")
+		categoryName = try object.value(for: "category")
 
 		desc = try? object.value(for: "desc")
 		price = try? object.value(for: "price")
@@ -55,3 +59,13 @@ final class Product: NSObject {
 }
 
 extension Product: Unmarshaling {}
+
+extension Product {
+	var seasonCode: String {
+		return styleCode.substring(to: Season.styleCodeIndex)
+	}
+	var themeCode: String {
+		return styleCode.substring(to: Theme.styleCodeIndex)
+	}
+}
+

@@ -54,7 +54,7 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 			completion( [], nil )
 			return
 		}
-		manager.fetchPromotedProducts(callback: completion)
+		manager.promotedProducts(callback: completion)
 	}
 
 	override func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {

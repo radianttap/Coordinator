@@ -16,10 +16,11 @@ final class CatalogManager {
 	}
 
 	fileprivate(set) var activeSeason: Season?
-	fileprivate(set) var seasons: [Season] = []
-	fileprivate(set) var themes: [Theme] = []
-	fileprivate(set) var categories: [Category] = []
+	fileprivate(set) var seasons: Set<Season> = []
+	fileprivate(set) var categories: Set<Category> = []
 	fileprivate(set) var promotedProducts: [Product] = []
+
+	fileprivate var lastUpdated: Date?
 }
 
 extension CatalogManager {
@@ -28,26 +29,87 @@ extension CatalogManager {
 	//	as required for specific views. These will be called by Coordinators,
 	//	then routed into UIViewControllers
 
-	func seasons(callback: @escaping ([Season], DataError?) -> Void) {
+	func seasons(callback: @escaping ([Season], CatalogError?) -> Void) {
+		callback( orderedSeasons, nil )
 
+		fetchProducts {
+			[unowned self] _, dataError in
+			if let dataError = dataError {
+				callback( self.orderedSeasons, .dataError(dataError) )
+				return
+			}
+			callback( self.orderedSeasons, nil )
+		}
 	}
 
-	func categories(for season: Season?, callback: @escaping ([Category], DataError?) -> Void) {
-		let s = season ?? activeSeason
+	func categories(for season: Season?, callback: @escaping ([Category], CatalogError?) -> Void) {
+		guard let s = season ?? activeSeason else {
+			callback( [], .missingSeason )
+			return
+		}
 
+		callback( s.orderedCategories, nil )
+
+		fetchProducts {
+			_, dataError in
+			if let dataError = dataError {
+				callback( s.orderedCategories, .dataError(dataError) )
+				return
+			}
+			callback( s.orderedCategories, nil )
+		}
 	}
 
-	func themes(for season: Season?, callback: @escaping ([Theme], DataError?) -> Void) {
-		let s = season ?? activeSeason
+	func themes(for season: Season?, callback: @escaping ([Theme], CatalogError?) -> Void) {
+		guard let s = season ?? activeSeason else {
+			callback( [], .missingSeason )
+			return
+		}
 
+		callback( s.orderedThemes, nil )
+
+		fetchProducts {
+			_, dataError in
+			if let dataError = dataError {
+				callback( s.orderedThemes, .dataError(dataError) )
+				return
+			}
+			callback( s.orderedThemes, nil )
+		}
 	}
 
-	func products(for season: Season?, callback: @escaping ([Product], DataError?) -> Void) {
-		let s = season ?? activeSeason
+	func products(for season: Season?, theme: Theme?, callback: @escaping ([Product], CatalogError?) -> Void) {
+		guard let s = season ?? activeSeason else {
+			callback( [], .missingSeason )
+			return
+		}
 
+		let products: [Product]
+		if let theme = theme {
+			products = theme.orderedProducts
+		} else {
+			products = s.orderedProducts
+		}
+		callback( products, nil )
+
+		fetchProducts {
+			_, dataError in
+			if let dataError = dataError {
+				callback( products, .dataError(dataError) )
+				return
+			}
+
+			let products: [Product]
+			if let theme = theme {
+				products = theme.orderedProducts
+			} else {
+				products = s.orderedProducts
+			}
+			callback( products, nil )
+		}
 	}
 
-	func promotedProducts(callback: @escaping ([Product], DataError?) -> Void) {
+	func promotedProducts(callback: @escaping ([Product], CatalogError?) -> Void) {
 
 	}
 }
@@ -60,6 +122,11 @@ fileprivate extension CatalogManager {
 	//	into business logic that only CatalogManager knows about
 
 
+	var orderedSeasons: [Season] {
+		return seasons.sorted(by: { $0.id < $1.id })
+	}
+
+
 	///	`Product` set comes from API as dense structure with information about the product itself,
 	///	but also the season/theme/category it belongs to. Those are all parent relationships.
 	///
@@ -68,15 +135,26 @@ fileprivate extension CatalogManager {
 	///	First two characters are code for season.
 	///	Third character is code for (marketing) theme (or first 3 combined).
 	///	The rest of the characters complete the product code.
-	func fetchProducts(callback: @escaping ([Product], DataError?) -> Void) {
+	///
+	///	Fetch an update on app start + at least once every day.
+	///
+	///	Callback first param is `true` if data set is successfully refreshed.
+	func fetchProducts(callback: @escaping (Bool, DataError?) -> Void) {
+		if let lastUpdated = lastUpdated, lastUpdated.isLaterThan(date: Date().subtract(days: 1)) {
+			callback(false, nil)
+			return
+		}
+
 		dataManager.fetchProducts {
-			[unowned self] arr, dataError in
+			[unowned self] set, dataError in
 			if let dataError = dataError {
-				callback( [], dataError )
+				callback(false, dataError)
 				return
 			}
 
-
+			self.seasons = set
+			callback(true, nil)
 		}
 	}
+
 }

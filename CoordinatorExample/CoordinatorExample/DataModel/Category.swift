@@ -12,19 +12,25 @@ import Marshal
 final class Category: NSObject {
 	var name: String
 
-	var products: [Product] = []
+	var products: Set<Product> = []
 
 	init(name: String) {
 		self.name = name
 	}
 
 	init(object: MarshaledObject) throws {
-		name = try object.value(for: "name")
+		name = try object.value(for: "category")
 
 		if let arr: [Product] = try? object.value(for: "products") {
-			products = arr
+			products = Set(arr)
 		}
 	}
 }
 
 extension Category: Unmarshaling {}
+
+extension Category {
+	var orderedProducts: [Product] {
+		return products.sorted(by: { $0.styleCode < $1.styleCode })
+	}
+}

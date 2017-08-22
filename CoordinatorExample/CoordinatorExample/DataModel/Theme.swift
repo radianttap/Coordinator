@@ -13,7 +13,8 @@ final class Theme: NSObject {
 	let id: String
 	let name: String
 
-	var products: [Product] = []
+	var products: Set<Product> = []
+	weak var season: Season?
 
 	init(name: String, id: String) {
 		self.name = name
@@ -21,14 +22,25 @@ final class Theme: NSObject {
 	}
 
 	init(object: MarshaledObject) throws {
-		id = try object.value(for: "id")
-		name = try object.value(for: "name")
-
-		if let arr: [Product] = try? object.value(for: "products") {
-			products = arr
+		name = try object.value(for: "theme")
+		if let styleCode: String = try? object.value(for: "style") {
+			self.id = styleCode.substring(to: String.Index(encodedOffset: 3) )
+		} else {
+			throw MarshalError.keyNotFound(key: "id|styleCode")
 		}
 	}
 }
 
 extension Theme: Unmarshaling {}
 
+extension Theme {
+	static var styleCodeIndex: String.Index { return String.Index(encodedOffset: 3) }
+
+	var seasonCode: String {
+		return id.substring(to: Season.styleCodeIndex)
+	}
+
+	var orderedProducts: [Product] {
+		return products.sorted(by: { $0.styleCode < $1.styleCode })
+	}
+}
