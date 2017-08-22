@@ -45,5 +45,29 @@ extension DataManager {
 			}
 		}
 	}
+
+	func fetchPromotedProducts(callback: @escaping ([Product], DataError?) -> Void) {
+		let path = IvkoService.Path.promotions
+		apiManager.call(path: path) {
+			json, serviceError in
+
+			if let serviceError = serviceError {
+				callback( [], DataError.ivkoServiceError(serviceError) )
+				return
+			}
+			guard let result = json else {
+				callback( [], DataError.missingData )
+				return
+			}
+
+			do {
+				let wrapper = ["wrap": result]
+				let products: [Product] = try wrapper.value(for: "wrap")
+				callback( products, nil )
+			} catch let marshalErr {
+				callback( [], DataError.marshalError(marshalErr as! MarshalError) )
+			}
+		}
+	}
 }
 
