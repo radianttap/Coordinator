@@ -218,18 +218,28 @@ fileprivate extension IvkoService {
 				return
 			}
 
+			guard
+				let obj = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments])
+			else {
+				//	convert to string, so it‘ logged what‘s actually returned
+				let str = String(data: data, encoding: .utf8)
+				callback(nil, IvkoServiceError.unexpectedResponse(httpURLResponse, str))
+				return
+			}
+
 			switch path {
-			default:
-				guard
-					let obj = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments]),
-					let json = obj as? JSON
-				else {
-					//	convert to string, so it‘ logged what‘s actually returned
-					let str = String(data: data, encoding: .utf8)
-					callback(nil, IvkoServiceError.unexpectedResponse(httpURLResponse, str))
+			case .promotions:
+				guard let jsons = obj as? [JSON] else {
+					callback(nil, IvkoServiceError.unexpectedResponse(httpURLResponse, nil))
 					return
 				}
+				callback(["promotions": jsons], nil)
 
+			default:
+				guard let json = obj as? JSON else {
+					callback(nil, IvkoServiceError.unexpectedResponse(httpURLResponse, nil))
+					return
+				}
 				callback(json, nil)
 			}
 		}

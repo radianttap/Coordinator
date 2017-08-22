@@ -42,7 +42,7 @@ extension DataManager {
 			do {
 				let products: Set<Product> = try result.value(for: "products")
 				products.forEach({
-					$0.assetManager = self.assetManager	//	need to image URLs
+					$0.assetManager = self.assetManager	//	need for image URLs
 				})
 
 				let jsonObjects: [JSON] = try result.value(for: "products")
@@ -111,9 +111,12 @@ extension DataManager {
 			}
 
 			do {
-				let wrapper = ["wrap": result]
-				let products: [Product] = try wrapper.value(for: "wrap")
+				let products: [Product] = try result.value(for: "promotions")
+				products.forEach({
+					$0.assetManager = self.assetManager	//	need for image URLs
+				})
 				callback( products, nil )
+
 			} catch let marshalErr {
 				callback( [], DataError.marshalError(marshalErr as! MarshalError) )
 			}
