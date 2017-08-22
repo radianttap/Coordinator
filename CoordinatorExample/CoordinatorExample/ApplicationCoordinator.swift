@@ -15,6 +15,13 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	}
 
 
+
+	//	AppCoordinator is root coordinator, top-level object in the UI hierarchy
+	//	It keeps references to all the data source objects
+	var dataManager: DataManager!
+	var catalogManager: CatalogManager!
+
+
 	//	Declaration of all possible Coordinators
 	//	== sections inside the app
 
@@ -30,15 +37,19 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	//	Coordinator lifecycle
 
 	override func start(with completion: @escaping (Coordinator<UINavigationController>) -> Void = {_ in}) {
-		//	this is top-level, it should 
-		//	keep references to shared objects (Managers)
+		//	prepare managers
+		let apiManager = IvkoService.shared
+		dataManager = DataManager(apiManager: apiManager)
+		catalogManager = CatalogManager(dataManager: dataManager)
 
-		dependencies = AppDependency()
+		dependencies = AppDependency(apiManager: apiManager,
+		                             dataManager: dataManager,
+		                             catalogManager: catalogManager)
+		//	finally ready
 		super.start(with: completion)
 
 		//	now, here comes the logic which 
 		//	content Coordinator to load
-
 		setupActiveSection()
 	}
 
