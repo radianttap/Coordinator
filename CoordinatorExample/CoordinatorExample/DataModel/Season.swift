@@ -14,7 +14,6 @@ final class Season: NSObject {
 	let name: String
 
 	var themes: Set<Theme> = []
-	var categories: Set<Category> = []
 
 	init(name: String, id: String) {
 		self.name = name
@@ -37,16 +36,20 @@ extension Season: Unmarshaling {}
 extension Season {
 	static var styleCodeIndex: String.Index { return String.Index(encodedOffset: 2) }
 
-	var products: [Product] {
-		return themes.flatMap({ $0.products })
-	}
-
 	var orderedThemes: [Theme] {
 		return themes.sorted(by: { $0.id < $1.id })
 	}
 
+	var categories: Set<Category> {
+		return Set(products.flatMap({ $0.category }))
+	}
+
 	var orderedCategories: [Category] {
 		return categories.sorted(by: { $0.name < $1.name })
+	}
+
+	var products: [Product] {
+		return themes.flatMap({ $0.products })
 	}
 
 	var orderedProducts: [Product] {
