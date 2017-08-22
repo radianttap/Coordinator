@@ -31,7 +31,7 @@ extension DataError: CustomStringConvertible {
 			return "No data available at the moment"
 		case .unknownColorCode(let code):
 			return "Unhandled product color code: \( code )"
-		case .ivkoServiceError, .marshalError:
+		case .ivkoServiceError, .marshalError:	//TODO: improve this
 			return "Internal error"
 		}
 	}
