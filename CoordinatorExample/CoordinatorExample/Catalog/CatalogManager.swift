@@ -110,7 +110,19 @@ extension CatalogManager {
 	}
 
 	func promotedProducts(callback: @escaping ([Product], CatalogError?) -> Void) {
+		callback( promotedProducts, nil )
 
+		fetchPromotions {
+			[unowned self] hasUpdates, dataError in
+			if !hasUpdates { return }
+
+			if let dataError = dataError {
+				callback( self.promotedProducts, .dataError(dataError) )
+				return
+			}
+
+			callback( self.promotedProducts, nil )
+		}
 	}
 }
 
@@ -157,4 +169,22 @@ fileprivate extension CatalogManager {
 		}
 	}
 
+
+	func fetchPromotions(callback: @escaping (Bool, DataError?) -> Void) {
+		if let lastUpdated = lastUpdated, lastUpdated.isLaterThan(date: Date().subtract(hours: 2)) {
+			callback(false, nil)
+			return
+		}
+
+		dataManager.fetchPromotedProducts {
+			[unowned self] arr, dataError in
+			if let dataError = dataError {
+				callback(false, dataError)
+				return
+			}
+
+			self.promotedProducts = arr
+			callback(true, nil)
+		}
+	}
 }
