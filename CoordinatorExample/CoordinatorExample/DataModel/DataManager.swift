@@ -39,9 +39,35 @@ extension DataManager {
 
 			do {
 				let products: Set<Product> = try result.value(for: "products")
-				let seasons: Set<Season> = try result.value(for: "products")
-				let themes: Set<Theme> = try result.value(for: "products")
-				let categories: Set<Category> = try result.value(for: "products")
+
+				let jsonObjects: [JSON] = try result.value(for: "products")
+
+				var seasonNames: Set<String> = Set(jsonObjects.flatMap({ try? $0.value(for: "season") }))
+				let jsonSeasons: [JSON] = jsonObjects.reduce([], { cur, obj in
+					guard let s: String = try? obj.value(for: "season") else { return cur }
+					if !seasonNames.contains(s) { return cur }
+					seasonNames.remove(s)
+					return cur + [obj]
+				})
+				let seasons: Set<Season> = try ["wrap": jsonSeasons].value(for: "wrap")
+
+				var themeNames: Set<String> = Set(jsonObjects.flatMap({ try? $0.value(for: "theme") }))
+				let jsonThemes: [JSON] = jsonObjects.reduce([], { cur, obj in
+					guard let s: String = try? obj.value(for: "theme") else { return cur }
+					if !themeNames.contains(s) { return cur }
+					themeNames.remove(s)
+					return cur + [obj]
+				})
+				let themes: Set<Theme> = try ["wrap": jsonThemes].value(for: "wrap")
+
+				var categoryNames: Set<String> = Set(jsonObjects.flatMap({ try? $0.value(for: "category") }))
+				let jsonCategories: [JSON] = jsonObjects.reduce([], { cur, obj in
+					guard let s: String = try? obj.value(for: "category") else { return cur }
+					if !categoryNames.contains(s) { return cur }
+					categoryNames.remove(s)
+					return cur + [obj]
+				})
+				let categories: Set<Category> = try ["wrap": jsonCategories].value(for: "wrap")
 
 				categories.forEach({ c in
 					c.products = Set(products.filter({ $0.categoryName == c.name }))
