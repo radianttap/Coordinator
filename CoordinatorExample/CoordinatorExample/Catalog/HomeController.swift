@@ -112,7 +112,6 @@ fileprivate extension HomeController {
 				DispatchQueue.main.async {
 					if let s = s {
 						self.season = s
-						self.updateData()
 						return
 					}
 
