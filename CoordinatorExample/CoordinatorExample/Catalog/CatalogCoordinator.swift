@@ -58,7 +58,11 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 	}
 
 	override func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {
-		completion( [], nil )
+		guard let manager = dependencies?.catalogManager else {
+			completion( [], nil )
+			return
+		}
+		manager.categories(for: season, callback: completion)
 	}
 }
 
