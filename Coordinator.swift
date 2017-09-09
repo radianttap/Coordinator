@@ -63,7 +63,7 @@ public protocol Coordinating: class {
 
 
 ///	Main Coordinator instance, where T is UIViewController or any of its subclasses.
-open class Coordinator<T>: UIResponder, Coordinating {
+open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	open let rootViewController: T
 
 
@@ -74,10 +74,10 @@ open class Coordinator<T>: UIResponder, Coordinating {
 	///
 	/// - returns: Coordinator instance, prepared to start
 	public init(rootViewController: T?) {
-		guard let rootViewController = rootViewController, let rvc = rootViewController as? UIViewController else {
+		guard let rvc = rootViewController else {
 			fatalError("Must supply UIViewController (or any of its subclasses) or override this init and instantiate VC in there.")
 		}
-		self.rootViewController = rootViewController
+		self.rootViewController = rvc
 		super.init()
 
 		rvc.parentCoordinator = self
