@@ -45,7 +45,7 @@ public protocol Coordinating: class {
 	var identifier: String { get }
 
 	/// Parent Coordinator can be any other Coordinator
-	weak var parent: Coordinating? { get }
+	weak var parent: Coordinating? { get set }
 
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
 	var childCoordinators: [String: Coordinating] { get }
@@ -53,12 +53,20 @@ public protocol Coordinating: class {
 	///	Returns either `parent` coordinator or `nil` if there isn‘t one
 	var coordinatingResponder: UIResponder? { get }
 
+	///	Tells the coordinator to start, which means at the end of this method it should
+	///	display some UIViewController
+	func start(with completion: @escaping () -> Void)
+
+	///	Tells the coordinator to stop, which means it should clear out any internal stuff
+	///	it possible tracks. I.e. list of shown UIViewControllers
+	func stop(with completion: @escaping () -> Void)
+
 	///	Call this method if the Coordinator is using UINavigationController
 	///	as rootViewController and customer has just pop-ed out of `coordinator` domain
 	///
 	///	This allows you to inform `coordinator.parent` it should activate something else
 	///	(like previous childCoordinator, if there is one)
-	func coordinatorDidFinish<T>(_ coordinator: Coordinator<T>)
+	func coordinatorDidFinish(_ coordinator: Coordinating)
 }
 
 
@@ -113,8 +121,8 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	etc.
 	///
 	///	- Parameter completion: An optional `Callback` executed at the end.
-	open func start(with completion: @escaping (Coordinator<T>) -> Void = {_ in}) {
-		completion(self)
+	open func start(with completion: @escaping () -> Void = {}) {
+		completion()
 	}
 
 	/// Tells the coordinator that it is done and that it should
@@ -127,7 +135,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	}
 
 
-	open func coordinatorDidFinish<U>(_ coordinator: Coordinator<U>) {
+	open func coordinatorDidFinish(_ coordinator: Coordinating) {
 		stopChild(coordinator: coordinator)
 	}
 
@@ -139,7 +147,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 
 	- Returns: The started coordinator.
 	*/
-	public func startChild<U>(coordinator: Coordinator<U>, completion: @escaping (Coordinator<U>) -> Void = {_ in}) {
+	public func startChild(coordinator: Coordinating, completion: @escaping () -> Void = {}) {
 		childCoordinators[coordinator.identifier] = coordinator
 		coordinator.parent = self
 		coordinator.start(with: completion)
@@ -152,7 +160,8 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	- Parameter coordinator: The coordinator implementation to stop.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
-	public func stopChild<U>(coordinator: Coordinator<U>, completion: @escaping () -> Void = {}) {
+	public func stopChild(coordinator: Coordinating, completion: @escaping () -> Void = {}) {
+		coordinator.parent = nil
 		coordinator.stop {
 			[unowned self] in
 
