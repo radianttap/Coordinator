@@ -153,7 +153,7 @@ extension HomeController: UICollectionViewDataSource {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		guard let ls = LayoutSection(rawValue: indexPath.section) else { fatalError("Unhandled section") }
+		guard let ls = LayoutSection(rawValue: section) else { fatalError("Unhandled section") }
 
 		switch ls {
 		case .promotions:
