@@ -127,5 +127,24 @@ fileprivate extension AppCoordinator {
 	}
 
 	func showAccount(_ page: AccountCoordinator.Page?) {
+		let identifier = String(describing: AccountCoordinator.self)
+		//	if Coordinator is already created...
+		if let c = childCoordinators[identifier] as? AccountCoordinator {
+			c.dependencies = dependencies
+			//	just display this page
+			if let page = page {
+				c.present(page: page, from: rootViewController)
+			}
+			return
+		}
+
+		//	otherwise, create the coordinator and start it
+
+		let c = AccountCoordinator()
+		c.dependencies = dependencies
+		startChild(coordinator: c)
+		if let page = page {
+			c.present(page: page, from: rootViewController)
+		}
 	}
 }

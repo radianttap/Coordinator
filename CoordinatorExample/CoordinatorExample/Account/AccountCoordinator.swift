@@ -14,6 +14,13 @@ final class AccountCoordinator: NavigationCoordinator, NeedsDependency {
 		didSet { updateChildCoordinatorDependencies() }
 	}
 
+	override init(rootViewController: UINavigationController? = nil) {
+		let nc = rootViewController ?? UINavigationController()
+		super.init(rootViewController: nc)
+
+		nc.delegate = self
+	}
+
 	//	Declaration of all local pages (ViewControllers)
 
 	enum Page {
