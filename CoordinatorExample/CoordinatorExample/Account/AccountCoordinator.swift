@@ -38,8 +38,7 @@ final class AccountCoordinator: NavigationCoordinator, NeedsDependency {
 
 	//	Coordinator lifecycle
 
-	override func start(with completion: @escaping (Coordinator<UINavigationController>) -> Void = {_ in}) {
-		rootViewController.delegate = self
+	override func start(with completion: @escaping () -> Void = {}) {
 		super.start(with: completion)
 	}
 

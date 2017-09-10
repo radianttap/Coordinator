@@ -36,7 +36,7 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 
 	//	Coordinator lifecycle
 
-	override func start(with completion: @escaping (Coordinator<UINavigationController>) -> Void = {_ in}) {
+	override func start(with completion: @escaping () -> Void = {}) {
 		//	prepare managers
 		let apiManager = IvkoService.shared
 		let assetManager = AssetManager.shared
