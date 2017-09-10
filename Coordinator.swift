@@ -8,6 +8,15 @@
 
 import UIKit
 
+
+///	Simple closure which allows you to wrap any coordinatingResponder method and
+///	add it into a `queuedMessages` array on the Coordinator.
+///
+///	You need to do this in case method needs a dependency that may not be available
+///	at that particular moment. So save it until dependencies are updated.
+public typealias CoordinatingQueuedMessage = () -> Void
+
+
 /*
 Coordinators are a design pattern that encourages decoupling view controllers
 such that they know as little as possible about how they are presented.
@@ -70,9 +79,29 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 
 
 
+
 	open override var coordinatingResponder: UIResponder? {
 		return parent as? UIResponder
 	}
+
+	///	List of wrapped methods requiring dependency which is not available right now
+	fileprivate(set) public var queuedMessages: [CoordinatingQueuedMessage] = []
+
+	///	Simply add the message wrapped in the closure. Mind the capture list for `self`.
+	public func enqueueMessage(_ message: @escaping CoordinatingQueuedMessage ) {
+		queuedMessages.append( message )
+	}
+
+	///	Call this each time your Coordinator's dependencies are updated
+	public func processQueuedMessages() {
+		//	make a local copy
+		let arr = queuedMessages
+		//	clean up the queue, in case it's re-populated while this pass is ongoing
+		queuedMessages.removeAll()
+		//	execute each message
+		arr.forEach { $0() }
+	}
+
 
 
 

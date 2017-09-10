@@ -11,7 +11,10 @@ import Coordinator
 
 final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	var dependencies: AppDependency? {
-		didSet { updateChildCoordinatorDependencies() }
+		didSet {
+			updateChildCoordinatorDependencies()
+			processQueuedMessages()
+		}
 	}
 
 
@@ -68,11 +71,7 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	}
 
 	override func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: (Bool) -> Void) {
-		//	re-route to CartManager and/or CartCoordinator
 
-		let ac = UIAlertController(title: nil, message: "cart-Add", preferredStyle: .alert)
-		ac.addAction( UIAlertAction(title: "OK", style: .default) )
-		rootViewController.present(ac, animated: true)
 	}
 
 	override func cartToggle(sender: Any?) {
