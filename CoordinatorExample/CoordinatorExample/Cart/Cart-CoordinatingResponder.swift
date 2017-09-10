@@ -16,7 +16,7 @@ extension UIResponder {
 	}
 
 	///	Adds given Product to the cart
-	func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: (Bool) -> Void) {
+	func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: @escaping (Bool) -> Void) {
 		coordinatingResponder?.cartAdd(product: product, color: color, sender: sender, completion: completion)
 	}
 

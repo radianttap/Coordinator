@@ -70,8 +70,16 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 		rootViewController.present(ac, animated: true)
 	}
 
-	override func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: (Bool) -> Void) {
+	override func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: @escaping (Bool) -> Void) {
+		guard let cartManager = dependencies?.cartManager else {
+			enqueueMessage { [unowned self] in
+				self.cartAdd(product: product, color: color, sender: sender, completion: completion)
+			}
+			return
+		}
 
+		cartManager.add(product: product, color: color.unbox)
+		completion(true)
 	}
 
 	override func cartToggle(sender: Any?) {
