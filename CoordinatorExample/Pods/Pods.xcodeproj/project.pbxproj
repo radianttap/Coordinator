@@ -271,10 +271,10 @@
 		03E91D619AA0BE9A3064A5DB9B45D12E /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				D05ABA171F659A04006B1206 /* Coordinating.swift */,
 				811DA6135E2B19CD3D3E254A29888878 /* Coordinator.swift */,
 				D3703179CA21BED658859017BAB9A629 /* NavigationCoordinator.swift */,
 				2EA3B70CD8E6A9F4DB391E52FDC8262F /* Support Files */,
-				D05ABA171F659A04006B1206 /* Coordinating.swift */,
 			);
 			name = Coordinator;
 			path = ../..;
