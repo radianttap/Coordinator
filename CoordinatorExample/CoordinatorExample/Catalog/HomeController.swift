@@ -101,7 +101,7 @@ fileprivate extension HomeController {
 			}
 		}
 
-		//	this below could be done better
+		//	this below could probably be done way better
 
 		guard let season = season else {
 			self.categories = []
@@ -144,14 +144,17 @@ extension HomeController: UICollectionViewDataSource {
 	fileprivate enum LayoutSection: Int {
 		case promotions
 		case categories
+
+		static let count = 2
 	}
 
 	func numberOfSections(in collectionView: UICollectionView) -> Int {
-		return 2
+		return LayoutSection.count
 	}
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		let ls = LayoutSection(rawValue: section)!
+		guard let ls = LayoutSection(rawValue: indexPath.section) else { fatalError("Unhandled section") }
+
 		switch ls {
 		case .promotions:
 			return promotedProducts.count == 0 ? 0 : 1
@@ -161,7 +164,8 @@ extension HomeController: UICollectionViewDataSource {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let ls = LayoutSection(rawValue: indexPath.section)!
+		guard let ls = LayoutSection(rawValue: indexPath.section) else { fatalError("Unhandled section") }
+
 		switch ls {
 		case .promotions:
 			let cell: PromoContainerCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
@@ -181,10 +185,11 @@ extension HomeController: UICollectionViewDataSource {
 //	MARK: UICollectionViewDelegateFlowLayout
 extension HomeController: UICollectionViewDelegateFlowLayout {
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		let layout = collectionViewLayout as! UICollectionViewFlowLayout
+		guard let ls = LayoutSection(rawValue: indexPath.section) else { fatalError("Unhandled section") }
+		guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { fatalError("Wrong CV Layout") }
+
 		var size = layout.itemSize
 
-		let ls = LayoutSection(rawValue: indexPath.section)!
 		switch ls {
 		case .promotions:
 			if promotedProducts.count == 0 { return .zero }

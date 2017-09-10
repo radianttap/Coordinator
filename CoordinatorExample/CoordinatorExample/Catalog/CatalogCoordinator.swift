@@ -81,7 +81,11 @@ fileprivate extension CatalogCoordinator {
 		switch p {
 		case .home:
 			let vc = HomeController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
-			vc.season = dependencies?.catalogManager?.activeSeason
+			if let catalogManager = dependencies?.catalogManager, let activeSeason = catalogManager.activeSeason {
+				vc.season = activeSeason
+				vc.promotedProducts = catalogManager.promotedProducts
+				vc.categories = activeSeason.orderedCategories
+			}
 			root(vc)
 
 		case .product(let product):
