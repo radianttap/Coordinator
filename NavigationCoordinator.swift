@@ -37,6 +37,10 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		}
 	}
 
+	public func present(_ vc: UIViewController) {
+		rootViewController.present(vc, animated: true, completion: nil)
+	}
+
 	public func show(_ vc: UIViewController) {
 		viewControllers.append(vc)
 		rootViewController.show(vc, sender: self)
@@ -45,6 +49,17 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 	public func root(_ vc: UIViewController) {
 		viewControllers = [vc]
 		rootViewController.viewControllers = [vc]
+	}
+
+	open override func start(with completion: @escaping () -> Void) {
+		rootViewController.delegate = self
+		super.start(with: completion)
+	}
+
+	open override func stop(with completion: @escaping () -> Void) {
+		rootViewController.delegate = nil
+		viewControllers.removeAll()
+		super.stop(with: completion)
 	}
 }
 
