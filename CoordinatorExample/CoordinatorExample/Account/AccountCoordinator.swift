@@ -63,6 +63,7 @@ fileprivate extension AccountCoordinator {
 
 	func setupActivePage(_ enforcedPage: Page? = nil) {
 		let p = enforcedPage ?? page
+		page = p
 
 		switch p {
 		default:

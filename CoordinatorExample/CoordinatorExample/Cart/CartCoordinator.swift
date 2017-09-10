@@ -51,6 +51,7 @@ final class CartCoordinator: NavigationCoordinator, NeedsDependency {
 fileprivate extension CartCoordinator {
 	func setupActivePage(_ enforcedPage: Page? = nil) {
 		let p = enforcedPage ?? page
+		page = p
 
 		switch p {
 		default:
