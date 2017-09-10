@@ -123,7 +123,24 @@ fileprivate extension AppCoordinator {
 	}
 
 	func showCart(_ page: CartCoordinator.Page?) {
+		let identifier = String(describing: CartCoordinator.self)
+		//	if Coordinator is already created...
+		if let c = childCoordinators[identifier] as? CartCoordinator {
+			c.dependencies = dependencies
+			//	just display this page
+			if let page = page {
+				c.display(page: page)
+			}
+			return
+		}
 
+		//	otherwise, create the coordinator and start it
+		let c = CartCoordinator(rootViewController: rootViewController)
+		c.dependencies = dependencies
+		if let page = page {
+			c.page = page
+		}
+		startChild(coordinator: c)
 	}
 
 	func showAccount(_ page: AccountCoordinator.Page?) {
