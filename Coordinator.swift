@@ -170,12 +170,12 @@ extension UIViewController {
 		static var ParentCoordinator = "ParentCoordinator"
 	}
 
-	public var parentCoordinator: Coordinating? {
+	public weak var parentCoordinator: Coordinating? {
 		get {
 			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Coordinating
 		}
 		set {
-			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_RETAIN)
+			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_ASSIGN)
 		}
 	}
 }
