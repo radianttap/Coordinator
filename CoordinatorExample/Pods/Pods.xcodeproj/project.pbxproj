@@ -60,6 +60,7 @@
 		C6B660C3D730B1457E5537238F941369 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDDF8D75AA654F65ACE2125C52AFAAD2 /* Foundation.framework */; };
 		C8A24B5D1DE2CE90CDB894280AB8DC89 /* UIButton+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1FD80149446DA2328AD94479B226C /* UIButton+Kingfisher.swift */; };
 		CF6CC35E76E5EE8F9A6441AB07E8078C /* ValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3B35DF7A0DFB5AF65C13BEF58793C0 /* ValueType.swift */; };
+		D027B9421F66B3050088C079 /* UIKit-CoordinatingExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D027B9411F66B3050088C079 /* UIKit-CoordinatingExtensions.swift */; };
 		D05ABA181F659A04006B1206 /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05ABA171F659A04006B1206 /* Coordinating.swift */; };
 		D4D6C0A689145B53E332183C4B1AA8A2 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2E9B0831394732EE9A6BFD534E698D /* Indicator.swift */; };
 		D535F967F08593E5B52B238DE0793E6F /* Kingfisher.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A1E68DF29AB7D24039A853653FAFEE5 /* Kingfisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -183,6 +184,7 @@
 		C53A56D0107F77C9AF0A49E5B8C5EC6C /* Kingfisher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Kingfisher.swift; path = Sources/Kingfisher.swift; sourceTree = "<group>"; };
 		C639B115182B60AC754A174DCA8C54E6 /* Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Sources/Image.swift; sourceTree = "<group>"; };
 		CC5840CEA19B32DA28F7AAA16DB02335 /* String+MD5.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+MD5.swift"; path = "Sources/String+MD5.swift"; sourceTree = "<group>"; };
+		D027B9411F66B3050088C079 /* UIKit-CoordinatingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit-CoordinatingExtensions.swift"; sourceTree = "<group>"; };
 		D05ABA171F659A04006B1206 /* Coordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinating.swift; sourceTree = "<group>"; };
 		D298C0C218DBEA986D7B67AC7760F1D6 /* Pods-CoordinatorExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoordinatorExample.release.xcconfig"; sourceTree = "<group>"; };
 		D3703179CA21BED658859017BAB9A629 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			children = (
 				D05ABA171F659A04006B1206 /* Coordinating.swift */,
 				811DA6135E2B19CD3D3E254A29888878 /* Coordinator.swift */,
+				D027B9411F66B3050088C079 /* UIKit-CoordinatingExtensions.swift */,
 				D3703179CA21BED658859017BAB9A629 /* NavigationCoordinator.swift */,
 				2EA3B70CD8E6A9F4DB391E52FDC8262F /* Support Files */,
 			);
@@ -782,6 +785,7 @@
 				772141CE961C67BD2ACFC8F6E8FFC715 /* Coordinator-dummy.m in Sources */,
 				A247FC79F720E8678927E3126F1BF42B /* Coordinator.swift in Sources */,
 				D05ABA181F659A04006B1206 /* Coordinating.swift in Sources */,
+				D027B9421F66B3050088C079 /* UIKit-CoordinatingExtensions.swift in Sources */,
 				EC7003DEC2F6B2D1D8348A32AE371971 /* NavigationCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
