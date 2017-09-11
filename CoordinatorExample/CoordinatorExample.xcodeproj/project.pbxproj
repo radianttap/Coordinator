@@ -20,6 +20,8 @@
 		D00541891F46349500CFF7AE /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D005417F1F46349500CFF7AE /* ReusableView.swift */; };
 		D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5A1EC2FE230008A087 /* AppDependency.swift */; };
 		D0255A7C1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */; };
+		D027B93C1F669DF50088C079 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D027B93B1F669DF50088C079 /* CartItem.swift */; };
+		D027B93E1F669E3E0088C079 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = D027B93D1F669E3E0088C079 /* Size.swift */; };
 		D02921D11F48FB540010B2B6 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D01F48FB540010B2B6 /* ProductViewController.swift */; };
 		D02921D31F48FED40010B2B6 /* AccountCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D21F48FED40010B2B6 /* AccountCoordinator.swift */; };
 		D02921D51F4901640010B2B6 /* CartCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D02921D41F4901640010B2B6 /* CartCoordinator.swift */; };
@@ -79,6 +81,8 @@
 		D005417F1F46349500CFF7AE /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D010CB5A1EC2FE230008A087 /* AppDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Catalog-CoordinatingResponder.swift"; path = "Catalog/Catalog-CoordinatingResponder.swift"; sourceTree = "<group>"; };
+		D027B93B1F669DF50088C079 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CartItem.swift; path = DataModel/CartItem.swift; sourceTree = "<group>"; };
+		D027B93D1F669E3E0088C079 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Size.swift; path = DataModel/Size.swift; sourceTree = "<group>"; };
 		D02921D01F48FB540010B2B6 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProductViewController.swift; path = Catalog/ProductViewController.swift; sourceTree = "<group>"; };
 		D02921D21F48FED40010B2B6 /* AccountCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCoordinator.swift; sourceTree = "<group>"; };
 		D02921D41F4901640010B2B6 /* CartCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCoordinator.swift; sourceTree = "<group>"; };
@@ -332,6 +336,8 @@
 				D0FF0C301EC6D73D0023F8B8 /* Category.swift */,
 				D0FF0C341EC6D7FF0023F8B8 /* Season.swift */,
 				D0FF0C321EC6D7980023F8B8 /* Theme.swift */,
+				D027B93B1F669DF50088C079 /* CartItem.swift */,
+				D027B93D1F669E3E0088C079 /* Size.swift */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -491,6 +497,7 @@
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
 				D00541891F46349500CFF7AE /* ReusableView.swift in Sources */,
 				D00541861F46349500CFF7AE /* AsyncOperation.swift in Sources */,
+				D027B93E1F669E3E0088C079 /* Size.swift in Sources */,
 				D036A96A1F48F206001E671B /* ActionClosurable.swift in Sources */,
 				D00541851F46349500CFF7AE /* Notifying.swift in Sources */,
 				D00541841F46349500CFF7AE /* String-Extensions.swift in Sources */,
@@ -525,6 +532,7 @@
 				D0FF0C2E1EC6D6C60023F8B8 /* Product.swift in Sources */,
 				D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */,
 				D0FF0C311EC6D73D0023F8B8 /* Category.swift in Sources */,
+				D027B93C1F669DF50088C079 /* CartItem.swift in Sources */,
 				D036A95A1F48EFF4001E671B /* AccountManager.swift in Sources */,
 				D036A9661F48F206001E671B /* NetworkError.swift in Sources */,
 				D0765D091ECDC8B100535CAB /* DataError.swift in Sources */,

@@ -64,7 +64,11 @@ extension Color {
 	}()
 }
 
-
+extension Color: Equatable {
+	static func ==(lhs: Color, rhs: Color) -> Bool {
+		return lhs.code == rhs.code
+	}
+}
 
 
 
