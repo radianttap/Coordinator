@@ -256,7 +256,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cartBarItem" destination="Pe3-Xc-hsH" id="fvS-1R-yv0"/>
+                        <outlet property="cartBarItem" destination="Pe3-Xc-hsH" id="U3b-Iw-P7e"/>
                         <outlet property="mainPhotoView" destination="psR-Bz-LS9" id="81g-Pg-nlA"/>
                         <outlet property="titleLabel" destination="ieD-QM-IQY" id="710-OJ-4d6"/>
                     </connections>
