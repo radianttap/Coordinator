@@ -24,4 +24,8 @@ extension UIResponder {
 	func cartToggle(sender: Any?) {
 		coordinatingResponder?.cartToggle(sender: sender)
 	}
+
+	func cartStatus(sender: Any?, completion: @escaping (Int) -> Void) {
+		coordinatingResponder?.cartStatus(sender: sender, completion: completion)
+	}
 }

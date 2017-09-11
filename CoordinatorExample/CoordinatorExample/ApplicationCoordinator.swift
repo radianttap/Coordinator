@@ -65,6 +65,17 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 
 	//	MARK:- CoordinatingResponder
 
+	override func cartStatus(sender: Any?, completion: @escaping (Int) -> Void) {
+		guard let cartManager = dependencies?.cartManager else {
+			enqueueMessage { [unowned self] in
+				self.cartStatus(sender: sender, completion: completion)
+			}
+			return
+		}
+
+		completion(cartManager.items.count)
+	}
+
 	override func cartBuyNow(_ product: Product, sender: Any?) {
 		//	re-route to CartManager and/or CartCoordinator
 

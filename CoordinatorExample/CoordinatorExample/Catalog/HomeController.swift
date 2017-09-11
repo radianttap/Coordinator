@@ -127,6 +127,15 @@ fileprivate extension HomeController {
 	///	Hence you need to use `weak self` to avoid crashing your app
 	func updateData() {
 
+		cartStatus(sender: self) {
+			[weak self] num in
+			guard let `self` = self else { return }
+
+			DispatchQueue.main.async {
+				self.numberOfCartItems = num
+			}
+		}
+
 		fetchPromotedProducts(sender: self) {
 			[weak self] arr, _ in
 			guard let `self` = self else { return }
