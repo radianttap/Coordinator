@@ -41,7 +41,7 @@ final class HomeController: UIViewController, StoryboardLoadable {
 	var numberOfCartItems: Int? {
 		didSet {
 			if !self.isViewLoaded { return }
-			updateCartStatus()
+			renderCartStatus()
 		}
 	}
 
@@ -76,10 +76,13 @@ extension HomeController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		setupTitleView()
+		renderTitleView()
+		renderCartStatus()
 		collectionView.register(PromoContainerCell.self)
 
-		updateCartStatus()
+		//	you can move this into `viewWillAppear(animated:)`
+		//	if needed to refresh on each view appearance
+		updateData()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -93,20 +96,22 @@ extension HomeController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		updateData()
-	}
-
-	fileprivate func setupTitleView() {
-		self.navigationItem.titleView = {
-			return UIImageView(image: UIImage(named: "ivko_woman"))
-		}()
-		self.navigationItem.titleView?.sizeToFit()
+		updateCartStatus()
 	}
 }
 
 
 fileprivate extension HomeController {
-	func updateCartStatus() {
+	//	MARK: Internal rendering
+
+	func renderTitleView() {
+		self.navigationItem.titleView = {
+			return UIImageView(image: UIImage(named: "ivko_woman"))
+		}()
+		self.navigationItem.titleView?.sizeToFit()
+	}
+
+	func renderCartStatus() {
 		guard let numberOfCartItems = numberOfCartItems, numberOfCartItems > 0 else {
 			self.cartBarItem.removeBadge()
 			return
@@ -114,19 +119,15 @@ fileprivate extension HomeController {
 		self.cartBarItem.addBadge(number: numberOfCartItems)
 	}
 
+
+	//	MARK: Data updates
+
 	///	This is the heart of the approach that isolates VCs from the rest of the app.
 	///
 	///	Each VC will always use only its local data model and care about nothing else.
 	///	Local model is populated either directly from outside (DI) or
 	///	by using `coordinatingResponder` messages with completion handler.
-	///
-	///	Note the use of `[weak self]`. 
-	///	VCs should not care where data come from, thus
-	///	they will potentially be fetched from the (slow?) network, meaning
-	///	customer can decide to move away from this VC which could then be deallocated.
-	///	Hence you need to use `weak self` to avoid crashing your app
-	func updateData() {
-
+	func updateCartStatus() {
 		cartStatus(sender: self) {
 			[weak self] num in
 			guard let `self` = self else { return }
@@ -135,7 +136,20 @@ fileprivate extension HomeController {
 				self.numberOfCartItems = num
 			}
 		}
+	}
 
+	///	This is the heart of the approach that isolates VCs from the rest of the app.
+	///
+	///	Each VC will always use only its local data model and care about nothing else.
+	///	Local model is populated either directly from outside (DI) or
+	///	by using `coordinatingResponder` messages with completion handler.
+	///
+	///	Note the use of `[weak self]`.
+	///	VCs should not care where data come from, thus
+	///	they will potentially be fetched from the (slow?) network, meaning
+	///	customer can decide to move away from this VC which could then be deallocated.
+	///	Hence you need to use `weak self` to avoid crashing your app
+	func updateData() {
 		fetchPromotedProducts(sender: self) {
 			[weak self] arr, _ in
 			guard let `self` = self else { return }
@@ -145,7 +159,8 @@ fileprivate extension HomeController {
 			}
 		}
 
-		//	this below could probably be done way better
+		//	TODO: this waiting for seasons to load,
+		//	should be happening in CatalogManager
 
 		guard let season = season else {
 			self.categories = []

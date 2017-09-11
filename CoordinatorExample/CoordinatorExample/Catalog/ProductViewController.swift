@@ -30,7 +30,7 @@ final class ProductViewController: UIViewController, StoryboardLoadable {
 	var numberOfCartItems: Int? {
 		didSet {
 			if !self.isViewLoaded { return }
-			updateCartStatus()
+			renderCartStatus()
 		}
 	}
 }
@@ -58,7 +58,7 @@ extension ProductViewController {
 		super.viewDidLoad()
 
 		populate()
-		updateCartStatus()
+		renderCartStatus()
 
 		//	HACK: setup default color
 		color = Color.c18
@@ -77,7 +77,7 @@ fileprivate extension ProductViewController {
 		}
 	}
 
-	func updateCartStatus() {
+	func renderCartStatus() {
 		guard let numberOfCartItems = numberOfCartItems, numberOfCartItems > 0 else {
 			self.cartBarItem.removeBadge()
 			return
