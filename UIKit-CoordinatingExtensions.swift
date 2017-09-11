@@ -63,14 +63,20 @@ extension UIViewController {
 	instead returning nil by default.
 
 	Subclasses must override this method to set the next responder.
-	UIView implements this method by returning the UIViewController object
-	that manages it (if it has one) or its superview (if it doesn’t);
+
 	UIViewController implements the method by returning its view’s superview;
 	UIWindow returns the application object, and UIApplication returns nil.
+	---
+
+	We also check are there maybe `parent` UIViewController before finally
+	falling back to `view.superview`
 	*/
 	override open var coordinatingResponder: UIResponder? {
 		guard let parentCoordinator = self.parentCoordinator else {
-			return view.superview
+			guard let parentController = self.parent else {
+				return view.superview
+			}
+			return parentController as UIResponder
 		}
 		return parentCoordinator as? UIResponder
 	}
