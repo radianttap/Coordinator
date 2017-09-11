@@ -85,14 +85,6 @@ extension HomeController {
 		updateData()
 	}
 
-	override func viewDidLayoutSubviews() {
-		super.viewDidLayoutSubviews()
-
-		if automaticallyAdjustsScrollViewInsets {
-			collectionView.contentInset.top = topLayoutGuide.length
-		}
-	}
-
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
