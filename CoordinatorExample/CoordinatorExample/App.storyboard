@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UlK-YE-ikZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="UlK-YE-ikZ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +16,7 @@
             <objects>
                 <navigationController id="UlK-YE-ikZ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hbg-MO-jXm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -130,7 +131,13 @@
                             <constraint firstAttribute="trailing" secondItem="FD0-oj-Zz7" secondAttribute="trailing" id="ybF-8l-PsD"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="MmZ-eu-0Bg"/>
+                    <navigationItem key="navigationItem" id="MmZ-eu-0Bg">
+                        <barButtonItem key="leftBarButtonItem" image="shop-basket" id="bb3-eo-E2Q" customClass="BadgeUIBarButtonItem" customModule="CoordinatorExample" customModuleProvider="target">
+                            <connections>
+                                <action selector="cartTapped:" destination="q4p-Dd-3am" id="6cT-SE-eSV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="1PH-AN-5Ht" id="GG3-eF-zFv"/>
                         <outlet property="notificationContainer" destination="FD0-oj-Zz7" id="CWE-gz-ksy"/>
@@ -152,11 +159,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="71502-25a" translatesAutoresizingMaskIntoConstraints="NO" id="psR-Bz-LS9">
-                                <rect key="frame" x="24" y="77.5" width="335" height="720"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="psR-Bz-LS9">
+                                <rect key="frame" x="0.0" y="75.5" width="375" height="267"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieD-QM-IQY">
-                                <rect key="frame" x="24" y="36" width="335" height="33.5"/>
+                                <rect key="frame" x="24" y="36" width="335" height="31.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -166,10 +173,11 @@
                         <constraints>
                             <constraint firstItem="ieD-QM-IQY" firstAttribute="leading" secondItem="rfI-s5-zEG" secondAttribute="leadingMargin" constant="8" id="6t6-56-kAD"/>
                             <constraint firstItem="psR-Bz-LS9" firstAttribute="top" secondItem="ieD-QM-IQY" secondAttribute="bottom" constant="8" id="DUX-GA-wge"/>
-                            <constraint firstItem="psR-Bz-LS9" firstAttribute="leading" secondItem="ieD-QM-IQY" secondAttribute="leading" id="Y5d-0e-MgD"/>
+                            <constraint firstItem="psR-Bz-LS9" firstAttribute="leading" secondItem="rfI-s5-zEG" secondAttribute="leading" id="GEZ-N5-OGJ"/>
+                            <constraint firstItem="psR-Bz-LS9" firstAttribute="height" secondItem="rfI-s5-zEG" secondAttribute="height" multiplier="0.4" id="K6l-Yc-4Cv"/>
+                            <constraint firstAttribute="trailing" secondItem="psR-Bz-LS9" secondAttribute="trailing" id="UXk-Tw-Bhz"/>
                             <constraint firstItem="ieD-QM-IQY" firstAttribute="top" secondItem="MHc-IE-xG8" secondAttribute="bottom" constant="16" id="dbZ-E7-pgp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ieD-QM-IQY" secondAttribute="trailing" id="eFM-yv-YME"/>
-                            <constraint firstItem="psR-Bz-LS9" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="ieD-QM-IQY" secondAttribute="trailing" id="t6s-VP-A6A"/>
                         </constraints>
                     </view>
                     <connections>
@@ -183,6 +191,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="71502-25a" width="490" height="720"/>
+        <image name="shop-basket" width="44" height="36"/>
     </resources>
 </document>
