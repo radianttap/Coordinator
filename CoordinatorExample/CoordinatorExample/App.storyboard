@@ -132,7 +132,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MmZ-eu-0Bg">
-                        <barButtonItem key="rightBarButtonItem" image="shop-basket" id="bb3-eo-E2Q" customClass="BadgeUIBarButtonItem" customModule="CoordinatorExample" customModuleProvider="target">
+                        <barButtonItem key="rightBarButtonItem" image="shop-basket" id="bb3-eo-E2Q">
                             <connections>
                                 <action selector="cartTapped:" destination="q4p-Dd-3am" id="6cT-SE-eSV"/>
                             </connections>
@@ -249,7 +249,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qET-Ka-vkJ">
-                        <barButtonItem key="rightBarButtonItem" image="shop-basket" id="Pe3-Xc-hsH" customClass="BadgeUIBarButtonItem" customModule="CoordinatorExample" customModuleProvider="target">
+                        <barButtonItem key="rightBarButtonItem" image="shop-basket" id="Pe3-Xc-hsH">
                             <connections>
                                 <action selector="cartTapped:" destination="moF-r1-ZcN" id="grY-l7-zxT"/>
                             </connections>

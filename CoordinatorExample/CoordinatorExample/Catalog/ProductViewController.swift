@@ -14,7 +14,7 @@ final class ProductViewController: UIViewController, StoryboardLoadable {
 
 	@IBOutlet fileprivate weak var mainPhotoView: UIImageView!
 	@IBOutlet fileprivate weak var titleLabel: UILabel!
-	@IBOutlet fileprivate weak var cartBarItem: BadgeUIBarButtonItem!
+	@IBOutlet fileprivate weak var cartBarItem: UIBarButtonItem!
 
 	//	Local data model
 
@@ -81,9 +81,9 @@ fileprivate extension ProductViewController {
 
 	func renderCartStatus() {
 		guard let numberOfCartItems = numberOfCartItems, numberOfCartItems > 0 else {
-			self.cartBarItem.removeBadge()
+			self.cartBarItem.setBadge(text: nil)
 			return
 		}
-		self.cartBarItem.addBadge(number: numberOfCartItems)
+		self.cartBarItem.setBadge(text: "\( numberOfCartItems )")
 	}
 }

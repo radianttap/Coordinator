@@ -14,7 +14,7 @@ final class HomeController: UIViewController, StoryboardLoadable {
 
 	@IBOutlet fileprivate weak var collectionView: UICollectionView!
 	@IBOutlet fileprivate weak var notificationContainer: UIView!
-	@IBOutlet fileprivate weak var cartBarItem: BadgeUIBarButtonItem!
+	@IBOutlet fileprivate weak var cartBarItem: UIBarButtonItem!
 
 	//	Local data model
 
@@ -57,7 +57,7 @@ final class HomeController: UIViewController, StoryboardLoadable {
 			[weak self] isAddedToCart, numberOfCartItems in
 			guard let `self` = self else { return }
 
-			self.cartBarItem.addBadge(number: numberOfCartItems)
+			self.cartBarItem.setBadge(text: "\( numberOfCartItems )")
 			completion(isAddedToCart, numberOfCartItems)
 		})
 	}
@@ -105,10 +105,10 @@ fileprivate extension HomeController {
 
 	func renderCartStatus() {
 		guard let numberOfCartItems = numberOfCartItems, numberOfCartItems > 0 else {
-			self.cartBarItem.removeBadge()
+			self.cartBarItem.setBadge(text: nil)
 			return
 		}
-		self.cartBarItem.addBadge(number: numberOfCartItems)
+		self.cartBarItem.setBadge(text: "\( numberOfCartItems )")
 	}
 
 

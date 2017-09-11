@@ -1,38 +1,20 @@
-//
-//  UIBarButtonBadge.swift
-//  Finzione
-//
-//  Created by Mohaned Benmesken on 8/31/17.
-//  Copyright © 2017 Mohaned Benmesken. All rights reserved.
-//
+//	Picked up from:
+//	https://gist.github.com/freedom27/c709923b163e26405f62b799437243f4
 
-import Foundation
+
 import UIKit
+
 extension CAShapeLayer {
-
-	//previous method used for creating circle badge
-	func drawCircleAtLocation(location: CGPoint, withRadius radius: CGFloat, andColor color: UIColor, filled: Bool) {
+	func drawRoundedRect(rect: CGRect, andColor color: UIColor, filled: Bool) {
 		fillColor = filled ? color.cgColor : UIColor.white.cgColor
 		strokeColor = color.cgColor
-		let origin = CGPoint(x: location.x - radius, y: location.y - radius)
-		path = UIBezierPath(ovalIn: CGRect(origin: origin, size: CGSize(width: radius * 2, height: radius * 2))).cgPath
+		path = UIBezierPath(roundedRect: rect, cornerRadius: 7).cgPath
 	}
-
-	func drawRoundedRectAtLocation(location: CGPoint,size: CGSize, withRadius radius: CGFloat, andColor color: UIColor, filled: Bool) {
-		fillColor = filled ? color.cgColor : UIColor.white.cgColor
-		strokeColor = color.cgColor
-		let origin = CGPoint(x: location.x - radius, y: location.y - radius)
-		//path = UIBezierPath(ovalIn: CGRect(origin: origin, size: CGSize(width: radius * 2, height: radius * 2))).cgPath
-		path = UIBezierPath(roundedRect: CGRect(origin: origin, size: size), cornerRadius: radius).cgPath
-	}
-
 }
 
 private var handle: UInt8 = 0;
 
-// this class made for the badge uibarbutton and made to have flexible width based on the content
-class BadgeUIBarButtonItem : UIBarButtonItem{
-
+extension UIBarButtonItem {
 	private var badgeLayer: CAShapeLayer? {
 		if let b: AnyObject = objc_getAssociatedObject(self, &handle) as AnyObject? {
 			return b as? CAShapeLayer
@@ -41,80 +23,66 @@ class BadgeUIBarButtonItem : UIBarButtonItem{
 		}
 	}
 
-	var btn = UIButton()
-
-	override func awakeFromNib() {
-
-		let size = self.image?.size ?? CGSize(width: 32, height: 32)
-
-		// setting background image for the UIBarImage if it exist
-		btn.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-		btn.setBackgroundImage(self.image, for: .normal)
-
-	}
-
-	func addBadge(number: Int, withOffset offset: CGPoint = CGPoint.zero, andColor color: UIColor = UIColor.green, andFilled filled: Bool = true, fontColor:UIColor = UIColor.white) {
-
+	func setBadge(text: String?, withOffsetFromTopRight offset: CGPoint = CGPoint.zero, andColor color:UIColor = UIColor.red, andFilled filled: Bool = true, andFontSize fontSize: CGFloat = 11)
+	{
 		badgeLayer?.removeFromSuperlayer()
 
+		if (text == nil || text == "") {
+			return
+		}
+
+		addBadge(text: text!, withOffset: offset, andColor: color, andFilled: filled)
+	}
+
+	private func addBadge(text: String, withOffset offset: CGPoint = CGPoint.zero, andColor color: UIColor = UIColor.red, andFilled filled: Bool = true, andFontSize fontSize: CGFloat = 11)
+	{
+		guard let view = self.value(forKey: "view") as? UIView else { return }
+
+		var font = UIFont.systemFont(ofSize: fontSize)
+
+		if #available(iOS 9.0, *) {
+			font = UIFont.monospacedDigitSystemFont(ofSize: fontSize, weight: UIFontWeightRegular)
+		}
+
+		let badgeSize = text.size(attributes: [NSFontAttributeName: font])
 
 		// Initialize Badge
 		let badge = CAShapeLayer()
 
+		let height = badgeSize.height;
+		var width = badgeSize.width + 2 /* padding */
 
-		// check if the view is RTL
-		var isRight = false
-		if #available(iOS 9.0, *) {
-			if UIView.userInterfaceLayoutDirection(
-				for: btn.semanticContentAttribute) == .rightToLeft {
-
-				isRight = true
-				// The view is shown in right-to-left mode right now.
-			}
-		} else {
-			// Use the previous technique
-			if UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft {
-				isRight = true
-				// The view is in right-to-left mode
-			}
+		//make sure we have at least a circle
+		if (width < height) {
+			width = height
 		}
 
-		// set the position of the badge based if the direction of the view
-		let location = CGPoint(x: (isRight ? offset.x : btn.frame.width), y: (offset.y))
+		//x position is offset from right-hand side
+		let x = view.frame.width - width + offset.x
+
+		let badgeFrame = CGRect(origin: CGPoint(x: x, y: offset.y), size: CGSize(width: width, height: height))
+
+		badge.drawRoundedRect(rect: badgeFrame, andColor: color, filled: filled)
+		view.layer.addSublayer(badge)
 
 		// Initialiaze Badge's label
 		let label = CATextLayer()
-		label.string = "\(number)"
+		label.string = text
 		label.alignmentMode = kCAAlignmentCenter
-		label.fontSize = 11
-		label.frame = CGRect(origin: CGPoint(x: location.x - 4, y: offset.y-7), size: label.preferredFrameSize())
-		label.foregroundColor = filled ? fontColor.cgColor : color.cgColor
+		label.font = font
+		label.fontSize = font.pointSize
+
+		label.frame = badgeFrame
+		label.foregroundColor = filled ? UIColor.white.cgColor : color.cgColor
 		label.backgroundColor = UIColor.clear.cgColor
 		label.contentsScale = UIScreen.main.scale
-
-		badge.drawRoundedRectAtLocation(location: location, size: CGSize.init(width: label.preferredFrameSize().width+8, height: 16), withRadius: 8, andColor: color, filled: filled)
-
-		btn.layer.addSublayer(badge)
-
 		badge.addSublayer(label)
-
-		customView = btn
-		// btn.frame = CGRect(x: 0, y: 0, width: width, height: width)
 
 		// Save Badge as UIBarButtonItem property
 		objc_setAssociatedObject(self, &handle, badge, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
 	}
 
-	func updateBadge(number: Int) {
-		if let text = badgeLayer?.sublayers?.filter({ $0 is CATextLayer }).first as? CATextLayer {
-			text.string = "\(number)"
-		}
-	}
-
-	func removeBadge() {
+	private func removeBadge() {
 		badgeLayer?.removeFromSuperlayer()
 	}
-
-
 }
-
