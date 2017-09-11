@@ -8,9 +8,9 @@
 
 import UIKit
 import TinyConstraints
+import SwiftyTimer
 
 final class PromoContainerCell: UICollectionViewCell, ReusableView {
-
 	//	UI outlets
 
 	fileprivate lazy var collectionView: UICollectionView = {
@@ -39,7 +39,40 @@ final class PromoContainerCell: UICollectionViewCell, ReusableView {
 	var promotedProducts: [Product] = [] {
 		didSet {
 			collectionView.reloadData()
+			setup()
 		}
+	}
+
+	//	Timers
+
+	var timer: Timer?
+}
+
+extension PromoContainerCell {
+	override func prepareForReuse() {
+		super.prepareForReuse()
+
+		timer?.invalidate()
+	}
+
+	fileprivate func setup() {
+		timer = Timer.every(3) {
+			[weak self] in
+			guard let `self` = self else { return }
+			self.slide()
+		}
+	}
+
+	fileprivate func slide() {
+		let cv = self.collectionView
+
+		let pagesCount = Int(cv.contentSize.width / cv.bounds.width)
+		var page = Int(abs(cv.contentOffset.x / cv.bounds.width))
+		page += 1
+		if page >= pagesCount { page = 0 }
+
+		let indexPath = IndexPath(item: page, section: 0)
+		cv.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
 	}
 }
 
