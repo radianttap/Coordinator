@@ -54,6 +54,9 @@ fileprivate extension CartCoordinator {
 		page = p
 
 		switch p {
+		case .home:
+			let vc = CartController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
+			root(vc)
 		default:
 			break
 		}

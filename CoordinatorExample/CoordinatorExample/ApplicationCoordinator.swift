@@ -99,6 +99,10 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	override func cartToggle(sender: Any?) {
 		setupActiveSection( .cart(.home) )
 	}
+
+	override func catalogShowPage(_ page: CatalogPageBox, sender: Any?) {
+		setupActiveSection( .catalog(page.unbox) )
+	}
 }
 
 

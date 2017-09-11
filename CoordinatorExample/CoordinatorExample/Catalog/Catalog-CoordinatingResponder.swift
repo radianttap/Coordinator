@@ -8,6 +8,19 @@
 
 import UIKit
 
+
+final class CatalogPageBox: NSObject {
+	let unbox: CatalogCoordinator.Page
+	init(_ value: CatalogCoordinator.Page) {
+		self.unbox = value
+	}
+}
+extension CatalogCoordinator.Page {
+	var boxed: CatalogPageBox { return CatalogPageBox(self) }
+}
+
+
+
 extension UIResponder {
 
 	//	** Data requests by various VCs should bubble up to some of the Coordinators
@@ -43,6 +56,9 @@ extension UIResponder {
 
 	//	** Switching to different VCs
 
+	func catalogShowPage(_ page: CatalogPageBox, sender: Any?) {
+		coordinatingResponder?.catalogShowPage(page, sender: sender)
+	}
 
 	/// Use this method to request display of single product details view
 	///

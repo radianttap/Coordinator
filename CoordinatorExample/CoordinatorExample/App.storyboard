@@ -148,6 +148,44 @@
             </objects>
             <point key="canvasLocation" x="-172" y="179.46026986506749"/>
         </scene>
+        <!--Cart Controller-->
+        <scene sceneID="1dT-y7-AAQ">
+            <objects>
+                <viewController storyboardIdentifier="CartController" id="kgX-Yl-ua8" customClass="CartController" customModule="CoordinatorExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="636-XB-LDS"/>
+                        <viewControllerLayoutGuide type="bottom" id="1tT-in-TR3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ltK-qn-Isw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cart Home UI goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLf-Fh-QBP">
+                                <rect key="frame" x="32" y="36" width="311" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="FLf-Fh-QBP" secondAttribute="trailing" constant="16" id="XpW-7V-6Yl"/>
+                            <constraint firstItem="FLf-Fh-QBP" firstAttribute="leading" secondItem="ltK-qn-Isw" secondAttribute="leadingMargin" constant="16" id="eTE-PZ-G0q"/>
+                            <constraint firstItem="FLf-Fh-QBP" firstAttribute="top" secondItem="636-XB-LDS" secondAttribute="bottom" constant="16" id="v2m-ai-NDm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="eQ5-m4-0fQ">
+                        <barButtonItem key="leftBarButtonItem" image="icon-dress" id="NXK-zy-bfW">
+                            <connections>
+                                <action selector="catalogItemTapped:" destination="kgX-Yl-ua8" id="JEd-cx-lox"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9UN-EU-fbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-172" y="910"/>
+        </scene>
         <!--Product View Controller-->
         <scene sceneID="0cJ-bi-bCN">
             <objects>
@@ -211,7 +249,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qET-Ka-vkJ">
-                        <barButtonItem key="rightBarButtonItem" image="shop-basket" id="Pe3-Xc-hsH" customClass="BadgeUIBarButtonItem" customModule="CoordinatorExample" customModuleProvider="target"/>
+                        <barButtonItem key="rightBarButtonItem" image="shop-basket" id="Pe3-Xc-hsH" customClass="BadgeUIBarButtonItem" customModule="CoordinatorExample" customModuleProvider="target">
+                            <connections>
+                                <action selector="cartTapped:" destination="moF-r1-ZcN" id="grY-l7-zxT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cartBarItem" destination="Pe3-Xc-hsH" id="fvS-1R-yv0"/>
@@ -225,6 +267,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon-dress" width="16" height="24"/>
         <image name="shop-basket" width="24" height="20"/>
     </resources>
 </document>
