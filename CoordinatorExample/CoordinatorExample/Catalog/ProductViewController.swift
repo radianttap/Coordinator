@@ -65,10 +65,32 @@ extension ProductViewController {
 		//	TODO: add UI to choose colors
 		color = Color.c18
 	}
+
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+
+		updateCartStatus()
+	}
 }
 
 
 fileprivate extension ProductViewController {
+	//	MARK: Data updates
+
+	func updateCartStatus() {
+		cartStatus(sender: self) {
+			[weak self] num in
+			guard let `self` = self else { return }
+
+			DispatchQueue.main.async {
+				self.numberOfCartItems = num
+			}
+		}
+	}
+
+
+	//	MARK: Internal
+
 	func populate() {
 		guard let product = product else { return }
 
