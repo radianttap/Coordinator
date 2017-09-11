@@ -61,6 +61,8 @@ extension ProductViewController {
 		renderCartStatus()
 
 		//	HACK: setup default color
+		//	for the demos to work.
+		//	TODO: add UI to choose colors
 		color = Color.c18
 	}
 }
@@ -72,8 +74,8 @@ fileprivate extension ProductViewController {
 
 		titleLabel.text = product.name
 
-		if let path = product.imagePaths.first {
-			mainPhotoView.image = UIImage(named: path)
+		if let url = product.heroURL {
+			mainPhotoView.kf.setImage(with: url)
 		}
 	}
 

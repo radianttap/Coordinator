@@ -65,6 +65,7 @@ extension Product {
 	var seasonCode: String {
 		return styleCode.substring(to: Season.styleCodeIndex)
 	}
+
 	var themeCode: String {
 		return styleCode.substring(to: Theme.styleCodeIndex)
 	}
@@ -75,12 +76,16 @@ extension Product {
 	}
 
 	var gridImageURL: URL? {
-		guard let path = gridImagePath else { return nil }
+		guard let path = gridImagePath ?? imagePaths.first else { return nil }
 		return assetManager?.url(forProductPath: path)
 	}
 
 	var imageURLs: [URL] {
 		return imagePaths.flatMap({ assetManager?.url(forProductPath: $0) })
+	}
+
+	var heroURL: URL? {
+		return imageURLs.first ?? gridImageURL ?? promoImageURL
 	}
 }
 
