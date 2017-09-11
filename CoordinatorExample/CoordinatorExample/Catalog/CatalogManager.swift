@@ -44,9 +44,9 @@ extension CatalogManager {
 		callback( orderedSeasons, nil )
 
 		fetchProducts {
-			[unowned self] _, dataError in
-			if let dataError = dataError {
-				callback( self.orderedSeasons, .dataError(dataError) )
+			[unowned self] _, catalogError in
+			if let catalogError = catalogError {
+				callback( self.orderedSeasons, catalogError )
 				return
 			}
 			callback( self.orderedSeasons, nil )
@@ -62,9 +62,9 @@ extension CatalogManager {
 		callback( s.orderedCategories, nil )
 
 		fetchProducts {
-			_, dataError in
-			if let dataError = dataError {
-				callback( s.orderedCategories, .dataError(dataError) )
+			_, catalogError in
+			if let catalogError = catalogError {
+				callback( s.orderedCategories, catalogError )
 				return
 			}
 			callback( s.orderedCategories, nil )
@@ -80,9 +80,9 @@ extension CatalogManager {
 		callback( s.orderedThemes, nil )
 
 		fetchProducts {
-			_, dataError in
-			if let dataError = dataError {
-				callback( s.orderedThemes, .dataError(dataError) )
+			_, catalogError in
+			if let catalogError = catalogError {
+				callback( s.orderedThemes, catalogError )
 				return
 			}
 			callback( s.orderedThemes, nil )
@@ -104,9 +104,9 @@ extension CatalogManager {
 		callback( products, nil )
 
 		fetchProducts {
-			_, dataError in
-			if let dataError = dataError {
-				callback( products, .dataError(dataError) )
+			_, catalogError in
+			if let catalogError = catalogError {
+				callback( products, catalogError )
 				return
 			}
 
@@ -124,11 +124,11 @@ extension CatalogManager {
 		callback( promotedProducts, nil )
 
 		fetchPromotions {
-			[unowned self] hasUpdates, dataError in
+			[unowned self] hasUpdates, catalogError in
 			if !hasUpdates { return }
 
-			if let dataError = dataError {
-				callback( self.promotedProducts, .dataError(dataError) )
+			if let catalogError = catalogError {
+				callback( self.promotedProducts, catalogError )
 				return
 			}
 
@@ -162,7 +162,7 @@ fileprivate extension CatalogManager {
 	///	Fetch an update on app start + at least once every day.
 	///
 	///	Callback first param is `true` if data set is successfully refreshed.
-	func fetchProducts(callback: @escaping (Bool, DataError?) -> Void = {_, _ in}) {
+	func fetchProducts(callback: @escaping (Bool, CatalogError?) -> Void = {_, _ in}) {
 		if let lastUpdated = lastUpdatedProducts, lastUpdated.isLaterThan(date: Date().subtract(days: 1)) {
 			callback(false, nil)
 			return
@@ -173,7 +173,7 @@ fileprivate extension CatalogManager {
 		dataManager.fetchProducts {
 			[unowned self] seasons, cats, dataError in
 			if let dataError = dataError {
-				callback(false, dataError)
+				callback(false, .dataError(dataError))
 				return
 			}
 
@@ -185,7 +185,7 @@ fileprivate extension CatalogManager {
 	}
 
 
-	func fetchPromotions(callback: @escaping (Bool, DataError?) -> Void = {_, _ in}) {
+	func fetchPromotions(callback: @escaping (Bool, CatalogError?) -> Void = {_, _ in}) {
 		if let lastUpdated = lastUpdatedPromotions, lastUpdated.isLaterThan(date: Date().subtract(hours: 2)) {
 			callback(false, nil)
 			return
@@ -196,7 +196,7 @@ fileprivate extension CatalogManager {
 		dataManager.fetchPromotedProducts {
 			[unowned self] arr, dataError in
 			if let dataError = dataError {
-				callback(false, dataError)
+				callback(false, .dataError(dataError))
 				return
 			}
 
