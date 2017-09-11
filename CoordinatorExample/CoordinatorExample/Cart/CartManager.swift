@@ -10,6 +10,13 @@ import Foundation
 
 
 final class CartManager {
+	fileprivate var dataManager: DataManager
+
+	init(dataManager: DataManager) {
+		self.dataManager = dataManager
+	}
+
+	//	Local stuff
 
 	fileprivate(set) var items: [CartItem] = []
 

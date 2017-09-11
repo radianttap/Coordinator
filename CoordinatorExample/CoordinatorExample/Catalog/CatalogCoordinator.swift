@@ -86,11 +86,13 @@ fileprivate extension CatalogCoordinator {
 				vc.promotedProducts = catalogManager.promotedProducts
 				vc.categories = activeSeason.orderedCategories
 			}
+			vc.numberOfCartItems = dependencies?.cartManager?.items.count
 			root(vc)
 
 		case .product(let product):
 			let vc = ProductViewController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
 			vc.product = product
+			vc.numberOfCartItems = dependencies?.cartManager?.items.count
 			show(vc)
 		}
 	}

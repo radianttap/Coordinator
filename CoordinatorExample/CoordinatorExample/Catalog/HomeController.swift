@@ -10,7 +10,6 @@ import UIKit
 import SwiftyTimer
 
 final class HomeController: UIViewController, StoryboardLoadable {
-
 	//	UI Outlets
 
 	@IBOutlet fileprivate weak var collectionView: UICollectionView!
@@ -39,6 +38,12 @@ final class HomeController: UIViewController, StoryboardLoadable {
 		}
 	}
 
+	var numberOfCartItems: Int? {
+		didSet {
+			if !self.isViewLoaded { return }
+			updateCartStatus()
+		}
+	}
 
 	//	Timers
 
@@ -73,6 +78,8 @@ extension HomeController {
 
 		setupTitleView()
 		collectionView.register(PromoContainerCell.self)
+
+		updateCartStatus()
 	}
 
 	override func viewDidLayoutSubviews() {
@@ -99,6 +106,14 @@ extension HomeController {
 
 
 fileprivate extension HomeController {
+	func updateCartStatus() {
+		guard let numberOfCartItems = numberOfCartItems, numberOfCartItems > 0 else {
+			self.cartBarItem.removeBadge()
+			return
+		}
+		self.cartBarItem.addBadge(number: numberOfCartItems)
+	}
+
 	///	This is the heart of the approach that isolates VCs from the rest of the app.
 	///
 	///	Each VC will always use only its local data model and care about nothing else.

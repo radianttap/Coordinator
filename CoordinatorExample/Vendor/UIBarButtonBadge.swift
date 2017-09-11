@@ -45,13 +45,15 @@ class BadgeUIBarButtonItem : UIBarButtonItem{
 
 	override func awakeFromNib() {
 
+		let size = self.image?.size ?? CGSize(width: 32, height: 32)
+
 		// setting background image for the UIBarImage if it exist
-		btn.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+		btn.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
 		btn.setBackgroundImage(self.image, for: .normal)
 
 	}
 
-	func addBadge(number: Int, withOffset offset: CGPoint = CGPoint.zero, andColor color: UIColor = UIColor.yellow, andFilled filled: Bool = true, fontColor:UIColor = UIColor.black) {
+	func addBadge(number: Int, withOffset offset: CGPoint = CGPoint.zero, andColor color: UIColor = UIColor.green, andFilled filled: Bool = true, fontColor:UIColor = UIColor.white) {
 
 		badgeLayer?.removeFromSuperlayer()
 

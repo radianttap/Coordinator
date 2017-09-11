@@ -14,6 +14,7 @@ final class ProductViewController: UIViewController, StoryboardLoadable {
 
 	@IBOutlet fileprivate weak var mainPhotoView: UIImageView!
 	@IBOutlet fileprivate weak var titleLabel: UILabel!
+	@IBOutlet fileprivate weak var cartBarItem: BadgeUIBarButtonItem!
 
 	//	Local data model
 
@@ -23,15 +24,44 @@ final class ProductViewController: UIViewController, StoryboardLoadable {
 			self.populate()
 		}
 	}
+
+	var color: Color?
+
+	var numberOfCartItems: Int? {
+		didSet {
+			if !self.isViewLoaded { return }
+			updateCartStatus()
+		}
+	}
 }
 
 
-//	MARK: View lifecycle
 extension ProductViewController {
+	//	MARK: Actions
+
+	@IBAction func cartTapped(_ sender: UIBarButtonItem) {
+		cartToggle(sender: self)
+	}
+
+	@IBAction func addTapped(_ sender: UIButton) {
+		guard let product = product, let color = color else { return }
+		cartAdd(product: product, color: color.boxed, sender: sender) {
+			[weak self] _, num in
+			guard let `self` = self else { return }
+			self.numberOfCartItems = num
+		}
+	}
+
+	//	MARK: View lifecycle
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		populate()
+		updateCartStatus()
+
+		//	HACK: setup default color
+		color = Color.c18
 	}
 }
 
@@ -45,5 +75,13 @@ fileprivate extension ProductViewController {
 		if let path = product.imagePaths.first {
 			mainPhotoView.image = UIImage(named: path)
 		}
+	}
+
+	func updateCartStatus() {
+		guard let numberOfCartItems = numberOfCartItems, numberOfCartItems > 0 else {
+			self.cartBarItem.removeBadge()
+			return
+		}
+		self.cartBarItem.addBadge(number: numberOfCartItems)
 	}
 }

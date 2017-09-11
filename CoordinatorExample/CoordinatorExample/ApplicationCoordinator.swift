@@ -23,6 +23,7 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 	//	It keeps references to all the data source objects
 	var dataManager: DataManager!
 	var catalogManager: CatalogManager!
+	var cartManager: CartManager!
 
 
 	//	Declaration of all possible Coordinators
@@ -45,10 +46,12 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 		let assetManager = AssetManager.shared
 		dataManager = DataManager(apiManager: apiManager, assetManager: assetManager)
 		catalogManager = CatalogManager(dataManager: dataManager)
+		cartManager = CartManager(dataManager: dataManager)
 
 		dependencies = AppDependency(apiManager: apiManager,
 		                             dataManager: dataManager,
 		                             assetManager: assetManager,
+		                             cartManager: cartManager,
 		                             catalogManager: catalogManager)
 		//	finally ready
 		super.start(with: completion)
