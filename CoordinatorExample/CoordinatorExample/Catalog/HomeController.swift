@@ -15,6 +15,7 @@ final class HomeController: UIViewController, StoryboardLoadable {
 
 	@IBOutlet fileprivate weak var collectionView: UICollectionView!
 	@IBOutlet fileprivate weak var notificationContainer: UIView!
+	@IBOutlet fileprivate weak var cartBarItem: BadgeUIBarButtonItem!
 
 	//	Local data model
 
@@ -28,14 +29,12 @@ final class HomeController: UIViewController, StoryboardLoadable {
 	var promotedProducts: [Product] = [] {
 		didSet {
 			if !self.isViewLoaded { return }
-//			collectionView.reloadSections( IndexSet(integer: LayoutSection.promotions.rawValue) )
 			collectionView.reloadData()
 		}
 	}
 	var categories: [Category] = [] {
 		didSet {
 			if !self.isViewLoaded { return }
-//			collectionView.reloadSections( IndexSet(integer: LayoutSection.promotions.rawValue) )
 			collectionView.reloadData()
 		}
 	}
@@ -44,10 +43,31 @@ final class HomeController: UIViewController, StoryboardLoadable {
 	//	Timers
 
 	var timer: Timer?
+
+
+	//	MARK: CoordinatingResponder messages
+
+	override func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: @escaping (Bool, Int) -> Void) {
+		coordinatingResponder?.cartAdd(product: product, color: color, sender: sender, completion: {
+			[weak self] isAddedToCart, numberOfCartItems in
+			guard let `self` = self else { return }
+
+			self.cartBarItem.addBadge(number: numberOfCartItems)
+			completion(isAddedToCart, numberOfCartItems)
+		})
+	}
 }
 
-//	MARK: View lifecycle
 extension HomeController {
+	//	MARK: Actions
+
+	@IBAction func cartTapped(_ sender: UIBarButtonItem) {
+		cartToggle(sender: self)
+	} 
+
+
+	//	MARK: View lifecycle
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 

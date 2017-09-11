@@ -70,7 +70,7 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 		rootViewController.present(ac, animated: true)
 	}
 
-	override func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: @escaping (Bool) -> Void) {
+	override func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: @escaping (Bool, Int) -> Void) {
 		guard let cartManager = dependencies?.cartManager else {
 			enqueueMessage { [unowned self] in
 				self.cartAdd(product: product, color: color, sender: sender, completion: completion)
@@ -79,14 +79,11 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 		}
 
 		cartManager.add(product: product, color: color.unbox)
-		completion(true)
+		completion(true, cartManager.items.count)
 	}
 
 	override func cartToggle(sender: Any?) {
-
-		let ac = UIAlertController(title: nil, message: "cart-Toggle", preferredStyle: .alert)
-		ac.addAction( UIAlertAction(title: "OK", style: .default) )
-		rootViewController.present(ac, animated: true)
+		setupActiveSection( .cart(.home) )
 	}
 }
 
