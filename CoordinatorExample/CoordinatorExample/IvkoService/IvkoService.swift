@@ -6,9 +6,7 @@
 //  Copyright © 2017. Radiant Tap. All rights reserved.
 //
 
-import Foundation
-import Marshal
-
+import UIKit
 
 public typealias JSON = [String: Any]
 
