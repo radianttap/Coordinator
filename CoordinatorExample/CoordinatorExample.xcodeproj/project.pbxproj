@@ -19,6 +19,7 @@
 		D00541881F46349500CFF7AE /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D005417E1F46349500CFF7AE /* NibLoadable.swift */; };
 		D00541891F46349500CFF7AE /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D005417F1F46349500CFF7AE /* ReusableView.swift */; };
 		D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5A1EC2FE230008A087 /* AppDependency.swift */; };
+		D01EB09D1F7BC7C90042C837 /* NetworkTaskMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB09C1F7BC7C90042C837 /* NetworkTaskMetric.swift */; };
 		D0255A7C1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */; };
 		D027B93C1F669DF50088C079 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D027B93B1F669DF50088C079 /* CartItem.swift */; };
 		D027B93E1F669E3E0088C079 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = D027B93D1F669E3E0088C079 /* Size.swift */; };
@@ -82,6 +83,7 @@
 		D005417E1F46349500CFF7AE /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		D005417F1F46349500CFF7AE /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D010CB5A1EC2FE230008A087 /* AppDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
+		D01EB09C1F7BC7C90042C837 /* NetworkTaskMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTaskMetric.swift; sourceTree = "<group>"; };
 		D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Catalog-CoordinatingResponder.swift"; path = "Catalog/Catalog-CoordinatingResponder.swift"; sourceTree = "<group>"; };
 		D027B93B1F669DF50088C079 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CartItem.swift; path = DataModel/CartItem.swift; sourceTree = "<group>"; };
 		D027B93D1F669E3E0088C079 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Size.swift; path = DataModel/Size.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		D036A95B1F48F206001E671B /* Swift-Network */ = {
 			isa = PBXGroup;
 			children = (
+				D01EB09C1F7BC7C90042C837 /* NetworkTaskMetric.swift */,
 				D036A95C1F48F206001E671B /* Network-Extensions.swift */,
 				D036A95D1F48F206001E671B /* NetworkError.swift */,
 				D036A95E1F48F206001E671B /* NetworkOperation.swift */,
@@ -504,6 +507,7 @@
 				D00541891F46349500CFF7AE /* ReusableView.swift in Sources */,
 				D00541861F46349500CFF7AE /* AsyncOperation.swift in Sources */,
 				D027B93E1F669E3E0088C079 /* Size.swift in Sources */,
+				D01EB09D1F7BC7C90042C837 /* NetworkTaskMetric.swift in Sources */,
 				D036A96A1F48F206001E671B /* ActionClosurable.swift in Sources */,
 				D00541851F46349500CFF7AE /* Notifying.swift in Sources */,
 				D00541841F46349500CFF7AE /* String-Extensions.swift in Sources */,

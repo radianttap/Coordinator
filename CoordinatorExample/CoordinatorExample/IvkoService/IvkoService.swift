@@ -25,6 +25,8 @@ final class IvkoService {
 			return c
 		}()
 
+		urlSession = URLSession(configuration: urlSessionConfiguration)
+
 		queue = {
 			let oq = OperationQueue()
 			oq.qualityOfService = .userInitiated
@@ -33,6 +35,7 @@ final class IvkoService {
 	}
 
 	fileprivate var urlSessionConfiguration: URLSessionConfiguration
+	fileprivate var urlSession: URLSession
 	fileprivate var queue: OperationQueue
 }
 
@@ -190,7 +193,7 @@ fileprivate extension IvkoService {
 	//	MARK:- Execution
 
 	func execute(_ urlRequest: URLRequest, path: Path, callback: @escaping ServiceCallback) {
-		let op = NetworkOperation(urlRequest: urlRequest, urlSessionConfiguration: urlSessionConfiguration) {
+		let op = NetworkOperation(urlRequest: urlRequest, urlSession: urlSession) {
 //			[unowned self]
 			payload in
 

@@ -7,7 +7,10 @@
 //
 
 import Foundation
+
+#if os(iOS)
 import WebKit
+#endif
 
 extension ServerTrustPolicy {
 	///	Default value to use throughout the app, aids consistency.
@@ -27,9 +30,11 @@ extension URLSession {
 }
 
 
+#if os(iOS)
 extension WKWebView {
 	var serverTrustPolicy : ServerTrustPolicy {
 		return ServerTrustPolicy.defaultPolicy
 	}
 }
+#endif
 

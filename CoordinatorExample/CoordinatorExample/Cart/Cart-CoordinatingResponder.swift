@@ -17,6 +17,9 @@ extension UIResponder {
 
 	///	Adds given Product to the cart
 	func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: @escaping (Bool, Int) -> Void) {
+		guard let responser = coordinatingResponder else {
+			fatalError("unhandled messaged")
+		}
 		coordinatingResponder?.cartAdd(product: product, color: color, sender: sender, completion: completion)
 	}
 
