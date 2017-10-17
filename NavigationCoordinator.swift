@@ -49,6 +49,17 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		rootViewController.viewControllers = [vc]
 	}
 
+	public func pop(to vc: UIViewController, animated: Bool = true) {
+		rootViewController.popToViewController(vc, animated: animated)
+
+		if let index = viewControllers.index(of: vc) {
+			let lastPosition = viewControllers.count - 1
+			if lastPosition > 0 {
+				viewControllers = Array(viewControllers.dropLast(lastPosition - index))
+			}
+		}
+	}
+
 	open override func start(with completion: @escaping () -> Void) {
 		rootViewController.delegate = self
 		super.start(with: completion)
