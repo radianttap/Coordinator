@@ -14,8 +14,6 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	public override init(rootViewController: UINavigationController?) {
 		super.init(rootViewController: rootViewController)
-
-		rootViewController?.delegate = self
 	}
 
 	public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {

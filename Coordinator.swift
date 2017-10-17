@@ -60,8 +60,6 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 		}
 		self.rootViewController = rvc
 		super.init()
-
-		rvc.parentCoordinator = self
 	}
 
 
@@ -115,6 +113,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///
 	///	- Parameter completion: An optional `Callback` executed at the end.
 	open func start(with completion: @escaping () -> Void = {}) {
+		rootViewController.parentCoordinator = self
 		completion()
 	}
 
@@ -124,6 +123,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///
 	///	- Parameter completion: An optional `Callback` executed at the end.
 	open func stop(with completion: @escaping () -> Void = {}) {
+		rootViewController.parentCoordinator = nil
 		completion()
 	}
 
