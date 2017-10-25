@@ -186,6 +186,7 @@
 		CC5840CEA19B32DA28F7AAA16DB02335 /* String+MD5.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+MD5.swift"; path = "Sources/String+MD5.swift"; sourceTree = "<group>"; };
 		D027B9411F66B3050088C079 /* UIKit-CoordinatingExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit-CoordinatingExtensions.swift"; sourceTree = "<group>"; };
 		D05ABA171F659A04006B1206 /* Coordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinating.swift; sourceTree = "<group>"; };
+		D0AB7A7C1FA0A9D600861BB9 /* Coordinator.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Coordinator.podspec; sourceTree = "<group>"; };
 		D298C0C218DBEA986D7B67AC7760F1D6 /* Pods-CoordinatorExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoordinatorExample.release.xcconfig"; sourceTree = "<group>"; };
 		D3703179CA21BED658859017BAB9A629 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		D3E6C2969E837EBA7F0CD4B711A5E757 /* Pods-CoordinatorExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CoordinatorExample.modulemap"; sourceTree = "<group>"; };
@@ -273,6 +274,7 @@
 		03E91D619AA0BE9A3064A5DB9B45D12E /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				D0AB7A7C1FA0A9D600861BB9 /* Coordinator.podspec */,
 				D05ABA171F659A04006B1206 /* Coordinating.swift */,
 				811DA6135E2B19CD3D3E254A29888878 /* Coordinator.swift */,
 				D027B9411F66B3050088C079 /* UIKit-CoordinatingExtensions.swift */,
