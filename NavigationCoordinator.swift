@@ -26,6 +26,7 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		if let vc = viewControllers.last, vc === fromViewController {
 			//	this is pop. remove this controller from Coordinator's list
 			viewControllers.removeLast()
+			handlePopBack(to: viewControllers.last)
 		}
 		//	is there any controller left shown?
 		if viewControllers.count == 0 {
@@ -58,6 +59,9 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 				viewControllers = Array(viewControllers.dropLast(lastPosition - index))
 			}
 		}
+	}
+
+	open func handlePopBack(to vc: UIViewController?) {
 	}
 
 	open override func start(with completion: @escaping () -> Void) {
