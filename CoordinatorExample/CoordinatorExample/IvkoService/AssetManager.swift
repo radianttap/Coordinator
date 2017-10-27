@@ -9,10 +9,29 @@
 import Foundation
 
 
-final class AssetManager {
+final class AssetManager: NetworkSession {
 	static let shared = AssetManager()
 
-	private init() {}
+	private init() {
+		queue = {
+			let oq = OperationQueue()
+			oq.qualityOfService = .userInitiated
+			return oq
+		}()
+
+		let urlSessionConfiguration: URLSessionConfiguration = {
+			let c = URLSessionConfiguration.default
+			c.allowsCellularAccess = true
+			c.httpCookieAcceptPolicy = .never
+			c.httpShouldSetCookies = false
+			return c
+		}()
+		super.init(urlSessionConfiguration: urlSessionConfiguration)
+	}
+
+	//	Local stuff
+
+	fileprivate var queue: OperationQueue
 }
 
 extension AssetManager {

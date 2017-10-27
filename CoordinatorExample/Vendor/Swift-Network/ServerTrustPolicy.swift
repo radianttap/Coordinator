@@ -24,6 +24,8 @@
 
 import Foundation
 
+// MARK: - ServerTrustPolicy
+
 /// The `ServerTrustPolicy` evaluates the server trust generally provided by an `NSURLAuthenticationChallenge` when
 /// connecting to a server over a secure HTTPS connection. The policy configuration then evaluates the server trust
 /// with a given set of criteria to determine whether the server trust is valid and the connection should be made.
@@ -36,6 +38,13 @@ import Foundation
 ///                             validate the host provided by the challenge. Applications are encouraged to always
 ///                             validate the host in production environments to guarantee the validity of the server's
 ///                             certificate chain.
+///
+/// - performRevokedEvaluation: Uses the default and revoked server trust evaluations allowing you to control whether to
+///                             validate the host provided by the challenge as well as specify the revocation flags for
+///                             testing for revoked certificates. Apple platforms did not start testing for revoked
+///                             certificates automatically until iOS 10.1, macOS 10.12 and tvOS 10.1 which is
+///                             demonstrated in our TLS tests. Applications are encouraged to always validate the host
+///                             in production environments to guarantee the validity of the server's certificate chain.
 ///
 /// - pinCertificates:          Uses the pinned certificates to validate the server trust. The server trust is
 ///                             considered valid if one of the pinned certificates match one of the server certificates.
@@ -56,6 +65,7 @@ import Foundation
 /// - customEvaluation:         Uses the associated closure to evaluate the validity of the server trust.
 public enum ServerTrustPolicy {
 	case performDefaultEvaluation(validateHost: Bool)
+	case performRevokedEvaluation(validateHost: Bool, revocationFlags: CFOptionFlags)
 	case pinCertificates(certificates: [SecCertificate], validateCertificateChain: Bool, validateHost: Bool)
 	case pinPublicKeys(publicKeys: [SecKey], validateCertificateChain: Bool, validateHost: Bool)
 	case disableEvaluation
@@ -119,6 +129,12 @@ public enum ServerTrustPolicy {
 		case let .performDefaultEvaluation(validateHost):
 			let policy = SecPolicyCreateSSL(true, validateHost ? host as CFString : nil)
 			SecTrustSetPolicies(serverTrust, policy)
+
+			serverTrustIsValid = trustIsValid(serverTrust)
+		case let .performRevokedEvaluation(validateHost, revocationFlags):
+			let defaultPolicy = SecPolicyCreateSSL(true, validateHost ? host as CFString : nil)
+			let revokedPolicy = SecPolicyCreateRevocation(revocationFlags)
+			SecTrustSetPolicies(serverTrust, [defaultPolicy, revokedPolicy] as CFTypeRef)
 
 			serverTrustIsValid = trustIsValid(serverTrust)
 		case let .pinCertificates(pinnedCertificates, validateCertificateChain, validateHost):
@@ -240,4 +256,3 @@ public enum ServerTrustPolicy {
 		return publicKey
 	}
 }
-

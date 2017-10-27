@@ -9,7 +9,7 @@
 import Foundation
 
 /// A simple struct to use as network "result".
-///	As the network operation is processing, it will populate
+///	As `NetworkOperation` is processing, its varuous propertues will be populated along the way.
 struct NetworkPayload {
 	///	The original value of URLRequest at the start of the operation
 	let originalRequest: URLRequest
@@ -24,27 +24,35 @@ struct NetworkPayload {
 		self.urlRequest = urlRequest
 	}
 
+	
+	//	MARK: Result properties
+
 	///	Any error that URLSession may populate (timeouts, no connection etc)
 	var error: NetworkError?
 
-	///	Received HTTP response. Process status code and headers
+	///	Received HTTP response. Use it to process status code and headers
 	var response: HTTPURLResponse?
 
 	///	Received stream of bytes
 	var data: Data?
 
+
+	//	MARK: Timestamps
+
 	///	Moment when the payload was prepared. May not be the same as `tsStart`
 	let tsCreated = Date()
 
-	///	Moment when network task is started (`task.resume()`)
-	var tsStart: Date?
+	///	Moment when network task is started (you called `task.resume()` for the first time).
+	///	Call `.start()` to set it.
+	fileprivate(set) var tsStart: Date?
 
-	///	Moment when network task has ended. Used together with `tsStart` makes for simple speed metering
-	var tsEnd: Date?
+	///	Moment when network task has ended. Used together with `tsStart` makes for simple speed metering.
+	///	Call `.end()` to set it.
+	fileprivate(set) var tsEnd: Date?
 }
 
 extension NetworkPayload {
-	///	Called along with `urlSessionDataTask.resume()`
+	///	Call this along with `task.resume()`
 	mutating func start() {
 		self.tsStart = Date()
 	}

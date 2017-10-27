@@ -19,7 +19,6 @@
 		D00541881F46349500CFF7AE /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D005417E1F46349500CFF7AE /* NibLoadable.swift */; };
 		D00541891F46349500CFF7AE /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D005417F1F46349500CFF7AE /* ReusableView.swift */; };
 		D010CB5B1EC2FE230008A087 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D010CB5A1EC2FE230008A087 /* AppDependency.swift */; };
-		D01EB09D1F7BC7C90042C837 /* NetworkTaskMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01EB09C1F7BC7C90042C837 /* NetworkTaskMetric.swift */; };
 		D0255A7C1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */; };
 		D027B93C1F669DF50088C079 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D027B93B1F669DF50088C079 /* CartItem.swift */; };
 		D027B93E1F669E3E0088C079 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = D027B93D1F669E3E0088C079 /* Size.swift */; };
@@ -48,6 +47,9 @@
 		D05ABA1A1F659BC1006B1206 /* NeedsDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05ABA191F659BC1006B1206 /* NeedsDependency.swift */; };
 		D0765D091ECDC8B100535CAB /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0765D081ECDC8B100535CAB /* DataError.swift */; };
 		D091DA021F66E9B8000A6C8A /* CartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091DA011F66E9B8000A6C8A /* CartController.swift */; };
+		D09363681FA35A4200888CD4 /* NetworkHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09363651FA35A4200888CD4 /* NetworkHTTPMethod.swift */; };
+		D09363691FA35A4200888CD4 /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09363661FA35A4200888CD4 /* NetworkTask.swift */; };
+		D093636A1FA35A4200888CD4 /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09363671FA35A4200888CD4 /* NetworkSession.swift */; };
 		D0C25D2D1F4C86430036E8BF /* CatalogError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C25D2C1F4C86430036E8BF /* CatalogError.swift */; };
 		D0D6B2431F49F3F200501CF0 /* CatalogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D6B2421F49F3F200501CF0 /* CatalogManager.swift */; };
 		D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */; };
@@ -83,7 +85,6 @@
 		D005417E1F46349500CFF7AE /* NibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		D005417F1F46349500CFF7AE /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		D010CB5A1EC2FE230008A087 /* AppDependency.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
-		D01EB09C1F7BC7C90042C837 /* NetworkTaskMetric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTaskMetric.swift; sourceTree = "<group>"; };
 		D0255A7B1ECC2FE6003BF29D /* Catalog-CoordinatingResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Catalog-CoordinatingResponder.swift"; path = "Catalog/Catalog-CoordinatingResponder.swift"; sourceTree = "<group>"; };
 		D027B93B1F669DF50088C079 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CartItem.swift; path = DataModel/CartItem.swift; sourceTree = "<group>"; };
 		D027B93D1F669E3E0088C079 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Size.swift; path = DataModel/Size.swift; sourceTree = "<group>"; };
@@ -114,6 +115,9 @@
 		D05ABA191F659BC1006B1206 /* NeedsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsDependency.swift; sourceTree = "<group>"; };
 		D0765D081ECDC8B100535CAB /* DataError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataError.swift; path = DataModel/DataError.swift; sourceTree = "<group>"; };
 		D091DA011F66E9B8000A6C8A /* CartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
+		D09363651FA35A4200888CD4 /* NetworkHTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHTTPMethod.swift; sourceTree = "<group>"; };
+		D09363661FA35A4200888CD4 /* NetworkTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
+		D09363671FA35A4200888CD4 /* NetworkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
 		D0C25D2C1F4C86430036E8BF /* CatalogError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CatalogError.swift; path = Catalog/CatalogError.swift; sourceTree = "<group>"; };
 		D0D6B2421F49F3F200501CF0 /* CatalogManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CatalogManager.swift; path = Catalog/CatalogManager.swift; sourceTree = "<group>"; };
 		D0F32E0D1E6B06DB0087C700 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
@@ -248,7 +252,9 @@
 		D036A95B1F48F206001E671B /* Swift-Network */ = {
 			isa = PBXGroup;
 			children = (
-				D01EB09C1F7BC7C90042C837 /* NetworkTaskMetric.swift */,
+				D09363651FA35A4200888CD4 /* NetworkHTTPMethod.swift */,
+				D09363671FA35A4200888CD4 /* NetworkSession.swift */,
+				D09363661FA35A4200888CD4 /* NetworkTask.swift */,
 				D036A95C1F48F206001E671B /* Network-Extensions.swift */,
 				D036A95D1F48F206001E671B /* NetworkError.swift */,
 				D036A95E1F48F206001E671B /* NetworkOperation.swift */,
@@ -503,11 +509,11 @@
 				D036A9671F48F206001E671B /* NetworkOperation.swift in Sources */,
 				D00541881F46349500CFF7AE /* NibLoadable.swift in Sources */,
 				D0FF0C391EC83C070023F8B8 /* DataManager.swift in Sources */,
+				D09363691FA35A4200888CD4 /* NetworkTask.swift in Sources */,
 				D0FF0C371EC6D9180023F8B8 /* Price.swift in Sources */,
 				D00541891F46349500CFF7AE /* ReusableView.swift in Sources */,
 				D00541861F46349500CFF7AE /* AsyncOperation.swift in Sources */,
 				D027B93E1F669E3E0088C079 /* Size.swift in Sources */,
-				D01EB09D1F7BC7C90042C837 /* NetworkTaskMetric.swift in Sources */,
 				D036A96A1F48F206001E671B /* ActionClosurable.swift in Sources */,
 				D00541851F46349500CFF7AE /* Notifying.swift in Sources */,
 				D00541841F46349500CFF7AE /* String-Extensions.swift in Sources */,
@@ -543,10 +549,12 @@
 				D0FF0C2E1EC6D6C60023F8B8 /* Product.swift in Sources */,
 				D0F32E0E1E6B06DB0087C700 /* ApplicationCoordinator.swift in Sources */,
 				D0FF0C311EC6D73D0023F8B8 /* Category.swift in Sources */,
+				D09363681FA35A4200888CD4 /* NetworkHTTPMethod.swift in Sources */,
 				D027B93C1F669DF50088C079 /* CartItem.swift in Sources */,
 				D036A95A1F48EFF4001E671B /* AccountManager.swift in Sources */,
 				D036A9661F48F206001E671B /* NetworkError.swift in Sources */,
 				D0765D091ECDC8B100535CAB /* DataError.swift in Sources */,
+				D093636A1FA35A4200888CD4 /* NetworkSession.swift in Sources */,
 				D0FF0C521EC85CB30023F8B8 /* CategoryCell.swift in Sources */,
 				D027B9401F66A5A80088C079 /* UIBarButtonBadge.swift in Sources */,
 			);
