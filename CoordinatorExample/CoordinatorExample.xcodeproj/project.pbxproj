@@ -253,12 +253,12 @@
 			isa = PBXGroup;
 			children = (
 				D09363651FA35A4200888CD4 /* NetworkHTTPMethod.swift */,
+				D036A95D1F48F206001E671B /* NetworkError.swift */,
+				D036A95F1F48F206001E671B /* NetworkPayload.swift */,
+				D036A95E1F48F206001E671B /* NetworkOperation.swift */,
 				D09363671FA35A4200888CD4 /* NetworkSession.swift */,
 				D09363661FA35A4200888CD4 /* NetworkTask.swift */,
 				D036A95C1F48F206001E671B /* Network-Extensions.swift */,
-				D036A95D1F48F206001E671B /* NetworkError.swift */,
-				D036A95E1F48F206001E671B /* NetworkOperation.swift */,
-				D036A95F1F48F206001E671B /* NetworkPayload.swift */,
 				D036A9601F48F206001E671B /* ServerTrustPolicy.swift */,
 			);
 			path = "Swift-Network";
