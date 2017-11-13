@@ -1,50 +1,28 @@
 PODS:
-  - Coordinator (4.1)
-  - Kingfisher (3.10.2)
+  - Coordinator (5.1.3)
+  - Kingfisher (4.1.1)
   - Marshal (1.2.4)
   - SwiftyTimer (2.0.0)
-  - TinyConstraints (2.1.1)
+  - TinyConstraints (3.0.1)
 
 DEPENDENCIES:
   - Coordinator (from `../`)
-  - Kingfisher (from `https://github.com/radianttap/Kingfisher.git`)
-  - Marshal (from `https://github.com/radianttap/Marshal.git`)
-  - SwiftyTimer (from `https://github.com/radianttap/SwiftyTimer.git`)
-  - TinyConstraints (from `https://github.com/radianttap/TinyConstraints.git`)
+  - Kingfisher
+  - Marshal
+  - SwiftyTimer
+  - TinyConstraints
 
 EXTERNAL SOURCES:
   Coordinator:
-    :path: "../"
-  Kingfisher:
-    :git: https://github.com/radianttap/Kingfisher.git
-  Marshal:
-    :git: https://github.com/radianttap/Marshal.git
-  SwiftyTimer:
-    :git: https://github.com/radianttap/SwiftyTimer.git
-  TinyConstraints:
-    :git: https://github.com/radianttap/TinyConstraints.git
-
-CHECKOUT OPTIONS:
-  Kingfisher:
-    :commit: 96d0f0134d36263991df3f183b501e434d8ba54c
-    :git: https://github.com/radianttap/Kingfisher.git
-  Marshal:
-    :commit: 7a814e26312d5e7f1209168ca1a7860dcc12cf5f
-    :git: https://github.com/radianttap/Marshal.git
-  SwiftyTimer:
-    :commit: 77325e642504ccf1d1dde022da35c384764958e7
-    :git: https://github.com/radianttap/SwiftyTimer.git
-  TinyConstraints:
-    :commit: 42513def02c9958d32b7fe315a19f4e5f3aee202
-    :git: https://github.com/radianttap/TinyConstraints.git
+    :path: ../
 
 SPEC CHECKSUMS:
-  Coordinator: be562cc10ecedc094ee218fe96ab36d905433fe4
-  Kingfisher: d65c8e3db9bf83eb4354cc2c9444d4b1cfd38d14
-  Marshal: b635c8e4eab427d46cd953617fb6594d3a30f0f1
+  Coordinator: 7f2d43cf80d8c668c54d530a892b23df7ff03fe7
+  Kingfisher: 6793a473357b5dbee42b0068ef203fe8325f259e
+  Marshal: 8e04e6624e506921db7143b0bfd83caee03f32d6
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
-  TinyConstraints: 1cd016f1984410e11fda693e8d8d2977a71556ad
+  TinyConstraints: 77cb4735982941687268bb6f324badd0ae29ad46
 
-PODFILE CHECKSUM: aa9c9818bb7facbccccce702d354093118ae1c27
+PODFILE CHECKSUM: 57215f92be8a363b0885109e47e967c416ba13e7
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

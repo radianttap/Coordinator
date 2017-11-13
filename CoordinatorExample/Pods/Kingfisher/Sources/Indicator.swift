@@ -128,7 +128,7 @@ class ActivityIndicator: Indicator {
         #if os(macOS)
             activityIndicatorView = NSProgressIndicator(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
             activityIndicatorView.controlSize = .small
-            activityIndicatorView.style = .spinningStyle
+            activityIndicatorView.style = .spinning
         #else
             #if os(tvOS)
                 let indicatorStyle = UIActivityIndicatorViewStyle.white
@@ -164,6 +164,7 @@ class ImageIndicator: Indicator {
 
         animatedImageIndicatorView = ImageView()
         animatedImageIndicatorView.image = image
+        animatedImageIndicatorView.frame = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
         
         #if os(macOS)
             // Need for gif to animate on macOS
@@ -171,7 +172,6 @@ class ImageIndicator: Indicator {
             self.animatedImageIndicatorView.canDrawSubviewsIntoLayer = true
         #else
             animatedImageIndicatorView.contentMode = .center
-            
             animatedImageIndicatorView.autoresizingMask = [.flexibleLeftMargin,
                                                            .flexibleRightMargin,
                                                            .flexibleBottomMargin,
