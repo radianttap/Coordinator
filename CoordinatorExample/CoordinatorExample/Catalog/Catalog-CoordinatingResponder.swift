@@ -32,12 +32,12 @@ extension UIResponder {
 	/// - Parameters:
 	///   - sender: reference to object who requested data
 	///   - completion: Closure to call when data is ready or error occurs
-	func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void ) {
+	@objc dynamic func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void ) {
 		coordinatingResponder?.fetchPromotedProducts(sender: sender, completion: completion)
 	}
 
 
-	func fetchActiveSeason(sender: Any?, completion: @escaping (Season?, Error?) -> Void ) {
+	@objc dynamic func fetchActiveSeason(sender: Any?, completion: @escaping (Season?, Error?) -> Void ) {
 		coordinatingResponder?.fetchActiveSeason(sender: sender, completion: completion)
 	}
 
@@ -48,7 +48,7 @@ extension UIResponder {
 	///   - season: (optional) season
 	///   - sender: reference to object who requested data
 	///   - completion: Closure to call when data is ready or error occurs
-	func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void ) {
+	@objc dynamic func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void ) {
 		coordinatingResponder?.fetchProductCategories(season: season, sender: sender, completion: completion)
 	}
 
@@ -56,7 +56,7 @@ extension UIResponder {
 
 	//	** Switching to different VCs
 
-	func catalogShowPage(_ page: CatalogPageBox, sender: Any?) {
+	@objc dynamic func catalogShowPage(_ page: CatalogPageBox, sender: Any?) {
 		coordinatingResponder?.catalogShowPage(page, sender: sender)
 	}
 
@@ -65,7 +65,7 @@ extension UIResponder {
 	/// - Parameters:
 	///   - product: Product to show
 	///   - sender: reference to object who requested the display
-	func showProduct(_ product: Product, sender: Any?) {
+	@objc dynamic func showProduct(_ product: Product, sender: Any?) {
 		coordinatingResponder?.showProduct(product, sender: sender)
 	}
 }
