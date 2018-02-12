@@ -50,6 +50,16 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		rootViewController.viewControllers = [vc]
 	}
 
+	public func top(_ vc: UIViewController) {
+		if viewControllers.count == 0 {
+			root(vc)
+			return
+		}
+		viewControllers.removeLast()
+		rootViewController.viewControllers.removeLast()
+		show(vc)
+	}
+
 	public func pop(to vc: UIViewController, animated: Bool = true) {
 		rootViewController.popToViewController(vc, animated: animated)
 
