@@ -128,8 +128,8 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	}
 
 
-	open func coordinatorDidFinish(_ coordinator: Coordinating) {
-		stopChild(coordinator: coordinator)
+	open func coordinatorDidFinish(_ coordinator: Coordinating, completion: @escaping () -> Void = {}) {
+		stopChild(coordinator: coordinator, completion: completion)
 	}
 
 	/**

@@ -40,7 +40,13 @@ public protocol Coordinating: class {
 	///
 	///	This allows you to inform `coordinator.parent` it should activate something else
 	///	(like previous childCoordinator, if there is one)
-	func coordinatorDidFinish(_ coordinator: Coordinating)
+	func coordinatorDidFinish(_ coordinator: Coordinating, completion: @escaping () -> Void)
+
+	///	Adds the supplied coordinator into its childCoordinators dictionary and calls its `start` method
+	func startChild(coordinator: Coordinating, completion: @escaping () -> Void)
+
+	///	Calls `stop` on the supplied coordinator and removes it from its childCoordinators dictionary
+	func stopChild(coordinator: Coordinating, completion: @escaping () -> Void)
 }
 
 
