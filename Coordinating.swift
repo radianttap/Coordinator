@@ -47,6 +47,12 @@ public protocol Coordinating: class {
 
 	///	Calls `stop` on the supplied coordinator and removes it from its childCoordinators dictionary
 	func stopChild(coordinator: Coordinating, completion: @escaping () -> Void)
+
+	///	Coordinator will assign itself as parentCoordinator of its rootController,
+	///	ready to start displaying its content View Controllers.
+	///
+	///	See NavigationCoordinator for one possible usage.
+	func activate()
 }
 
 

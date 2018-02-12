@@ -132,6 +132,16 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 		stopChild(coordinator: coordinator, completion: completion)
 	}
 
+	///	Coordinator can be in memory, but it‘s not currently displaying anything.
+	///	For example, parentCoordinator started some other Coordinator which then took over root VC to display its VCs,
+	///	but did not stop this one.
+	///
+	///	Parent Coordinator can then re-activate this one, in which case it should take-over the
+	///	the ownership of the root VC.
+	open func activate() {
+		rootViewController.parentCoordinator = self
+	}
+
 	/**
 	Adds new child coordinator and starts it.
 

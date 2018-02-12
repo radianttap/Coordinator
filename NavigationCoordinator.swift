@@ -68,6 +68,15 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		viewControllers.removeAll()
 		super.stop(with: completion)
 	}
+
+	open override func activate() {
+		//	take ownership over UINavigationController
+		super.activate()
+		//	assign itself again as UINavigationControllerDelegate
+		rootViewController.delegate = self
+		//	re-assign own content View Controllers
+		rootViewController.viewControllers = viewControllers
+	}
 }
 
 fileprivate extension NavigationCoordinator {
@@ -83,7 +92,7 @@ fileprivate extension NavigationCoordinator {
         //    is there any controller left shown?
         if self.viewControllers.count == 0 {
             //    inform the parent Coordinator that this child Coordinator has no more views
-            self.parent?.coordinatorDidFinish(self)
+            self.parent?.coordinatorDidFinish(self, completion: {})
             return
         }
     }
