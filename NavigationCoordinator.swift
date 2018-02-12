@@ -81,7 +81,14 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	open override func stop(with completion: @escaping () -> Void) {
 		rootViewController.delegate = nil
+
+		for vc in viewControllers {
+			guard let index = rootViewController.viewControllers.index(of: vc) else { continue }
+			rootViewController.viewControllers.remove(at: index)
+		}
+
 		viewControllers.removeAll()
+
 		super.stop(with: completion)
 	}
 
