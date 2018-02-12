@@ -36,6 +36,10 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		rootViewController.present(vc, animated: true, completion: nil)
 	}
 
+	public func dismiss() {
+		rootViewController.dismiss(animated: true, completion: nil)
+	}
+
 	public func show(_ vc: UIViewController) {
 		viewControllers.append(vc)
 		rootViewController.show(vc, sender: self)
