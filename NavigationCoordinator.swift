@@ -18,16 +18,18 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
 
-        if #available(iOS 10.0, *) {
-        navigationController.transitionCoordinator?.notifyWhenInteractionChanges({ [unowned self] context in
-            guard !context.isInteractive else { return }
-            self.willShowController(viewController, fromViewController: context.viewController(forKey: .from))
-
-        })} else {
-            //    get the FROM coordinator in the NC transition
-            let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from)
-            self.willShowController(viewController, fromViewController: fromViewController)
-        }
+		if #available(iOS 10.0, *) {
+			navigationController.transitionCoordinator?.notifyWhenInteractionChanges {
+				[unowned self] context in
+				guard !context.isInteractive else { return }
+				let fromViewController = context.viewController(forKey: .from)
+				self.willShowController(viewController, fromViewController: fromViewController)
+			}
+		} else {
+			//    get the FROM coordinator in the NC transition
+			let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from)
+			self.willShowController(viewController, fromViewController: fromViewController)
+		}
 	}
 
 	public func present(_ vc: UIViewController) {
@@ -80,22 +82,24 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 }
 
 fileprivate extension NavigationCoordinator {
-    func willShowController(_ toViewController: UIViewController, fromViewController: UIViewController?) {
-        guard let fromViewController = fromViewController else { return }
+	func willShowController(_ viewController: UIViewController, fromViewController: UIViewController?) {
+		guard let fromViewController = fromViewController else { return }
 
-        //    check is this pop:
-        if let vc = self.viewControllers.last, vc === fromViewController {
-            //    this is pop. remove this controller from Coordinator's list
-            self.viewControllers.removeLast()
-            self.handlePopBack(to: self.viewControllers.last)
-        }
-        //    is there any controller left shown?
-        if self.viewControllers.count == 0 {
-            //    inform the parent Coordinator that this child Coordinator has no more views
-            self.parent?.coordinatorDidFinish(self, completion: {})
-            return
-        }
-    }
+		if !viewControllers.contains( viewController ) { return }
+
+		//	check is this pop:
+		if let vc = self.viewControllers.last, vc === fromViewController {
+			//	this is pop. remove this controller from Coordinator's list
+			self.viewControllers.removeLast()
+			self.handlePopBack(to: self.viewControllers.last)
+		}
+		//	is there any controller left shown?
+		if self.viewControllers.count == 0 {
+			//	inform the parent Coordinator that this child Coordinator has no more views
+			self.parent?.coordinatorDidFinish(self, completion: {})
+			return
+		}
+	}
 }
 
 
