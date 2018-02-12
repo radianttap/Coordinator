@@ -24,7 +24,7 @@ final class Season: NSObject {
 		name = try object.value(for: "season")
 
 		if let styleCode: String = try? object.value(for: "style") {
-			self.id = styleCode.substring(to: String.Index(encodedOffset: 2) )
+			self.id = String(styleCode.prefix(2))
 		} else {
 			throw MarshalError.keyNotFound(key: "id|styleCode")
 		}

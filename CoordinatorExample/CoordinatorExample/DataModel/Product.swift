@@ -63,11 +63,11 @@ extension Product: Unmarshaling {}
 
 extension Product {
 	var seasonCode: String {
-		return styleCode.substring(to: Season.styleCodeIndex)
+		return String(styleCode.prefix(upTo: Season.styleCodeIndex))
 	}
 
 	var themeCode: String {
-		return styleCode.substring(to: Theme.styleCodeIndex)
+		return String(styleCode.prefix(upTo: Theme.styleCodeIndex))
 	}
 
 	var promoImageURL: URL? {

@@ -24,7 +24,7 @@ final class Theme: NSObject {
 	init(object: MarshaledObject) throws {
 		name = try object.value(for: "theme")
 		if let styleCode: String = try? object.value(for: "style") {
-			self.id = styleCode.substring(to: String.Index(encodedOffset: 3) )
+			self.id = String(styleCode.prefix(3))
 		} else {
 			throw MarshalError.keyNotFound(key: "id|styleCode")
 		}
@@ -37,7 +37,7 @@ extension Theme {
 	static var styleCodeIndex: String.Index { return String.Index(encodedOffset: 3) }
 
 	var seasonCode: String {
-		return id.substring(to: Season.styleCodeIndex)
+		return String(id[..<Season.styleCodeIndex])
 	}
 
 	var orderedProducts: [Product] {
