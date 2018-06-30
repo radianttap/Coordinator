@@ -102,6 +102,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 
 
 
+	private(set) public var isStarted: Bool = false
 
 	/// Tells the coordinator to create/display its initial view controller and take over the user flow.
 	///	Use this method to configure your `rootViewController` (if it isn't already).
@@ -114,6 +115,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	- Parameter completion: An optional `Callback` executed at the end.
 	open func start(with completion: @escaping () -> Void = {}) {
 		rootViewController.parentCoordinator = self
+		isStarted = true
 		completion()
 	}
 
