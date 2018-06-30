@@ -186,6 +186,7 @@
 		CA992D6F000947AA37BD26083AF173F3 /* Image.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Image.swift; path = Sources/Image.swift; sourceTree = "<group>"; };
 		CF22D2FAFF10F69BC75665E1D64281A7 /* TinyConstraints-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TinyConstraints-prefix.pch"; sourceTree = "<group>"; };
 		CF511FB6ABE368E5FFA7C34D19427447 /* ValueType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ValueType.swift; path = Sources/ValueType.swift; sourceTree = "<group>"; };
+		D0DA510C20E7F668008E9C14 /* Coordinator.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Coordinator.podspec; sourceTree = "<group>"; };
 		D18E5B6BEE181360D2258F617B2EB723 /* UnmarshalUpdating.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnmarshalUpdating.swift; path = Sources/UnmarshalUpdating.swift; sourceTree = "<group>"; };
 		D298C0C218DBEA986D7B67AC7760F1D6 /* Pods-CoordinatorExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CoordinatorExample.release.xcconfig"; sourceTree = "<group>"; };
 		D3E6C2969E837EBA7F0CD4B711A5E757 /* Pods-CoordinatorExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-CoordinatorExample.modulemap"; sourceTree = "<group>"; };
@@ -455,6 +456,7 @@
 		CF654DAA88FF702F5802B39E8C987F77 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				D0DA510C20E7F668008E9C14 /* Coordinator.podspec */,
 				F25299BA5B773BD0AE7F5A098E7638DD /* Coordinating.swift */,
 				032F88C1B0D37BF36E068A9992F88909 /* Coordinator.swift */,
 				D68371D3F566292DABAC481E48FE5B0C /* NavigationCoordinator.swift */,
