@@ -102,7 +102,7 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 	}
 }
 
-fileprivate extension NavigationCoordinator {
+private extension NavigationCoordinator {
 	func willShowController(_ viewController: UIViewController, fromViewController: UIViewController?) {
 		guard let fromViewController = fromViewController else { return }
 

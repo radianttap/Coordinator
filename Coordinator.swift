@@ -73,7 +73,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
 	///	The only way to add/remove something is through startChild/stopChild methods
-	fileprivate(set) public var childCoordinators: [String: Coordinating] = [:]
+	private(set) public var childCoordinators: [String: Coordinating] = [:]
 
 
 
@@ -83,7 +83,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	}
 
 	///	List of wrapped methods requiring dependency which is not available right now
-	fileprivate(set) public var queuedMessages: [CoordinatingQueuedMessage] = []
+	private(set) public var queuedMessages: [CoordinatingQueuedMessage] = []
 
 	///	Simply add the message wrapped in the closure. Mind the capture list for `self`.
 	public func enqueueMessage(_ message: @escaping CoordinatingQueuedMessage ) {
