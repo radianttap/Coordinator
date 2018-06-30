@@ -56,6 +56,7 @@ fileprivate extension CartCoordinator {
 		switch p {
 		case .home:
 			let vc = CartController.instantiate(fromStoryboardNamed: UIStoryboard.Name.app)
+			vc.cartItems = dependencies?.cartManager?.items ?? []
 			root(vc)
 		default:
 			break

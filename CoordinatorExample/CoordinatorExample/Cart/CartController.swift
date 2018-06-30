@@ -11,12 +11,29 @@ import UIKit
 final class CartController: UIViewController, StoryboardLoadable {
 	//	UI
 
-	@IBOutlet fileprivate weak var catalogItem: UIBarButtonItem!
+	@IBOutlet private weak var catalogItem: UIBarButtonItem!
+
+	var cartItems: [CartItem] = [] {
+		didSet {
+			if !isViewLoaded { return }
+			processContentUpdate()
+		}
+	}
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+
+		processContentUpdate()
+	}
 }
 
-fileprivate extension CartController {
+private extension CartController {
 
 	@IBAction func catalogItemTapped(_ sender: UIBarButtonItem) {
 		catalogShowPage( CatalogCoordinator.Page.home.boxed, sender: self)
+	}
+
+	func processContentUpdate() {
+		
 	}
 }

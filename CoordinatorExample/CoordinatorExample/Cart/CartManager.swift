@@ -10,7 +10,7 @@ import Foundation
 
 
 final class CartManager {
-	fileprivate var dataManager: DataManager
+	private var dataManager: DataManager
 
 	init(dataManager: DataManager) {
 		self.dataManager = dataManager
@@ -18,7 +18,7 @@ final class CartManager {
 
 	//	Local stuff
 
-	fileprivate(set) var items: [CartItem] = []
+	private(set) var items: [CartItem] = []
 
 	func add(product: Product, color: Color) {
 		let item = CartItem(product: product, color: color)
