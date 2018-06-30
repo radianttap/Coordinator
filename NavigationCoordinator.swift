@@ -18,38 +18,9 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	///	This method is implemented to detect when "pop" happens.
 	///	`popViewController` must be detected in order to remove popped VC from Coordinator's `viewControllers` array.
-	public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-		if #available(iOS 10.0, *) {
-			let wasStartedInteractive = navigationController.transitionCoordinator?.initiallyInteractive ?? false
-			if !wasStartedInteractive {
-				//	non-interactive transition
-				let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from)
-				self.willShowController(viewController, fromViewController: fromViewController)
-
-			} else {
-				//	interactive
-				navigationController.transitionCoordinator?.notifyWhenInteractionChanges {
-					[unowned self] context in
-					//	if cancelled, pop will not happen. so just bail out
-					if context.isCancelled { return }
-					//	if switched to interactive segment, bail out
-					if context.isInteractive { return }
-					//	if transition did not finish at least 50%, then it's the same as cancelled
-					if context.percentComplete < 0.5 { return }
-
-					//	TODO:
-					//	if transition switches back to interactive after this point,
-					//	then we will essentially have `push` again. or not..?
-
-					let fromViewController = context.viewController(forKey: .from)
-					self.willShowController(viewController, fromViewController: fromViewController)
-				}
-			}
-
-		} else { // < iOS 10
-			let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from)
-			self.willShowController(viewController, fromViewController: fromViewController)
-		}
+	public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+		let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from)
+		self.willShowController(viewController, fromViewController: fromViewController)
 	}
 
 	public func present(_ vc: UIViewController) {
