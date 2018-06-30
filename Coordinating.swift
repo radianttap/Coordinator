@@ -19,7 +19,7 @@ public protocol Coordinating: class {
 	var identifier: String { get }
 
 	/// Parent Coordinator can be any other Coordinator
-	weak var parent: Coordinating? { get set }
+	var parent: Coordinating? { get set }
 
 	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
 	var childCoordinators: [String: Coordinating] { get }
