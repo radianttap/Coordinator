@@ -74,7 +74,10 @@ extension UIViewController {
 	override open var coordinatingResponder: UIResponder? {
 		guard let parentCoordinator = self.parentCoordinator else {
 			guard let parentController = self.parent else {
-				return view.superview
+				guard let presentingController = self.presentingViewController else {
+					return view.superview
+				}
+				return presentingController as UIResponder
 			}
 			return parentController as UIResponder
 		}
