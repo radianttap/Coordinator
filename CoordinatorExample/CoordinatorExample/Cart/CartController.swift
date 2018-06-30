@@ -12,6 +12,9 @@ final class CartController: UIViewController, StoryboardLoadable {
 	//	UI
 
 	@IBOutlet private weak var catalogItem: UIBarButtonItem!
+	@IBOutlet private weak var tableView: UITableView!
+
+	//	Local data model
 
 	var cartItems: [CartItem] = [] {
 		didSet {
@@ -22,8 +25,7 @@ final class CartController: UIViewController, StoryboardLoadable {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		processContentUpdate()
+		title = NSLocalizedString("Cart", comment: "")
 	}
 }
 
@@ -34,6 +36,20 @@ private extension CartController {
 	}
 
 	func processContentUpdate() {
-		
+		tableView.reloadData()
 	}
 }
+
+extension CartController: UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return cartItems.count
+	}
+
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell: CartItemCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+		let cartItem = cartItems[indexPath.row]
+		cell.configure(with: cartItem)
+		return cell
+	}
+}
+

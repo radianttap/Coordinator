@@ -19,4 +19,8 @@ extension CartItem {
 		self.product = product
 		self.color = color
 	}
+
+	var cartDescription: String {
+		return "\( product.name ) · \( color.name ), size \( size )"
+	}
 }
