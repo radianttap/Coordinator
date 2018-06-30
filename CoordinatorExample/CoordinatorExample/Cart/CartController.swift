@@ -29,6 +29,27 @@ private extension CartController {
 	@IBAction func catalogItemTapped(_ sender: UIBarButtonItem) {
 		catalogShowPage( CatalogCoordinator.Page.home.boxed, sender: self)
 	}
+
+	func confirmItemRemoval(_ cartItem: CartItem, atIndexPath indexPath: IndexPath) {
+		let m = String(format: NSLocalizedString("Are you sure you want to remove item: %@", comment: ""), cartItem.cartDescription)
+		let ac = UIAlertController(title: NSLocalizedString("Confirm item removal", comment: ""),
+								   message: m,
+								   preferredStyle: .alert)
+		let yes = UIAlertAction(title: NSLocalizedString("Yes, remove", comment: ""), style: .destructive) {
+			[unowned self] _ in
+			self.cartRemove(item: cartItem.boxed, sender: self) {
+				_ in
+				self.cartItems.remove(at: indexPath.row)
+				self.tableView.deleteRows(at: [indexPath], with: .top)
+			}
+		}
+		let no = UIAlertAction(title: NSLocalizedString("Nooooo!", comment: ""), style: .cancel)
+
+		ac.addAction(yes)
+		ac.addAction(no)
+
+		present(ac, animated: true)
+	}
 }
 
 extension CartController: UITableViewDataSource {
@@ -51,12 +72,7 @@ extension CartController: UITableViewDelegate {
 			guard let `self` = self else { return }
 
 			let cartItem = self.cartItems[indexPath.row]
-			self.cartRemove(item: cartItem.boxed, sender: self) {
-				_ in
-
-				self.cartItems.remove(at: indexPath.row)
-				self.tableView.deleteRows(at: [indexPath], with: .top)
-			}
+			self.confirmItemRemoval(cartItem, atIndexPath: indexPath)
 		}
 		deleteAction.backgroundColor = .red
 
