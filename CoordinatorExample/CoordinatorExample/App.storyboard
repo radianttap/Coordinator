@@ -205,6 +205,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="OsW-zW-2kh" id="rUh-Uj-ZxA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9UN-EU-fbx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

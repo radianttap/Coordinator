@@ -30,6 +30,11 @@ final class CartManager {
 		items.remove(at: index)
 	}
 
+	func remove(item: CartItem) {
+		guard let index = items.index(where: { $0.product == item.product && $0.color == item.color }) else { return }
+		items.remove(at: index)
+	}
+
 	func clear() {
 		items.removeAll()
 	}

@@ -44,8 +44,20 @@ final class CartCoordinator: NavigationCoordinator, NeedsDependency {
 
 
 	//	MARK:- Coordinating Messages
-	//	must be placed here, due to current Swift/ObjC limitations
+	//	(must be placed here, due to current Swift/ObjC limitations)
 
+	override func cartRemove(item: CartItemBox, sender: Any?, completion: @escaping (Bool) -> Void) {
+		guard let cartManager = dependencies?.cartManager else {
+			enqueueMessage {
+				[weak self] in
+				self?.cartRemove(item: item, sender: sender, completion: completion)
+			}
+			return
+		}
+
+		cartManager.remove(item: item.unbox)
+		completion(true)
+	}
 }
 
 fileprivate extension CartCoordinator {

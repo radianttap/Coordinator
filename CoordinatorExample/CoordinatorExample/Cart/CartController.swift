@@ -16,12 +16,7 @@ final class CartController: UIViewController, StoryboardLoadable {
 
 	//	Local data model
 
-	var cartItems: [CartItem] = [] {
-		didSet {
-			if !isViewLoaded { return }
-			processContentUpdate()
-		}
-	}
+	var cartItems: [CartItem] = []
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -33,10 +28,6 @@ private extension CartController {
 
 	@IBAction func catalogItemTapped(_ sender: UIBarButtonItem) {
 		catalogShowPage( CatalogCoordinator.Page.home.boxed, sender: self)
-	}
-
-	func processContentUpdate() {
-		tableView.reloadData()
 	}
 }
 
@@ -53,3 +44,22 @@ extension CartController: UITableViewDataSource {
 	}
 }
 
+extension CartController: UITableViewDelegate {
+	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+		let deleteAction = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Remove", comment: "")) {
+			[weak self] action, indexPath in
+			guard let `self` = self else { return }
+
+			let cartItem = self.cartItems[indexPath.row]
+			self.cartRemove(item: cartItem.boxed, sender: self) {
+				_ in
+
+				self.cartItems.remove(at: indexPath.row)
+				self.tableView.deleteRows(at: [indexPath], with: .top)
+			}
+		}
+		deleteAction.backgroundColor = .red
+
+		return [deleteAction]
+	}
+}

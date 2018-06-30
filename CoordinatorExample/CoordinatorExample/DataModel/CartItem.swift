@@ -24,3 +24,17 @@ extension CartItem {
 		return "\( product.name ) · \( color.name ), size \( size )"
 	}
 }
+
+
+//	Boxing pure Swift type into Objective-C friendly form
+
+class CartItemBox: NSObject {
+	let unbox: CartItem
+	init(_ value: CartItem) {
+		self.unbox = value
+	}
+}
+
+extension CartItem {
+	var boxed: CartItemBox { return CartItemBox(self) }
+}

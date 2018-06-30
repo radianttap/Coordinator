@@ -20,6 +20,11 @@ extension UIResponder {
 		coordinatingResponder?.cartAdd(product: product, color: color, sender: sender, completion: completion)
 	}
 
+	///	Removes a particular CartItem from the shopping cart
+	@objc dynamic func cartRemove(item: CartItemBox, sender: Any?, completion: @escaping (Bool) -> Void) {
+		coordinatingResponder?.cartRemove(item: item, sender: sender, completion: completion)
+	}
+
 	///	show/hide the cart
 	@objc dynamic func cartToggle(sender: Any?) {
 		coordinatingResponder?.cartToggle(sender: sender)
