@@ -41,7 +41,7 @@ extension Season {
 	}
 
 	var categories: Set<Category> {
-		return Set(products.flatMap({ $0.category }))
+		return Set(products.compactMap({ $0.category }))
 	}
 
 	var orderedCategories: [Category] {

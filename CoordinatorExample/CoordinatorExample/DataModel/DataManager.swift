@@ -47,7 +47,7 @@ extension DataManager {
 
 				let jsonObjects: [JSON] = try result.value(for: "products")
 
-				var seasonNames: Set<String> = Set(jsonObjects.flatMap({ try? $0.value(for: "season") }))
+				var seasonNames: Set<String> = Set(jsonObjects.compactMap({ try? $0.value(for: "season") }))
 				let jsonSeasons: [JSON] = jsonObjects.reduce([], { cur, obj in
 					guard let s: String = try? obj.value(for: "season") else { return cur }
 					if !seasonNames.contains(s) { return cur }
@@ -56,7 +56,7 @@ extension DataManager {
 				})
 				let seasons: Set<Season> = try ["wrap": jsonSeasons].value(for: "wrap")
 
-				var themeNames: Set<String> = Set(jsonObjects.flatMap({ try? $0.value(for: "theme") }))
+				var themeNames: Set<String> = Set(jsonObjects.compactMap({ try? $0.value(for: "theme") }))
 				let jsonThemes: [JSON] = jsonObjects.reduce([], { cur, obj in
 					guard let s: String = try? obj.value(for: "theme") else { return cur }
 					if !themeNames.contains(s) { return cur }
@@ -65,7 +65,7 @@ extension DataManager {
 				})
 				let themes: Set<Theme> = try ["wrap": jsonThemes].value(for: "wrap")
 
-				var categoryNames: Set<String> = Set(jsonObjects.flatMap({ try? $0.value(for: "category") }))
+				var categoryNames: Set<String> = Set(jsonObjects.compactMap({ try? $0.value(for: "category") }))
 				let jsonCategories: [JSON] = jsonObjects.reduce([], { cur, obj in
 					guard let s: String = try? obj.value(for: "category") else { return cur }
 					if !categoryNames.contains(s) { return cur }

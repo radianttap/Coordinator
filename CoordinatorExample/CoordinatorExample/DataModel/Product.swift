@@ -50,7 +50,7 @@ final class Product: NSObject {
 			materials = arr
 		}
 		if let arr: [Int] = try? object.value(for: "colors") {
-			colors = try arr.flatMap({ try Color(colorCode: $0) })
+			colors = try arr.compactMap({ try Color(colorCode: $0) })
 		}
 
 		promoImagePath = try? object.value(for: "promoImage")
@@ -81,7 +81,7 @@ extension Product {
 	}
 
 	var imageURLs: [URL] {
-		return imagePaths.flatMap({ assetManager?.url(forProductPath: $0) })
+		return imagePaths.compactMap({ assetManager?.url(forProductPath: $0) })
 	}
 
 	var heroURL: URL? {
