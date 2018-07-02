@@ -11,10 +11,10 @@ import Kingfisher
 
 final class CategoryCell: UICollectionViewCell, ReusableView {
     
-	@IBOutlet fileprivate weak var photoView: UIImageView!
-	@IBOutlet fileprivate weak var nameLabel: UILabel!
+	@IBOutlet private weak var photoView: UIImageView!
+	@IBOutlet private weak var nameLabel: UILabel!
 
-	fileprivate var category: Category?
+	private var category: Category?
 }
 
 

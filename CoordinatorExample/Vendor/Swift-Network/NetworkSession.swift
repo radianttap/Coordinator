@@ -77,7 +77,7 @@ extension NetworkSession: URLSessionDataDelegate {
 		handleURLSession(session, task: task as? URLSessionDataTask, didReceive: challenge, completionHandler: completionHandler)
 	}
 
-	fileprivate func handleURLSession(_ session: URLSession,
+	private func handleURLSession(_ session: URLSession,
 									 task: URLSessionDataTask?,
 									 didReceive challenge: URLAuthenticationChallenge,
 									 completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)

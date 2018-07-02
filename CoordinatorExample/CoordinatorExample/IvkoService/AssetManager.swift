@@ -31,7 +31,7 @@ final class AssetManager: NetworkSession {
 
 	//	Local stuff
 
-	fileprivate var queue: OperationQueue
+	private var queue: OperationQueue
 }
 
 extension AssetManager {
@@ -44,7 +44,7 @@ extension AssetManager {
 	}
 }
 
-fileprivate extension AssetManager {
+private extension AssetManager {
 	//	MARK:- Common params and types
 
 	var baseURL : URL {

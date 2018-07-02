@@ -37,7 +37,7 @@ final class IvkoService: NetworkSession {
 
 	//	Local stuff
 
-	fileprivate var queue: OperationQueue
+	private var queue: OperationQueue
 }
 
 
@@ -52,7 +52,7 @@ extension IvkoService {
 		case details(styleCode: String)
 
 
-		fileprivate var method: IvkoService.Method {
+		private var method: IvkoService.Method {
 			return .GET
 		}
 
@@ -162,7 +162,7 @@ extension IvkoService {
 
 
 
-fileprivate extension IvkoService {
+private extension IvkoService {
 	//	MARK:- Common params and types
 
 	var baseURL : URL {

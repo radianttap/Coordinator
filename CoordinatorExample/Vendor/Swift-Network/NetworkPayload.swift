@@ -44,11 +44,11 @@ struct NetworkPayload {
 
 	///	Moment when network task is started (you called `task.resume()` for the first time).
 	///	Call `.start()` to set it.
-	fileprivate(set) var tsStart: Date?
+	private(set) var tsStart: Date?
 
 	///	Moment when network task has ended. Used together with `tsStart` makes for simple speed metering.
 	///	Call `.end()` to set it.
-	fileprivate(set) var tsEnd: Date?
+	private(set) var tsEnd: Date?
 }
 
 extension NetworkPayload {

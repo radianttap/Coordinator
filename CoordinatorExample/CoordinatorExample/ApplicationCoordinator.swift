@@ -106,7 +106,7 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 }
 
 
-fileprivate extension AppCoordinator {
+private extension AppCoordinator {
 	//	MARK:- Internal
 
 	func setupActiveSection(_ enforcedSection: Section? = nil) {

@@ -9,7 +9,7 @@
 import Foundation
 
 final class CatalogManager {
-	fileprivate var dataManager: DataManager
+	private var dataManager: DataManager
 
 	init(dataManager: DataManager) {
 		self.dataManager = dataManager
@@ -18,20 +18,20 @@ final class CatalogManager {
 		fetchPromotions()
 	}
 
-	fileprivate(set) var activeSeason: Season?
+	private(set) var activeSeason: Season?
 
-	fileprivate(set) var seasons: Set<Season> = [] {
+	private(set) var seasons: Set<Season> = [] {
 		didSet {
 			if activeSeason == nil { activeSeason = orderedSeasons.first }
 		}
 	}
 
-	fileprivate(set) var categories: Set<Category> = []
+	private(set) var categories: Set<Category> = []
 
-	fileprivate(set) var promotedProducts: [Product] = []
+	private(set) var promotedProducts: [Product] = []
 
-	fileprivate var lastUpdatedProducts: Date?
-	fileprivate var lastUpdatedPromotions: Date?
+	private var lastUpdatedProducts: Date?
+	private var lastUpdatedPromotions: Date?
 }
 
 extension CatalogManager {
@@ -138,7 +138,7 @@ extension CatalogManager {
 }
 
 
-fileprivate extension CatalogManager {
+private extension CatalogManager {
 	//	MARK:- Private API
 	//	These are thin wrappers around DataManager‘s similarly named methods.
 	//	They are used to process received data and splice and dice them as needed,

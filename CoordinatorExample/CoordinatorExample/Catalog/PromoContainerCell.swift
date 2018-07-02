@@ -13,7 +13,7 @@ import SwiftyTimer
 final class PromoContainerCell: UICollectionViewCell, ReusableView {
 	//	UI outlets
 
-	fileprivate lazy var collectionView: UICollectionView = {
+	private lazy var collectionView: UICollectionView = {
 		let layout = UICollectionViewFlowLayout()
 		layout.scrollDirection = .horizontal
 		layout.minimumLineSpacing = 0
@@ -55,7 +55,7 @@ extension PromoContainerCell {
 		timer?.invalidate()
 	}
 
-	fileprivate func setup() {
+	private func setup() {
 		timer = Timer.every(3) {
 			[weak self] in
 			guard let `self` = self else { return }
@@ -63,7 +63,7 @@ extension PromoContainerCell {
 		}
 	}
 
-	fileprivate func slide() {
+	private func slide() {
 		let cv = self.collectionView
 
 		let pagesCount = Int(cv.contentSize.width / cv.bounds.width)

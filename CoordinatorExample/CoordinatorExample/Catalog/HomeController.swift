@@ -12,9 +12,9 @@ import SwiftyTimer
 final class HomeController: UIViewController, StoryboardLoadable {
 	//	UI Outlets
 
-	@IBOutlet fileprivate weak var collectionView: UICollectionView!
-	@IBOutlet fileprivate weak var notificationContainer: UIView!
-	@IBOutlet fileprivate weak var cartBarItem: UIBarButtonItem!
+	@IBOutlet private weak var collectionView: UICollectionView!
+	@IBOutlet private weak var notificationContainer: UIView!
+	@IBOutlet private weak var cartBarItem: UIBarButtonItem!
 
 	//	Local data model
 
@@ -93,7 +93,7 @@ extension HomeController {
 }
 
 
-fileprivate extension HomeController {
+private extension HomeController {
 	//	MARK: Internal rendering
 
 	func renderTitleView() {
@@ -192,7 +192,7 @@ fileprivate extension HomeController {
 
 //	MARK: UICollectionViewDataSource
 extension HomeController: UICollectionViewDataSource {
-	fileprivate enum LayoutSection: Int {
+	private enum LayoutSection: Int {
 		case promotions
 		case categories
 

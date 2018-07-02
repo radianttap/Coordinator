@@ -65,7 +65,7 @@ final class AccountCoordinator: NavigationCoordinator, NeedsDependency {
 //	}
 }
 
-fileprivate extension AccountCoordinator {
+private extension AccountCoordinator {
 	//	MARK:- Internal
 
 	func setupActivePage(_ enforcedPage: Page? = nil) {

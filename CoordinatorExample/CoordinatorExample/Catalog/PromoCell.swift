@@ -11,12 +11,12 @@ import Kingfisher
 
 final class PromoCell: UICollectionViewCell, NibReusableView {
 
-	@IBOutlet fileprivate weak var photoView: UIImageView!
-	@IBOutlet fileprivate weak var nameLabel: UILabel!
-	@IBOutlet fileprivate weak var categoryLabel: UILabel!
-	@IBOutlet fileprivate weak var descLabel: UILabel!
+	@IBOutlet private weak var photoView: UIImageView!
+	@IBOutlet private weak var nameLabel: UILabel!
+	@IBOutlet private weak var categoryLabel: UILabel!
+	@IBOutlet private weak var descLabel: UILabel!
 
-	fileprivate var product: Product?
+	private var product: Product?
 }
 
 extension PromoCell {
@@ -53,7 +53,7 @@ extension PromoCell {
 	}
 }
 
-fileprivate extension PromoCell {
+private extension PromoCell {
 	@IBAction func didTapBuyNow(_ sender: UIButton) {
 		guard let product = product else { return }
 

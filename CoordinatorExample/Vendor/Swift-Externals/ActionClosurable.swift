@@ -10,7 +10,7 @@ import UIKit
 
 private class Actor<T> {
 	@objc func act(sender: AnyObject) { closure(sender as! T) }
-	fileprivate let closure: (T) -> Void
+	private let closure: (T) -> Void
 	init(acts closure: @escaping (T) -> Void) {
 		self.closure = closure
 	}

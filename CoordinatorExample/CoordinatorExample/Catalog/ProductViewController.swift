@@ -12,9 +12,9 @@ final class ProductViewController: UIViewController, StoryboardLoadable {
 
 	//	UI Outlets
 
-	@IBOutlet fileprivate weak var mainPhotoView: UIImageView!
-	@IBOutlet fileprivate weak var titleLabel: UILabel!
-	@IBOutlet fileprivate weak var cartBarItem: UIBarButtonItem!
+	@IBOutlet private weak var mainPhotoView: UIImageView!
+	@IBOutlet private weak var titleLabel: UILabel!
+	@IBOutlet private weak var cartBarItem: UIBarButtonItem!
 
 	//	Local data model
 
@@ -74,7 +74,7 @@ extension ProductViewController {
 }
 
 
-fileprivate extension ProductViewController {
+private extension ProductViewController {
 	//	MARK: Data updates
 
 	func updateCartStatus() {

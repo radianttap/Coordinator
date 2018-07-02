@@ -73,7 +73,7 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 	}
 }
 
-fileprivate extension CatalogCoordinator {
+private extension CatalogCoordinator {
 	func setupActivePage(_ enforcedPage: Page? = nil) {
 		let p = enforcedPage ?? page
 		page = p
