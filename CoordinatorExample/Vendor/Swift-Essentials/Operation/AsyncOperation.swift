@@ -1,6 +1,7 @@
 //
 //  AsyncOperation.swift
 //  Radiant Tap Essentials
+//	https://github.com/radianttap/swift-essentials
 //
 //  Copyright © 2017 Radiant Tap
 //  MIT License · http://choosealicense.com/licenses/mit/
@@ -9,7 +10,7 @@
 import Foundation
 
 open class AsyncOperation : Operation {
-	public enum State {
+	private enum State {
 		case ready
 		case executing
 		case finished
@@ -26,14 +27,38 @@ open class AsyncOperation : Operation {
 		}
 	}
 
-	private(set) public var state = State.ready {
-		willSet {
-			willChangeValue(forKey: state.key)
-			willChangeValue(forKey: newValue.key)
+	private let queue = DispatchQueue(label: "com.radianttap.Essentials.AsyncOperation")
+
+	/// Private backing store for `state`
+	private var _state: Atomic<State> = Atomic(.ready)
+
+	/// The state of the operation
+	private var state: State {
+		get {
+			return _state.atomic
 		}
-		didSet {
-			didChangeValue(forKey: oldValue.key)
-			didChangeValue(forKey: state.key)
+		set {
+			// A state mutation should be a single atomic transaction. We can't simply perform
+			// everything on the isolation queue for `_state` because the KVO willChange/didChange
+			// notifications have to be sent from outside the isolation queue. Otherwise we would
+			// deadlock because KVO observers will in turn try to read `state` (by calling
+			// `isReady`, `isExecuting`, `isFinished`. Use a second queue to wrap the entire
+			// transaction.
+			queue.sync {
+				// Retrieve the existing value first. Necessary for sending fine-grained KVO
+				// willChange/didChange notifications only for the key paths that actually change.
+				let oldValue = _state.atomic
+				guard newValue != oldValue else {
+					return
+				}
+				willChangeValue(forKey: oldValue.key)
+				willChangeValue(forKey: newValue.key)
+				_state.mutate {
+					$0 = newValue
+				}
+				didChangeValue(forKey: oldValue.key)
+				didChangeValue(forKey: newValue.key)
+			}
 		}
 	}
 
@@ -57,7 +82,7 @@ open class AsyncOperation : Operation {
 	//MARK: Setup
 
 	///	Do not override this method, ever. Call it from `workItem()` instead
-	final func markFinished() {
+	final public func markFinished() {
 		state = .finished
 	}
 
