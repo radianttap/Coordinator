@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		return c
 	}()
 
-	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+	func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 		window = UIWindow(frame: UIScreen.main.bounds)
 
 		window?.rootViewController = appCoordinator.rootViewController
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		return true
 	}
 
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 		window?.makeKeyAndVisible()
 		appCoordinator.start()
