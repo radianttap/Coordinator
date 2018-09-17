@@ -44,6 +44,7 @@
 		D04B76601DE5B6D2009F1B9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04B765F1DE5B6D2009F1B9A /* AppDelegate.swift */; };
 		D04B76671DE5B6D2009F1B9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D04B76661DE5B6D2009F1B9A /* Assets.xcassets */; };
 		D04B766A1DE5B6D2009F1B9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D04B76681DE5B6D2009F1B9A /* LaunchScreen.storyboard */; };
+		D0519310214FE31E0047AB2D /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D051930F214FE31E0047AB2D /* Atomic.swift */; };
 		D05ABA1A1F659BC1006B1206 /* NeedsDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05ABA191F659BC1006B1206 /* NeedsDependency.swift */; };
 		D0765D091ECDC8B100535CAB /* DataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0765D081ECDC8B100535CAB /* DataError.swift */; };
 		D091DA021F66E9B8000A6C8A /* CartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D091DA011F66E9B8000A6C8A /* CartController.swift */; };
@@ -113,6 +114,7 @@
 		D04B76661DE5B6D2009F1B9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D04B76691DE5B6D2009F1B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D04B766B1DE5B6D2009F1B9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D051930F214FE31E0047AB2D /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		D05ABA191F659BC1006B1206 /* NeedsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsDependency.swift; sourceTree = "<group>"; };
 		D0765D081ECDC8B100535CAB /* DataError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataError.swift; path = DataModel/DataError.swift; sourceTree = "<group>"; };
 		D091DA011F66E9B8000A6C8A /* CartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		D00541701F46349500CFF7AE /* Swift-Essentials */ = {
 			isa = PBXGroup;
 			children = (
+				D051930F214FE31E0047AB2D /* Atomic.swift */,
 				D00541711F46349500CFF7AE /* Controllers */,
 				D00541741F46349500CFF7AE /* Foundation */,
 				D00541781F46349500CFF7AE /* Notifications */,
@@ -556,6 +559,7 @@
 				D036A96C1F48F206001E671B /* Marshal-Extensions.swift in Sources */,
 				D02921D51F4901640010B2B6 /* CartCoordinator.swift in Sources */,
 				D036A9681F48F206001E671B /* NetworkPayload.swift in Sources */,
+				D0519310214FE31E0047AB2D /* Atomic.swift in Sources */,
 				D00541831F46349500CFF7AE /* Date-Extensions.swift in Sources */,
 				D0FF0C581EC987EE0023F8B8 /* Color.swift in Sources */,
 				D02921D11F48FB540010B2B6 /* ProductViewController.swift in Sources */,
