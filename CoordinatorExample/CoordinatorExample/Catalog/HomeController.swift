@@ -55,7 +55,7 @@ final class HomeController: UIViewController, StoryboardLoadable {
 	override func cartAdd(product: Product, color: ColorBox, sender: Any?, completion: @escaping (Bool, Int) -> Void) {
 		coordinatingResponder?.cartAdd(product: product, color: color, sender: sender, completion: {
 			[weak self] isAddedToCart, numberOfCartItems in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 
 			self.cartBarItem.setBadge(text: "\( numberOfCartItems )")
 			completion(isAddedToCart, numberOfCartItems)
@@ -122,7 +122,7 @@ private extension HomeController {
 	func updateCartStatus() {
 		cartStatus(sender: self) {
 			[weak self] num in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 
 			DispatchQueue.main.async {
 				self.numberOfCartItems = num
@@ -144,7 +144,7 @@ private extension HomeController {
 	func updateData() {
 		fetchPromotedProducts(sender: self) {
 			[weak self] arr, _ in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 
 			DispatchQueue.main.async {
 				self.promotedProducts = arr
@@ -159,7 +159,7 @@ private extension HomeController {
 
 			fetchActiveSeason(sender: self, completion: {
 				[weak self] s, error in
-				guard let `self` = self else { return }
+				guard let self = self else { return }
 				DispatchQueue.main.async {
 					if let s = s {
 						self.season = s
@@ -178,7 +178,7 @@ private extension HomeController {
 
 		fetchProductCategories(season: season, sender: self) {
 			[weak self] arr, _ in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 
 			DispatchQueue.main.async {
 				self.categories = arr

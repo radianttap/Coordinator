@@ -69,7 +69,7 @@ extension CartController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 		let deleteAction = UITableViewRowAction(style: .destructive, title: NSLocalizedString("Remove", comment: "")) {
 			[weak self] action, indexPath in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 
 			let cartItem = self.cartItems[indexPath.row]
 			self.confirmItemRemoval(cartItem, atIndexPath: indexPath)

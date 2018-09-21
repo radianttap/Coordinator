@@ -47,7 +47,7 @@ extension ProductViewController {
 		guard let product = product, let color = color else { return }
 		cartAdd(product: product, color: color.boxed, sender: sender) {
 			[weak self] _, num in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 			self.numberOfCartItems = num
 		}
 	}
@@ -80,7 +80,7 @@ private extension ProductViewController {
 	func updateCartStatus() {
 		cartStatus(sender: self) {
 			[weak self] num in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 
 			DispatchQueue.main.async {
 				self.numberOfCartItems = num

@@ -58,7 +58,7 @@ extension PromoContainerCell {
 	private func setup() {
 		timer = Timer.every(3) {
 			[weak self] in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 			self.slide()
 		}
 	}

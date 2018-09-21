@@ -106,7 +106,7 @@ final class NetworkOperation: AsyncOperation {
 			//	Create task, using `completionHandler` form
 			task = localURLSession.dataTask(with: payload.urlRequest, completionHandler: {
 				[weak self] data, response, error in
-				guard let `self` = self else { return }
+				guard let self = self else { return }
 
 				self.payload.response = response as? HTTPURLResponse
 				if let e = error {
@@ -201,7 +201,7 @@ private extension NetworkOperation {
 
 		task.finishCallback = {
 			[weak self] in
-			guard let `self` = self else { return }
+			guard let self = self else { return }
 
 			if self.incomingData.isEmpty && !self.allowEmptyData {
 				self.payload.error = .noData
