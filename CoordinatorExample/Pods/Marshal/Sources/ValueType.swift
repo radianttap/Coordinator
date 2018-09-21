@@ -37,13 +37,30 @@ extension ValueType {
 extension String: ValueType {}
 extension Int: ValueType {}
 extension UInt: ValueType {}
-extension Float: ValueType {}
-extension Double: ValueType {}
 extension Bool: ValueType {}
+
+extension Float: ValueType {
+    public static func value(from object: Any) throws -> Float {
+        guard let value = object as? NSNumber else {
+            throw MarshalError.typeMismatch(expected: NSNumber.self, actual: type(of: object))
+        }
+        return value.floatValue
+    }
+}
+
+extension Double: ValueType {
+    public static func value(from object: Any) throws -> Double {
+        guard let value = object as? NSNumber else {
+            throw MarshalError.typeMismatch(expected: NSNumber.self, actual: type(of: object))
+        }
+        return value.doubleValue
+    }
+}
 
 extension Int64: ValueType {
     public static func value(from object: Any) throws -> Int64 {
-        guard let value = object as? NSNumber else { throw MarshalError.typeMismatch(expected: NSNumber.self, actual: type(of: object)) }
+        guard let value = object as? NSNumber else {
+            throw MarshalError.typeMismatch(expected: NSNumber.self, actual: type(of: object)) }
         return value.int64Value
     }
 }
@@ -55,7 +72,7 @@ extension Array where Element: ValueType {
         }
         
         if discardingErrors {
-            return anyArray.flatMap {
+            return anyArray.compactMap {
                 let value = try? Element.value(from: $0)
                 guard let element = value as? Element else {
                     return nil
@@ -189,3 +206,14 @@ extension Character: ValueType {
         return Character(value)
     }
 }
+
+#if swift(>=4.1)
+#else
+    extension Collection {
+        func compactMap<ElementOfResult>(
+            _ transform: (Element) throws -> ElementOfResult?
+            ) rethrows -> [ElementOfResult] {
+            return try flatMap(transform)
+        }
+    }
+#endif

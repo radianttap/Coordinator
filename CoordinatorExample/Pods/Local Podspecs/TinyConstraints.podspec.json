@@ -1,9 +1,10 @@
 {
   "name": "TinyConstraints",
-  "version": "2.1.1",
+  "version": "3.2.1",
   "platforms": {
     "ios": "9.0",
-    "tvos": "9.0"
+    "tvos": "9.0",
+    "osx": "10.11"
   },
   "summary": "Nothing but sugar.",
   "description": "Tiny Constraints is the syntactic sugar that makes NSLayoutConstraint sweeter for human use.",
@@ -18,7 +19,7 @@
   "social_media_url": "https://twitter.com/roberthein",
   "source": {
     "git": "https://github.com/roberthein/TinyConstraints.git",
-    "tag": "2.1.1"
+    "tag": "3.2.1"
   },
   "source_files": "TinyConstraints/Classes/**/*.{swift}"
 }

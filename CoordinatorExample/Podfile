@@ -7,16 +7,16 @@ target 'CoordinatorExample' do
 	pod 'Coordinator', :path => '../'
 
 	# Auto Layout helpers in code
-	pod 'TinyConstraints'
+	pod 'TinyConstraints',	:git => 'https://github.com/radianttap/TinyConstraints'
 
 	# Image Cache
-	pod 'Kingfisher'
+	pod 'Kingfisher', 	:git => 'https://github.com/radianttap/Kingfisher.git', :branch => 'swift4.2'
 
 	# JSON parser
-	pod 'Marshal'
+	pod 'Marshal', 	:git => 'https://github.com/radianttap/Marshal.git'
 
 	# Nice NSTimer wrapper
-	pod 'SwiftyTimer'
+	pod 'SwiftyTimer', 	:git => 'https://github.com/radianttap/SwiftyTimer.git'
 
 end
 

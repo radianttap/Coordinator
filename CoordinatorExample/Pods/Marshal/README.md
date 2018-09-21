@@ -89,7 +89,7 @@ We've looked at going from our `[String: Any]` into our local models, but what a
 extension User: Marshaling {
     func marshaled() -> [String: Any] {
         return {
-            "id": "id",
+            "id": id,
             "name" : name,
             "email": email
         }

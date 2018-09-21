@@ -4,7 +4,7 @@
 //
 //  Created by Wei Wang on 15/4/6.
 //
-//  Copyright (c) 2017 Wei Wang <onevcat@gmail.com>
+//  Copyright (c) 2018 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -30,12 +30,12 @@ import AppKit
 import UIKit
 #endif
 
-public typealias DownloadProgressBlock = ((_ receivedSize: Int64, _ totalSize: Int64) -> ())
-public typealias CompletionHandler = ((_ image: Image?, _ error: NSError?, _ cacheType: CacheType, _ imageURL: URL?) -> ())
+public typealias DownloadProgressBlock = ((_ receivedSize: Int64, _ totalSize: Int64) -> Void)
+public typealias CompletionHandler = ((_ image: Image?, _ error: NSError?, _ cacheType: CacheType, _ imageURL: URL?) -> Void)
 
 /// RetrieveImageTask represents a task of image retrieving process.
 /// It contains an async task of getting image from disk and from network.
-public class RetrieveImageTask {
+public final class RetrieveImageTask {
     
     public static let empty = RetrieveImageTask()
     
@@ -86,6 +86,8 @@ public class KingfisherManager {
     var currentDefaultOptions: KingfisherOptionsInfo {
         return [.downloader(downloader), .targetCache(cache)] + defaultOptions
     }
+
+    fileprivate let processQueue: DispatchQueue
     
     convenience init() {
         self.init(downloader: .default, cache: .default)
@@ -94,6 +96,9 @@ public class KingfisherManager {
     init(downloader: ImageDownloader, cache: ImageCache) {
         self.downloader = downloader
         self.cache = cache
+
+        let processQueueName = "com.onevcat.Kingfisher.KingfisherManager.processQueue.\(UUID().uuidString)"
+        processQueue = DispatchQueue(label: processQueueName, attributes: .concurrent)
     }
     
     /**
@@ -146,18 +151,19 @@ public class KingfisherManager {
                       completionHandler: CompletionHandler?,
                                 options: KingfisherOptionsInfo) -> RetrieveImageDownloadTask?
     {
-        let downloader = options.downloader
+        let downloader = options.downloader ?? self.downloader
+        let processQueue = self.processQueue
         return downloader.downloadImage(with: url, retrieveImageTask: retrieveImageTask, options: options,
             progressBlock: { receivedSize, totalSize in
                 progressBlock?(receivedSize, totalSize)
             },
             completionHandler: { image, error, imageURL, originalData in
 
-                let targetCache = options.targetCache
+                let targetCache = options.targetCache ?? self.cache
                 if let error = error, error.code == KingfisherError.notModified.rawValue {
                     // Not modified. Try to find the image from cache.
                     // (The image should be in cache. It should be guaranteed by the framework users.)
-                    targetCache.retrieveImage(forKey: key, options: options, completionHandler: { (cacheImage, cacheType) -> () in
+                    targetCache.retrieveImage(forKey: key, options: options, completionHandler: { (cacheImage, cacheType) -> Void in
                         completionHandler?(cacheImage, nil, cacheType, url)
                     })
                     return
@@ -170,24 +176,33 @@ public class KingfisherManager {
                                       processorIdentifier:options.processor.identifier,
                                       cacheSerializer: options.cacheSerializer,
                                       toDisk: !options.cacheMemoryOnly,
-                                      completionHandler: nil)
-                    if options.cacheOriginalImage {
+                                      completionHandler: {
+                                        guard options.waitForCache else { return }
+                                        
+                                        let cacheType = targetCache.imageCachedType(forKey: key, processorIdentifier: options.processor.identifier)
+                                        completionHandler?(image, nil, cacheType, url)
+                    })
+                    
+                    if options.cacheOriginalImage && options.processor != DefaultImageProcessor.default {
+                        let originalCache = options.originalCache ?? targetCache
                         let defaultProcessor = DefaultImageProcessor.default
-                        if let originaliImage = defaultProcessor.process(item: .data(originalData), options: options) {
-                            targetCache.store(originaliImage,
-                                              original: originalData,
-                                              forKey: key,
-                                              processorIdentifier: defaultProcessor.identifier,
-                                              cacheSerializer: options.cacheSerializer,
-                                              toDisk: !options.cacheMemoryOnly,
-                                              completionHandler: nil)
+                        processQueue.async {
+                            if let originalImage = defaultProcessor.process(item: .data(originalData), options: options) {
+                                originalCache.store(originalImage,
+                                                    original: originalData,
+                                                    forKey: key,
+                                                    processorIdentifier: defaultProcessor.identifier,
+                                                    cacheSerializer: options.cacheSerializer,
+                                                    toDisk: !options.cacheMemoryOnly,
+                                                    completionHandler: nil)
+                            }
                         }
-                        
                     }
                 }
 
-                completionHandler?(image, error, .none, url)
-
+                if options.waitForCache == false {
+                    completionHandler?(image, error, .none, url)
+                }
             })
     }
     
@@ -198,9 +213,8 @@ public class KingfisherManager {
                               completionHandler: CompletionHandler?,
                                         options: KingfisherOptionsInfo)
     {
-        
-        
-        let diskTaskCompletionHandler: CompletionHandler = { (image, error, cacheType, imageURL) -> () in
+
+        let diskTaskCompletionHandler: CompletionHandler = { (image, error, cacheType, imageURL) -> Void in
             completionHandler?(image, error, cacheType, imageURL)
         }
         
@@ -220,7 +234,8 @@ public class KingfisherManager {
             
         }
         
-        let targetCache = options.targetCache
+        let targetCache = options.targetCache ?? self.cache
+        let processQueue = self.processQueue
         // First, try to get the exactly image from cache
         targetCache.retrieveImage(forKey: key, options: options) { image, cacheType in
             // If found, we could finish now.
@@ -238,27 +253,44 @@ public class KingfisherManager {
             
             // If processor is not the default one, we have a chance to check whether
             // the original image is already in cache.
+            let originalCache = options.originalCache ?? targetCache
             let optionsWithoutProcessor = options.removeAllMatchesIgnoringAssociatedValue(.processor(processor))
-            targetCache.retrieveImage(forKey: key, options: optionsWithoutProcessor) { image, cacheType in
+            originalCache.retrieveImage(forKey: key, options: optionsWithoutProcessor) { image, cacheType in
                 // If we found the original image, there is no need to download it again.
                 // We could just apply processor to it now.
                 guard let image = image else {
                     handleNoCache()
                     return
                 }
-                
-                guard let processedImage = processor.process(item: .image(image), options: options) else {
-                    diskTaskCompletionHandler(nil, nil, .none, url)
-                    return
+
+                processQueue.async {
+                    guard let processedImage = processor.process(item: .image(image), options: options) else {
+                        options.callbackDispatchQueue.safeAsync {
+                            diskTaskCompletionHandler(nil, nil, .none, url)
+                        }
+                        return
+                    }
+                    targetCache.store(processedImage,
+                                      original: nil,
+                                      forKey: key,
+                                      processorIdentifier:options.processor.identifier,
+                                      cacheSerializer: options.cacheSerializer,
+                                      toDisk: !options.cacheMemoryOnly,
+                                      completionHandler: {
+                                        guard options.waitForCache else { return }
+
+                                        let cacheType = targetCache.imageCachedType(forKey: key, processorIdentifier: options.processor.identifier)
+                                        options.callbackDispatchQueue.safeAsync {
+                                            diskTaskCompletionHandler(processedImage, nil, cacheType, url)
+                                        }
+                    })
+
+                    if options.waitForCache == false {
+                        options.callbackDispatchQueue.safeAsync {
+                            diskTaskCompletionHandler(processedImage, nil, .none, url)
+                        }
+                    }
                 }
-                targetCache.store(processedImage,
-                                  original: nil,
-                                  forKey: key,
-                                  processorIdentifier:options.processor.identifier,
-                                  cacheSerializer: options.cacheSerializer,
-                                  toDisk: !options.cacheMemoryOnly,
-                                  completionHandler: nil)
-                diskTaskCompletionHandler(processedImage, nil, .none, url)
             }
         }
     }

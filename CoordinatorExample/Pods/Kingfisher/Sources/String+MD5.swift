@@ -21,22 +21,10 @@ Permission is granted to anyone to use this software for any purpose,including c
 
 import Foundation
 
-public struct StringProxy {
-    fileprivate let base: String
-    init(proxy: String) {
-        base = proxy
-    }
-}
+extension String: KingfisherCompatible { }
 
-extension String: KingfisherCompatible {
-    public typealias CompatibleType = StringProxy
-    public var kf: CompatibleType {
-        return StringProxy(proxy: self)
-    }
-}
-
-extension StringProxy {
-    var md5: String {
+extension Kingfisher where Base == String {
+    public var md5: String {
         if let data = base.data(using: .utf8, allowLossyConversion: true) {
 
             let message = data.withUnsafeBytes { bytes -> [UInt8] in
@@ -74,8 +62,13 @@ func arrayOfBytes<T>(_ value: T, length: Int? = nil) -> [UInt8] {
         return bytes
     }
 
+    #if swift(>=4.1)
+    valuePointer.deinitialize(count: 1)
+    valuePointer.deallocate()
+    #else
     valuePointer.deinitialize()
     valuePointer.deallocate(capacity: 1)
+    #endif
     
     return bytes
 }

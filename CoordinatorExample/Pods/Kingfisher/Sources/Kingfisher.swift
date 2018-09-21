@@ -4,7 +4,7 @@
 //
 //  Created by Wei Wang on 16/9/14.
 //
-//  Copyright (c) 2017 Wei Wang <onevcat@gmail.com>
+//  Copyright (c) 2018 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -42,6 +42,8 @@ import ImageIO
     public typealias ImageView = UIImageView
     public typealias View = UIView
     public typealias Button = UIButton
+    #else
+    import WatchKit
     #endif
 #endif
 
@@ -62,7 +64,7 @@ public protocol KingfisherCompatible {
 
 public extension KingfisherCompatible {
     public var kf: Kingfisher<Self> {
-        get { return Kingfisher(self) }
+        return Kingfisher(self)
     }
 }
 
@@ -70,4 +72,6 @@ extension Image: KingfisherCompatible { }
 #if !os(watchOS)
 extension ImageView: KingfisherCompatible { }
 extension Button: KingfisherCompatible { }
+#else
+extension WKInterfaceImage: KingfisherCompatible { }
 #endif

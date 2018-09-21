@@ -47,15 +47,26 @@ public extension Constrainable {
     }
     
     @discardableResult
-    public func edges(to view: Constrainable, insets: TinyEdgeInsets = .zero, priority: LayoutPriority = .required, isActive: Bool = true) -> Constraints {
+    public func edges(to view: Constrainable, excluding excludedEdge: LayoutEdge = .none, insets: TinyEdgeInsets = .zero, priority: LayoutPriority = .required, isActive: Bool = true) -> Constraints {
         prepareForLayout()
         
-        let constraints = [
-            topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top).with(priority),
-            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: insets.left).with(priority),
-            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: insets.bottom).with(priority),
-            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: insets.right).with(priority)
-        ]
+        var constraints = Constraints()
+        
+        if !excludedEdge.contains(.top) {
+            constraints.append(topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top).with(priority))
+        }
+        
+        if !excludedEdge.contains(.left) {
+            constraints.append(leftAnchor.constraint(equalTo: view.leftAnchor, constant: insets.left).with(priority))
+        }
+        
+        if !excludedEdge.contains(.bottom) {
+            constraints.append(bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: insets.bottom).with(priority))
+        }
+        
+        if !excludedEdge.contains(.right) {
+            constraints.append(rightAnchor.constraint(equalTo: view.rightAnchor, constant: insets.right).with(priority))
+        }
         
         if isActive {
             Constraint.activate(constraints)
@@ -133,6 +144,11 @@ public extension Constrainable {
         case .equalOrGreater: return widthAnchor.constraint(greaterThanOrEqualTo: dimension ?? view.widthAnchor, multiplier: multiplier, constant: offset).with(priority).set(active: isActive)
         }
     }
+
+    @discardableResult
+    public func widthToHeight(of view: Constrainable, multiplier: CGFloat = 1, offset: CGFloat = 0, relation: ConstraintRelation = .equal, priority: LayoutPriority = .required, isActive: Bool = true) -> Constraint {
+        return width(to: view, view.heightAnchor, multiplier: multiplier, offset: offset, relation: relation, priority: priority, isActive: isActive)
+    }
     
     @discardableResult
     public func width(min: CGFloat? = nil, max: CGFloat? = nil, priority: LayoutPriority = .required, isActive: Bool = true) -> Constraints {
@@ -176,6 +192,11 @@ public extension Constrainable {
         case .equalOrGreater: return heightAnchor.constraint(greaterThanOrEqualTo: dimension ?? view.heightAnchor, multiplier: multiplier, constant: offset).with(priority).set(active: isActive)
         }
     }
+
+    @discardableResult
+    public func heightToWidth(of view: Constrainable, multiplier: CGFloat = 1, offset: CGFloat = 0, relation: ConstraintRelation = .equal, priority: LayoutPriority = .required, isActive: Bool = true) -> Constraint {
+        return height(to: view, view.widthAnchor, multiplier: multiplier, offset: offset, relation: relation, priority: priority, isActive: isActive)
+    }
     
     @discardableResult
     public func height(min: CGFloat? = nil, max: CGFloat? = nil, priority: LayoutPriority = .required, isActive: Bool = true) -> Constraints {
@@ -196,6 +217,11 @@ public extension Constrainable {
         }
         
         return constraints
+    }
+
+    @discardableResult
+    public func aspectRatio(_ ratio: CGFloat, relation: ConstraintRelation = .equal, priotity: LayoutPriority = .required, isActive: Bool = true) -> Constraint {
+        return widthToHeight(of: self, multiplier: ratio, offset: 0, relation: relation, priority: priotity, isActive: isActive)
     }
     
     @discardableResult
