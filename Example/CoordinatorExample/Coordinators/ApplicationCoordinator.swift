@@ -20,7 +20,7 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 
 
 	//	AppCoordinator is root coordinator, top-level object in the UI hierarchy
-	//	It keeps references to all the data source objects
+	//	It keeps references to all the services, data source/management & middleware objects
 	var dataManager: DataManager!
 	var catalogManager: CatalogManager!
 	var cartManager: CartManager!
@@ -56,14 +56,14 @@ final class AppCoordinator: NavigationCoordinator, NeedsDependency {
 		//	finally ready
 		super.start(with: completion)
 
-		//	now, here comes the logic which 
-		//	content Coordinator to load
+		//	now, decide which content Coordinator to load
 		setupActiveSection()
 	}
 
 
 
 	//	MARK:- CoordinatingResponder
+	//	(Note: must be placed here, due to current Swift/ObjC limitations)
 
 	override func cartStatus(sender: Any?, completion: @escaping (Int) -> Void) {
 		guard let cartManager = dependencies?.cartManager else {

@@ -58,7 +58,6 @@ final class AccountCoordinator: NavigationCoordinator, NeedsDependency {
 
 
 	//	MARK:- Coordinating Messages
-	//	must be placed here, due to current Swift/ObjC limitations
 
 //	override func accountDismiss(queue: OperationQueue, sender: Any?) {
 //		parent?.coordinatorDidFinish(self)
