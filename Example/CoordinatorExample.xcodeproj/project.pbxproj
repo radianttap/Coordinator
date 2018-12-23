@@ -478,7 +478,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CoordinatorExample/Pods-CoordinatorExample-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-CoordinatorExample/Pods-CoordinatorExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Coordinator/Coordinator.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Marshal/Marshal.framework",
@@ -495,7 +495,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CoordinatorExample/Pods-CoordinatorExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CoordinatorExample/Pods-CoordinatorExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

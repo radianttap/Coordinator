@@ -1,5 +1,5 @@
 PODS:
-  - Coordinator (6.1)
+  - Coordinator (6.1.1)
   - Kingfisher (4.9.0)
   - Marshal (1.3)
   - SwiftyTimer (2.1)
@@ -40,12 +40,12 @@ CHECKOUT OPTIONS:
     :git: https://github.com/radianttap/TinyConstraints
 
 SPEC CHECKSUMS:
-  Coordinator: 19f4c0b92bbe1017f9d9f455458d74705a12ad9f
+  Coordinator: c3c6efad0abd03b07501bd4ce82fcf19014d177d
   Kingfisher: 59e9da83f94fe29fdfc92b11b8f44415d885c2e6
   Marshal: c46e10c2ebe4fb68d57d34abffdd5b7fa4e89bb6
   SwiftyTimer: d3d81b31537d2c4ec8994b7c87550a3877c47d87
   TinyConstraints: 5ca700872f726c49d10829d7b00f31e4ec731f36
 
-PODFILE CHECKSUM: 811f5353a2415896972396488652d2b4ce5b1de3
+PODFILE CHECKSUM: e3406802969d27d08734a0ea24808ae35055e780
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2
