@@ -38,11 +38,11 @@ Login flow that some AccountCoordinator may implement:
 
 1. create an instance of LoginViewController and display it
 2. receive username/password from LoginViewController
-3. send them to DataManager
-4. If DataManager returns an error, deliver that error back to LoginViewController
-5. If DataManager returns a User instance, replace LoginViewController with UserProfileViewController
+3. send them to AccountManager
+4. If AccountManager returns an error, deliver that error back to LoginViewController
+5. If AccountManager returns a User instance, replace LoginViewController with UserProfileViewController
 
-In this scenario, LoginVC does not know that DataManager exists nor it ever references it. It also does not know that AccountCoordinator nor UserProfileVC exist.
+In this scenario, LoginVC does not know that AccountManager exists nor it ever references it. It also does not know that AccountCoordinator nor UserProfileVC exist.
 
 How can that be possible? Read on.
 
@@ -82,9 +82,9 @@ extension UIResponder {
 you can
 
 * Call `accountLogin()` from *anywhere*: view controller, view, button's event handler, table/collection view cell, UIAlertAction etc.
-* That call will be passed *up* the responder chain until it reaches `UIApplicationDelegate` which is the top UI point your app is given by iOS runtime.
-* Through the `callback` closure, you can then pass the results back *down* the chain.
-* At any link in the chain you can override this method, do whatever you want and continue the chain (or not, as you need)
+* That call will be passed *up* the responder chain until it reaches some Coordinator instance which overrides that method. It none does, it gets to UIApplicationDelegate (which is the top UI point your app is given by iOS runtime) and nothing happens.
+* Through the `callback` closure, Coordinator can then pass the results back *down* the chain.
+* At any point in this chain you can override this method, do whatever you want and continue the chain (or not, as you need)
 
 There is no need for Delegate pattern (although nothing stops you from using one). No other pattern is required, ever. 
 
