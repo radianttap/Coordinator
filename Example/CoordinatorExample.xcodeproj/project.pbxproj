@@ -116,6 +116,7 @@
 		D051930F214FE31E0047AB2D /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		D05ABA191F659BC1006B1206 /* NeedsDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsDependency.swift; sourceTree = "<group>"; };
 		D06488D721CFBED600F3F0E7 /* UIBarButtonBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBarButtonBadge.swift; sourceTree = "<group>"; };
+		D06488D921D0FA8F00F3F0E7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D0765D081ECDC8B100535CAB /* DataError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataError.swift; sourceTree = "<group>"; };
 		D091DA011F66E9B8000A6C8A /* CartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
 		D09363651FA35A4200888CD4 /* NetworkHTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkHTTPMethod.swift; sourceTree = "<group>"; };
@@ -286,6 +287,7 @@
 		D04B76531DE5B6D2009F1B9A = {
 			isa = PBXGroup;
 			children = (
+				D06488D921D0FA8F00F3F0E7 /* README.md */,
 				D005416F1F4633A200CFF7AE /* Vendor */,
 				D04B765E1DE5B6D2009F1B9A /* CoordinatorExample */,
 				D04B765D1DE5B6D2009F1B9A /* Products */,
