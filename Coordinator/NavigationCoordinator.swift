@@ -14,6 +14,9 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	///	This method is implemented to detect when "pop" happens.
 	///	`popViewController` must be detected in order to remove popped VC from Coordinator's `viewControllers` array.
+	///
+	///	It is strongly advised to *not* override this method, but it's allowed to do so in case you really need to.
+	///	What you likely want to override is `handlePopBack(to:)` method.
 	public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
 		let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from)
 		self.didShowController(viewController, fromViewController: fromViewController)
@@ -27,16 +30,22 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		rootViewController.dismiss(animated: true, completion: nil)
 	}
 
+	///	Main method to push supplied UIVC to the navigation stack.
+	///	First it adds the `vc` to the Coordinator's `viewControllers` then calls `show(vc)` on the root.
 	public func show(_ vc: UIViewController) {
 		viewControllers.append(vc)
 		rootViewController.show(vc, sender: self)
 	}
 
+	///	Clears entire navigation stack on both the Coordinator and UINavigationController by
+	/// setting this `[vc]` on respective `viewControllers` property.
 	public func root(_ vc: UIViewController) {
 		viewControllers = [vc]
 		rootViewController.viewControllers = [vc]
 	}
 
+	///	Replaces current top UIVC in the navigation stack (currently visible UIVC) in the root
+	///	with the supplied `vc` instance.
 	public func top(_ vc: UIViewController) {
 		if viewControllers.count == 0 {
 			root(vc)
@@ -47,15 +56,16 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		show(vc)
 	}
 
+	///	Pops back to the given instance, removing one or more UIVCs from the navigation stack.
 	public func pop(to vc: UIViewController, animated: Bool = true) {
-		rootViewController.popToViewController(vc, animated: animated)
+		guard let index = viewControllers.index(of: vc) else { return  }
 
-		if let index = viewControllers.index(of: vc) {
-			let lastPosition = viewControllers.count - 1
-			if lastPosition > 0 {
-				viewControllers = Array(viewControllers.dropLast(lastPosition - index))
-			}
+		let lastPosition = viewControllers.count - 1
+		if lastPosition > 0 {
+			viewControllers = Array(viewControllers.dropLast(lastPosition - index))
 		}
+
+		rootViewController.popToViewController(vc, animated: animated)
 	}
 
 	///	If you subclass NavigationCoordinator, then override this method if you need to
@@ -88,9 +98,9 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 	}
 
 	open override func activate() {
-		//	take ownership over UINavigationController
+		//	take back ownership over root (UINavigationController)
 		super.activate()
-		//	assign itself again as UINavigationControllerDelegate
+		//	assign itself again as `UINavigationControllerDelegate`
 		rootViewController.delegate = self
 		//	re-assign own content View Controllers
 		rootViewController.viewControllers = viewControllers
