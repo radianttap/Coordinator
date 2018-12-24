@@ -20,26 +20,24 @@ public typealias CoordinatingQueuedMessage = () -> Void
 /*
 Coordinators are a design pattern that encourages decoupling view controllers
 such that they know as little as possible about how they are presented.
+As such, View Controllers should never directly push/pop or present other VCs.
+They should not be aware of their existence.
 
-As such, view controllers should never directly push/pop or present other VCs.
-They should either use:
-1. Delegate pattern to indicate such action is needed and owning Coordinator will assign itself delegate
-2. Specific closures that owning Coordinator will populate and thus respond to
-3. Custom actions implemented using `targetViewController(for:sender:)` API
+That is Coordinator's job.
 
 Coordinators can be “nested” such that child coordinators encapsulate different flows
 and prevent any one of them from becoming too large.
 
 Each coordinator has an identifier to simplify logging and debugging.
-Identifier is also used as key for the childCoordinators dictionary
+Identifier is also used as key for the `childCoordinators` dictionary.
 
-You can either use Coordinator instances directly or – far more likely –
-subclass them to add specific behavior for the given particular usage.
+You should never use this class directly (although you can).
+Make a proper subclass and add specific behavior for the given particular usage.
 
 Note: Don't overthink this. Idea is to have fairly small number of coordinators in the app.
 If you embed controllers into other VC (thus using them as simple UI components),
 then keep that flow inside the given container controller.
-Expose to Coordinator only those behaviors that cause push/pop/present to bubble up
+Expose to Coordinator only those behaviors that cause push/pop/present to bubble up.
 */
 
 
@@ -52,8 +50,9 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	Usually one of container controllers (UINavigationController, UITabBarController etc).
 	///
 	/// - parameter rootViewController: UIViewController at the top of the hierarchy.
+	/// - returns: Coordinator instance, fully prepared but started yet.
 	///
-	/// - returns: Coordinator instance, prepared to start
+	///	Note: if you override this init, you must call `super`.
 	public init(rootViewController: T?) {
 		guard let rvc = rootViewController else {
 			fatalError("Must supply UIViewController (or any of its subclasses) or override this init and instantiate VC in there.")
@@ -68,29 +67,28 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	}()
 
 
-	/// Parent Coordinator can be any other Coordinator
 	open weak var parent: Coordinating?
 
-	///	A dictionary of child Coordinators, where key is Coordinator's identifier property
-	///	The only way to add/remove something is through startChild/stopChild methods
+	///	A dictionary of child Coordinators, where key is Coordinator's identifier property.
+	///	The only way to add/remove something is through `startChild` / `stopChild` methods.
 	private(set) public var childCoordinators: [String: Coordinating] = [:]
 
 
-
-
+	///	Next coordinating Responder for any Coordinator instance is its parent Coordinator.
 	open override var coordinatingResponder: UIResponder? {
 		return parent as? UIResponder
 	}
 
-	///	List of wrapped methods requiring dependency which is not available right now
+	///	Temporary keeper for methods requiring dependency which is not available yet.
 	private(set) public var queuedMessages: [CoordinatingQueuedMessage] = []
 
-	///	Simply add the message wrapped in the closure. Mind the capture list for `self`.
+	///	Simply add the message wrapped in the closure. Mind the capture list for `self` and other objects.
 	public func enqueueMessage(_ message: @escaping CoordinatingQueuedMessage ) {
 		queuedMessages.append( message )
 	}
 
-	///	Call this each time your Coordinator's dependencies are updated
+	///	Call this each time your Coordinator's dependencies are updated.
+	///	It will go through all the queued closures and try to execute them again.
 	public func processQueuedMessages() {
 		//	make a local copy
 		let arr = queuedMessages
@@ -106,6 +104,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 
 	/// Tells the coordinator to create/display its initial view controller and take over the user flow.
 	///	Use this method to configure your `rootViewController` (if it isn't already).
+	///
 	///	Some examples:
 	///	* instantiate and assign `viewControllers` for UINavigationController or UITabBarController
 	///	* assign itself (Coordinator) as delegate for the shown UIViewController(s)
@@ -113,6 +112,8 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	etc.
 	///
 	///	- Parameter completion: An optional `Callback` executed at the end.
+	///
+	///	Note: if you override this method, you must call `super` and pass the `completion` closure.
 	open func start(with completion: @escaping () -> Void = {}) {
 		rootViewController.parentCoordinator = self
 		isStarted = true
@@ -120,16 +121,23 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	}
 
 	/// Tells the coordinator that it is done and that it should
-	///	rewind the view controller state to where it was before `start` was called.
-	///	That means either dismiss presented controller or pop pushed ones.
+	///	clear out its backyard.
 	///
-	///	- Parameter completion: An optional `Callback` executed at the end.
+	///	Possible stuff to do here: dismiss presented controller or pop back pushed ones.
+	///
+	///	- Parameter completion: Closure to execute at the end.
+	///
+	///	Note: if you override this method, you must call `super` and pass the `completion` closure.
 	open func stop(with completion: @escaping () -> Void = {}) {
 		rootViewController.parentCoordinator = nil
 		completion()
 	}
 
-
+	///	By default, calls `stopChild` on the given Coordinator, passing in the `completion` block.
+	///
+	///	(See also comments for this method in the Coordinating protocol)
+	///
+	///	Note: if you override this method, you should call `super` and pass the `completion` closure.
 	open func coordinatorDidFinish(_ coordinator: Coordinating, completion: @escaping () -> Void = {}) {
 		stopChild(coordinator: coordinator, completion: completion)
 	}
@@ -140,6 +148,10 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///
 	///	Parent Coordinator can then re-activate this one, in which case it should take-over the
 	///	the ownership of the root VC.
+	///
+	///	Note: if you override this method, you should call `super`
+	///
+	///	By default, it sets itself as `parentCoordinator` for its `rootViewController`.
 	open func activate() {
 		rootViewController.parentCoordinator = self
 	}
@@ -149,8 +161,6 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `start()` method.
-
-	- Returns: The started coordinator.
 	*/
 	public func startChild(coordinator: Coordinating, completion: @escaping () -> Void = {}) {
 		childCoordinators[coordinator.identifier] = coordinator
