@@ -8,6 +8,9 @@
 
 import Foundation
 
+// Each layer in the Layers app architecture should have its own Error type.
+// It wraps any Error returned by lower-level layers.
+
 enum CatalogError: Error {
 	case dataError(DataError)
 

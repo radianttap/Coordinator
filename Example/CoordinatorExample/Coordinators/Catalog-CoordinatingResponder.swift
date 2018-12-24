@@ -8,7 +8,10 @@
 
 import UIKit
 
-
+//	Page is Swift enum type. As such, it's not representable in the Objective-C
+//	and it must be in order to use it as argument of UIResponder method.
+//
+//	Solution: wrap it inside NSObject subclass.
 final class CatalogPageBox: NSObject {
 	let unbox: CatalogCoordinator.Page
 	init(_ value: CatalogCoordinator.Page) {

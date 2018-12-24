@@ -38,6 +38,8 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 	override func start(with completion: @escaping () -> Void = {}) {
 		super.start(with: completion)
 
+		//	Starting a Coordinator means it should
+		//	display some screen it manages.
 		setupActivePage()
 	}
 
@@ -82,6 +84,8 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 }
 
 private extension CatalogCoordinator {
+	//	This is private, implementation detail.
+	//	No other file in the app knows how CatalogCoordinator internally works, nor it should.
 	func setupActivePage(_ enforcedPage: Page? = nil) {
 		let p = enforcedPage ?? page
 		page = p

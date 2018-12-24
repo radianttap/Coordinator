@@ -20,6 +20,9 @@ final class CartManager {
 
 	private(set) var items: [CartItem] = []
 
+
+	//	Public API
+
 	func add(product: Product, color: Color) {
 		let item = CartItem(product: product, color: color)
 		items.append(item)
