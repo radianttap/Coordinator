@@ -9,12 +9,8 @@
 import UIKit
 
 open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigationControllerDelegate {
-	//	this keeps the references to actual UIViewControllers managed by this Coordinator only
+	//	References to actual UIViewControllers managed by this Coordinator instance.
 	open var viewControllers: [UIViewController] = []
-
-	public override init(rootViewController: UINavigationController?) {
-		super.init(rootViewController: rootViewController)
-	}
 
 	///	This method is implemented to detect when "pop" happens.
 	///	`popViewController` must be detected in order to remove popped VC from Coordinator's `viewControllers` array.
@@ -62,24 +58,32 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		}
 	}
 
+	///	If you subclass NavigationCoordinator, then override this method if you need to
+	///	do something special when customer taps the UIKit's backButton in the navigationBar.
+	///
+	///	By default, this does nothing.
 	open func handlePopBack(to vc: UIViewController?) {
 	}
 
 	open override func start(with completion: @escaping () -> Void) {
+		//	assign itself as UINavigationControllerDelegate
 		rootViewController.delegate = self
+		//	must call this
 		super.start(with: completion)
 	}
 
 	open override func stop(with completion: @escaping () -> Void) {
+		//	relinquish being delegate for UINC
 		rootViewController.delegate = nil
 
+		//	remove all of its UIVCs from the root UINC
 		for vc in viewControllers {
 			guard let index = rootViewController.viewControllers.index(of: vc) else { continue }
 			rootViewController.viewControllers.remove(at: index)
 		}
-
+		//	clean up UIVC instances
 		viewControllers.removeAll()
-
+		//	must call this
 		super.stop(with: completion)
 	}
 
