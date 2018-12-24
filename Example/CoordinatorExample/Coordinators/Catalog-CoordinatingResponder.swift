@@ -32,13 +32,13 @@ extension UIResponder {
 	/// - Parameters:
 	///   - sender: reference to object who requested data
 	///   - completion: Closure to call when data is ready or error occurs
-	@objc dynamic func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void ) {
-		coordinatingResponder?.fetchPromotedProducts(sender: sender, completion: completion)
+	@objc dynamic func fetchPromotedProducts(onQueue queue: OperationQueue? = nil, sender: Any?, completion: @escaping ([Product], Error?) -> Void ) {
+		coordinatingResponder?.fetchPromotedProducts(onQueue: queue, sender: sender, completion: completion)
 	}
 
 
-	@objc dynamic func fetchActiveSeason(sender: Any?, completion: @escaping (Season?, Error?) -> Void ) {
-		coordinatingResponder?.fetchActiveSeason(sender: sender, completion: completion)
+	@objc dynamic func fetchActiveSeason(onQueue queue: OperationQueue? = nil, sender: Any?, completion: @escaping (Season?, Error?) -> Void ) {
+		coordinatingResponder?.fetchActiveSeason(onQueue: queue, sender: sender, completion: completion)
 	}
 
 	/// Returns the list of categories in given season. If `season` is `nil`,
@@ -48,8 +48,8 @@ extension UIResponder {
 	///   - season: (optional) season
 	///   - sender: reference to object who requested data
 	///   - completion: Closure to call when data is ready or error occurs
-	@objc dynamic func fetchProductCategories(season: Season, sender: Any?, completion: @escaping ([Category], Error?) -> Void ) {
-		coordinatingResponder?.fetchProductCategories(season: season, sender: sender, completion: completion)
+	@objc dynamic func fetchProductCategories(season: Season, onQueue queue: OperationQueue? = nil, sender: Any?, completion: @escaping ([Category], Error?) -> Void ) {
+		coordinatingResponder?.fetchProductCategories(season: season, onQueue: queue, sender: sender, completion: completion)
 	}
 
 

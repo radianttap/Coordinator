@@ -120,19 +120,24 @@ extension CatalogManager {
 		}
 	}
 
-	func promotedProducts(callback: @escaping ([Product], CatalogError?) -> Void) {
+	func promotedProducts(onQueue queue: OperationQueue? = nil, callback: @escaping ([Product], CatalogError?) -> Void) {
+		//	direct callback, on current queue
 		callback( promotedProducts, nil )
 
 		fetchPromotions {
 			[unowned self] hasUpdates, catalogError in
 			if !hasUpdates { return }
 
+			//	this may have been called from background thread
+			//	so make sure to perform this on the requested OperationQueue
+			//	(if UI called this, then it will be OperationQueue.main)
+
 			if let catalogError = catalogError {
-				callback( self.promotedProducts, catalogError )
+				OperationQueue.perform(callback( self.promotedProducts, catalogError ), onQueue: queue)
 				return
 			}
 
-			callback( self.promotedProducts, nil )
+			OperationQueue.perform(callback( self.promotedProducts, nil ), onQueue: queue)
 		}
 	}
 }

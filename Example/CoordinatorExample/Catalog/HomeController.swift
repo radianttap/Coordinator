@@ -142,13 +142,11 @@ private extension HomeController {
 	///	customer can decide to move away from this VC which could then be deallocated.
 	///	Hence you need to use `weak self` to avoid crashing your app
 	func updateData() {
-		fetchPromotedProducts(sender: self) {
+		fetchPromotedProducts(onQueue: .main, sender: self) {
 			[weak self] arr, _ in
 			guard let self = self else { return }
 
-			DispatchQueue.main.async {
-				self.promotedProducts = arr
-			}
+			self.promotedProducts = arr
 		}
 
 		//	TODO: this waiting for seasons to load,

@@ -51,20 +51,20 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 		setupActivePage( .product(product) )
 	}
 
-	override func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
+	override func fetchPromotedProducts(onQueue queue: OperationQueue? = nil, sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
 		guard let manager = dependencies?.catalogManager else {
 			//	If manager is not yet ready, save this call.
 			//	Once `didSet` if fired on `dependencies` property above,
 			//	Coordinator will go through all enqueued messages and try again.
 			enqueueMessage {
-				[weak self] in self?.fetchPromotedProducts(sender: sender, completion: completion)
+				[weak self] in self?.fetchPromotedProducts(onQueue: queue, sender: sender, completion: completion)
 			}
 			return
 		}
 		manager.promotedProducts(callback: completion)
 	}
 
-	override func fetchProductCategories(season: Season?, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {
+	override func fetchProductCategories(season: Season?, onQueue queue: OperationQueue? = nil, sender: Any?, completion: @escaping ([Category], Error?) -> Void) {
 		guard let manager = dependencies?.catalogManager else {
 			completion( [], nil )
 			return
@@ -72,7 +72,7 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 		manager.categories(for: season, callback: completion)
 	}
 
-	override func fetchActiveSeason(sender: Any?, completion: @escaping (Season?, Error?) -> Void) {
+	override func fetchActiveSeason(onQueue queue: OperationQueue? = nil, sender: Any?, completion: @escaping (Season?, Error?) -> Void) {
 		guard let manager = dependencies?.catalogManager else {
 			completion( nil, nil )
 			return
