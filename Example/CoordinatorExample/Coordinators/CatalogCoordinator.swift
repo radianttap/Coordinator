@@ -11,7 +11,10 @@ import Coordinator
 
 final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 	var dependencies: AppDependency? {
-		didSet { updateChildCoordinatorDependencies() }
+		didSet {
+			updateChildCoordinatorDependencies()
+			processQueuedMessages()
+		}
 	}
 
 	//	Declaration of all local pages (ViewControllers)
@@ -50,7 +53,12 @@ final class CatalogCoordinator: NavigationCoordinator, NeedsDependency {
 
 	override func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
 		guard let manager = dependencies?.catalogManager else {
-			completion( [], nil )
+			//	If manager is not yet ready, save this call.
+			//	Once `didSet` if fired on `dependencies` property above,
+			//	Coordinator will go through all enqueued messages and try again.
+			enqueueMessage {
+				[weak self] in self?.fetchPromotedProducts(sender: sender, completion: completion)
+			}
 			return
 		}
 		manager.promotedProducts(callback: completion)
