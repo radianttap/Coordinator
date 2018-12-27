@@ -254,7 +254,9 @@ If no queue is specified, it’s executed on the current queue.
 
 ## Further reading
 
-Rough [history of development](http://aplus.rs/tags/coordinator/) on my blog. I did not come up with the library all at once, it was a gradual process as all good things are.
+On my blog: [Coordinator: the missing pattern in UIKit](http://aplus.rs/2018/coordinator-missing-pattern-uikit/)
+
+Rough [history of development](http://aplus.rs/tags/coordinator/), also on my blog. I did not come up with the library all at once, it was a gradual process as all good things are.
 
 [Mind map your app](https://speakerdeck.com/radianttap/mind-map-your-app) - slides from my talk at NSBudapest meetup in May 2018. Very rough [video recording](https://youtu.be/7bOo7X5znKw) of that talk.
 
