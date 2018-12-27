@@ -3,15 +3,26 @@
 Implementation of _Coordinator_ design pattern. It is *the* application architecture pattern for iOS, carefully designed to fit into UIKit; so much so it could easily be `UICoordinator`.
 
 Since this is *core architectural pattern*, it’s not possible to explain its usage with one or two clever lines of code. Give it a day or two; analyze and play around with the demo example. I’m pretty sure you’ll find it worthy of your time and future projects.
-## Installation
-### CocoaPods
-[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects.For usage and installation instructions, visit their website.To integrate Coordinator into your Xcode project using CocoaPods, specify it in your `Podfile`:
-```ruby
-pod 'Coordinator', '~> 6.1.1'
-```
-### Manually 
-If you prefer not to use any of the aforementioned dependency managers ,you can integrate Coordinator into your project manually,Just drag Coordinator folder into your project(Only four class file).
 
+
+## Installation
+
+### Manually 
+
+My preferred method is to integrate Coordinator into the project manually. Just drag `Coordinator` folder into your project — it‘s only four files.
+
+If you prefer to use dependency managers, see below. 
+Releases are tagged with [Semantic Versioning](https://semver.org) in mind.
+
+### CocoaPods
+
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate Coordinator into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+pod 'Coordinator', 	:git => 'https://github.com/radianttap/Coordinator.git'
+```
+
+Sadly, you must use direct link through `:git` since CocoaPods repo contains a framework of the same name. That framework seems long abandoned and my requests to remove it and thus allow me to publish mine were unsuccessful.
 
 ## Coordinator: the pattern 
 (and why you need to use it)
