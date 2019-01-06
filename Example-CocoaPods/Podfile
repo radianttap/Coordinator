@@ -1,0 +1,22 @@
+use_frameworks!
+
+target 'CoordinatorExample' do
+	platform :ios, '9.0'
+
+	# Well, obviously
+	pod 'Coordinator', :path => '../'
+
+	# Auto Layout helpers in code
+	pod 'TinyConstraints',	:git => 'https://github.com/radianttap/TinyConstraints'
+
+	# Image Cache
+	pod 'Kingfisher', 	:git => 'https://github.com/radianttap/Kingfisher.git', :branch => 'swift4.2'
+
+	# JSON parser
+	pod 'Marshal', 	:git => 'https://github.com/radianttap/Marshal.git'
+
+	# Nice Timer wrapper
+	pod 'SwiftyTimer', 	:git => 'https://github.com/radianttap/SwiftyTimer.git'
+
+end
+
