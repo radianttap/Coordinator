@@ -1,0 +1,13 @@
+{
+    "list":[
+            {"name": "Joe Smith", "living":true, "age":21, "address": {"street": "1 Infinite Loop", "city":"Cupertino"}},
+            {"name": "Jane Doe", "living":false, "age":21, "address": {"street": "2 Infinite Loop", "city":"Sunnyvale"}}
+    ],
+    "meta":{
+        "next":"http://apple.com",
+        "prev":null
+    },
+    "result": {
+        "ok": true
+    }
+}

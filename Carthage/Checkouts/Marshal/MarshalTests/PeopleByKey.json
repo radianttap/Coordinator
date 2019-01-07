@@ -1,0 +1,6 @@
+{
+    "people":{
+        "person_id1": {"first":"Jason","last":"Larsen", "address":null, "score":42},
+        "person_id2": {"first":"Bart","last":"Whiteley", "score":47}
+    },
+}
