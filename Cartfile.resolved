@@ -1,0 +1,4 @@
+github "radianttap/Kingfisher" "aa0ade759f59d20e216f11d5063c5263e7e3b002"
+github "radianttap/Marshal" "1.2.7"
+github "radianttap/SwiftyTimer" "2.0.1"
+github "radianttap/TinyConstraints" "3.2.1"
