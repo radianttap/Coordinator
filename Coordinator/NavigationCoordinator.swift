@@ -112,7 +112,7 @@ private extension NavigationCoordinator {
 		guard let fromViewController = fromViewController else { return }
 
 		//	if this FROM controller is not in the Coordinator's internal list, ignore it
-		if !viewControllers.contains( viewController ) { return }
+		if !viewControllers.contains(fromViewController) { return }
 
 		//	check is this pop:
 		if let vc = self.viewControllers.last, vc === fromViewController {
