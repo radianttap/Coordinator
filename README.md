@@ -1,3 +1,5 @@
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 # Coordinator
 
 Implementation of _Coordinator_ design pattern. It is *the* application architecture pattern for iOS, carefully designed to fit into UIKit; so much so it could easily be `UICoordinator`.
@@ -22,7 +24,28 @@ Releases are tagged with [Semantic Versioning](https://semver.org) in mind.
 pod 'Coordinator', 	:git => 'https://github.com/radianttap/Coordinator.git'
 ```
 
-Sadly, you must use direct link through `:git` since CocoaPods repo contains a framework of the same name. That framework seems long abandoned and my requests to remove it and thus allow me to publish mine were unsuccessful.
+You must use direct link through `:git` since CocoaPods central repository contains a framework of the same name. That framework seems long abandoned and my requests to remove it and thus allow me to publish mine were unsuccessful.
+
+Look into `Example-CocoaPods` folder for an example app using CocoaPods as dependency manager.
+
+### Setting up with Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
+
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate Coordinator into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "radianttap/Coordinator"
+```
+
+`Coordinator.xcodeproj` in the root is using Carthage for the example app and is also housing the framework itself. 
 
 ## Coordinator: the pattern 
 (and why you need to use it)
