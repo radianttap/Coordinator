@@ -17,7 +17,7 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 	///
 	///	It is strongly advised to *not* override this method, but it's allowed to do so in case you really need to.
 	///	What you likely want to override is `handlePopBack(to:)` method.
-	public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+	open func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
 		let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from)
 		self.didShowController(viewController, fromViewController: fromViewController)
 	}
