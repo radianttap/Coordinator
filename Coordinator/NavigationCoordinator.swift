@@ -17,7 +17,7 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 	///
 	///	It is strongly advised to *not* override this method, but it's allowed to do so in case you really need to.
 	///	What you likely want to override is `handlePopBack(to:)` method.
-	public func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+	open func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
 		let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from)
 		self.didShowController(viewController, fromViewController: fromViewController)
 	}
@@ -109,24 +109,31 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 private extension NavigationCoordinator {
 	func didShowController(_ viewController: UIViewController, fromViewController: UIViewController?) {
-		guard let fromViewController = fromViewController else { return }
+        if let fromViewController = fromViewController {
+            guard viewControllers.contains(fromViewController) else { return }
+            guard let last = viewControllers.last, last === fromViewController else { return }
 
-		//	if this FROM controller is not in the Coordinator's internal list, ignore it
-		if !viewControllers.contains(fromViewController) { return }
+            if let index = viewControllers.firstIndex(of: viewController) {
+                let lastPosition = viewControllers.count - 1
+                viewControllers = Array(viewControllers.dropLast(lastPosition - index))
+                handlePopBack(to: viewController)
+            } else {
+                viewControllers.removeLast()
+                handlePopBack(to: last)
+            }
+        } else {
+            guard viewController !== viewControllers.last else { return }
+            guard let index = viewControllers.firstIndex(of: viewController) else { return }
 
-		//	check is this pop:
-		if let vc = self.viewControllers.last, vc === fromViewController {
-			//	it is pop. remove this controller from Coordinator's list
-			self.viewControllers.removeLast()
-			//	customization point for the NavigationCoordinator's subclass
-			//	to update its internal state on pop-back
-			self.handlePopBack(to: self.viewControllers.last)
-		}
+            let lastPosition = viewControllers.count - 1
+            viewControllers = Array(viewControllers.dropLast(lastPosition - index))
+            handlePopBack(to: viewController)
+        }
 
 		//	is there any controller left shown in this Coordinator?
-		if self.viewControllers.count == 0 {
+		if viewControllers.count == 0 {
 			//	inform the parent Coordinator that this child Coordinator has no more VCs
-			self.parent?.coordinatorDidFinish(self, completion: {})
+			parent?.coordinatorDidFinish(self, completion: {})
 			return
 		}
 	}
