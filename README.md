@@ -2,7 +2,7 @@
 
 # Coordinator
 
-Implementation of _Coordinator_ design pattern. It is *the* application architecture pattern for iOS, carefully designed to fit into UIKit; so much so it could easily be `UICoordinator`.
+Implementation of _Coordinator_ design pattern. It is *the* application architecture pattern for iOS, carefully designed to fit into UIKit; so much it could easily be `UICoordinator`.
 
 Since this is *core architectural pattern*, it’s not possible to explain its usage with one or two clever lines of code. Give it a day or two; analyze and play around with the demo example. I’m pretty sure you’ll find it worthy of your time and future projects.
 
@@ -24,7 +24,7 @@ Releases are tagged with [Semantic Versioning](https://semver.org) in mind.
 pod 'Coordinator', 	:git => 'https://github.com/radianttap/Coordinator.git'
 ```
 
-You must use direct link through `:git` since CocoaPods central repository contains a framework of the same name. That framework seems long abandoned and my requests to remove it and thus allow me to publish mine were unsuccessful.
+You must use direct link through `:git` since CocoaPods central repository contains a framework of the same name.[^1]
 
 Look into `Example-CocoaPods` folder for an example app using CocoaPods as dependency manager.
 
@@ -200,13 +200,13 @@ Since apps can be fairly complex, each Coordinator can have an unlimited number 
 
 When you instantiate a Coordinator instance, you call `start()` to use it and `stop()` when it’s no longer needed.
 
-In the Coordinator subclass, you’ll override the method you defined in the UIResponder extension and actually do something useful instead of just calling the same method on next coordinatingResponder.
+In the Coordinator subclass, you’ll override the method you defined in the UIResponder extension and actually do something useful instead of just calling the same method on next `coordinatingResponder`.
 
 ## Demo example
 
 The best explanation for any architecture is demo app, which I built.
 
-_CoordinatorExample_ in this repository mimics a shopping app. It has a fairly complete implementation of the [Layers architecture](http://aplus.rs/tags/layers/) where Coordinator is one of the central elements.
+Example app mimics a shopping app. It has a fairly complete implementation of the [Layers architecture](http://aplus.rs/tags/layers/) where Coordinator is one of the central elements.
 
 Look into `AppDelegate` where you can see that each app must have an instance of `AppCoordinator`, which is main entry point into the app. It’s created and strongly referenced by the AppDelegate. 
 
@@ -216,9 +216,9 @@ This Coordinator then spawns any other Coordinators you need, when you need them
 
 See in the demo how I use `Section` and `Page` enums to declare parts and screens of the app and thus hide internal implementation of each Coordinator from the rest of the app.
 
-Section == one Coordinator instance. 
+Section == one Coordinator instance, one semantic part of the app (my account, catalog, payment etc)
 
-Page == one screen inside a particular Coordinator.
+Page == one screen inside a particular Coordinator. Each page corresponds to one UIViewController.
 
 ### NavigationCoordinator
 
@@ -306,3 +306,5 @@ I file these two talks under *essential education* for any iOS developer. While 
 
 [MIT](https://choosealicense.com/licenses/mit/), as usual.
 
+
+[^1]: That framework seems long abandoned and my requests to remove it and thus allow me to publish mine were unsuccessful.
