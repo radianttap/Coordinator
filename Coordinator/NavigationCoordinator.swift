@@ -31,12 +31,12 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	//	MARK:- Presenting
 
-	public func present(_ vc: UIViewController) {
-		rootViewController.present(vc, animated: true, completion: nil)
+	public func present(_ vc: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+		rootViewController.present(vc, animated: animated, completion: completion)
 	}
 
-	public func dismiss() {
-		rootViewController.dismiss(animated: true, completion: nil)
+	public func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+		rootViewController.dismiss(animated: animated, completion: completion)
 	}
 
 
