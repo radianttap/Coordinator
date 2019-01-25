@@ -32,6 +32,7 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 	//	MARK:- Presenting
 
 	public func present(_ vc: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
+		vc.parentCoordinator = self
 		rootViewController.present(vc, animated: animated, completion: completion)
 	}
 
