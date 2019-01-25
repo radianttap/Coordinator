@@ -67,38 +67,15 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	}()
 
 
-	open weak var parent: Coordinating?
-
-	///	A dictionary of child Coordinators, where key is Coordinator's identifier property.
-	///	The only way to add/remove something is through `startChild` / `stopChild` methods.
-	private(set) public var childCoordinators: [String: Coordinating] = [:]
-
-
-	///	Next coordinating Responder for any Coordinator instance is its parent Coordinator.
+	///	Next coordinatingResponder for any Coordinator instance is its parent Coordinator.
 	open override var coordinatingResponder: UIResponder? {
 		return parent as? UIResponder
 	}
 
-	///	Temporary keeper for methods requiring dependency which is not available yet.
-	private(set) public var queuedMessages: [CoordinatingQueuedMessage] = []
-
-	///	Simply add the message wrapped in the closure. Mind the capture list for `self` and other objects.
-	public func enqueueMessage(_ message: @escaping CoordinatingQueuedMessage ) {
-		queuedMessages.append( message )
-	}
-
-	///	Call this each time your Coordinator's dependencies are updated.
-	///	It will go through all the queued closures and try to execute them again.
-	public func processQueuedMessages() {
-		//	make a local copy
-		let arr = queuedMessages
-		//	clean up the queue, in case it's re-populated while this pass is ongoing
-		queuedMessages.removeAll()
-		//	execute each message
-		arr.forEach { $0() }
-	}
 
 
+
+	//	MARK:- Lifecycle
 
 	private(set) public var isStarted: Bool = false
 
@@ -156,6 +133,17 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 		rootViewController.parentCoordinator = self
 	}
 
+
+
+
+	//	MARK:- Containment
+
+	open weak var parent: Coordinating?
+
+	///	A dictionary of child Coordinators, where key is Coordinator's identifier property.
+	///	The only way to add/remove something is through `startChild` / `stopChild` methods.
+	private(set) public var childCoordinators: [String: Coordinating] = [:]
+
 	/**
 	Adds new child coordinator and starts it.
 
@@ -183,6 +171,28 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 			self.childCoordinators.removeValue(forKey: coordinator.identifier)
 			completion()
 		}
+	}
+
+
+	//	MARK:- Queuing coordinatingResponder methods
+
+	///	Temporary keeper for methods requiring dependency which is not available yet.
+	private(set) public var queuedMessages: [CoordinatingQueuedMessage] = []
+
+	///	Simply add the message wrapped in the closure. Mind the capture list for `self` and other objects.
+	public func enqueueMessage(_ message: @escaping CoordinatingQueuedMessage ) {
+		queuedMessages.append( message )
+	}
+
+	///	Call this each time your Coordinator's dependencies are updated.
+	///	It will go through all the queued closures and try to execute them again.
+	public func processQueuedMessages() {
+		//	make a local copy
+		let arr = queuedMessages
+		//	clean up the queue, in case it's re-populated while this pass is ongoing
+		queuedMessages.removeAll()
+		//	execute each message
+		arr.forEach { $0() }
 	}
 }
 
