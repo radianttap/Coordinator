@@ -132,7 +132,7 @@ private extension NavigationCoordinator {
 		if viewController === viewControllers.last {
 			return
 		}
-
+		
 		//	Check: just shown VC should be present in Coordinator's viewControllers sequence.
 		//	If it's not there, then bail out.
 		//		| Again, this should not happen,
