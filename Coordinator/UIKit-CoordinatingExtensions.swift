@@ -37,7 +37,7 @@ At the UIViewController level (see below), it‘s intercepted to switch up to th
 Once that happens, it stays in the Coordinator hierarchy, since coordinator can be nested only inside other coordinators.
 */
 public extension UIResponder {
-	@objc public var coordinatingResponder: UIResponder? {
+	@objc var coordinatingResponder: UIResponder? {
 		return next
 	}
 
