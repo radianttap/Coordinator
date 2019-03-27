@@ -1,7 +1,7 @@
 
 github "radianttap/TinyConstraints"
 
-github "radianttap/Kingfisher" "swift4.2"
+github "radianttap/Kingfisher"
 
 github "radianttap/Marshal"
 
