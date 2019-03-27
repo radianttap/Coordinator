@@ -29,12 +29,12 @@ final class CartManager {
 	}
 
 	func remove(product: Product, color: Color) {
-		guard let index = items.index(where: { $0.product == product && $0.color == color }) else { return }
+		guard let index = items.firstIndex(where: { $0.product == product && $0.color == color }) else { return }
 		items.remove(at: index)
 	}
 
 	func remove(item: CartItem) {
-		guard let index = items.index(where: { $0.product == item.product && $0.color == item.color }) else { return }
+		guard let index = items.firstIndex(where: { $0.product == item.product && $0.color == item.color }) else { return }
 		items.remove(at: index)
 	}
 
