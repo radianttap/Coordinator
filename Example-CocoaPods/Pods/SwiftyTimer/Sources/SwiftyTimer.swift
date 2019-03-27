@@ -105,7 +105,7 @@ extension Timer {
     /// Specify `runLoop` or `modes` to override these defaults.
     
     public func start(runLoop: RunLoop = .current, modes: RunLoop.Mode...) {
-        let modes = modes.isEmpty ? [RunLoop.Mode.default] : modes
+        let modes = modes.isEmpty ? [.default] : modes
         
         for mode in modes {
             runLoop.add(self, forMode: mode)

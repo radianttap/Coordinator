@@ -1,13 +1,13 @@
 PODS:
-  - Coordinator (6.1.1)
-  - Kingfisher (4.9.0)
-  - Marshal (1.3)
-  - SwiftyTimer (2.1)
-  - TinyConstraints (3.2.1)
+  - Coordinator (6.2.1)
+  - Kingfisher (5.3.0)
+  - Marshal (1.3.1)
+  - SwiftyTimer (2.1.0)
+  - TinyConstraints (3.3.1)
 
 DEPENDENCIES:
   - Coordinator (from `../`)
-  - Kingfisher (from `https://github.com/radianttap/Kingfisher.git`, branch `swift4.2`)
+  - Kingfisher (from `https://github.com/radianttap/Kingfisher.git`)
   - Marshal (from `https://github.com/radianttap/Marshal.git`)
   - SwiftyTimer (from `https://github.com/radianttap/SwiftyTimer.git`)
   - TinyConstraints (from `https://github.com/radianttap/TinyConstraints`)
@@ -16,7 +16,6 @@ EXTERNAL SOURCES:
   Coordinator:
     :path: "../"
   Kingfisher:
-    :branch: swift4.2
     :git: https://github.com/radianttap/Kingfisher.git
   Marshal:
     :git: https://github.com/radianttap/Marshal.git
@@ -27,25 +26,25 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Kingfisher:
-    :commit: aa0ade759f59d20e216f11d5063c5263e7e3b002
+    :commit: 7e3e5f9176e21fd82a4d37af2084d7d71b88eedd
     :git: https://github.com/radianttap/Kingfisher.git
   Marshal:
-    :commit: 15bf7d0d8e2336980cedb2c7bfe4c0903ffe50e2
+    :commit: b391d52b0ffb1fbd57833ae9cd5565e1cadbaa93
     :git: https://github.com/radianttap/Marshal.git
   SwiftyTimer:
-    :commit: 0b5d28e4821557ccef11c81d2e7bd4d09ea6f064
+    :commit: 8b3171612cb3ed227feaa2a2f6680df290541658
     :git: https://github.com/radianttap/SwiftyTimer.git
   TinyConstraints:
-    :commit: c3d35efbd8e50020f86b4be349e6e98e69b33655
+    :commit: c09f14788ebdd30af947cb4ce2069a4fa1c0ea49
     :git: https://github.com/radianttap/TinyConstraints
 
 SPEC CHECKSUMS:
-  Coordinator: c3c6efad0abd03b07501bd4ce82fcf19014d177d
-  Kingfisher: 59e9da83f94fe29fdfc92b11b8f44415d885c2e6
-  Marshal: c46e10c2ebe4fb68d57d34abffdd5b7fa4e89bb6
-  SwiftyTimer: d3d81b31537d2c4ec8994b7c87550a3877c47d87
-  TinyConstraints: 5ca700872f726c49d10829d7b00f31e4ec731f36
+  Coordinator: 2cc43e501517689a24b7dfe93b05b2d0bb1631f0
+  Kingfisher: 4692c783ffb99e9e2e40a6eb3e518c3b96c6fa8c
+  Marshal: 4ece78ad33cd68004622af6a1de2f71297bbeb70
+  SwiftyTimer: 0d5bc65a6b60a52ed8b6c9566c0a1cf524147732
+  TinyConstraints: dbf7519aefc01ea59d62244300c7718aec68e280
 
-PODFILE CHECKSUM: e3406802969d27d08734a0ea24808ae35055e780
+PODFILE CHECKSUM: 230815ada3059f54a148a285445c5db251cac7db
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.7.0.beta.2

@@ -1,7 +1,7 @@
 use_frameworks!
 
-target 'CoordinatorExample' do
-	platform :ios, '9.0'
+target 'Coordinator-CP' do
+	platform :ios, '10.0'
 
 	# Well, obviously
 	pod 'Coordinator', :path => '../'
@@ -10,7 +10,7 @@ target 'CoordinatorExample' do
 	pod 'TinyConstraints',	:git => 'https://github.com/radianttap/TinyConstraints'
 
 	# Image Cache
-	pod 'Kingfisher', 	:git => 'https://github.com/radianttap/Kingfisher.git', :branch => 'swift4.2'
+	pod 'Kingfisher', 	:git => 'https://github.com/radianttap/Kingfisher.git'
 
 	# JSON parser
 	pod 'Marshal', 	:git => 'https://github.com/radianttap/Marshal.git'
