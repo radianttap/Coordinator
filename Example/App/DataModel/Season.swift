@@ -34,8 +34,6 @@ final class Season: NSObject {
 extension Season: Unmarshaling {}
 
 extension Season {
-	static var styleCodeIndex: String.Index { return String.Index(encodedOffset: 2) }
-
 	var orderedThemes: [Theme] {
 		return themes.sorted(by: { $0.id < $1.id })
 	}

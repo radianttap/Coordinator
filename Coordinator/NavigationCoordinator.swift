@@ -71,7 +71,7 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	///	Pops back to the given instance, removing one or more UIVCs from the navigation stack.
 	public func pop(to vc: UIViewController, animated: Bool = true) {
-		guard let index = viewControllers.index(of: vc) else { return  }
+		guard let index = viewControllers.firstIndex(of: vc) else { return  }
 
 		let lastPosition = viewControllers.count - 1
 		if lastPosition > 0 {
@@ -97,7 +97,7 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 		//	remove all of its UIVCs from the root UINC
 		for vc in viewControllers {
-			guard let index = rootViewController.viewControllers.index(of: vc) else { continue }
+			guard let index = rootViewController.viewControllers.firstIndex(of: vc) else { continue }
 			rootViewController.viewControllers.remove(at: index)
 		}
 		//	clean up UIVC instances

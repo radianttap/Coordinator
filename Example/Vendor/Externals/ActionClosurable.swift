@@ -32,12 +32,12 @@ private func register<T>(_ actor: Actor<T>, to object: AnyObject) {
 
 public protocol ActionClosurable {}
 public extension ActionClosurable where Self: AnyObject {
-	public func convert(closure: @escaping (Self) -> Void, toConfiguration configure: (AnyObject, Selector) -> Void) {
+	func convert(closure: @escaping (Self) -> Void, toConfiguration configure: (AnyObject, Selector) -> Void) {
 		let actor = Actor(acts: closure)
 		configure(actor, #selector(Actor<AnyObject>.act(sender:)))
 		register(actor, to: self)
 	}
-	public static func convert(closure: @escaping (Self) -> Void, toConfiguration configure: (AnyObject, Selector) -> Self) -> Self {
+	static func convert(closure: @escaping (Self) -> Void, toConfiguration configure: (AnyObject, Selector) -> Self) -> Self {
 		let actor = Actor(acts: closure)
 		let instance = configure(actor, #selector(Actor<AnyObject>.act(sender:)))
 		register(actor, to: instance)

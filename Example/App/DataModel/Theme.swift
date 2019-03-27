@@ -34,10 +34,9 @@ final class Theme: NSObject {
 extension Theme: Unmarshaling {}
 
 extension Theme {
-	static var styleCodeIndex: String.Index { return String.Index(encodedOffset: 3) }
-
 	var seasonCode: String {
-		return String(id[..<Season.styleCodeIndex])
+		let styleCodeIndex = String.Index(utf16Offset: 2, in: id)
+		return String(id[..<styleCodeIndex])
 	}
 
 	var orderedProducts: [Product] {

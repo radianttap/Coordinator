@@ -70,8 +70,8 @@ extension Atomic: Equatable where A: Equatable {
 }
 
 extension Atomic: Hashable where A: Hashable {
-	public var hashValue: Int {
-		return atomic.hashValue
+	public func hash(into hasher: inout Hasher) {
+		hasher.combine(atomic)
 	}
 }
 
