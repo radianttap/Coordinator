@@ -4,7 +4,7 @@
 //
 //  Created by Wei Wang on 16/1/19.
 //
-//  Copyright (c) 2018 Wei Wang <onevcat@gmail.com>
+//  Copyright (c) 2019 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -47,7 +47,7 @@ class InterfaceController: WKInterfaceController {
     
     func refreshImage() {
         let url = URL(string: "https://raw.githubusercontent.com/onevcat/Kingfisher/master/images/kingfisher-\(currentIndex! + 1).jpg")!
-        self.interfaceImage.kf.setImage(url)
+        interfaceImage.kf.setImage(with: url)
     }
 
     override func willActivate() {

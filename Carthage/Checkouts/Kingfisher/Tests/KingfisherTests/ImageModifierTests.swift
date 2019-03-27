@@ -1,10 +1,10 @@
 //
-//  ImageProcessorTests.swift
+//  ImageModifierTests.swift
 //  Kingfisher
 //
 //  Created by Ethan Gill on 2017/11/29.
 //
-//  Copyright (c) 2018 Ethan Gill <onevcat@gmail.com>
+//  Copyright (c) 2019 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -40,9 +40,9 @@ class ImageModifierTests: XCTestCase {
     }
 
     func testAnyImageModifier() {
-        let m = AnyImageModifier(modify: { image in
+        let m = AnyImageModifier { image in
             return image
-        })
+        }
         let image = Image(data: testImagePNGData)!
         let modifiedImage = m.modify(image)
         XCTAssert(modifiedImage == image)
@@ -65,11 +65,7 @@ class ImageModifierTests: XCTestCase {
         let m = FlipsForRightToLeftLayoutDirectionImageModifier()
         let image = Image(data: testImagePNGData)!
         let modifiedImage = m.modify(image)
-        if #available(iOS 9.0, *) {
-            XCTAssert(modifiedImage.flipsForRightToLeftLayoutDirection == true)
-        } else {
-            XCTAssert(true)
-        }
+        XCTAssert(modifiedImage.flipsForRightToLeftLayoutDirection == true)
     }
 
     func testAlignmentRectInsetsImageModifier() {

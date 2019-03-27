@@ -2,6 +2,103 @@
 
 -----
 
+## [5.3.0 - Prefetching Sources](https://github.com/onevcat/Kingfisher/releases/tag/5.3.0) (2019-03-24)
+
+#### Add
+* Now `ImagePretcher` also supports using `Source` as fetching target. [#1142](https://github.com/onevcat/Kingfisher/pull/1142)
+* An option to skip file name hashing when storing image to disk cashe. [#1140](https://github.com/onevcat/Kingfisher/pull/1140)
+* Supports multiple Swift versions for CocoaPods 1.7.0.
+
+#### Fix
+* An issue that loading a downsampled image from original version might lead to different scale and potential memory performance problem. [#1126](https://github.com/onevcat/Kingfisher/pull/1126)
+* Marking setter of `kf` wrapper as `nonmutating` and seperate value/reference version of `KingfisherCompatible`. This allows mutating properties on `kf` even with a `let` declaration. [#1134](https://github.com/onevcat/Kingfisher/pull/1134)
+* A regression which causes stack overflow when using `ImagePretcher` to load huge ammount of images. [#1143](https://github.com/onevcat/Kingfisher/pull/1143)
+
+---
+
+## [5.2.0 - Swift 5.0](https://github.com/onevcat/Kingfisher/releases/tag/5.2.0) (2019-02-27)
+
+#### Add
+* Compatible with Swift 5.0 and Xcode 10.2. Now Kingfisher builds against Swift 4.0, 4.2 and 5.0. [#1098](https://github.com/onevcat/Kingfisher/pull/1098)
+
+#### Fix
+* A possible dead lock when using `ImagePretcher` heavily in another thread. [#1122](https://github.com/onevcat/Kingfisher/pull/1122)
+* Redesign `Result` type based on Swift `Result` in standard library. Deprecate `value` and `error` getter for `Kingfisher.Result`.
+
+---
+
+## [5.1.1 - Racing](https://github.com/onevcat/Kingfisher/releases/tag/5.1.1) (2019-02-11)
+
+#### Fix
+* Deprecate incorrect `ImageCache` initializer with `path` parameter. Now use the `cacheDirectoryURL` version for clearer implemetation. [#1114](https://github.com/onevcat/Kingfisher/pull/1114/)
+* Fix a race condition when setting download delegate from multiple `ImagePrefetcher`s. [#1109](https://github.com/onevcat/Kingfisher/issues/1109)
+* Now `directoryURL` of disk storage backend is marked as public correctly. [#1108](https://github.com/onevcat/Kingfisher/issues/1108)
+
+---
+
+## [5.1.0 - Redirecting & Racing](https://github.com/onevcat/Kingfisher/releases/tag/5.1.0) (2019-01-12)
+
+#### Add
+* Add a `ImageDownloadRedirectHandler` for intercepting HTTP request which redirects. [#1072](https://github.com/onevcat/Kingfisher/pull/1072)
+
+#### Fix
+* Some thread racing when downloading and resetting images in the same image view. [#1089](https://github.com/onevcat/Kingfisher/pull/1089)
+
+---
+
+## [5.0.1 - Interweave](https://github.com/onevcat/Kingfisher/releases/tag/5.0.1) (2018-12-17)
+
+#### Fix
+* Retrieving images from cache now respect options `callbackQueue` setting. [#1066](https://github.com/onevcat/Kingfisher/issues/1066)
+* A crash when passing zero or negative size to `DownsamplingImageProcessor`. [#1073](https://github.com/onevcat/Kingfisher/issues/1073)
+
+---
+
+## [5.0.0 - Reborn](https://github.com/onevcat/Kingfisher/releases/tag/5.0.0) (2018-12-08)
+
+#### Add
+* Add `Result` type to Kingfisher. Now all callbacks in Kingfisher are using `Result` instead of tuples. This is more future-friendly and provides a modern way to make error handling better.
+* Make `KingfisherError` much more elaborate and accurate. Instead of simply provides the error code, now `KingfisherError` contains error reason and necessary associated values. It will help to understand and track the errors easier.
+* Better cache management by separating memory cache and disk cache to their own storages. Now you can use `MemoryStorage` and `DiskStorage` as the `ImageCache` backend.
+* Image cache of memory storage would be purged automatically in a certain time interval. This reduce memory pressure for other parts of your app.
+* The `ImageCache` is rewritten from scratch, to get benefit from new created `MemoryStorage` and `DiskStorage`. At the same time, this hybrid cache abstract keeps most API compatibility from the earlier versions.
+* Now the `ImageCache` can receive only raw `Data` object and cache it as needed.
+* A `KingfisherParsedOptionsInfo` type to parse `KingfisherOptionsInfoItem`s in related API. This improves reusability and performance when handling options in Kingfisher.
+* An option to specify whether an image should also prefetched to memory cache or not.
+* An option to make the disk file loading synchronously instead of in its own I/O queue.
+* Options to specify cache expiration for either memory cache or disk cache. This gives you a chance to control cache lifetime in a per-task grain size.
+* Add a default maximum size for memory cache. Now only at most 25% of your device memory will be used to kept images in memory. You can also change this value if needed.
+* An option to specify a processing queue for image processors. This gives your flexibility if you want to use main queue or if you want to dispatch the processing to a different queue.
+* A `DownsamplingImageProcessor` for downsampling an image to a given size before loading it to memory.
+* Add `ImageDataProvider` protocol to make it possible to provide image data locally instead of downloading from network. Several concrete types are provided to load images from data format. Use `LocalFileImageDataProvider` to load an image from a local disk path, `Base64ImageDataProvider` to load image from a Base64 string representation and `RawImageDataProvider` to provide a raw `Data object`.
+* A general `Source` protocol to define from where the image should be loaded. Currently, we support to load an image from `ImageDataProvider` or from network now.
+
+#### Fix
+* Now CommonCrypto from system is used to calculate file name from cache key, instead of using a customized hash algorithm.
+* An issue which causes `ImageDownloader` crashing when a lot of downloading tasks running at the same time.
+* All operations like image pretching and data receiving should now be performed in non-UI threads correctly.
+* Now `KingfisherCompatible` uses struct for `kf` namespacing for better performance.
+
+---
+
+## [4.10.1 - Time Machine](https://github.com/onevcat/Kingfisher/releases/tag/4.10.1) (2018-11-03)
+
+#### Fix
+* Add Swift 4 compatibility back.
+* Increase watchOS target to 3.0 in podspec.
+
+---
+
+## [4.10.0 - Swift 4.2](https://github.com/onevcat/Kingfisher/releases/tag/4.10.0) (2018-09-20)
+
+#### Add
+* Support for building with Xcode 10 and Swift 4.2. This version requires Xcode 10 or later with Swift 4.2 compiler.
+
+#### Fix
+* Improve performance when an invalide HTTP status code received. [#985](https://github.com/onevcat/Kingfisher/pull/985)
+
+---
+
 ## [4.9.0 - Patience is a Virtue](https://github.com/onevcat/Kingfisher/releases/tag/4.9.0) (2018-09-04)
 
 #### Add

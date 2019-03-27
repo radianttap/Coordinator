@@ -4,7 +4,7 @@
 //
 //  Created by Wei Wang on 16/1/6.
 //
-//  Copyright (c) 2018 Wei Wang <onevcat@gmail.com>
+//  Copyright (c) 2019 Wei Wang <onevcat@gmail.com>
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,7 @@ extension ViewController: NSCollectionViewDataSource {
                                                    progressBlock: { receivedSize, totalSize in
                                                     print("\(indexPath.item + 1): \(receivedSize)/\(totalSize)")
                                                     },
-                                              completionHandler: { image, error, cacheType, imageURL in
+                                              completionHandler: { result in
                                                     print("\(indexPath.item + 1): Finished")
                                                     })
         
