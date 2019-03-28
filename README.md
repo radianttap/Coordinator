@@ -1,4 +1,9 @@
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![](https://img.shields.io/github/tag/radianttap/Coordinator.svg?label=current)](https://github.com/radianttap/Coordinator/releases)
+![platforms: iOS|tvOS](https://img.shields.io/badge/platform-iOS|tvOS-blue.svg)
+[![](https://img.shields.io/github/license/radianttap/Coordinator.svg)](https://github.com/radianttap/Coordinator/blob/master/LICENSE)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-AD4709.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods compatible](https://img.shields.io/badge/CocoaPods-compatible-fb0006.svg)](https://cocoapods.org)
+![](https://img.shields.io/badge/swift-5-223344.svg?logo=swift&labelColor=FA7343&logoColor=white)
 
 # Coordinator
 
