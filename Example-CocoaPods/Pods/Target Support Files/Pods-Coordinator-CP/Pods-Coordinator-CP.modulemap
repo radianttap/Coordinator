@@ -1,6 +1,0 @@
-framework module Pods_Coordinator_CP {
-  umbrella header "Pods-Coordinator-CP-umbrella.h"
-
-  export *
-  module * { export * }
-}
