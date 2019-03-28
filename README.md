@@ -26,8 +26,6 @@ pod 'Coordinator', 	:git => 'https://github.com/radianttap/Coordinator.git'
 
 You must use direct link through `:git` since CocoaPods central repository contains a framework of the same name.[^1]
 
-Look into `Example-CocoaPods` folder for an example app using CocoaPods as dependency manager.
-
 ### Setting up with Carthage
 
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that automates the process of adding frameworks to your Cocoa application.
