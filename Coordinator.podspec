@@ -13,5 +13,6 @@ Pod::Spec.new do |s|
   s.source_files = 'Coordinator/*.swift'
   s.frameworks   = 'UIKit'
 
+  s.swift_version  = '5.0'
   s.swift_versions = ['4.2', '5.0']
 end
