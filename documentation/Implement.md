@@ -74,10 +74,6 @@ Now, when Coordinator is started, it will process the `section` or `page` proper
 
 Things like: `DataManager`, `DataImporter`, `WebService`, `AccountManager`, `PaymentManager` etc.
 
-### AppDependency
-
-A very simple conduit to keep all your non-UI dependencies in one struct, automatically accessible to any Coordinator, at any level. 
-
 ```swift
 final class ApplicationCoordinator: ... {
 	private lazy var webService: WebService = WebService()
@@ -85,6 +81,32 @@ final class ApplicationCoordinator: ... {
 	private lazy var accountManager: AccountManager = AccountManager(dataManager: dataManager)
 	private lazy var contentManager: ContentManager = ContentManager(dataManager: dataManager)
 	...
+}
+```
+
+### AppDependency
+
+A very simple conduit to keep all your non-UI dependencies in one struct, automatically accessible to any Coordinator, at any level. 
+
+```swift
+struct AppDependency {
+	var webService: WebService?
+	var dataManager: DataManager?
+	var accountManager: AccountManager?
+	var contentManager: ContentManager?
+
+	//	Init
+
+	init(webService: WebService? = nil,
+		 dataManager: DataManager? = nil,
+		 accountManager: AccountManager? = nil,
+		 contentManager: ContentManager? = nil)
+	{
+		self.webService = webService
+		self.dataManager = dataManager
+		self.accountManager = accountManager
+		self.contentManager = contentManager
+	}
 }
 ```
 
@@ -99,6 +121,8 @@ final class ContentCoordinator: NavigationCoordinator {
 	}
 
 ```
+
+This way, Coordinators can fulfill their promise to be *routing mechanism* between any UIVC and any back-end object.
 
 #### Message queueing
 

@@ -56,7 +56,7 @@ The _why_ and _how_ and...
 - the [Class](documentation/Class.md)
 - recommended [Implementation](documentation/Implement.md)
 
-## Further reading
+### Further reading
 
 On my blog: [Coordinator: the missing pattern in UIKit](http://aplus.rs/2018/coordinator-missing-pattern-uikit/)
 
