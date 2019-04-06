@@ -131,7 +131,7 @@ Some dependencies can take a while to setup, things like Core Data stack. Thus y
 You can queue the received coordinatingResponder method call: 
 
 ```swift
-override func fetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
+override func contentFetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
 	guard let manager = dependencies?.catalogManager else {
 		enqueueMessage {
 			[weak self] in self?.fetchPromotedProducts(sender: sender, completion: completion)
