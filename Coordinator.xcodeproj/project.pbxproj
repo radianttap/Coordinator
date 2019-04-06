@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33048BBE21FA6F8A00B93597 /* NavigationCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33048BBD21FA6F8A00B93597 /* NavigationCoordinatorTests.swift */; };
 		D0A788C921E25679002F34B2 /* Coordinator.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A788C721E25679002F34B2 /* Coordinator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D0A788D721E2571B002F34B2 /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A788D321E2571B002F34B2 /* Coordinating.swift */; };
 		D0A788D821E2571B002F34B2 /* NavigationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0A788D421E2571B002F34B2 /* NavigationCoordinator.swift */; };
@@ -16,9 +15,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		33048BBB21FA6F8A00B93597 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		33048BBD21FA6F8A00B93597 /* NavigationCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCoordinatorTests.swift; sourceTree = "<group>"; };
-		33048BBF21FA6F8A00B93597 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D06488D921D0FA8F00F3F0E7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D0A788C521E25679002F34B2 /* Coordinator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Coordinator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A788C721E25679002F34B2 /* Coordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Coordinator.h; sourceTree = "<group>"; };
@@ -30,13 +26,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		33048BB821FA6F8A00B93597 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D0A788C221E25679002F34B2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -47,15 +36,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		33048BBC21FA6F8A00B93597 /* ExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				33048BBD21FA6F8A00B93597 /* NavigationCoordinatorTests.swift */,
-				33048BBF21FA6F8A00B93597 /* Info.plist */,
-			);
-			path = ExampleTests;
-			sourceTree = "<group>";
-		};
 		771A0BD9B13E86050EF52F25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +49,6 @@
 				D0A788D221E2571B002F34B2 /* Coordinator */,
 				D06488D921D0FA8F00F3F0E7 /* README.md */,
 				D0A788C621E25679002F34B2 /* Framework */,
-				33048BBC21FA6F8A00B93597 /* ExampleTests */,
 				D04B765D1DE5B6D2009F1B9A /* Products */,
 				771A0BD9B13E86050EF52F25 /* Frameworks */,
 			);
@@ -79,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				D0A788C521E25679002F34B2 /* Coordinator.framework */,
-				33048BBB21FA6F8A00B93597 /* ExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,23 +96,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		33048BBA21FA6F8A00B93597 /* ExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 33048BC421FA6F8A00B93597 /* Build configuration list for PBXNativeTarget "ExampleTests" */;
-			buildPhases = (
-				33048BB721FA6F8A00B93597 /* Sources */,
-				33048BB821FA6F8A00B93597 /* Frameworks */,
-				33048BB921FA6F8A00B93597 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ExampleTests;
-			productName = ExampleTests;
-			productReference = 33048BBB21FA6F8A00B93597 /* ExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		D0A788C421E25679002F34B2 /* Coordinator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0A788CE21E25679002F34B2 /* Build configuration list for PBXNativeTarget "Coordinator" */;
@@ -163,10 +124,6 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Radiant Tap";
 				TargetAttributes = {
-					33048BBA21FA6F8A00B93597 = {
-						CreatedOnToolsVersion = 10.0;
-						ProvisioningStyle = Automatic;
-					};
 					D0A788C421E25679002F34B2 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
@@ -188,19 +145,11 @@
 			projectRoot = "";
 			targets = (
 				D0A788C421E25679002F34B2 /* Coordinator */,
-				33048BBA21FA6F8A00B93597 /* ExampleTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		33048BB921FA6F8A00B93597 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D0A788C321E25679002F34B2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -211,14 +160,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		33048BB721FA6F8A00B93597 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				33048BBE21FA6F8A00B93597 /* NavigationCoordinatorTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D0A788C121E25679002F34B2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -233,47 +174,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		33048BC221FA6F8A00B93597 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.krin.ExampleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		33048BC321FA6F8A00B93597 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.krin.ExampleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		D04B766C1DE5B6D2009F1B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -457,15 +357,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		33048BC421FA6F8A00B93597 /* Build configuration list for PBXNativeTarget "ExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				33048BC221FA6F8A00B93597 /* Debug */,
-				33048BC321FA6F8A00B93597 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		D04B76571DE5B6D2009F1B9A /* Build configuration list for PBXProject "Coordinator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
