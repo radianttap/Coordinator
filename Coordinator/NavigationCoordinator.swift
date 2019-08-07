@@ -69,6 +69,17 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		show(vc)
 	}
 
+	///	Pops back to previous UIVC in the stack, inside this Coordinator.
+	public func pop(animated: Bool = true) {
+		//	there must be at least two VCs in order for UINC.pop to succeed (you can't pop the last VC in the stack)
+		if viewControllers.count < 2 {
+			return
+		}
+		viewControllers = Array(viewControllers.dropLast())
+
+		rootViewController.popViewController(animated: animated)
+	}
+
 	///	Pops back to the given instance, removing one or more UIVCs from the navigation stack.
 	public func pop(to vc: UIViewController, animated: Bool = true) {
 		guard let index = viewControllers.firstIndex(of: vc) else { return  }
