@@ -105,10 +105,11 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		guard let index = viewControllers.firstIndex(of: vc) else { return  }
 
 		let lastPosition = viewControllers.count - 1
-		if lastPosition > 0 {
-			viewControllers = Array(viewControllers.dropLast(lastPosition - index))
+		if lastPosition - index <= 0 {
+			return
 		}
 
+		viewControllers = Array(viewControllers.dropLast(lastPosition - index))
 		rootViewController.popToViewController(vc, animated: animated)
 	}
 
