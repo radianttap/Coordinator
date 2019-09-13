@@ -139,6 +139,45 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		super.stop(with: completion)
 	}
 
+	override open func coordinatorDidFinish(_ coordinator: Coordinating, completion: @escaping () -> Void = {}) {
+		//	some child Coordinator reports that it's done (pop-ed back from, most likely)
+        super.coordinatorDidFinish(coordinator) {
+			[weak self] in
+			guard let self = self else { return }
+
+			//	figure out which Coordinator should now take ownershop of root NC
+			guard let topVC = self.rootViewController.topViewController else {
+				completion()
+				return
+			}
+			//	if it belongs to this Coordinator, then re-activate itself
+			if self.viewControllers.contains(topVC) {
+				self.activate()
+				self.handlePopBack(to: topVC)
+
+				completion()
+				return
+			}
+
+			//	if not, go through other possible child Coordinators
+			for (_, c) in self.childCoordinators {
+				if
+					let c = c as? NavigationCoordinator,
+					c.viewControllers.contains(topVC)
+				{
+					c.activate()
+					c.handlePopBack(to: topVC)
+
+					completion()
+					return
+				}
+			}
+
+			//	if nothing found, then this Coordinator is also done, along with its child
+			self.parent?.coordinatorDidFinish(self, completion: completion)
+        }
+    }
+
 	open override func activate() {
 		//	take back ownership over root (UINavigationController)
 		super.activate()
