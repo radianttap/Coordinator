@@ -15,6 +15,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D05B2C43232BDF690017EE53 /* Class.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Class.md; sourceTree = "<group>"; };
+		D05B2C44232BDF690017EE53 /* Implement.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Implement.md; sourceTree = "<group>"; };
+		D05B2C45232BDF690017EE53 /* Library.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Library.md; sourceTree = "<group>"; };
+		D05B2C46232BDF690017EE53 /* Pattern.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Pattern.md; sourceTree = "<group>"; };
 		D06488D921D0FA8F00F3F0E7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D0A788C521E25679002F34B2 /* Coordinator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Coordinator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0A788C721E25679002F34B2 /* Coordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Coordinator.h; sourceTree = "<group>"; };
@@ -48,6 +52,7 @@
 			children = (
 				D0A788D221E2571B002F34B2 /* Coordinator */,
 				D06488D921D0FA8F00F3F0E7 /* README.md */,
+				D05B2C42232BDF690017EE53 /* documentation */,
 				D0A788C621E25679002F34B2 /* Framework */,
 				D04B765D1DE5B6D2009F1B9A /* Products */,
 				771A0BD9B13E86050EF52F25 /* Frameworks */,
@@ -60,6 +65,17 @@
 				D0A788C521E25679002F34B2 /* Coordinator.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D05B2C42232BDF690017EE53 /* documentation */ = {
+			isa = PBXGroup;
+			children = (
+				D05B2C43232BDF690017EE53 /* Class.md */,
+				D05B2C44232BDF690017EE53 /* Implement.md */,
+				D05B2C45232BDF690017EE53 /* Library.md */,
+				D05B2C46232BDF690017EE53 /* Pattern.md */,
+			);
+			path = documentation;
 			sourceTree = "<group>";
 		};
 		D0A788C621E25679002F34B2 /* Framework */ = {
