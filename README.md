@@ -74,9 +74,9 @@ Coordinators are fairly old pattern but it was Soroush who brought them under iO
 
 ***
 
-Bill Dudney, WWDC 2014, session 224: [Core iOS Application Architectural Patterns](https://developer.apple.com/videos/play/wwdc2014/224/)
+Bill Dudney, WWDC 2014, session 224: [Core iOS Application Architectural Patterns](https://youtu.be/U5zJY0ODV4w)
 
-Andy Matuschak & Colin Barrett, WWDC 2014, session 229: [Advanced iOS Application Architecture and Patterns](https://developer.apple.com/videos/play/wwdc2014/229/)
+Andy Matuschak & Colin Barrett, WWDC 2014, session 229: [Advanced iOS Application Architecture and Patterns](https://youtu.be/C9mFqibrPtA)
 
 I file these two talks under *essential education* for any iOS developer. While not directly associated with Coordinator pattern, you should still carefully watch and listen to understand what it means to “fit inside iOS SDK”.
 
