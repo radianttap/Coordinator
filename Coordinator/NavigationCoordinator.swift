@@ -85,8 +85,8 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 			return
 		}
 		viewControllers.removeLast()
-		rootViewController.viewControllers.removeLast()
-		show(vc)
+		viewControllers.append(vc)
+		rootViewController.viewControllers = viewControllers
 	}
 
 	///	Pops back to previous UIVC in the stack, inside this Coordinator.
