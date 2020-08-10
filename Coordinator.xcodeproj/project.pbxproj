@@ -27,6 +27,7 @@
 		D0A788D421E2571B002F34B2 /* NavigationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationCoordinator.swift; sourceTree = "<group>"; };
 		D0A788D521E2571B002F34B2 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		D0A788D621E2571B002F34B2 /* UIKit-CoordinatingExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit-CoordinatingExtensions.swift"; sourceTree = "<group>"; };
+		D0C6D1F924E15A0B00F91B15 /* Coordinator.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Coordinator.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +51,7 @@
 		D04B76531DE5B6D2009F1B9A = {
 			isa = PBXGroup;
 			children = (
+				D0C6D1F924E15A0B00F91B15 /* Coordinator.podspec */,
 				D0A788D221E2571B002F34B2 /* Coordinator */,
 				D06488D921D0FA8F00F3F0E7 /* README.md */,
 				D05B2C42232BDF690017EE53 /* documentation */,
