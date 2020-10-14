@@ -10,18 +10,25 @@ import UIKit
 
 //	Inject parentCoordinator property into all UIViewControllers
 extension UIViewController {
-	private struct AssociatedKeys {
-		static var ParentCoordinator = "ParentCoordinator"
-	}
+    private class WeakCoordinatingTrampoline: NSObject {
+        weak var coordinating: Coordinating?
+    }
 
-	public weak var parentCoordinator: Coordinating? {
-		get {
-			return objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? Coordinating
-		}
-		set {
-			objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, newValue, .OBJC_ASSOCIATION_ASSIGN)
-		}
-	}
+    private struct AssociatedKeys {
+        static var ParentCoordinator = "ParentCoordinator"
+    }
+
+    public weak var parentCoordinator: Coordinating? {
+        get {
+            let trampoline = objc_getAssociatedObject(self, &AssociatedKeys.ParentCoordinator) as? WeakCoordinatingTrampoline
+            return trampoline?.coordinating
+        }
+        set {
+            let trampoline = WeakCoordinatingTrampoline()
+            trampoline.coordinating = newValue
+            objc_setAssociatedObject(self, &AssociatedKeys.ParentCoordinator, trampoline, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
 }
 
 
