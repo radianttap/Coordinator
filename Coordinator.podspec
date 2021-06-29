@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'Coordinator'
-  s.version      = '6.4'
+  s.version      = '6.4.2'
   s.summary      = 'Advanced Swift implementation of (Application) Coordinator software design pattern.'
   s.description  = 'It implements a mechanism to allow custom messaging between any UIView, UIViewController and Coordinator, regardless of where in the hierarchy they are. Thus it side-steps the need for delegates all over your code. It simplifies testing and allows creation of self-contained visual boxes that do one thing and don’t care where are they embedded or presented.'
   s.homepage     = 'https://github.com/radianttap/Coordinator'
