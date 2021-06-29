@@ -43,8 +43,8 @@ However, it does not interfere with the regular UIResponder functionality.
 At the UIViewController level (see below), it‘s intercepted to switch up to the coordinator, if the UIVC has one.
 Once that happens, it stays in the Coordinator hierarchy, since coordinator can be nested only inside other coordinators.
 */
-public extension UIResponder {
-	@objc var coordinatingResponder: UIResponder? {
+extension UIResponder {
+	@objc open var coordinatingResponder: UIResponder? {
 		return next
 	}
 
