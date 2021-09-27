@@ -59,4 +59,26 @@ public protocol Coordinating: AnyObject {
 	func activate()
 }
 
+// MARK: - Dictionary Extension
 
+/// Sometimes a coordinator needs to make decisions base on the information whether or
+/// not a certain child coordinator is already active. In this case the coordinator has to
+/// consult its active child coordinators. Finding out whether a child coordinator of a certain
+/// type is already in the dictionary of child coordinators can be made a bit more elegant by
+/// means of the following dictionary extension.
+///
+/// So one can call e.g.
+/// ...
+///    if !childCoordinators.child(matching: SettingsCoordinator.self) {
+///    ...
+///    }
+/// ...
+public extension Dictionary where Value == Coordinating {
+
+    /// Access the first child matching a specific type.
+    /// - Parameter type: the type of the child
+    /// - Returns: the first child coordinator or nil
+    func child<T>(matching type: T.Type) -> T? {
+        values.first { $0 is T } as? T
+    }
+}
