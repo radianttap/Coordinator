@@ -79,14 +79,20 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	///	Replaces current top UIVC in the navigation stack (currently visible UIVC) in the root
 	///	with the supplied `vc` instance.
-	public func top(_ vc: UIViewController) {
+	public func top(_ vc: UIViewController, animated: Bool = true) {
 		if viewControllers.count == 0 {
 			root(vc)
 			return
 		}
 		viewControllers.removeLast()
-		rootViewController.viewControllers.removeLast()
-		show(vc)
+
+		if animated {
+			rootViewController.viewControllers.removeLast()
+			show(vc)
+		} else {
+			viewControllers.append(vc)
+			rootViewController.viewControllers = viewControllers
+		}
 	}
 
 	///	Pops back to previous UIVC in the stack, inside this Coordinator.
