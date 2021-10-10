@@ -17,13 +17,13 @@ import UIKit
 public typealias CoordinatingQueuedMessage = () -> Void
 
 
-/*
+/**
 Coordinators are a design pattern that encourages decoupling view controllers
-such that they know as little as possible about how they are presented.
-As such, View Controllers should never directly push/pop or present other VCs.
+in such a way that they know as little as possible about how they are presented.
+View Controllers should never directly push/pop or present other VCs.
 They should not be aware of their existence.
 
-That is Coordinator's job.
+**That is Coordinator's job.**
 
 Coordinators can be “nested” such that child coordinators encapsulate different flows
 and prevent any one of them from becoming too large.
@@ -55,7 +55,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	Note: if you override this init, you must call `super`.
 	public init(rootViewController: T?) {
 		guard let rvc = rootViewController else {
-			fatalError("Must supply UIViewController (or any of its subclasses) or override this init and instantiate VC in there.")
+			preconditionFailure("Must supply UIViewController (or any of its subclasses) or override this init and instantiate VC in there.")
 		}
 		self.rootViewController = rvc
 		super.init()
