@@ -133,6 +133,12 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 		rootViewController.parentCoordinator = self
 	}
 
+	///	This should activate relevant Coordinator + remove any shown UIVCs from other Coordinators.
+	///
+	///	By default, it just calls `activate()`
+	open func takeover() {
+		activate()
+	}
 
 
 
