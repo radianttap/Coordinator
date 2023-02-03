@@ -185,16 +185,20 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
         }
     }
 
-	///	Activates existing Coordinator instance by assigning itself as UINCDelegate for the rootViewController.
-	///	Then install its `viewControllers` on (root) UINavigationController, effectivelly clearing out its previous stack.
-	///
-	///	Call this when you want to replace one Coordinator instance with another Coordinator over the same UINavigationController.
 	open override func activate() {
 		//	take back ownership over root (UINavigationController)
 		super.activate()
 
 		//	assign itself again as `UINavigationControllerDelegate`
 		rootViewController.delegate = self
+	}
+
+	///	Activates existing Coordinator instance by assigning itself as UINCDelegate for the rootViewController.
+	///	Then install its `viewControllers` on (root) UINavigationController, effectivelly clearing out its previous stack.
+	///
+	///	Call this when you want to replace one Coordinator instance with another Coordinator.
+	open func takeover() {
+		activate()
 
 		//	re-assign own content View Controllers, clearing out whatever is there
 		rootViewController.viewControllers = viewControllers
