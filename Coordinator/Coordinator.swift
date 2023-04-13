@@ -171,12 +171,8 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	*/
 	public func stopChild(coordinator: Coordinating, completion: @escaping () -> Void = {}) {
 		coordinator.parent = nil
-		coordinator.stop {
-			[unowned self] in
-
-			self.childCoordinators.removeValue(forKey: coordinator.identifier)
-			completion()
-		}
+		self.childCoordinators.removeValue(forKey: coordinator.identifier)
+		coordinator.stop(with: completion)
 	}
 
 
