@@ -24,7 +24,8 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 		guard let transitionCoordinator = navigationController.transitionCoordinator else {
 			//	TransitionCoordinator is not present, most likely because `popViewController(animated: false)` is called.
-			//	In the Coordinator-based app, this should *not* be done, ever.
+			//
+			//	In the Coordinator-based app, this should *NOT* be done, ever.
 			return
         }
 
