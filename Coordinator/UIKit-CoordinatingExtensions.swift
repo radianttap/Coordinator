@@ -58,6 +58,17 @@ extension UIResponder {
 	*/
 }
 
+extension UIResponder {
+	///	Searches upwards the responder chain for the `Coordinator` that manages current `UIViewController`
+	public var containingCoordinator: Coordinating? {
+		if let vc = self as? UIViewController, let pc = vc.parentCoordinator {
+			return pc
+		}
+		
+		return coordinatingResponder?.containingCoordinator
+	}
+}
+
 
 extension UIViewController {
 /**
