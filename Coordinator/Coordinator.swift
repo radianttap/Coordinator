@@ -42,6 +42,7 @@ Expose to Coordinator only those behaviors that cause push/pop/present to bubble
 
 
 ///	Main Coordinator instance, where T is UIViewController or any of its subclasses.
+@MainActor
 open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	public let rootViewController: T
 

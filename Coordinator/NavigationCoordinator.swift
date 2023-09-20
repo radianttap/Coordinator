@@ -8,6 +8,7 @@
 
 import UIKit
 
+@MainActor
 open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigationControllerDelegate {
 	//	References to actual UIViewControllers managed by this Coordinator instance.
 	open var viewControllers: [UIViewController] = []

@@ -11,6 +11,7 @@ import UIKit
 ///	Protocol to define what is required for an object to be Coordinator.
 ///
 ///	It also simplifies coordinator hierarchy management.
+@MainActor
 public protocol Coordinating: AnyObject {
 	///	Unique string to identify specific Coordinator instance.
 	///
