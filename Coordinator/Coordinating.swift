@@ -29,25 +29,25 @@ public protocol Coordinating: AnyObject {
 	
 	///	Tells the coordinator to start, which means at the end of this method it should
 	///	display some UIViewController.
-	func start(with completion: @escaping () -> Void)
+	func start() async 
 	
 	///	Tells the coordinator to stop, which means it should clear out any internal stuff
 	///	it possibly tracks.
 	///	I.e. list of shown `UIViewController`s.
-	func stop(with completion: @escaping () -> Void)
+	func stop() async 
 	
 	///	Essentially, this means that Coordinator requests from its parent to stop it.
 	///
 	///	Useful in cases where a particular Coordinator instance know that at particular
 	///	moment none of its UIVCs will be visible or useful anymore.
 	///	This is a chance for parentCoordinator to nicely transitions to some other Coordinator.
-	func coordinatorDidFinish(_ coordinator: Coordinating, completion: @escaping () -> Void)
+	func coordinatorDidFinish(_ coordinator: Coordinating) async 
 	
 	///	Adds the supplied coordinator into its `childCoordinators` dictionary and calls its `start` method
-	func startChild(coordinator: Coordinating, completion: @escaping () -> Void)
+	func startChild(coordinator: Coordinating) async 
 	
 	///	Calls `stop` on the supplied coordinator and removes it from its `childCoordinators` dictionary
-	func stopChild(coordinator: Coordinating, completion: @escaping () -> Void)
+	func stopChild(coordinator: Coordinating) async 
 	
 	///	Activate Coordinator which was used before.
 	///

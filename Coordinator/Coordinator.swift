@@ -91,10 +91,9 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	- Parameter completion: An optional `Callback` executed at the end.
 	///
 	///	Note: if you override this method, you must call `super` and pass the `completion` closure.
-	open func start(with completion: @escaping () -> Void = {}) {
+	open func start() async {
 		rootViewController.parentCoordinator = self
 		isStarted = true
-		completion()
 	}
 
 	/// Tells the coordinator that it is done and that it should
@@ -105,9 +104,8 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	- Parameter completion: Closure to execute at the end.
 	///
 	///	Note: if you override this method, you must call `super` and pass the `completion` closure.
-	open func stop(with completion: @escaping () -> Void = {}) {
+	open func stop() async {
 		rootViewController.parentCoordinator = nil
-		completion()
 	}
 
 	///	By default, calls `stopChild` on the given Coordinator, passing in the `completion` block.
@@ -115,8 +113,8 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	(See also comments for this method in the Coordinating protocol)
 	///
 	///	Note: if you override this method, you should call `super` and pass the `completion` closure.
-	open func coordinatorDidFinish(_ coordinator: Coordinating, completion: @escaping () -> Void = {}) {
-		stopChild(coordinator: coordinator, completion: completion)
+	open func coordinatorDidFinish(_ coordinator: Coordinating) async {
+		await stopChild(coordinator: coordinator)
 	}
 
 	///	Coordinator can be in memory, but it‘s not currently displaying anything.
@@ -156,10 +154,10 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `start()` method.
 	*/
-	public func startChild(coordinator: Coordinating, completion: @escaping () -> Void = {}) {
+	public func startChild(coordinator: Coordinating) async {
 		childCoordinators[coordinator.identifier] = coordinator
 		coordinator.parent = self
-		coordinator.start(with: completion)
+		await coordinator.start()
 	}
 
 
@@ -169,10 +167,10 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	- Parameter coordinator: The coordinator implementation to stop.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
-	public func stopChild(coordinator: Coordinating, completion: @escaping () -> Void = {}) {
+	public func stopChild(coordinator: Coordinating) async {
 		coordinator.parent = nil
 		self.childCoordinators.removeValue(forKey: coordinator.identifier)
-		coordinator.stop(with: completion)
+		await coordinator.stop()
 	}
 
 

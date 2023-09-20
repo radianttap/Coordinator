@@ -123,14 +123,14 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	//	MARK:- Coordinator lifecycle
 
-	open override func start(with completion: @escaping () -> Void) {
+	open override func start() async {
 		//	assign itself as UINavigationControllerDelegate
 		rootViewController.delegate = self
 		//	must call this
-		super.start(with: completion)
+		await super.start()
 	}
 
-	open override func stop(with completion: @escaping () -> Void) {
+	open override func stop() async {
 		//	relinquish being delegate for UINC
 		rootViewController.delegate = nil
 
@@ -144,46 +144,40 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		viewControllers.removeAll()
 
 		//	must call this
-		super.stop(with: completion)
+		await super.stop()
 	}
 
-	override open func coordinatorDidFinish(_ coordinator: Coordinating, completion: @escaping () -> Void = {}) {
-		//	some child Coordinator reports that it's done (pop-ed back from, most likely)
-        super.coordinatorDidFinish(coordinator) {
-			[weak self] in
-			guard let self = self else { return }
+	override open func coordinatorDidFinish(_ coordinator: Coordinating) async {
+		//	some child Coordinator reports that it's done
+		//	(pop-ed back from, most likely)
+		
+		await super.coordinatorDidFinish(coordinator)
 
-			//	figure out which Coordinator should now take ownershop of root NC
-			guard let topVC = self.rootViewController.topViewController else {
-				completion()
+		//	figure out which Coordinator should now take ownershop of root NC
+		guard let topVC = self.rootViewController.topViewController else {
+			return
+		}
+		//	if it belongs to this Coordinator, then re-activate itself
+		if self.viewControllers.contains(topVC) {
+			self.activate()
+			self.handlePopBack(to: topVC)
+			return
+		}
+
+		//	if not, go through other possible child Coordinators
+		for (_, c) in self.childCoordinators {
+			if
+				let c = c as? NavigationCoordinator,
+				c.viewControllers.contains(topVC)
+			{
+				c.activate()
+				c.handlePopBack(to: topVC)
 				return
 			}
-			//	if it belongs to this Coordinator, then re-activate itself
-			if self.viewControllers.contains(topVC) {
-				self.activate()
-				self.handlePopBack(to: topVC)
+		}
 
-				completion()
-				return
-			}
-
-			//	if not, go through other possible child Coordinators
-			for (_, c) in self.childCoordinators {
-				if
-					let c = c as? NavigationCoordinator,
-					c.viewControllers.contains(topVC)
-				{
-					c.activate()
-					c.handlePopBack(to: topVC)
-
-					completion()
-					return
-				}
-			}
-
-			//	if nothing found, then this Coordinator is also done, along with its child
-			self.parent?.coordinatorDidFinish(self, completion: completion)
-        }
+		//	if nothing found, then this Coordinator is also done, along with its child
+		await self.parent?.coordinatorDidFinish(self)
     }
 
 	open override func activate() {
@@ -211,7 +205,9 @@ private extension NavigationCoordinator {
 		//	Check: is there any controller left shown in this Coordinator?
 		if viewControllers.count == 0 {
 			//	there isn't thus inform the parent Coordinator that this child Coordinator is done.
-			parent?.coordinatorDidFinish(self, completion: {})
+			Task {
+				await parent?.coordinatorDidFinish(self)
+			}
 			return
 		}
 
@@ -228,7 +224,9 @@ private extension NavigationCoordinator {
 		//		| Note: using firstIndex(of:) and not .last nicely handles if you programatically pop more than one UIVC.
 		guard let index = viewControllers.firstIndex(of: viewController) else {
 			//	it's not, it means UINC moved to some other Coordinator domain and thus bail out from here
-			parent?.coordinatorDidFinish(self, completion: {})
+			Task {
+				await parent?.coordinatorDidFinish(self)
+			}
 			return
 		}
 
