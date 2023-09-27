@@ -17,17 +17,16 @@ This is crucial. Library [extends UIResponder](https://github.com/radianttap/Coo
 ```swift
 extension UIResponder {
 
-  @objc dynamic func accountLogin(username: String,
+  @MainActor
+  @objc func accountLogin(username: String,
         password: String,
-        onQueue queue: OperationQueue? = nil,
-        sender: Any?,
-        callback: @escaping (User?, Error?) -> Void)
+        sender: Any?) async throws
   {
-    coordinatingResponder?.accountLogin(username: username,
+    try await coordinatingResponder?.accountLogin(
+        username: username,
         password: password,
-        onQueue: queue,
-        sender: sender,
-        callback: callback)
+        sender: sender
+    )
   }
 
 }
@@ -36,13 +35,12 @@ extension UIResponder {
 you can
 
 * Call `accountLogin()` from *anywhere*: view controller, view, button's event handler, table/collection view cell, UIAlertAction etc.
-* That call will be passed *up* the responder chain until it reaches some Coordinator instance which overrides that method. It none does, it gets to UIApplicationDelegate (which is the top UI point your app is given by iOS runtime) and nothing happens.
-* Through the `callback` closure, Coordinator can then pass the results back *down* the chain.
+* That call will be passed *up* the responder chain until it reaches some Coordinator instance which overrides that method. It none does, it gets to `UISceneDelegate` /  `UIApplicationDelegate` (which is the top UI point your app is given by iOS runtime) and nothing happens.
 * At any point in this chain you can override this method, do whatever you want and continue the chain (or not, as you need)
 
 There is no need for Delegate pattern (although nothing stops you from using one). No other pattern is required, ever. 
 
-By reusing the essential component of UIKit design — the responder chain — UIViewController's output can travel up *and* down the…
+By reusing the essential component of UIKit design — the responder chain — UIViewController's output can travel through the…
 
 ### CoordinatingResponder chain
 

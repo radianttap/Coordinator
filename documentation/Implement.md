@@ -2,87 +2,10 @@
 
 ## Recommended implementation
 
-Create one instance of `ApplicationCoordinator`, which is main entry point into the app. It’s created and strongly referenced by the AppDelegate. 
+Since iOS 13, Apple strongly encourages iOS apps using scene-based structure and behavior. Any scene (window) can be created/terminated at any moment. Thus the only object in the app that will live as long as the app is alive is `AppDelegate` which will spawn a scene, when needed. Each scene should have at least one Coordinator instance, let’s call it `SceneCoordinator`.
 
-```swift
-final class AppDelegate: ... {
-	var window: UIWindow?
-	var applicationCoordinator: ApplicationCoordinator!
-
-	func application(_ application: UIApplication,
-					 willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
-	{
-		window = UIWindow(frame: UIScreen.main.bounds)
-
-		applicationCoordinator = {
-			let nc = UINavigationController()
-			let c = ApplicationCoordinator(rootViewController: nc)
-			return c
-		}()
-		window?.rootViewController = applicationCoordinator.rootViewController
-
-		return true
-	}
-
-	func application(_ application: UIApplication,
-					 didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
-	{
-		window?.makeKeyAndVisible()
-		applicationCoordinator.start()
-		return true
-	}
-```
-
-This Coordinator then spawns any other Coordinators you need, when you need them. AppCoordinator is the only one that’s always in memory.
-
-### Declarative routing
-
-Use an enum called `Section` inside `ApplicationCoordinator` to declare natural UI parts of the app: _Content_, _Account_, _Payment_, _Order_, _Cart_ etc. Each case will correspond to (content) Coordinator instance.
-
-Each specific screen will be UIVC instance. Model them with another enum called `Page`, inside each of the content Coordinators. Each case can have zero or more associated values, which are public arguments / parameters for the screen.
-
-```swift
-final class ApplicationCoordinator: ... {
-	enum Section {
-	  case content(page: ContentCoordinator.Page?)
-	  case account(page: AccountCoordinator.Page?)
-	  case payment(page: PaymentCoordinator.Page?)
-	}
-	var section: Section = .content(page: nil)
-}
-
-...
-
-final class AccountCoordinator: ... {
-	enum Page {
-		case login
-		case createAccount
-		case confirmAccount(code: String?)
-		case profile(user: User)
-		...
-	}
-	var page: Page = .login
-}
-
-```
-
-Now, when Coordinator is started, it will process the `section` or `page` property and setup display of appropriate UI.
-
-### Data and Middleware instances
-
-`ApplicationCoordinator` is the crown, the top of your app stack. Hence it is the natural place to keep instances to all the non-UI objects (which are most likely various singletons).
-
-Things like: `DataManager`, `DataImporter`, `WebService`, `AccountManager`, `PaymentManager` etc.
-
-```swift
-final class ApplicationCoordinator: ... {
-	private lazy var webService: WebService = WebService()
-	private lazy var dataManager: DataManager = DataManager(service: webService)
-	private lazy var accountManager: AccountManager = AccountManager(dataManager: dataManager)
-	private lazy var contentManager: ContentManager = ContentManager(dataManager: dataManager)
-	...
-}
-```
+Thus the only place to keep app-wide dependencies is `AppDelegate`.
+There can be way too many of these dependencies to shuffle around thus it’s good idea to create a singular container for all of them:
 
 ### AppDependency
 
@@ -122,40 +45,199 @@ final class ContentCoordinator: NavigationCoordinator {
 
 ```
 
-This way, Coordinators can fulfill their promise to be *routing mechanism* between any UIVC and any back-end object.
+This way, Coordinators can fulfil their promise to be *routing mechanism* between any UIVC and any back-end object.
 
-#### Message queueing
+### AppDelegate
 
-Some dependencies can take a while to setup, things like Core Data stack. Thus you may end up in situation where your UI is shown before DataManager or middleware is ready to respond.
+As said before, instances of app-wide dependencies should then be kept here.
 
-You can queue the received coordinatingResponder method call: 
+```
+final class AppDelegate: UIResponder, UIApplicationDelegate {
+	var webService: WebService(...)
+	var dataManager: DataManager(...)
+	...
+	
 
-```swift
-override func contentFetchPromotedProducts(sender: Any?, completion: @escaping ([Product], Error?) -> Void) {
-	guard let manager = dependencies?.catalogManager else {
-		enqueueMessage {
-			[weak self] in self?.fetchPromotedProducts(sender: sender, completion: completion)
+	var appDependency: AppDependency? {
+		didSet {
+			updateSceneDependencies()
 		}
-		return
 	}
-	manager.promotedProducts(callback: completion)
-}
+	
+	func updateSceneDependencies() {...}
+	
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+		//	instantiate all services and middleware
+		//	build and set AppDependency
+		rebuildDependencies()
+
+		return true
+	}
 ```
 
-...and wait until dependency is updated; then try again:
+Method `rebuildDependencies()` simply (re)creates AppDependency struct with whatever is currently available and assigns it to the said property.
+
+### Pass dependencies from AppDelegate to scenes
+
+The following method is the only place where we can pass these dependencies down to `UISceneSession` (and thus to `UIScene`):
 
 ```swift
-var dependencies: AppDependency? {
-	didSet {
-		updateChildCoordinatorDependencies()
-		processQueuedMessages()
+func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+
+	connectingSceneSession.appDependency = appDependency
+	return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+}
+```
+
+For this to work, we need inject appDependency property into UISceneSession:
+
+```swift
+extension UISceneSession {
+	private struct AssociatedKeys {
+		static var appDependency: Void?
+	}
+	
+	var appDependency: AppDependency? {
+		get {
+			return objc_getAssociatedObject(self, &AssociatedKeys.appDependency) as? AppDependency
+		}
+		set {
+			objc_setAssociatedObject(self, &AssociatedKeys.appDependency, newValue, .OBJC_ASSOCIATION_COPY)
+			sceneCoordinator?.appDependency = newValue
+		}
 	}
 }
 ```
+
+And now this method in `AppDelegate` would work as well.
+
+```swift
+func updateSceneDependencies() {
+	let application = UIApplication.shared
+	
+	application.openSessions.forEach {
+		$0.appDependency = appDependency
+	}
+}
+
+```
+
+### SceneCoordinator
+
+Here’s a typical Coordinator that uses `UINavigationController` as its root VC:
+
+```swift
+@MainActor
+final class SceneCoordinator: NavigationCoordinator, NeedsDependency {
+	private weak var scene: UIScene!
+	private weak var sceneDelegate: SceneDelegate!
+	
+	init(scene: UIScene,
+		 sceneDelegate: SceneDelegate,
+		 appBundleIdentifier: String? = nil)
+	{
+		self.scene = scene
+		self.sceneDelegate = sceneDelegate
+		
+		let vc = NavigationController()
+		super.init(rootViewController: vc)
+		
+		appDependency = scene.session.appDependency
+	}
+	
+	override var coordinatingResponder: UIResponder? {
+		return sceneDelegate
+	}
+```
+
+`SceneCoordinator` takes over management of `window`’s `rootViewController` continues the `coordinatingResponder` chain from here to `SceneDelegate`.
+
+### SceneDelegate
+
+Now we can instantiate our `SceneCoordinator` and pass-on the supplied `AppDependency` from the scene’s session.
+
+```
+final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+
+	var window: UIWindow?
+	private(set) var coordinator: SceneCoordinator?
+
+	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+		guard let windowScene = (scene as? UIWindowScene) else { return }
+		
+		let window = UIWindow(windowScene: windowScene)
+		self.window = window
+		
+		let sceneCoordinator = SceneCoordinator(scene: scene, sceneDelegate: self)
+		self.coordinator = sceneCoordinator
+
+		window.rootViewController = sceneCoordinator.rootViewController
+
+		window.makeKeyAndVisible()
+		Task {
+			await sceneCoordinator.start()
+		}
+	}
+	
+	override var coordinatingResponder: UIResponder? {
+		window
+	}
+}
+```
+
+`SceneDelegate` also concludes the coordinatingResponder’s upward chain.
+
+### Declarative routing
+
+Use an enum called `Page` inside `ApplicationCoordinator` to declare natural full UI screens of the app.
+
+Each specific screen will be UIVC instance. Each case can have zero or more associated values, which are public arguments / parameters for the screen.
+
+```swift
+enum Page {
+	case login
+	case createAccount
+	case confirmAccount(code: String?)
+	case profile(user: User)
+	...
+}
+```
+
+Now you simply need one global method to switch to any screen in the app:
+
+```swift
+extension UIResponder {
+	@MainActor
+	@objc func globalDisplay(page: PageBox, sender: Any? = nil) {
+		coordinatingResponder?.globalDisplay(page: page, sender: sender)
+	}
+}
+```
+
+Override this method anywhere in the coordinatingResponder chain to do what is needed. In this case, usually at any Coordinator to push related UIVC instance.
+
+We need `PageBox` wrapper since the method arguments must be ObjC-friendly. This is super easy to do, giving us wrap and unwrap:
+
+```swift
+final class PageBox: NSObject {
+	let unbox: Page
+	init(_ value: Page) {
+		self.unbox = value
+	}
+}
+extension Page {
+	var boxed: PageBox { return PageBox(self) }
+}
+```
+
+This is also easy to script with tools like [Sourcery](https://github.com/krzysztofzablocki/Sourcery/).
 
 ### Naming your coordinatingResponder methods
 
-I use consistent naming scheme to group my UIResponder extension methods. All stuff dealing with shopping cart use `cart` prefix. Same with account, catalog etc. Xcode’s autocomplete then helps to filter possible options when coding.
+I use consistent naming scheme to group my coordinatingResponder methods. Anything that affects entire app is prefixed with `global` like `globalDisplay(page:sender:)` method above.
+
+All stuff dealing with shopping cart can use `cart` prefix. Same with account, catalog etc. Xcode’s autocomplete then helps to filter possible options when coding.
 
 (Sometimes a little consistency and common sense is enough.)
 
