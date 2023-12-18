@@ -14,7 +14,7 @@ Since this is *core architectural pattern*, it’s not possible to explain its u
 
 ## Installation
 
-- version 7.x and up is made with Swift 5.5 concurrency in mind (async / awai)
+- version 7.x and up is made with Swift 5.5 concurrency in mind (async / await)
 - versions before that (6.x) use closures
 
 ### Manually 
