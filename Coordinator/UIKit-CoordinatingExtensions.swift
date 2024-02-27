@@ -14,6 +14,7 @@ extension UIViewController {
         weak var coordinating: Coordinating?
     }
 
+	@MainActor
     private struct AssociatedKeys {
 		//	per: https://github.com/atrick/swift-evolution/blob/diagnose-implicit-raw-bitwise/proposals/nnnn-implicit-raw-bitwise-conversion.md#workarounds-for-common-cases
 		static var ParentCoordinator: Void?
