@@ -92,7 +92,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	- Parameter completion: An optional `Callback` executed at the end.
 	///
 	///	Note: if you override this method, you must call `super` and pass the `completion` closure.
-	open func start() async {
+	open func start() {
 		rootViewController.parentCoordinator = self
 		isStarted = true
 	}
@@ -105,7 +105,7 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	- Parameter completion: Closure to execute at the end.
 	///
 	///	Note: if you override this method, you must call `super` and pass the `completion` closure.
-	open func stop() async {
+	open func stop() {
 		rootViewController.parentCoordinator = nil
 	}
 
@@ -114,8 +114,8 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	///	(See also comments for this method in the Coordinating protocol)
 	///
 	///	Note: if you override this method, you should call `super` and pass the `completion` closure.
-	open func coordinatorDidFinish(_ coordinator: Coordinating) async {
-		await stopChild(coordinator: coordinator)
+	open func coordinatorDidFinish(_ coordinator: Coordinating) {
+		stopChild(coordinator: coordinator)
 	}
 
 	///	Coordinator can be in memory, but it‘s not currently displaying anything.
@@ -155,10 +155,10 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	- Parameter coordinator: The coordinator implementation to start.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `start()` method.
 	*/
-	public func startChild(coordinator: Coordinating) async {
+	public func startChild(coordinator: Coordinating) {
 		childCoordinators[coordinator.identifier] = coordinator
 		coordinator.parent = self
-		await coordinator.start()
+		coordinator.start()
 	}
 
 
@@ -168,10 +168,10 @@ open class Coordinator<T: UIViewController>: UIResponder, Coordinating {
 	- Parameter coordinator: The coordinator implementation to stop.
 	- Parameter completion: An optional `Callback` passed to the coordinator's `stop()` method.
 	*/
-	public func stopChild(coordinator: Coordinating) async {
+	public func stopChild(coordinator: Coordinating) {
 		coordinator.parent = nil
 		self.childCoordinators.removeValue(forKey: coordinator.identifier)
-		await coordinator.stop()
+		coordinator.stop()
 	}
 
 

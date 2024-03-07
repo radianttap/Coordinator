@@ -124,14 +124,14 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 
 	//	MARK:- Coordinator lifecycle
 
-	open override func start() async {
+	open override func start() {
 		//	assign itself as UINavigationControllerDelegate
 		rootViewController.delegate = self
 		//	must call this
-		await super.start()
+		super.start()
 	}
 
-	open override func stop() async {
+	open override func stop() {
 		//	relinquish being delegate for UINC
 		rootViewController.delegate = nil
 
@@ -145,14 +145,14 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		viewControllers.removeAll()
 
 		//	must call this
-		await super.stop()
+		super.stop()
 	}
 
-	override open func coordinatorDidFinish(_ coordinator: Coordinating) async {
+	override open func coordinatorDidFinish(_ coordinator: Coordinating) {
 		//	some child Coordinator reports that it's done
 		//	(pop-ed back from, most likely)
 		
-		await super.coordinatorDidFinish(coordinator)
+		super.coordinatorDidFinish(coordinator)
 
 		//	figure out which Coordinator should now take ownershop of root NC
 		guard let topVC = self.rootViewController.topViewController else {
@@ -178,7 +178,7 @@ open class NavigationCoordinator: Coordinator<UINavigationController>, UINavigat
 		}
 
 		//	if nothing found, then this Coordinator is also done, along with its child
-		await self.parent?.coordinatorDidFinish(self)
+		self.parent?.coordinatorDidFinish(self)
     }
 
 	open override func activate() {
@@ -206,9 +206,7 @@ private extension NavigationCoordinator {
 		//	Check: is there any controller left shown in this Coordinator?
 		if viewControllers.count == 0 {
 			//	there isn't thus inform the parent Coordinator that this child Coordinator is done.
-			Task {
-				await parent?.coordinatorDidFinish(self)
-			}
+			parent?.coordinatorDidFinish(self)
 			return
 		}
 
@@ -225,9 +223,7 @@ private extension NavigationCoordinator {
 		//		| Note: using firstIndex(of:) and not .last nicely handles if you programatically pop more than one UIVC.
 		guard let index = viewControllers.firstIndex(of: viewController) else {
 			//	it's not, it means UINC moved to some other Coordinator domain and thus bail out from here
-			Task {
-				await parent?.coordinatorDidFinish(self)
-			}
+			parent?.coordinatorDidFinish(self)
 			return
 		}
 
