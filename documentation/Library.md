@@ -4,7 +4,7 @@
 
 Per this library, Coordinator instance is essentially defined by these two points:
 
-· **1** · It has one instance of UIViewController which is its *root ViewController*. This is usually some container controller like `UINavigationController` but it can be any subclass.
+· **1** · It has one instance of `UIViewController` which is its *root ViewController*. This is usually some container controller like `UINavigationController` but it can be any subclass.
 
 This way, it can internally create instances of UIVC, populate their input with data it needs and then just _show_ or _present_ them as needed. By reusing these essential UIKit mechanisms it minimally interferes with how iOS already works. 
 

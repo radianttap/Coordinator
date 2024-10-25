@@ -20,10 +20,11 @@ struct AppDependency {
 
 	//	Init
 
-	init(webService: WebService? = nil,
-		 dataManager: DataManager? = nil,
-		 accountManager: AccountManager? = nil,
-		 contentManager: ContentManager? = nil)
+	init(
+		webService: WebService? = nil,
+		dataManager: DataManager? = nil,
+		accountManager: AccountManager? = nil,
+		contentManager: ContentManager? = nil)
 	{
 		self.webService = webService
 		self.dataManager = dataManager
@@ -45,7 +46,7 @@ final class ContentCoordinator: NavigationCoordinator {
 
 ```
 
-This way, Coordinators can fulfil their promise to be *routing mechanism* between any UIVC and any back-end object.
+This way, Coordinators can fulfill their promise to be *routing mechanism* between any UIVC and any back-end object.
 
 ### AppDelegate
 
@@ -94,6 +95,7 @@ For this to work, we need inject appDependency property into UISceneSession:
 
 ```swift
 extension UISceneSession {
+	@MainActor
 	private struct AssociatedKeys {
 		static var appDependency: Void?
 	}
@@ -175,9 +177,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		window.rootViewController = sceneCoordinator.rootViewController
 
 		window.makeKeyAndVisible()
-		Task {
-			await sceneCoordinator.start()
-		}
+		sceneCoordinator.start()
 	}
 	
 	override var coordinatingResponder: UIResponder? {
@@ -208,7 +208,6 @@ Now you simply need one global method to switch to any screen in the app:
 
 ```swift
 extension UIResponder {
-	@MainActor
 	@objc func globalDisplay(page: PageBox, sender: Any? = nil) {
 		coordinatingResponder?.globalDisplay(page: page, sender: sender)
 	}
