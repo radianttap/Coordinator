@@ -12,7 +12,7 @@ Coordinator takes care of navigation and routing while View Controller takes car
 
 · **2** · It subclasses `UIResponder`, same as `UIView` and `UIViewController` do.
 
-This is crucial. Library [extends UIResponder](https://github.com/radianttap/Coordinator/blob/master/Coordinator/UIKit-CoordinatingExtensions.swift) by giving it a new property called `coordinatingResponder`. This means that if you define a method like this:
+This is crucial. Library [extends UIResponder](https://github.com/radianttap/Coordinator/blob/master/Sources/Coordinator/UIKit-CoordinatingExtensions.swift) by giving it a new property called `coordinatingResponder`. This means that if you define a method like this:
 
 ```swift
 extension UIResponder {
