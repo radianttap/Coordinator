@@ -18,10 +18,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Coordinator",
-			swiftSettings: [
-				.enableExperimentalFeature("StrictConcurrency")
-			]
+            name: "Coordinator"
 		)
 	],
 	swiftLanguageModes: [.v6]
